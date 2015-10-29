@@ -12,6 +12,7 @@ GameObject:
   - 114: {fileID: 11448416}
   - 50: {fileID: 5040006}
   - 58: {fileID: 5899592}
+  - 114: {fileID: 11467992}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Asteroid
@@ -94,6 +95,47 @@ MonoBehaviour:
   minBreakdownForce: 300
   maxBreakdownForce: 600
   DisableTime: .5
+--- !u!114 &11467992
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 148684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2066047398, guid: 4b4e8768ed04d6a4f98af6f4f83be984, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  switchPresetData:
+    _sourcePreset: 
+    _targetPreset: 
+  globalParameterData:
+    _name: 
+    _value: 0
+  globalSwitchParameterData:
+    _name: 
+    _switch: 
+  transitionToSnapshotData:
+    _snapshot: 
+    _timeToReach: 0
+  _eventName: astroidExplosion
+  _eventAction: 0
+  _trigger: 0
+  _eventValue: 
+  _eventParameter: 1
+  _eventParameterName: 
+  _delay: 0
+  _probability: 100
+  _eventTriggerType: 7
+  _ignoreGameObject: 0
+  _addToQueue: 0
+  _min: 0
+  _max: 1
+  _dspType: 0
+  _timeToTarget: 0
+  _curve: .5
+  _parentGameObject: {fileID: 0}
+  _useEventID: 0
 --- !u!212 &21227640
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -174,6 +216,26 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Mass
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _eventName
+      value: astroidExplosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _parentGameObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _eventTriggerType
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _ignoreGameObject
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _trigger
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

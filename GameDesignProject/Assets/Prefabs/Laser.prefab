@@ -12,6 +12,7 @@ GameObject:
   - 114: {fileID: 11461746}
   - 50: {fileID: 5046088}
   - 61: {fileID: 6141354}
+  - 114: {fileID: 11457402}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
@@ -60,6 +61,47 @@ BoxCollider2D:
   m_Offset: {x: .0173487514, y: .0066691637}
   serializedVersion: 2
   m_Size: {x: .232838362, y: 2.27969337}
+--- !u!114 &11457402
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 182134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2066047398, guid: 4b4e8768ed04d6a4f98af6f4f83be984, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  switchPresetData:
+    _sourcePreset: 
+    _targetPreset: 
+  globalParameterData:
+    _name: 
+    _value: 0
+  globalSwitchParameterData:
+    _name: 
+    _switch: 
+  transitionToSnapshotData:
+    _snapshot: 
+    _timeToReach: 0
+  _eventName: laser
+  _eventAction: 0
+  _trigger: 0
+  _eventValue: 
+  _eventParameter: 1
+  _eventParameterName: 
+  _delay: 0
+  _probability: 100
+  _eventTriggerType: 0
+  _ignoreGameObject: 0
+  _addToQueue: 0
+  _min: 0
+  _max: 1
+  _dspType: 0
+  _timeToTarget: 0
+  _curve: .5
+  _parentGameObject: {fileID: 182134}
+  _useEventID: 0
 --- !u!114 &11461746
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -71,6 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af5bed6abff554d429be628165500ed6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SourceShip: {fileID: 0}
   SourceStructure: {fileID: 0}
   EffectDuration: .100000001
   FadeDuration: 1
@@ -126,6 +169,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: FadeDuration
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _eventName
+      value: laser
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _parentGameObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _eventTriggerType
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
