@@ -1,17 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
+using GamepadInput;
 
 public class Thruster : Module
 {
+    public GamePad.Button Button;
+    public GamePad.Index Controller;
+    public float ThrustPower;
+
 
     // Use this for initialization
-    void Start()
+    new void Start()
     {
-
+        base.Start();
     }
 
-    public override void Activate()
+    public void Update()
     {
+        if (GamePad.GetButton(Button, Controller))
+        {
+            Activate();
+        }
+    }
+
+    public void Activate()
+    {
+        rb.AddForceAtPosition(transform.up * ThrustPower, transform.position);
 
     }
 }
