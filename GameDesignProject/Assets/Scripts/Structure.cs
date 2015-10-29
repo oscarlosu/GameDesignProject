@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Structure : Module
 {
@@ -42,5 +43,34 @@ public class Structure : Module
             Sockets.RemoveAt(index);
             GameObject.Destroy(go);
         }
+    }
+
+    public IList<Structure> GetAllStructureModules()
+    {
+        List<Structure> structureModules = new List<Structure>();
+        foreach (GameObject module in Sockets)
+        {
+            var structure = module.GetComponent<Structure>();
+            if (structure != null)
+            {
+                var structures = structure.GetAllStructureModules();
+                structureModules.AddRange(structures);
+            }
+        }
+
+        structureModules.Add(this);
+
+        return structureModules;
+    }
+
+    // Returns true if it has sockets and there is at least one module in one of the sockets.
+    public bool HasAnyModules()
+    {
+        foreach (GameObject module in Sockets)
+        {
+            if (module != null)
+                return true;
+        }
+        return false;
     }
 }
