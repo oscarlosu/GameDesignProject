@@ -43,6 +43,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 404934}
   - 50: {fileID: 5019570}
+  - 114: {fileID: 11499650}
   m_Layer: 0
   m_Name: TestShipLaser
   m_TagString: Ship
@@ -310,6 +311,19 @@ MonoBehaviour:
   - {fileID: 158342}
   rb: {fileID: 5019570}
   Ship: {fileID: 0}
+--- !u!114 &11499650
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 125734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5e9de1675a09d749bb9af2f80c14a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinCrashMagnitude: 2
+  CoreStructureModule: {fileID: 11496488}
 --- !u!212 &21244524
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -446,7 +460,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: CoreStructureModule
+      value: 
+      objectReference: {fileID: 11496488}
+    - target: {fileID: 0}
+      propertyPath: MinCrashMagnitude
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 125734}
