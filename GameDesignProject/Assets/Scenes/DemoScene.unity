@@ -894,6 +894,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11459532, guid: a50875eb2d0b8d349b6ea5b867182c78, type: 2}
+      propertyPath: Controller
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11453410, guid: a50875eb2d0b8d349b6ea5b867182c78, type: 2}
+      propertyPath: Controller
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 158342, guid: a50875eb2d0b8d349b6ea5b867182c78, type: 2}
+      propertyPath: m_TagString
+      value: DestructibleModule
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a50875eb2d0b8d349b6ea5b867182c78, type: 2}
   m_IsPrefabParent: 0
@@ -3436,7 +3448,7 @@ MonoBehaviour:
   rb: {fileID: 487503546}
   Ship: {fileID: 487503545}
   Button: 1
-  Controller: 0
+  Controller: 2
   ThrustPower: 5
 --- !u!212 &1800329520
 SpriteRenderer:
@@ -3704,7 +3716,7 @@ MonoBehaviour:
   rb: {fileID: 487503546}
   Ship: {fileID: 487503545}
   Button: 3
-  Controller: 0
+  Controller: 2
   ThrustPower: 5
 --- !u!212 &1911685011
 SpriteRenderer:
@@ -4018,7 +4030,7 @@ MonoBehaviour:
   rb: {fileID: 487503546}
   Ship: {fileID: 487503545}
   Button: 0
-  Controller: 0
+  Controller: 2
   ThrustPower: 5
 --- !u!212 &2072169802
 SpriteRenderer:
