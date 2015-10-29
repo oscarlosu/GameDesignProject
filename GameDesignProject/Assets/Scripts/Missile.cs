@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Missile : MonoBehaviour
+public class Missile : Projectile
 {
-    public float Weight;
     public float ThrustPower;
     public float ExplosionSpeed;
     public float ExplosionRadius;
@@ -12,8 +11,6 @@ public class Missile : MonoBehaviour
 
     private Rigidbody2D rb;
     private float elapsedTime;
-
-    public GameObject SourceStructure;
 
 
     // Use this for initialization
