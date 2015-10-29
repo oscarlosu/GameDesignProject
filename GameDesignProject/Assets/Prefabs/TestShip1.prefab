@@ -187,8 +187,8 @@ Rigidbody2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 188454}
   m_Mass: 9.99999975e-05
-  m_LinearDrag: 1
-  m_AngularDrag: 1
+  m_LinearDrag: .400000006
+  m_AngularDrag: .400000006
   m_GravityScale: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -435,7 +435,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_AngularDrag
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LinearDrag
+      value: .400000006
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 188454}

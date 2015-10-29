@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Weight: 0
-  ThrustPower: 7
+  ThrustPower: 12
   ExplosionSpeed: 0
   ExplosionRadius: 0
   ThrusterDuration: 5
@@ -113,7 +113,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: ThrustPower
-      value: 7
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: ThrusterDuration
