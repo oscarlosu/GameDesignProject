@@ -124,6 +124,22 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11434018, guid: 1d77ebe5c9d79c44d957a8aebdf6d9d9, type: 2}
+      propertyPath: Controller
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449724, guid: 1d77ebe5c9d79c44d957a8aebdf6d9d9, type: 2}
+      propertyPath: Controller
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11411146, guid: 1d77ebe5c9d79c44d957a8aebdf6d9d9, type: 2}
+      propertyPath: Controller
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11406506, guid: 1d77ebe5c9d79c44d957a8aebdf6d9d9, type: 2}
+      propertyPath: Controller
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d77ebe5c9d79c44d957a8aebdf6d9d9, type: 2}
   m_IsPrefabParent: 0
@@ -218,7 +234,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -229,7 +245,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 44.9099998
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -297,6 +313,22 @@ Prefab:
     - target: {fileID: 188454, guid: 1d77ebe5c9d79c44d957a8aebdf6d9d9, type: 2}
       propertyPath: m_Name
       value: TestShip1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 11434018, guid: 1d77ebe5c9d79c44d957a8aebdf6d9d9, type: 2}
+      propertyPath: Controller
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449724, guid: 1d77ebe5c9d79c44d957a8aebdf6d9d9, type: 2}
+      propertyPath: Controller
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11411146, guid: 1d77ebe5c9d79c44d957a8aebdf6d9d9, type: 2}
+      propertyPath: Controller
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11406506, guid: 1d77ebe5c9d79c44d957a8aebdf6d9d9, type: 2}
+      propertyPath: Controller
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
