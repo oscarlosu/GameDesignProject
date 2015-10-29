@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: be830c41b1455d943a691eef8f81bc25, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a1724e6954f655449a2fe16aa5ba27f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -102,6 +102,11 @@ Prefab:
       propertyPath: MissileLaunchSpeed
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a1724e6954f655449a2fe16aa5ba27f0,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 169258}

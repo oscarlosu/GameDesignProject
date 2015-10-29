@@ -246,10 +246,10 @@ MonoBehaviour:
   Button: 2
   Controller: 0
   LaserPrefab: {fileID: 182134, guid: 822ae9aa9a4f3d8478f4a20698647190, type: 2}
-  Cooldown: 0
-  MinLaserBreadth: .5
+  Cooldown: 1
+  MinLaserBreadth: 1
   MaxLaserBreadth: 5
-  MinLaserLength: .5
+  MinLaserLength: .100000001
   MaxLaserLength: 8
   MinChargeTime: 0
   MaxChargeTime: 3

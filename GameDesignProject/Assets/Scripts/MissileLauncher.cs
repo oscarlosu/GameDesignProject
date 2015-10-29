@@ -10,6 +10,7 @@ public class MissileLauncher : Module
 
     public float Cooldown;
     public float MissileLaunchSpeed;
+    public float MissileLaunchPosOffset;
 
     private float elapsedTime;
     private bool ready;
@@ -38,7 +39,7 @@ public class MissileLauncher : Module
             if(elapsedTime >= Cooldown)
             {
                 ready = true;
-                rend.enabled = true;
+                //rend.enabled = true;
                 elapsedTime = 0;
             }
         }
@@ -48,8 +49,8 @@ public class MissileLauncher : Module
     public void Activate()
     {
         ready = false;
-        rend.enabled = false;
-        GameObject missile = (GameObject)Instantiate(MissilePrefab, transform.position, transform.rotation);
+        //rend.enabled = false;
+        GameObject missile = (GameObject)Instantiate(MissilePrefab, transform.position + MissileLaunchPosOffset * transform.up, transform.rotation);
         missile.GetComponent<Rigidbody2D>().velocity = rb.velocity + (Vector2)(rb.transform.up * MissileLaunchSpeed);
         missile.GetComponent<Projectile>().SourceStructure = Sockets[0];
         missile.GetComponent<Projectile>().SourceShip = Ship;

@@ -44,10 +44,13 @@ MonoBehaviour:
   Sockets:
   - {fileID: 0}
   rb: {fileID: 0}
+  Ship: {fileID: 0}
   Button: 2
   Controller: 0
   MissilePrefab: {fileID: 144840, guid: c96b224f0813e814692a7ff16a70ddbe, type: 2}
   Cooldown: 2
+  MissileLaunchSpeed: 0
+  MissileLaunchPosOffset: 8.44999981
 --- !u!212 &21209952
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -72,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 7883cc95cc2aa2a42a1ac26a069dad60, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 68d81a9dff65d734dad82c380bc27af0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -84,6 +87,19 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 68d81a9dff65d734dad82c380bc27af0,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: MissileLaunchPosOffset.y
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MissileLaunchPosOffset
+      value: 8.44999981
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
