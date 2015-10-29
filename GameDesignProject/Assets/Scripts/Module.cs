@@ -7,6 +7,7 @@ public abstract class Module : MonoBehaviour
     public float Weight;
     public List<GameObject> Sockets;
     public Rigidbody2D rb;
+    public GameObject Ship;
 
     protected void Start()
     {
@@ -18,6 +19,7 @@ public abstract class Module : MonoBehaviour
     {
         rb.mass -= Weight;
     }
+
 
 
 }
