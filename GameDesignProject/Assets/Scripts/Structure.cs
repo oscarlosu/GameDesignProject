@@ -12,6 +12,26 @@ public class Structure : Module
 
     public void LoseModule()
     {
+        // Check if shield or armor module is present and destroy before others.
+        foreach (var go in Sockets)
+        {
+            // If current socket is empty, check the next one.
+            if (go == null)
+                continue;
+
+            if (go.tag == "DefensiveModule")
+            {
+                if (go.GetComponent<Armor>())
+                {
+                    go.GetComponent<Armor>().Activate();
+                }
+
+                // If defensive module was found,
+                //don't destroy random module after activating defensive module.
+                return;
+            }
+        }
+
         // Destroy random module attached to this structure
         int index = Random.Range(0, Sockets.Count);
         
