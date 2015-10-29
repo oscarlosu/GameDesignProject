@@ -223,6 +223,7 @@ MonoBehaviour:
   Sockets:
   - {fileID: 150362}
   rb: {fileID: 5019570}
+  Ship: {fileID: 0}
   Button: 1
   Controller: 1
   ThrustPower: 5
@@ -241,6 +242,17 @@ MonoBehaviour:
   Sockets:
   - {fileID: 150362}
   rb: {fileID: 5019570}
+  Ship: {fileID: 125734}
+  Button: 2
+  Controller: 0
+  LaserPrefab: {fileID: 182134, guid: 822ae9aa9a4f3d8478f4a20698647190, type: 2}
+  Cooldown: 0
+  MinLaserBreadth: .5
+  MaxLaserBreadth: 5
+  MinLaserLength: .5
+  MaxLaserLength: 8
+  MinChargeTime: 0
+  MaxChargeTime: 3
 --- !u!114 &11459532
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -256,6 +268,7 @@ MonoBehaviour:
   Sockets:
   - {fileID: 150362}
   rb: {fileID: 5019570}
+  Ship: {fileID: 0}
   Button: 0
   Controller: 0
   ThrustPower: 10
@@ -274,6 +287,7 @@ MonoBehaviour:
   Sockets:
   - {fileID: 150362}
   rb: {fileID: 5019570}
+  Ship: {fileID: 0}
   Button: 3
   Controller: 1
   ThrustPower: 5
@@ -295,6 +309,7 @@ MonoBehaviour:
   - {fileID: 122346}
   - {fileID: 158342}
   rb: {fileID: 5019570}
+  Ship: {fileID: 0}
 --- !u!212 &21244524
 SpriteRenderer:
   m_ObjectHideFlags: 1

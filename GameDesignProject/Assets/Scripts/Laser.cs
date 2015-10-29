@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Laser : MonoBehaviour
-{
-    public GameObject SourceStructure;
+public class Laser : Projectile
+{    
     public float EffectDuration;
     public float FadeDuration;
 

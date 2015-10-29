@@ -53,7 +53,5 @@ public class MissileLauncher : Module
         missile.GetComponent<Rigidbody2D>().velocity = rb.velocity + (Vector2)(rb.transform.up * MissileLaunchSpeed);
         missile.GetComponent<Projectile>().SourceStructure = Sockets[0];
         missile.GetComponent<Projectile>().SourceShip = Ship;
-        //rigidbody.AddForceAtPosition(transform.up * ThrustPower, transform.position);
-
     }
 }

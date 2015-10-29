@@ -75,6 +75,7 @@ public class LaserGun : Module
         laser.transform.position += laser.transform.up * size.y / 2;
         // Save source structure
         laser.GetComponent<Laser>().SourceStructure = Sockets[0];
+        laser.GetComponent<Laser>().SourceShip = Ship;
         // Reset elapsedTime
         elapsedTime = 0;
     }
