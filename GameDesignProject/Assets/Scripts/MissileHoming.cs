@@ -48,8 +48,6 @@ public class MissileHoming : Projectile
                 float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg - 90;
                 var rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotation, TurnSpeed);
-
-
             }
             // If there is still fuel in this basterd, select new target, when the new target timer runs out.
             if (timeSinceLastTarget > NewTargetTimer)
