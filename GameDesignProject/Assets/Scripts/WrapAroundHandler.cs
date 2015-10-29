@@ -19,8 +19,6 @@ public class WrapAroundHandler : MonoBehaviour
         // Scale background
         Sprite spr = GetComponent<SpriteRenderer>().sprite;
         transform.localScale = new Vector3(transform.localScale.x  * WorldSize.x / spr.bounds.size.x, transform.localScale.y * WorldSize.y / spr.bounds.size.y, transform.localScale.z);
-        // Debugging
-        Debug.Log(WorldBorderOffset);
     }
 
     // Update is called once per frame
