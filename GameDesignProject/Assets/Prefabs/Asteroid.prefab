@@ -92,9 +92,10 @@ MonoBehaviour:
   MediumMaxWeight: 7
   SplitMinNum: 3
   SplitMaxNum: 8
-  minBreakdownForce: 300
-  maxBreakdownForce: 600
+  MinBreakdownForce: 0
+  MaxBreakdownForce: 0
   DisableTime: .5
+  MinCrashMagnitude: 2
 --- !u!114 &11467992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -134,7 +135,7 @@ MonoBehaviour:
   _dspType: 0
   _timeToTarget: 0
   _curve: .5
-  _parentGameObject: {fileID: 0}
+  _parentGameObject: {fileID: 148684}
   _useEventID: 0
 --- !u!212 &21227640
 SpriteRenderer:
@@ -236,6 +237,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: _trigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MinCrashMagnitude
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

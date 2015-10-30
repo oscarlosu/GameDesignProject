@@ -22,7 +22,6 @@ public class Ship : MonoBehaviour
                 LoseModule(structureModules);
             }
         }
-
     }
 
     private void LoseModule(IList<Structure> structureModules)

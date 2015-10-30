@@ -12,8 +12,9 @@ public class Asteroid : MonoBehaviour
     public float SmallMinWeight, SmallMaxWeight;
     public float MediumMinWeight, MediumMaxWeight;
     public int SplitMinNum, SplitMaxNum;
-    public float minBreakdownForce, maxBreakdownForce;
+    public float MinBreakdownForce, MaxBreakdownForce;
     public float DisableTime;
+    public float MinCrashMagnitude;
 
     private float elapsedTime;
 
@@ -72,10 +73,28 @@ public class Asteroid : MonoBehaviour
                 Vector2 forceDir = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
                 Debug.Log(forceDir);
                 forceDir.Normalize();
-                float breakdownForce = Random.Range(minBreakdownForce, maxBreakdownForce);
+                float breakdownForce = Random.Range(MinBreakdownForce, MaxBreakdownForce);
                 go.GetComponent<Rigidbody2D>().AddForce(forceDir * breakdownForce);
             }
         }
+        // Play sound just before destroying the asteroid game object.
+
+        // Destroy game object.
         GameObject.Destroy(this.gameObject);
+    }
+
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        // Only "crash" if the force with which the objects hit each other is large enough.
+        if (coll.relativeVelocity.magnitude > MinCrashMagnitude)
+        {
+            Debug.Log("Crashed with a magnitude of: " + coll.relativeVelocity.magnitude);
+            // If the other object has a higher mass, break down.
+            if (coll.gameObject.GetComponent<Rigidbody2D>().mass > GetComponent<Rigidbody2D>().mass)
+            {
+                Debug.Log(this.gameObject + " destroyed!");
+                Breakdown();
+            }
+        }
     }
 }
