@@ -35,10 +35,13 @@ public class Ship : MonoBehaviour
             {
                 foreach (var m in s.Sockets)
                 {
-                    if (m.tag == "DefensiveModule")
+                    if (m != null)
                     {
-                        s.LoseModule();
-                        return;
+                        if (m.tag == "DefensiveModule")
+                        {
+                            s.LoseModule();
+                            return;
+                        }
                     }
                 }
             }
@@ -62,7 +65,10 @@ public class Ship : MonoBehaviour
         {
             foreach (GameObject m in s.Sockets)
             {
-                modules.Add(m.GetComponent<Module>());
+                if (m != null)
+                {
+                    modules.Add(m.GetComponent<Module>());
+                }
             }
         }
         return modules;

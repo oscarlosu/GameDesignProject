@@ -50,11 +50,14 @@ public class Structure : Module
         List<Structure> structureModules = new List<Structure>();
         foreach (GameObject module in Sockets)
         {
-            var structure = module.GetComponent<Structure>();
-            if (structure != null)
+            if (module != null)
             {
-                var structures = structure.GetAllStructureModules();
-                structureModules.AddRange(structures);
+                var structure = module.GetComponent<Structure>();
+                if (structure != null)
+                {
+                    var structures = structure.GetAllStructureModules();
+                    structureModules.AddRange(structures);
+                }
             }
         }
 
