@@ -51,7 +51,8 @@ public class MissileLauncher : Module
         ready = false;
         //rend.enabled = false;
         GameObject missile = (GameObject)Instantiate(MissilePrefab, transform.position + MissileLaunchPosOffset * transform.up, transform.rotation);
-        missile.GetComponent<Rigidbody2D>().velocity = rb.velocity + (Vector2)(rb.transform.up * MissileLaunchSpeed);
+        missile.transform.parent = null;
+        missile.GetComponent<Rigidbody2D>().velocity = rb.velocity + (Vector2)(transform.up * MissileLaunchSpeed);
         missile.GetComponent<Projectile>().SourceStructure = Sockets[0];
         missile.GetComponent<Projectile>().SourceShip = Ship;
     }

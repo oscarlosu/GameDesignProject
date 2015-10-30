@@ -93,6 +93,8 @@ public class MissileHoming : Projectile
             // Ignore source ship for a short period of time after the missile is fired
             if (other.gameObject != SourceStructure || elapsedTime >= GracePeriod)
             {
+                Debug.Log("Grace: " + GracePeriod + " Elapsed: " + elapsedTime);
+                Debug.Log("Other: " + other.gameObject + " source: " + SourceStructure);
                 // Make ship lose a module
                 Structure str = other.gameObject.GetComponent<Structure>();
                 str.LoseModule();
