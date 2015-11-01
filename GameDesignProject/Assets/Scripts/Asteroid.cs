@@ -18,7 +18,8 @@ public class Asteroid : MonoBehaviour
 
     private float elapsedTime;
 
-
+	
+	
     void Update()
     {
         if(!GetComponent<CircleCollider2D>().enabled)
@@ -78,7 +79,7 @@ public class Asteroid : MonoBehaviour
             }
         }
         // Play sound just before destroying the asteroid game object.
-
+        
         // Destroy game object.
         GameObject.Destroy(this.gameObject);
     }
