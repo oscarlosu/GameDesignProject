@@ -594,6 +594,7 @@ MonoBehaviour:
   - {fileID: 205458685}
   rb: {fileID: 150639137}
   Ship: {fileID: 150639135}
+  Controller: 0
 --- !u!1 &364125131
 GameObject:
   m_ObjectHideFlags: 0
@@ -3021,6 +3022,7 @@ MonoBehaviour:
   - {fileID: 1303278313}
   rb: {fileID: 364125132}
   Ship: {fileID: 364125131}
+  Controller: 0
 --- !u!212 &2101137110
 SpriteRenderer:
   m_ObjectHideFlags: 0

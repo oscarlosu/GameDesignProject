@@ -5,7 +5,6 @@ using GamepadInput;
 public class Thruster : Module
 {
     public GamePad.Button Button;
-    public GamePad.Index Controller;
     public float ThrustPower;
     public AudioSource ThrusterSound;
 
