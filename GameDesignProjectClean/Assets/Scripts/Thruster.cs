@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using GamepadInput;
+using UnityEditor;
 
 public class Thruster : Module
 {
-    public GamePad.Index Controller;
-    public GamePadKey Key;
-
-    public float ThrustPower;
+    [SerializeField] public float ThrustPower;
 
 
     // Use this for initialization
@@ -18,15 +16,56 @@ public class Thruster : Module
 
     public void Update()
     {
-        if (GamePadInputWrapper.GetButton(Key, Controller))
+        switch (InputType)
         {
-            Activate();
+            case InputKeyType.Button:
+                if (GamePad.GetButton(ButtonKey, Ship.GetComponent<Ship>().ControllerIndex))
+                {
+                    Activate(1);
+                }
+                break;
+            case InputKeyType.Trigger:
+                var value = GamePad.GetTrigger(TriggerKey, Ship.GetComponent<Ship>().ControllerIndex);
+                if (value > 0)
+                {
+                    Activate(value);
+                }
+                break;
         }
     }
 
-    public void Activate()
+    public void Activate(float power)
     {
-        Ship.GetComponent<Rigidbody2D>().AddForceAtPosition(transform.up * ThrustPower, transform.position);
+        Ship.GetComponent<Rigidbody2D>().AddForceAtPosition(transform.up * ThrustPower * power, transform.position);
 
+    }
+}
+
+/****************
+* Editor tools.
+****************/
+
+[CustomEditor(typeof(Thruster), true)]
+public class ThrusterEditor : ModuleEditor
+{
+
+    public override void OnInspectorGUI()
+    {
+        // Display the module's settings.
+        base.OnInspectorGUI();
+
+        // Create heading.
+        GUIStyle heading = new GUIStyle { fontSize = 14 };
+        EditorGUILayout.LabelField("Thrusters settings", heading);
+
+        // Get target and show/edit fields.
+        Thruster t = (Thruster) target;
+        t.ThrustPower = EditorGUILayout.FloatField("Power", t.ThrustPower);
+
+        // If the target was changed, set the target to dirty, so Unity will save the values.
+        if (GUI.changed)
+        {
+            EditorUtility.SetDirty(target);
+        }
     }
 }
