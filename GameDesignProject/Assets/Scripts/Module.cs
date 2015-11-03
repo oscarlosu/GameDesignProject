@@ -8,6 +8,7 @@ public abstract class Module : MonoBehaviour
     public List<GameObject> Sockets;
     public Rigidbody2D rb;
     public GameObject Ship;
+    public GamepadInput.GamePad.Index Controller;
 
     protected void Start()
     {

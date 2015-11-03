@@ -5,7 +5,6 @@ using GamepadInput;
 public class MissileLauncher : Module
 {
     public GamePad.Button Button;
-    public GamePad.Index Controller;
     public GameObject MissilePrefab;
 
     public float Cooldown;

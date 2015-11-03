@@ -5,7 +5,6 @@ using GamepadInput;
 public class LaserGun : Module
 {
     public GamePad.Button Button;
-    public GamePad.Index Controller;
     public GameObject LaserPrefab;
 
     public float Cooldown;
