@@ -4,6 +4,7 @@ using System.Collections.Generic;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Ship : MonoBehaviour
 {
+    public GamepadInput.GamePad.Index ControllerIndex;
     public float MinCrashMagnitude;
 
     private List<GameObject> modules;
