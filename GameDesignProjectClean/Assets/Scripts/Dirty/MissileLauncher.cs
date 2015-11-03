@@ -2,7 +2,7 @@
 using System.Collections;
 using GamepadInput;
 
-public class MissileLauncher : Module
+public class DirtyMissileLauncher : DirtyModule
 {
     public GamePad.Button Button;
     public GamePad.Index Controller;
@@ -53,7 +53,7 @@ public class MissileLauncher : Module
         GameObject missile = (GameObject)Instantiate(MissilePrefab, transform.position + MissileLaunchPosOffset * transform.up, transform.rotation);
         missile.transform.parent = null;
         missile.GetComponent<Rigidbody2D>().velocity = rb.velocity + (Vector2)(transform.up * MissileLaunchSpeed);
-        missile.GetComponent<Projectile>().SourceStructure = Sockets[0];
-        missile.GetComponent<Projectile>().SourceShip = Ship;
+        missile.GetComponent<DirtyProjectile>().SourceStructure = Sockets[0];
+        missile.GetComponent<DirtyProjectile>().SourceShip = Ship;
     }
 }

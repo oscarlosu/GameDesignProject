@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraZoomToFit : MonoBehaviour {
+public class DirtyCameraZoomToFit : MonoBehaviour {
     public Transform ship1;
     public Transform ship2;
     private float zOffset = 0.0f;

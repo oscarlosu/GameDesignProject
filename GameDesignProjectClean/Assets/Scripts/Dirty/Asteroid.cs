@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Asteroid : MonoBehaviour
+public class DirtyAsteroid : MonoBehaviour
 {
     public int Size;
     public int SizeMin, SizeMax;
@@ -65,8 +65,8 @@ public class Asteroid : MonoBehaviour
             for(int i = 0; i < num; ++i)
             {
                 var go = (GameObject)Instantiate(this.gameObject);
-                go.GetComponent<Asteroid>().Size = Size;
-                go.GetComponent<Asteroid>().Initialise();
+                go.GetComponent<DirtyAsteroid>().Size = Size;
+                go.GetComponent<DirtyAsteroid>().Initialise();
                 // Disable collider
                 go.GetComponent<CircleCollider2D>().enabled = false;
                 // Generate random force

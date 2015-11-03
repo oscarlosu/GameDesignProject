@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Missile : Projectile
+public class DirtyMissile : DirtyProjectile
 {
     public float ThrustPower;
     public float ExplosionSpeed;

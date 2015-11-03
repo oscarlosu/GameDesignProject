@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraHandler : MonoBehaviour
+public class DirtyCameraHandler : MonoBehaviour
 {
 
     public GameObject[] ObjectsInCamera;

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public abstract class Module : MonoBehaviour
+public abstract class DirtyModule : MonoBehaviour
 {
     public float Weight;
     public List<GameObject> Sockets;

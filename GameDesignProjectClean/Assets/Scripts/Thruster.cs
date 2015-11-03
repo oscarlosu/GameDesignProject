@@ -2,10 +2,11 @@
 using System.Collections;
 using GamepadInput;
 
-public class DirtyThruster : DirtyModule
+public class Thruster : Module
 {
-    public GamePad.Button Button;
     public GamePad.Index Controller;
+    public GamePadKey Key;
+
     public float ThrustPower;
 
 
@@ -17,7 +18,7 @@ public class DirtyThruster : DirtyModule
 
     public void Update()
     {
-        if (GamePad.GetButton(Button, Controller))
+        if (GamePadInputWrapper.GetButton(Key, Controller))
         {
             Activate();
         }
@@ -25,7 +26,7 @@ public class DirtyThruster : DirtyModule
 
     public void Activate()
     {
-        rb.AddForceAtPosition(transform.up * ThrustPower, transform.position);
+        Ship.GetComponent<Rigidbody2D>().AddForceAtPosition(transform.up * ThrustPower, transform.position);
 
     }
 }
