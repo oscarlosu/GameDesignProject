@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Component : MonoBehaviour
+public class ShipComponent : MonoBehaviour
 {
     public GameObject Ship;
     public int Mass;
 
     protected void Start()
     {
-        Ship.GetComponent<Rigidbody2D>().mass += Mass;
     }
 
 

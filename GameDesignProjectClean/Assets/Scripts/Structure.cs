@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Module : ShipComponent
+public class Structure : ShipComponent
 {
-
 
 
 }

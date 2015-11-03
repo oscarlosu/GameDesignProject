@@ -13,11 +13,10 @@ public class Ship : MonoBehaviour
 
     // Use this for initialization
     void Start()
-    {        
-        Assemble();
+    {
         // Add core  and structure mass to rigidbody
         GetComponent<Rigidbody2D>().mass = GlobalValues.CoreMass;
-
+        Assemble();
         print("Modules : " + modules.Count + " Structures : " + structures.Count);
     }
 
@@ -58,15 +57,15 @@ public class Ship : MonoBehaviour
             {
                 modules.Add(child);
             }
-            else if(child.GetComponent<Component>() != null)
+            else if(child.GetComponent<ShipComponent>() != null)
             {
                 structures.Add(child);
             }
             // Set itself as the ship of the component
-            if(child.GetComponent<Component>() != null)
+            if(child.GetComponent<ShipComponent>() != null)
             {
-                child.GetComponent<Component>().Ship = gameObject;
-                child.GetComponent<Component>().enabled = true;
+                child.GetComponent<ShipComponent>().Ship = gameObject;
+                GetComponent<Rigidbody2D>().mass += child.GetComponent<ShipComponent>().Mass;                
             }
             
 
