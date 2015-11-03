@@ -131,6 +131,52 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 447900, guid: 1776e0f4ba8573740a44bdef5c800fb3, type: 2}
   m_PrefabInternal: {fileID: 1980590513}
+--- !u!1001 &252134063
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 447900, guid: 1776e0f4ba8573740a44bdef5c800fb3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 447900, guid: 1776e0f4ba8573740a44bdef5c800fb3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -4.13999987
+      objectReference: {fileID: 0}
+    - target: {fileID: 447900, guid: 1776e0f4ba8573740a44bdef5c800fb3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 447900, guid: 1776e0f4ba8573740a44bdef5c800fb3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 447900, guid: 1776e0f4ba8573740a44bdef5c800fb3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 447900, guid: 1776e0f4ba8573740a44bdef5c800fb3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 447900, guid: 1776e0f4ba8573740a44bdef5c800fb3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 447900, guid: 1776e0f4ba8573740a44bdef5c800fb3, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 164392, guid: 1776e0f4ba8573740a44bdef5c800fb3, type: 2}
+      propertyPath: m_Name
+      value: Ship (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 1776e0f4ba8573740a44bdef5c800fb3, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1464680129
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,6 +189,7 @@ GameObject:
   - 92: {fileID: 1464680132}
   - 124: {fileID: 1464680131}
   - 81: {fileID: 1464680130}
+  - 114: {fileID: 1464680135}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -217,6 +264,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &1464680135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1464680129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3753e2b5f7bd8b44591a7ccb1ca8587a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Margin: 5
+  MaxSize: 20
+  SqueezeForce: 2000
 --- !u!1001 &1980590513
 Prefab:
   m_ObjectHideFlags: 0
@@ -254,6 +315,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 447900, guid: 1776e0f4ba8573740a44bdef5c800fb3, type: 2}
       propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 164392, guid: 1776e0f4ba8573740a44bdef5c800fb3, type: 2}
+      propertyPath: m_TagString
+      value: Ship
+      objectReference: {fileID: 0}
+    - target: {fileID: 5034100, guid: 1776e0f4ba8573740a44bdef5c800fb3, type: 2}
+      propertyPath: m_LinearDrag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5034100, guid: 1776e0f4ba8573740a44bdef5c800fb3, type: 2}
+      propertyPath: m_AngularDrag
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

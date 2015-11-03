@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Module
   - Structure
+  - Ship
   layers:
   - Default
   - TransparentFX
