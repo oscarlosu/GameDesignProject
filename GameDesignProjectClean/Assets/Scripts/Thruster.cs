@@ -41,7 +41,7 @@ public class Thruster : Module
             float powerX = 0, powerY = 0;
             float dot = Vector3.Dot(Ship.transform.up, transform.up);
             Debug.Log("DOT: " + dot);
-            if (dot < 0.01) // Thruster is backwards thruster.
+            if (dot < - 0.01) // Thruster is backwards thruster.
             {
                 //Debug.Log("Backwards thruster");
                 if (leftStickValue.y < 0)
@@ -60,10 +60,11 @@ public class Thruster : Module
             else // Thruster is sideways thruster.
             {
                 Debug.Log("Sideways thruster");
-                
-                if (Vector3.Cross(Ship.transform.position, transform.position).z < 0)
+                // NOTE: Thumbstick left is negative z
+                if (Vector3.Cross(Ship.transform.up, transform.up).z < 0)
                 {
-                    Debug.Log("Cross.z < 0");
+                    Debug.Log("Cross.z < 0"); 
+                    // LEFT!
                     if (leftStickValue.x > 0)
                     {
                         
