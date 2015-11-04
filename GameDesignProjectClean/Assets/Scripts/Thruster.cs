@@ -5,8 +5,8 @@ using UnityEditor;
 
 public class Thruster : Module
 {
-    [SerializeField] public float ThrustPower;
 
+    public float ThrustPower;
 
     // Use this for initialization
     new void Start()
@@ -16,6 +16,7 @@ public class Thruster : Module
 
     public void Update()
     {
+        // Handle normal input.
         switch (InputType)
         {
             case InputKeyType.Button:
@@ -31,6 +32,49 @@ public class Thruster : Module
                     Activate(value);
                 }
                 break;
+        }
+
+        // Handle thumb stick input.
+        Vector2 leftStickValue = GamePad.GetAxis(GamePad.Axis.LeftStick, Ship.GetComponent<Ship>().ControllerIndex);
+        if (leftStickValue.magnitude > 0)
+        {
+            float powerX = 0, powerY = 0;
+            float dot = Vector3.Dot(Ship.transform.up, transform.up);
+            Debug.Log("DOT: " + dot);
+            if (dot < 0.01) // Thruster is backwards thruster.
+            {
+                //Debug.Log("Backwards thruster");
+                if (leftStickValue.y < 0)
+                {
+                    powerY = Mathf.Abs(leftStickValue.y);
+                }
+            }
+            else if (dot > 0.01) // Thruster is forwards thruster.
+            {
+                Debug.Log("Forwards thruster");
+                if (leftStickValue.y > 0)
+                {
+                    powerY = leftStickValue.y;
+                }
+            }
+            else // Thruster is sideways thruster.
+            {
+                Debug.Log("Sideways thruster");
+                
+                if (Vector3.Cross(Ship.transform.position, transform.position).z < 0)
+                {
+                    Debug.Log("Cross.z < 0");
+                    if (leftStickValue.x > 0)
+                    {
+                        
+                    }
+                }
+                else
+                {
+                    
+                }
+            }
+            Ship.GetComponent<Rigidbody2D>().AddForceAtPosition(transform.up * ThrustPower * (powerX + powerY), transform.position);
         }
     }
 
@@ -59,7 +103,7 @@ public class ThrusterEditor : ModuleEditor
         EditorGUILayout.LabelField("Thrusters settings", heading);
 
         // Get target and show/edit fields.
-        Thruster t = (Thruster) target;
+        Thruster t = (Thruster)target;
         t.ThrustPower = EditorGUILayout.FloatField("Power", t.ThrustPower);
 
         // If the target was changed, set the target to dirty, so Unity will save the values.
