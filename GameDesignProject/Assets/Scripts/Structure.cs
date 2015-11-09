@@ -4,11 +4,23 @@ using System.Collections.Generic;
 
 public class Structure : Module
 {
-
+    float health = 100.0f;
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    public void LoseHealth(float healthLost)
+    {
+        health -= healthLost;
+        StartCoroutine("FlashRed");
+        if (health <= 0)
+        {
+            LoseModule();
+            healthLost = Mathf.Abs(health);
+            health = 100 - healthLost;
+        }
     }
 
     public void LoseModule()
@@ -43,6 +55,10 @@ public class Structure : Module
             Sockets.RemoveAt(index);
             GameObject.Destroy(go);
         }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public IList<Structure> GetAllStructureModules()
@@ -75,5 +91,28 @@ public class Structure : Module
                 return true;
         }
         return false;
+    }
+
+    IEnumerator FlashRed()
+    {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        Color red = Color.red;
+        Color white = Color.white;
+        sr.color = red;
+        yield return new WaitForSeconds(0.1f);
+        sr.color = white;
+        yield return new WaitForSeconds(0.1f);
+        sr.color = red;
+        yield return new WaitForSeconds(0.1f);
+        sr.color = white;
+        yield return new WaitForSeconds(0.1f);
+        sr.color = red;
+        yield return new WaitForSeconds(0.1f);
+        sr.color = white;
+        yield return new WaitForSeconds(0.1f);
+        sr.color = red;
+        yield return new WaitForSeconds(0.1f);
+        sr.color = white;
+        yield return new WaitForSeconds(0.1f);
     }
 }
