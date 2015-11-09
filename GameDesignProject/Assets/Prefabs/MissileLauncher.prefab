@@ -45,12 +45,12 @@ MonoBehaviour:
   - {fileID: 0}
   rb: {fileID: 0}
   Ship: {fileID: 0}
-  Button: 2
   Controller: 0
+  Button: 2
   MissilePrefab: {fileID: 144840, guid: c96b224f0813e814692a7ff16a70ddbe, type: 2}
   Cooldown: 2
   MissileLaunchSpeed: 0
-  MissileLaunchPosOffset: 8.44999981
+  MissileLaunchPosOffset: 0
 --- !u!212 &21209952
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -99,7 +99,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MissileLaunchPosOffset
-      value: 8.44999981
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

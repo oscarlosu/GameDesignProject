@@ -3,6 +3,8 @@ using System.Collections;
 
 public class MissileHoming : Projectile
 {
+    float homingDamage = 25;
+    [Space(10)]
     public float ThrusterActivateAt; // The thruser activates after this time period.
     public float ThrustPower;
     public float ThrusterDuration;

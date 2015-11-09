@@ -53,6 +53,10 @@ public class Ship : MonoBehaviour
                     structureModules[index].LoseModule();
                     return;
                 }
+                else
+                {
+                    Destroy(structureModules[index]);
+                }
             }
         }
     }
