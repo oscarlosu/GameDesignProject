@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 using GamepadInput;
-using Microsoft.Win32;
 using UnityEditor;
-using UnityEditor.AnimatedValues;
 
 public class Thruster : Module
 {
@@ -47,29 +44,33 @@ public class Thruster : Module
             {
                 if (leftStickValue.y < 0)
                 {
-                    powerY = -leftStickValue.y;
-
-                    if (leftStickValue.x < 0 && shipRelative.x < 0) // On right side.
+                    if (leftStickValue.x < -float.Epsilon)
                     {
-                        //Debug.Log("Backwards thruster on left side.");
-                        powerX = -leftStickValue.x;
+                        if (shipRelative.x < 0) // On the left side.
+                        {
+                            powerX = -leftStickValue.x;
+                        }
                     }
-                    else if (leftStickValue.x > 0 && shipRelative.x > 0) // On left side.
+                    else if (leftStickValue.x > float.Epsilon)
                     {
-                        //Debug.Log("Backwards thrusters on right side.");
-                        powerX = leftStickValue.x;
+                        if (shipRelative.x > 0) // On the right side.
+                        {
+                            powerX = leftStickValue.x;
+                        }
+                    }
+                    else // stick x practically in the middle.
+                    {
+                        powerY = -leftStickValue.y;
                     }
                 }
                 else if (leftStickValue.y > -float.Epsilon && leftStickValue.y < float.Epsilon)
                 {
                     if (leftStickValue.x < 0 && shipRelative.x < 0) // On right side.
                     {
-                        //Debug.Log("Backwards thruster on left side.");
                         powerX = -leftStickValue.x;
                     }
                     else if (leftStickValue.x > 0 && shipRelative.x > 0) // On left side.
                     {
-                        //Debug.Log("Backwards thrusters on right side.");
                         powerX = leftStickValue.x;
                     }
                 }
@@ -109,9 +110,7 @@ public class Thruster : Module
             {
                 //Debug.Log("Sideways thruster");
                 // NOTE: Thumbstick left is negative z
-
-
-                // I want to turn RIGHT!
+                
 
                 // Thruster above middle
                 // - Thruster is on left side
@@ -129,6 +128,7 @@ public class Thruster : Module
                 // - Thruster is on right side
                 // - - Thruster is pointing up.
 
+
                 if (shipRelative.y >= 0) // Thruster above middle.
                 {
                     if (shipRelative.x > 0) // Thruster on right side.
@@ -140,9 +140,13 @@ public class Thruster : Module
                             {
                                 powerX = leftStickValue.x;
                             }
-                            if (leftStickValue.x < 0 && leftStickValue.y < -float.Epsilon)
+                            else if (leftStickValue.x < 0 && leftStickValue.y < -float.Epsilon)
                             {
                                 powerX = -leftStickValue.x;
+                            }
+                            else
+                            {
+                                powerX = 0;
                             }
                         }
                         else // Thruster pointing right.
@@ -152,9 +156,13 @@ public class Thruster : Module
                             {
                                 powerX = -leftStickValue.x;
                             }
-                            if (leftStickValue.x > 0 && leftStickValue.y < -float.Epsilon)
+                            else if (leftStickValue.x > 0 && leftStickValue.y < -float.Epsilon)
                             {
                                 powerX = leftStickValue.x;
+                            }
+                            else
+                            {
+                                powerX = 0;
                             }
                         }
                     }
@@ -167,9 +175,13 @@ public class Thruster : Module
                             {
                                 powerX = leftStickValue.x;
                             }
-                            if (leftStickValue.x < 0 && leftStickValue.y < -float.Epsilon)
+                            else if (leftStickValue.x < 0 && leftStickValue.y < -float.Epsilon)
                             {
                                 powerX = -leftStickValue.x;
+                            }
+                            else
+                            {
+                                powerX = 0;
                             }
                         }
                         else // Thruster pointing right.
@@ -179,9 +191,13 @@ public class Thruster : Module
                             {
                                 powerX = -leftStickValue.x;
                             }
-                            if (leftStickValue.x > 0 && leftStickValue.y < -float.Epsilon)
+                            else if (leftStickValue.x > 0 && leftStickValue.y < -float.Epsilon)
                             {
                                 powerX = leftStickValue.x;
+                            }
+                            else
+                            {
+                                powerX = 0;
                             }
                         }
                     }
@@ -197,13 +213,29 @@ public class Thruster : Module
                             {
                                 powerX = -leftStickValue.x;
                             }
+                            else if (leftStickValue.x > 0 && leftStickValue.y < 0)
+                            {
+                                powerX = leftStickValue.x;
+                            }
+                            else
+                            {
+                                powerX = 0;
+                            }
                         }
                         else // Thruster pointing right.
                         {
                             Debug.Log("Below-right-right");
-                            if (leftStickValue.x > 0)
+                            if (leftStickValue.x > 0 && leftStickValue.y >= 0)
                             {
                                 powerX = leftStickValue.x;
+                            }
+                            else if (leftStickValue.x < 0 && leftStickValue.y < 0)
+                            {
+                                powerX = -leftStickValue.x;
+                            }
+                            else
+                            {
+                                powerX = 0;
                             }
                         }
                     }
@@ -212,17 +244,33 @@ public class Thruster : Module
                         if (Vector3.Cross(Ship.transform.up, transform.up).z < 0) // Thruster pointing left.
                         {
                             Debug.Log("Below-left-left");
-                            if (leftStickValue.x < 0)
+                            if (leftStickValue.x < 0 && leftStickValue.y >= 0)
                             {
                                 powerX = -leftStickValue.x;
+                            }
+                            else if (leftStickValue.x > 0 && leftStickValue.y < 0)
+                            {
+                                powerX = leftStickValue.x;
+                            }
+                            else
+                            {
+                                powerX = 0;
                             }
                         }
                         else // Thruster pointing right.
                         {
                             Debug.Log("Below-left-right");
-                            if (leftStickValue.x > 0)
+                            if (leftStickValue.x > 0 && leftStickValue.y >= 0)
                             {
                                 powerX = leftStickValue.x;
+                            }
+                            else if (leftStickValue.x < 0 && leftStickValue.y < 0)
+                            {
+                                powerX = -leftStickValue.x;
+                            }
+                            else
+                            {
+                                powerX = 0;
                             }
                         }
                     }
