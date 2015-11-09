@@ -4,115 +4,205 @@ using System.Collections.Generic;
 
 public class CameraHandler : MonoBehaviour
 {
+    // Zoom to fit params
     public float Margin;
     public float MaxSize;
-    public float SqueezeForce;
-
-
+    // Warning phase params
+    public float CameraShakeMagnitude;
+    public float WarningDuration;
+    // Shrink phase params    
+    public float PushOffsetFromCenter;
+    public float PushForceFactor;
+    public float PushTorqueMagnitude;
+    public float ShrinkSpeed;
+    public float ShrinkExtraDistance;
+    public float EarlyPushFactor;
 
     private GameObject[] ships;
     private Camera camera;
+
+    private enum CameraState
+    {
+        ZoomToFit,
+        Warning,
+        Shrink
+    }
+    private CameraState state;
+    private float elapsedTime;
+
 
     // Use this for initialization
     void Start()
     {
         camera = GetComponent<Camera>();
-        // Find all Ships in the scene
         ships = GameObject.FindGameObjectsWithTag(GlobalValues.ShipTag);
+        state = CameraState.ZoomToFit;
+        elapsedTime = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        CenterAndZoomToFit();      
-
-        if (camera.orthographicSize > MaxSize)
+        UpdateState();
+        switch(state)
         {
-            Squeeze();
+            case CameraState.ZoomToFit:
+                elapsedTime = 0;
+                CenterAndZoomToFit();
+                break;
+            case CameraState.Warning:
+                elapsedTime += Time.deltaTime;
+                CenterAndZoomToFit();
+                ShakeCamera();                
+                break;
+            case CameraState.Shrink:
+                Shrink();
+                break;
+        }
+        KeepShipsInsideViewport();
+
+    }
+
+    private void UpdateState()
+    {
+        switch(state)
+        {
+            case CameraState.ZoomToFit:
+                if(camera.orthographicSize > MaxSize)
+                {
+                    state = CameraState.Warning;
+                }
+                break;
+            case CameraState.Warning:
+                if(camera.orthographicSize <= MaxSize)
+                {
+                    state = CameraState.ZoomToFit;
+                }
+                else if(elapsedTime > WarningDuration)
+                {
+                    state = CameraState.Shrink;
+                }
+                break;
+            case CameraState.Shrink:
+                if (camera.orthographicSize <= MaxSize - ShrinkExtraDistance)
+                {
+                    state = CameraState.ZoomToFit;
+                }
+                break;
         }
     }
 
-    void Squeeze()
-    {
-        
-        // Push any ship that is too close to the border of the camera towards the center
-        foreach(GameObject ship in ships)
-        {
-            if(IsTooClose(ship))
-            {
-                Vector2 direction = camera.transform.position - ship.transform.position;
-                direction.Normalize();
-                ship.GetComponent<Rigidbody2D>().AddForce(direction * SqueezeForce);
-            }
-        }
-    }
-
-    bool IsTooClose(GameObject go)
-    {
-        float cameraHalfWidth = camera.aspect * camera.orthographicSize;
-        return go.transform.position.x < camera.transform.position.x - cameraHalfWidth + 2 * Margin ||
-               go.transform.position.x > camera.transform.position.x + cameraHalfWidth - 2 * Margin ||
-               go.transform.position.y < camera.transform.position.y - camera.orthographicSize + 2 * Margin ||
-               go.transform.position.y > camera.transform.position.y + camera.orthographicSize - 2 * Margin;
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("OntriggerEnter");
-        if (other.attachedRigidbody != null && other.attachedRigidbody.gameObject.tag == GlobalValues.ShipTag)
-        {
-            Vector2 direction = camera.transform.position - other.attachedRigidbody.gameObject.transform.position;
-            direction.Normalize();
-            other.attachedRigidbody.AddForce(direction * SqueezeForce);
-        }
-    }
-
-
-
+    
 
     private void CenterAndZoomToFit()
     {
-        if (ships.Length > 0)
+        // Update the orthographic size of the camera
+        float targetSize = GetMaxAxisDistanceToCamera() + Margin;
+        camera.orthographicSize = targetSize;
+        // Update position of the camera
+        Vector3 targetCenter = CameraTargetPosition();
+        camera.transform.position = new Vector3(targetCenter.x, targetCenter.y, camera.transform.position.z);
+        
+    }
+
+    private Vector3 CameraTargetPosition()
+    {
+        // The targert position for the camera is the average of the positions of the ships
+        int counter = 0;
+        Vector3 avg = Vector3.zero;
+        for (int i = 0; i < ships.Length; ++i)
         {
-            // Center and zoom to fit
-            Vector3 center = Vector3.zero;
-            int counter = 0;
-            Vector2 min = new Vector2(Mathf.Infinity, Mathf.Infinity), max = new Vector2(- Mathf.Infinity, - Mathf.Infinity);
-            for (int i = 0; i < ships.Length; ++i)
+            // Check if the ship has been destroyed
+            if (ships[i] != null)
             {
-                // Check if the ship has been destroyed
-                if (ships[i] != null)
-                {
-                    // Keep count of how many ships are still in the scene
-                    ++counter;
-                    // Get the minimum and maximum coordinates
-                    if (ships[i].transform.position.x < min.x)
-                        min.x = ships[i].transform.position.x;
-                    if (ships[i].transform.position.x > max.x)
-                        max.x = ships[i].transform.position.x;
-                    if (ships[i].transform.position.y < min.y)
-                        min.y = ships[i].transform.position.y;
-                    if (ships[i].transform.position.y > max.y)
-                        max.y = ships[i].transform.position.y;
-                    // Add positions
-                    center += ships[i].transform.position;
-                }
+                // Keep count of how many ships are still in the scene
+                ++counter;
+                // Add positions
+                avg += ships[i].transform.position;
             }
-            // Calculate the average and update the target position of the camera
-            center /= counter;
-
-            Vector3 targetCenter;
-            targetCenter.x = center.x;
-            targetCenter.y = center.y;
-            targetCenter.z = transform.position.z;
-
-            // Update the target size of the camera
-
-            float targetSize = Vector2.Distance(min, max) / 2 + Margin;
-
-            camera.transform.position = targetCenter;
-            camera.orthographicSize = targetSize;
-
+        }
+        // If there are no ships, we keep the current position of the camera
+        if (counter > 0)
+        {
+            return avg / counter;
+        }
+        else
+        {
+            return camera.transform.position;
         }
     }
+
+    private void ShakeCamera()
+    {
+        Vector3 shakeOffset = Random.insideUnitCircle * Mathf.Lerp(0, CameraShakeMagnitude, elapsedTime / WarningDuration);
+        camera.transform.position += shakeOffset;
+    }
+
+    private float GetMaxAxisDistanceToCamera()
+    {
+        float max = - Mathf.Infinity;
+        foreach(GameObject ship in ships)
+        {
+            float val = Mathf.Max(Mathf.Abs(ship.transform.position.x - camera.transform.position.x),
+                                  Mathf.Abs(ship.transform.position.y - camera.transform.position.y));
+            if (val > max)
+            {
+                max = val;
+            }
+        }
+        return max;
+    }
+
+    private void Shrink()
+    {
+        // Reduce orthographic size of camera
+        camera.orthographicSize -= ShrinkSpeed;
+        // Update position of the camera
+        Vector3 targetCenter = CameraTargetPosition();
+        camera.transform.position = new Vector3(targetCenter.x, targetCenter.y, camera.transform.position.z);
+    }
+
+    private void KeepShipsInsideViewport()
+    {
+        // Any ship outside of the viewport is thrown towards the center             
+        foreach (GameObject ship in ships)
+        {
+            if (IsShipOutsideViewport(ship))
+            {
+                ThrowShip(ship);
+            }
+        }
+    }
+
+    private bool IsShipOutsideViewport(GameObject ship)
+    {
+        float cameraHalfWidth = camera.aspect * camera.orthographicSize;
+        return Mathf.Abs(ship.transform.position.x - camera.transform.position.x) >= cameraHalfWidth * EarlyPushFactor ||
+               Mathf.Abs(ship.transform.position.y - camera.transform.position.y) >= camera.orthographicSize * EarlyPushFactor;
+    }
+
+    private void ThrowShip(GameObject ship)
+    {
+        // Set velocity of ship to zero
+        ship.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        ship.GetComponent<Rigidbody2D>().angularVelocity = 0;
+        // Add force roughly towaards the center of the viewport
+        Vector3 offsetFromCenter = Random.insideUnitCircle * PushOffsetFromCenter;
+        Vector3 squeezeDest = camera.transform.position;
+        squeezeDest += offsetFromCenter;
+        Vector2 direction = squeezeDest - ship.transform.position;
+        direction.Normalize();
+        ship.GetComponent<Rigidbody2D>().AddForce(direction * PushForceFactor * camera.orthographicSize);
+        // Add torque
+        // Positive rotation (counterclockwise)
+        if (Random.value >= 0.5f)
+        {
+            ship.GetComponent<Rigidbody2D>().AddTorque(Random.Range(0.5f, 1) * PushTorqueMagnitude, ForceMode2D.Impulse);
+        }
+        // Negative rotation (clockwise)
+        else
+        {
+            ship.GetComponent<Rigidbody2D>().AddTorque(-Random.Range(0.5f, 1) * PushTorqueMagnitude, ForceMode2D.Impulse);
+        }
+    }    
 }
