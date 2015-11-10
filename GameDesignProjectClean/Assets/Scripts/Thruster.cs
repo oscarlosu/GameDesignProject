@@ -22,13 +22,28 @@ public class Thruster : Module
                 if (GamePad.GetButton(ButtonKey, Ship.GetComponent<Ship>().ControllerIndex))
                 {
                     Activate(1);
+                    // DEBUG: Change sprite colour, when power is larger than 0.
+                    GetComponent<SpriteRenderer>().color = Color.magenta;
                 }
+                else
+                {
+                    // DEBUG: Change sprite colour, when deactivating.
+                    GetComponent<SpriteRenderer>().color = Color.white;
+                }
+
                 break;
             case InputKeyType.Trigger:
                 var value = GamePad.GetTrigger(TriggerKey, Ship.GetComponent<Ship>().ControllerIndex);
                 if (value > 0)
                 {
                     Activate(value);
+                    // DEBUG: Change sprite colour, when power is larger than 0.
+                    GetComponent<SpriteRenderer>().color = Color.magenta;
+                }
+                else
+                {
+                    // DEBUG: Change sprite colour, when deactivating.
+                    GetComponent<SpriteRenderer>().color = Color.white;
                 }
                 break;
         }
@@ -40,7 +55,7 @@ public class Thruster : Module
             float powerX = 0, powerY = 0;
             var shipRelative = Ship.transform.InverseTransformPoint(transform.position);
             float dot = Vector3.Dot(Ship.transform.up, transform.up);
-            if (dot < - 0.01) // Thruster is backwards thruster.
+            if (dot < -0.01) // Thruster is backwards thruster.
             {
                 if (leftStickValue.y < 0)
                 {
@@ -104,18 +119,18 @@ public class Thruster : Module
                         powerX = -leftStickValue.x;
                     }
                 }
-                
+
             }
             else // Thruster is sideways thruster.
             {
                 //Debug.Log("Sideways thruster");
                 // NOTE: Thumbstick left is negative z
-                
+
 
                 // Thruster above middle
                 // - Thruster is on left side
                 // - - Thruster is pointing left
-                
+
                 // Thruster below middle
                 // - Thruster is on right side
                 // - - Thruster is pointing right
@@ -285,7 +300,6 @@ public class Thruster : Module
     public void Activate(float power)
     {
         Ship.GetComponent<Rigidbody2D>().AddForceAtPosition(transform.up * ThrustPower * power, transform.position);
-
     }
 }
 
