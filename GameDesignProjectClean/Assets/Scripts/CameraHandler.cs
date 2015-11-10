@@ -38,6 +38,8 @@ public class CameraHandler : MonoBehaviour
         ships = GameObject.FindGameObjectsWithTag(GlobalValues.ShipTag);
         state = CameraState.ZoomToFit;
         elapsedTime = 0;
+
+        CenterAndZoomToFit();
     }
 
     // Update is called once per frame
@@ -143,8 +145,8 @@ public class CameraHandler : MonoBehaviour
         float max = - Mathf.Infinity;
         foreach(GameObject ship in ships)
         {
-            float val = Mathf.Max(Mathf.Abs(ship.transform.position.x - camera.transform.position.x),
-                                  Mathf.Abs(ship.transform.position.y - camera.transform.position.y));
+            float val = Mathf.Max(Mathf.Abs(Mathf.Abs(ship.transform.position.x) - Mathf.Abs(camera.transform.position.x)),
+                                  Mathf.Abs(Mathf.Abs(ship.transform.position.y) - Mathf.Abs(camera.transform.position.y)));
             if (val > max)
             {
                 max = val;
