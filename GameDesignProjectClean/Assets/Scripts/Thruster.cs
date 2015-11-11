@@ -59,8 +59,8 @@ public class Thruster : Module
         {
             float powerX = 0, powerY = 0;
             var shipRelative = Ship.transform.InverseTransformPoint(transform.position);
-            float dot = Vector3.Dot(Ship.transform.up, transform.up);
-            if (dot < -0.01) // Thruster is backwards thruster.
+            float dot = Vector3.Dot(Ship.transform.up, transform.up); // Determines if thrusters point forwards, backwards or sideways.
+            if (dot > 0.01) // Thruster is backwards thruster.
             {
                 if (leftStickValue.y < 0)
                 {
@@ -95,7 +95,7 @@ public class Thruster : Module
                     }
                 }
             }
-            else if (dot > 0.01) // Thruster is forwards thruster.
+            else if (dot < -0.01) // Thruster is forwards thruster.
             {
                 //Debug.Log("Forwards thruster");
                 if (leftStickValue.y > 0)
@@ -149,9 +149,9 @@ public class Thruster : Module
                 // - - Thruster is pointing up.
 
 
-                if (shipRelative.y >= 0) // Thruster above middle.
+                if (shipRelative.y <= 0) // Thruster above middle.
                 {
-                    if (shipRelative.x > 0) // Thruster on right side.
+                    if (shipRelative.x < 0) // Thruster on right side.
                     {
                         if (Vector3.Cross(Ship.transform.up, transform.up).z < 0) // Thruster pointing left.
                         {
@@ -298,7 +298,7 @@ public class Thruster : Module
             }
             // DEBUG: Change sprite colour, when power is larger than 0.
             GetComponent<SpriteRenderer>().color = powerX + powerY > 0 ? Color.magenta : Color.white;
-            Ship.GetComponent<Rigidbody2D>().AddForceAtPosition(transform.up * ThrustPower * (powerX + powerY), transform.position);
+            Ship.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up) * ThrustPower * (powerX + powerY), transform.position);
         }
     }
 
