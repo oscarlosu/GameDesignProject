@@ -210,54 +210,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11427372, guid: e5aad2f8a41462545a9e96d7c8bc0266, type: 2}
-      propertyPath: InputType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11427372, guid: e5aad2f8a41462545a9e96d7c8bc0266, type: 2}
-      propertyPath: ButtonKey
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11450048, guid: e5aad2f8a41462545a9e96d7c8bc0266, type: 2}
-      propertyPath: InputType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11450048, guid: e5aad2f8a41462545a9e96d7c8bc0266, type: 2}
-      propertyPath: ButtonKey
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11489458, guid: e5aad2f8a41462545a9e96d7c8bc0266, type: 2}
-      propertyPath: InputType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11489458, guid: e5aad2f8a41462545a9e96d7c8bc0266, type: 2}
-      propertyPath: ButtonKey
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11459194, guid: e5aad2f8a41462545a9e96d7c8bc0266, type: 2}
-      propertyPath: InputType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11459194, guid: e5aad2f8a41462545a9e96d7c8bc0266, type: 2}
-      propertyPath: ButtonKey
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11410616, guid: e5aad2f8a41462545a9e96d7c8bc0266, type: 2}
-      propertyPath: TriggerKey
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11409092, guid: e5aad2f8a41462545a9e96d7c8bc0266, type: 2}
-      propertyPath: TriggerKey
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11473392, guid: e5aad2f8a41462545a9e96d7c8bc0266, type: 2}
-      propertyPath: TriggerKey
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11485494, guid: e5aad2f8a41462545a9e96d7c8bc0266, type: 2}
-      propertyPath: TriggerKey
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e5aad2f8a41462545a9e96d7c8bc0266, type: 2}
   m_IsPrefabParent: 0
@@ -298,38 +250,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 406240, guid: 9f56a6cd3fd8a9f42bd654395c624675, type: 2}
       propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11480236, guid: 9f56a6cd3fd8a9f42bd654395c624675, type: 2}
-      propertyPath: TriggerKey
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11488992, guid: 9f56a6cd3fd8a9f42bd654395c624675, type: 2}
-      propertyPath: TriggerKey
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11419074, guid: 9f56a6cd3fd8a9f42bd654395c624675, type: 2}
-      propertyPath: TriggerKey
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11470842, guid: 9f56a6cd3fd8a9f42bd654395c624675, type: 2}
-      propertyPath: TriggerKey
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11427140, guid: 9f56a6cd3fd8a9f42bd654395c624675, type: 2}
-      propertyPath: InputType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11427140, guid: 9f56a6cd3fd8a9f42bd654395c624675, type: 2}
-      propertyPath: ButtonKey
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11413456, guid: 9f56a6cd3fd8a9f42bd654395c624675, type: 2}
-      propertyPath: InputType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11413456, guid: 9f56a6cd3fd8a9f42bd654395c624675, type: 2}
-      propertyPath: ButtonKey
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
