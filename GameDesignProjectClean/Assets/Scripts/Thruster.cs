@@ -15,6 +15,11 @@ public class Thruster : Module
 
     public void Update()
     {
+        // If the ship hasn't been set yet, don't do ANYTHING!
+        if (Ship == null)
+        {
+            return;
+        }
         // Handle normal input.
         switch (InputType)
         {

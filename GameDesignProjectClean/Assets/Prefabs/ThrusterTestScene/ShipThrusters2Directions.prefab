@@ -315,7 +315,7 @@ MonoBehaviour:
   Mass: 1
   InputType: 1
   ButtonKey: 0
-  TriggerKey: 0
+  TriggerKey: 1
   ThrustPower: 5
 --- !u!114 &11410616
 MonoBehaviour:
@@ -360,8 +360,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ship: {fileID: 0}
   Mass: 1
-  InputType: 1
-  ButtonKey: 0
+  InputType: 0
+  ButtonKey: 2
   TriggerKey: 1
   ThrustPower: 5
 --- !u!114 &11450048
@@ -377,8 +377,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ship: {fileID: 0}
   Mass: 1
-  InputType: 1
-  ButtonKey: 0
+  InputType: 0
+  ButtonKey: 2
   TriggerKey: 1
   ThrustPower: 5
 --- !u!114 &11459194
@@ -394,8 +394,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ship: {fileID: 0}
   Mass: 1
-  InputType: 1
-  ButtonKey: 0
+  InputType: 0
+  ButtonKey: 2
   TriggerKey: 1
   ThrustPower: 5
 --- !u!114 &11473392
@@ -413,7 +413,7 @@ MonoBehaviour:
   Mass: 1
   InputType: 1
   ButtonKey: 0
-  TriggerKey: 1
+  TriggerKey: 0
   ThrustPower: 5
 --- !u!114 &11485494
 MonoBehaviour:
@@ -430,7 +430,7 @@ MonoBehaviour:
   Mass: 1
   InputType: 1
   ButtonKey: 0
-  TriggerKey: 1
+  TriggerKey: 0
   ThrustPower: 5
 --- !u!114 &11489458
 MonoBehaviour:
@@ -445,8 +445,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ship: {fileID: 0}
   Mass: 1
-  InputType: 1
-  ButtonKey: 0
+  InputType: 0
+  ButtonKey: 2
   TriggerKey: 1
   ThrustPower: 5
 --- !u!212 &21220698

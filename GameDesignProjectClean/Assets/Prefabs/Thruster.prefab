@@ -12,7 +12,7 @@ GameObject:
   - 114: {fileID: 11486626}
   m_Layer: 0
   m_Name: Thruster
-  m_TagString: Untagged
+  m_TagString: Module
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,8 +42,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ship: {fileID: 0}
   Mass: 1
-  Controller: 0
-  Key: 1
+  InputType: 0
+  ButtonKey: 0
+  TriggerKey: 0
   ThrustPower: 8
 --- !u!212 &21276574
 SpriteRenderer:
@@ -69,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 99f6526cdfac529439959be18408251d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 150888e0ce0977848814cc76392b894a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -86,6 +87,15 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Module
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 150888e0ce0977848814cc76392b894a,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 153796}

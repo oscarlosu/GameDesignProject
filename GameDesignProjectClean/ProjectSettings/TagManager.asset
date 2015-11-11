@@ -7,6 +7,8 @@ TagManager:
   - Module
   - Structure
   - Ship
+  - AvailablePos
+  - BuilderHandler
   layers:
   - Default
   - TransparentFX
