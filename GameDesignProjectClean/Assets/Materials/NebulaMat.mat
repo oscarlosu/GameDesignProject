@@ -10,7 +10,7 @@ Material:
   m_Shader: {fileID: 4800000, guid: 533f41a6f5dc9d4419afde8d953b5d36, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -110,8 +110,15 @@ Material:
         first:
           name: _NebulaClouds1
         second:
-          m_Texture: {fileID: 2800000, guid: a518279e23b41ee4485d02e1932f0d18, type: 3}
-          m_Scale: {x: .100000001, y: .100000001}
+          m_Texture: {fileID: 2800000, guid: faf68c6dfbb1522428bfe4b225e9e8e2, type: 3}
+          m_Scale: {x: .0199999996, y: .0199999996}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _node_1020
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
@@ -177,6 +184,34 @@ Material:
       data:
         first:
           name: _VSpeed
+        second: .5
+      data:
+        first:
+          name: _node_1073
+        second: 0
+      data:
+        first:
+          name: _TransparencyModifier
+        second: .200000003
+      data:
+        first:
+          name: _Nebula1XOffsetModifier
+        second: -.5
+      data:
+        first:
+          name: _Nebula1YOffsetModifier
+        second: .300000012
+      data:
+        first:
+          name: _Nebula2XOffsetModifier
+        second: .699999988
+      data:
+        first:
+          name: _Nebula1YOffsetModifier_copy
+        second: 0
+      data:
+        first:
+          name: _Nebula2YOffsetModifier
         second: .5
     m_Colors:
       data:
