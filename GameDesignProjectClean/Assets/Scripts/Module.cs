@@ -52,6 +52,15 @@ public class ModuleEditor : Editor
                     (GamepadInput.GamePad.Trigger)EditorGUILayout.EnumPopup("Input key", module.TriggerKey);
                 break;
         }
+        // Select if the module can rotate (has more than one sprite direction).
+        module.CanSpriteRotate = EditorGUILayout.Toggle("Can sprite rotate", module.CanSpriteRotate);
+        // If it can rotate, also show sprite variables.
+        if (module.CanSpriteRotate)
+        {
+            module.SpriteForward = (Sprite)EditorGUILayout.ObjectField("Sprite forward", module.SpriteForward, typeof (Sprite), false);
+            module.SpriteSideways = (Sprite)EditorGUILayout.ObjectField("Sprite sideways", module.SpriteSideways, typeof (Sprite), false);
+        }
+
         // Add a separator between the module settings and the settings of the actual module.
         EditorGUILayout.Separator();
 

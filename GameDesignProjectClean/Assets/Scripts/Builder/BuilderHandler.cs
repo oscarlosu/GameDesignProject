@@ -4,12 +4,12 @@ using System.Collections;
 public class BuilderHandler : MonoBehaviour
 {
     public int GridSizeX, GridSizeY;
-    public Vector2 GridCellSize;
+    //public Vector2 GridCellSize;
     public GameObject ShipCore;
     public GameObject AvailablePosPrefab;
-    public Camera Cam;
     public GameObject[] AvailableModules;
 
+    private Camera Cam;
     private GameObject[,] grid;
     private AvailableBuildPos selectedCell;
 
@@ -230,16 +230,28 @@ public class BuilderHandler : MonoBehaviour
     // Rotates the module to the next free rotation (so it doesn't point into a cell with other components).
     private void RotateModule(int x, int y, int rotateCount)
     {
+        Debug.Log("Rotate module...");
+
         // If rotation has been tried more than 3 times, stop trying...
         if (rotateCount > 3)
         {
             return;
         }
         var module = Get(x, y);
-        if (module != null)
+        if (module != null && module.GetComponent<Module>() != null)
         {
             // Rotate module.
             module.transform.Rotate(new Vector3(0, 0, -90));
+            var moduleScr = module.GetComponent<Module>();
+            // Rotate the sprite facing direction, if the module can rotate.
+            if (moduleScr.CanSpriteRotate)
+            {
+                moduleScr.SpriteDireciton = moduleScr.SpriteDireciton == ShipComponent.Direction.Forward
+                    ? ShipComponent.Direction.Sideway
+                    : ShipComponent.Direction.Forward;
+                moduleScr.UpdateSprite();
+                Debug.Log("Rotated to: " + moduleScr.SpriteDireciton);
+            }
 
             // If new direction is blocked, rotate again.
             if (module.transform.rotation.eulerAngles.z > -1 &&

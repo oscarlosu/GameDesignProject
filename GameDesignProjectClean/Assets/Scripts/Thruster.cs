@@ -60,8 +60,8 @@ public class Thruster : Module
             float powerX = 0, powerY = 0;
             var shipRelative = Core.transform.InverseTransformPoint(transform.position);
 
-            float dot = Vector3.Dot(Core.transform.up, transform.up);
             // Determines if thrusters point forwards, backwards or sideways.
+            float dot = Vector3.Dot(Core.transform.up, transform.up);
             float crossZ = Vector3.Cross(Core.transform.up, transform.up).z;
             // dot == 0 && z < 0 : thruster pointing right
 

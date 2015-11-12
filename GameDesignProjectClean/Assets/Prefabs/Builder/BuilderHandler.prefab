@@ -41,13 +41,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridSizeX: 20
   GridSizeY: 20
-  GridCellSize: {x: 70, y: 70}
   ShipCore: {fileID: 0}
   AvailablePosPrefab: {fileID: 151368, guid: fc280ededd0abc747beb64b7264929cb, type: 2}
-  Cam: {fileID: 0}
   AvailableModules:
   - {fileID: 153268, guid: 543bc4c95ab883843b907f74c5007db3, type: 2}
   - {fileID: 153796, guid: 107e5e0fac9af0a42829fc9ff5d22224, type: 2}
+  - {fileID: 195576, guid: 4b95bf4e6c5f28c46a30246e09048388, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

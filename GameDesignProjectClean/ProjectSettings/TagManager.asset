@@ -9,6 +9,7 @@ TagManager:
   - Ship
   - AvailablePos
   - BuilderHandler
+  - Projectile
   layers:
   - Default
   - TransparentFX
