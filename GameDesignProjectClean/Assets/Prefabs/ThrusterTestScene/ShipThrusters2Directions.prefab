@@ -234,7 +234,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 164234}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.51000023, y: 0, z: 0}
+  m_LocalPosition: {x: -.317696095, y: 16.2999992, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 441598}
@@ -345,8 +345,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5b16ce33ca4da449a4d3669cf849a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ControllerIndex: 0
+  ControllerIndex: 1
   MinCrashMagnitude: 0
+  HitFeedbackDuration: 1
 --- !u!114 &11427372
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -499,7 +500,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 68ebd2da099019b468971d5a51a23963, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a902ef0325da4c2499b96b963896ba04, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21250892
 SpriteRenderer:
@@ -689,7 +690,12 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a902ef0325da4c2499b96b963896ba04,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 164234}

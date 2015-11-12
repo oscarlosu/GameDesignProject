@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -6,6 +7,7 @@ public class Ship : MonoBehaviour
 {
     public GamepadInput.GamePad.Index ControllerIndex;
     public float MinCrashMagnitude;
+    public float HitFeedbackDuration;
 
     private List<GameObject> modules;
     private List<GameObject> structures;
@@ -32,14 +34,39 @@ public class Ship : MonoBehaviour
         // Only "crash" if the force with which the objects hit each other is large enough.
         if (coll.relativeVelocity.magnitude > MinCrashMagnitude)
         {
-            Debug.Log("Crashed with a magnitude of: " + coll.relativeVelocity.magnitude);
+            //Debug.Log("Crashed with a magnitude of: " + coll.relativeVelocity.magnitude);
             // If the other object has a higher mass, lose one random module.
             if (coll.gameObject.GetComponent<Rigidbody2D>().mass >= GetComponent<Rigidbody2D>().mass)
             {                
-                LoseModule();
-                Debug.LogWarning("Ship " + gameObject.name + " collided with something with greater mass.");
+                LoseModule();                
+                Debug.LogWarning("Ship " + gameObject.name + " collided with something with greater or equal mass.");
             }
 
+        }
+    }
+
+    
+    IEnumerator HandleHitColor(GameObject obj)
+    {
+        SpriteRenderer rend = obj.GetComponent<SpriteRenderer>();
+        rend.color = Color.red;
+        for(int index = 0; index < obj.transform.childCount; ++index)
+        {
+            GameObject child = obj.transform.GetChild(index).gameObject;
+            if (child.GetComponent<Module>() != null)
+            {
+                child.GetComponent<SpriteRenderer>().color = Color.red;
+            }
+        }
+        yield return new WaitForSeconds(HitFeedbackDuration);
+        rend.color = Color.white;
+        for (int index = 0; index < obj.transform.childCount; ++index)
+        {
+            GameObject child = obj.transform.GetChild(index).gameObject;
+            if (child.GetComponent<Module>() != null)
+            {
+                child.GetComponent<SpriteRenderer>().color = Color.white;
+            }
         }
     }
     
@@ -87,6 +114,7 @@ public class Ship : MonoBehaviour
                 {
                     modules.Remove(m);
                     GameObject.Destroy(m);
+                    
                     return;
                 }
             }
