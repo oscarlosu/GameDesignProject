@@ -55,256 +55,196 @@ public class Thruster : Module
 
         // Handle thumb stick input.
         Vector2 leftStickValue = GamePad.GetAxis(GamePad.Axis.LeftStick, Ship.GetComponent<Ship>().ControllerIndex);
-        if (leftStickValue.magnitude > 0)
+        if (leftStickValue.magnitude > 0.5)
         {
             float powerX = 0, powerY = 0;
             var shipRelative = Ship.transform.InverseTransformPoint(transform.position);
-            float dot = Vector3.Dot(Ship.transform.up, transform.up); // Determines if thrusters point forwards, backwards or sideways.
-            if (dot > 0.01) // Thruster is backwards thruster.
+
+            float dot = Vector3.Dot(Ship.transform.up, transform.up);
+            // Determines if thrusters point forwards, backwards or sideways.
+            float crossZ = Vector3.Cross(Ship.transform.up, transform.up).z;
+            // dot == 0 && z < 0 : thruster pointing right
+
+            // Check which quadrant the thrusters are in.
+            if (shipRelative.x < 0 && shipRelative.y > 0) // Upper left quadrant.
             {
-                if (leftStickValue.y < 0)
+                if (dot > 0.01) // Thruster pointing forwards.
                 {
-                    if (leftStickValue.x < -float.Epsilon)
+                    if ((leftStickValue.x >= 0 && leftStickValue.y < 0) ||
+                        (leftStickValue.x < 0 && leftStickValue.y == 0))
                     {
-                        if (shipRelative.x < 0) // On the left side.
-                        {
-                            powerX = -leftStickValue.x;
-                        }
+                        powerX = leftStickValue.x;
+                        powerY = leftStickValue.y;
                     }
-                    else if (leftStickValue.x > float.Epsilon)
+                }
+                else if (dot < -0.01) // Thruster pointing backwards.
+                {
+                    if (leftStickValue.x >= 0 && leftStickValue.y > 0)
                     {
-                        if (shipRelative.x > 0) // On the right side.
+                        powerX = leftStickValue.x;
+                        powerY = leftStickValue.y;
+                    }
+                }
+                else
+                {
+                    if (crossZ > 0) // Thrusters pointing left.
+                    {
+                        if ((leftStickValue.x > 0 && leftStickValue.y >= 0) ||
+                            (leftStickValue.x < 0 && leftStickValue.y < 0))
                         {
                             powerX = leftStickValue.x;
+                            powerY = leftStickValue.y;
                         }
                     }
-                    else // stick x practically in the middle.
+                    else if (crossZ < 0) // Thruster pointing right.
                     {
-                        powerY = -leftStickValue.y;
-                    }
-                }
-                else if (leftStickValue.y > -float.Epsilon && leftStickValue.y < float.Epsilon)
-                {
-                    if (leftStickValue.x < 0 && shipRelative.x < 0) // On right side.
-                    {
-                        powerX = -leftStickValue.x;
-                    }
-                    else if (leftStickValue.x > 0 && shipRelative.x > 0) // On left side.
-                    {
-                        powerX = leftStickValue.x;
+                        if ((leftStickValue.x < 0 && leftStickValue.y >= 0) ||
+                            (leftStickValue.x > 0 && leftStickValue.y < 0))
+                        {
+                            powerX = leftStickValue.x;
+                            powerY = leftStickValue.y;
+                        }
                     }
                 }
             }
-            else if (dot < -0.01) // Thruster is forwards thruster.
+            else if (shipRelative.x > 0 && shipRelative.y > 0) // Upper right quadrant.
             {
-                //Debug.Log("Forwards thruster");
-                if (leftStickValue.y > 0)
+                if (dot > 0.01) // Thruster pointing forwards.
                 {
-                    powerY = leftStickValue.y;
-
-                    if (leftStickValue.x < 0 && shipRelative.x < 0) // On right side.
-                    {
-                        //Debug.Log("Forwards thruster on right side.");
-                        powerX = leftStickValue.x;
-                    }
-                    else if (leftStickValue.x > 0 && shipRelative.x > 0) // On left side.
-                    {
-                        //Debug.Log("Forward thrusters on left side.");
-                        powerX = -leftStickValue.x;
-                    }
-                }
-                else if (leftStickValue.y < float.Epsilon && leftStickValue.y > -float.Epsilon)
-                {
-                    if (leftStickValue.x > 0 && shipRelative.x < 0)
+                    if ((leftStickValue.x <= 0 && leftStickValue.y < 0) ||
+                        (leftStickValue.x > 0 && leftStickValue.y == 0))
                     {
                         powerX = leftStickValue.x;
-                    }
-                    if (leftStickValue.x < 0 && shipRelative.x > 0)
-                    {
-                        powerX = -leftStickValue.x;
+                        powerY = leftStickValue.y;
                     }
                 }
-
+                else if (dot < -0.01) // Thruster pointing backwards.
+                {
+                    if (leftStickValue.x <= 0 && leftStickValue.y > 0)
+                    {
+                        powerX = leftStickValue.x;
+                        powerY = leftStickValue.y;
+                    }
+                }
+                else
+                {
+                    if (crossZ > 0) // Thrusters pointing left.
+                    {
+                        if ((leftStickValue.x > 0 && leftStickValue.y >= 0) ||
+                            (leftStickValue.x < 0 && leftStickValue.y < 0))
+                        {
+                            powerX = leftStickValue.x;
+                            powerY = leftStickValue.y;
+                        }
+                    }
+                    else if (crossZ < 0) // Thruster pointing right.
+                    {
+                        if ((leftStickValue.x < 0 && leftStickValue.y >= 0) ||
+                            (leftStickValue.x > 0 && leftStickValue.y < 0))
+                        {
+                            powerX = leftStickValue.x;
+                            powerY = leftStickValue.y;
+                        }
+                    }
+                }
             }
-            else // Thruster is sideways thruster.
+            else if (shipRelative.x < 0 && shipRelative.y < 0) // Lower left quadrant.
             {
-                //Debug.Log("Sideways thruster");
-                // NOTE: Thumbstick left is negative z
-
-
-                // Thruster above middle
-                // - Thruster is on left side
-                // - - Thruster is pointing left
-
-                // Thruster below middle
-                // - Thruster is on right side
-                // - - Thruster is pointing right
-
-                // Thruster below middle
-                // - Thruster is on left side
-                // - - Thruster is pointing down.
-
-                // Thruster above middle
-                // - Thruster is on right side
-                // - - Thruster is pointing up.
-
-
-                if (shipRelative.y <= 0) // Thruster above middle.
+                if (dot > 0.01) // Thruster pointing forwards.
                 {
-                    if (shipRelative.x < 0) // Thruster on right side.
+                    if (leftStickValue.x >= 0 && leftStickValue.y < 0)
                     {
-                        if (Vector3.Cross(Ship.transform.up, transform.up).z < 0) // Thruster pointing left.
-                        {
-                            Debug.Log("Above-right-left");
-                            if (leftStickValue.x > 0 && leftStickValue.y >= 0)
-                            {
-                                powerX = leftStickValue.x;
-                            }
-                            else if (leftStickValue.x < 0 && leftStickValue.y < -float.Epsilon)
-                            {
-                                powerX = -leftStickValue.x;
-                            }
-                            else
-                            {
-                                powerX = 0;
-                            }
-                        }
-                        else // Thruster pointing right.
-                        {
-                            Debug.Log("Above-right-right");
-                            if (leftStickValue.x < 0 && leftStickValue.y >= 0)
-                            {
-                                powerX = -leftStickValue.x;
-                            }
-                            else if (leftStickValue.x > 0 && leftStickValue.y < -float.Epsilon)
-                            {
-                                powerX = leftStickValue.x;
-                            }
-                            else
-                            {
-                                powerX = 0;
-                            }
-                        }
-                    }
-                    else // Thruster on left side.
-                    {
-                        if (Vector3.Cross(Ship.transform.up, transform.up).z < 0) // Thruster pointing left.
-                        {
-                            Debug.Log("Above-left-left");
-                            if (leftStickValue.x > 0 && leftStickValue.y >= 0)
-                            {
-                                powerX = leftStickValue.x;
-                            }
-                            else if (leftStickValue.x < 0 && leftStickValue.y < -float.Epsilon)
-                            {
-                                powerX = -leftStickValue.x;
-                            }
-                            else
-                            {
-                                powerX = 0;
-                            }
-                        }
-                        else // Thruster pointing right.
-                        {
-                            Debug.Log("Above-left-right");
-                            if (leftStickValue.x < 0 && leftStickValue.y >= 0)
-                            {
-                                powerX = -leftStickValue.x;
-                            }
-                            else if (leftStickValue.x > 0 && leftStickValue.y < -float.Epsilon)
-                            {
-                                powerX = leftStickValue.x;
-                            }
-                            else
-                            {
-                                powerX = 0;
-                            }
-                        }
+                        powerX = leftStickValue.x;
+                        powerY = leftStickValue.y;
                     }
                 }
-                else // Thruster below middle.
+                else if (dot < -0.01) // Thruster pointing backwards.
                 {
-                    if (shipRelative.x > 0) // Thruster on right side.
+                    if ((leftStickValue.x >= 0 && leftStickValue.y > 0) ||
+                        (leftStickValue.x > 0 && leftStickValue.y == 0))
                     {
-                        if (Vector3.Cross(Ship.transform.up, transform.up).z < 0) // Thruster pointing left.
+                        powerX = leftStickValue.x;
+                        powerY = leftStickValue.y;
+                    }
+                }
+                else
+                {
+                    if (crossZ > 0) // Thrusters pointing left.
+                    {
+                        if ((leftStickValue.x < 0 && leftStickValue.y >= 0) ||
+                            (leftStickValue.x > 0 && leftStickValue.y < 0))
                         {
-                            Debug.Log("Below-right-left");
-                            if (leftStickValue.x < 0 && leftStickValue.y >= 0)
-                            {
-                                powerX = -leftStickValue.x;
-                            }
-                            else if (leftStickValue.x > 0 && leftStickValue.y < 0)
-                            {
-                                powerX = leftStickValue.x;
-                            }
-                            else
-                            {
-                                powerX = 0;
-                            }
-                        }
-                        else // Thruster pointing right.
-                        {
-                            Debug.Log("Below-right-right");
-                            if (leftStickValue.x > 0 && leftStickValue.y >= 0)
-                            {
-                                powerX = leftStickValue.x;
-                            }
-                            else if (leftStickValue.x < 0 && leftStickValue.y < 0)
-                            {
-                                powerX = -leftStickValue.x;
-                            }
-                            else
-                            {
-                                powerX = 0;
-                            }
+                            powerX = leftStickValue.x;
+                            powerY = leftStickValue.y;
                         }
                     }
-                    else // Thruster on left side.
+                    else if (crossZ < 0) // Thruster pointing right.
                     {
-                        if (Vector3.Cross(Ship.transform.up, transform.up).z < 0) // Thruster pointing left.
+                        if ((leftStickValue.x > 0 && leftStickValue.y >= 0) ||
+                            (leftStickValue.x < 0 && leftStickValue.y < 0))
                         {
-                            Debug.Log("Below-left-left");
-                            if (leftStickValue.x < 0 && leftStickValue.y >= 0)
-                            {
-                                powerX = -leftStickValue.x;
-                            }
-                            else if (leftStickValue.x > 0 && leftStickValue.y < 0)
-                            {
-                                powerX = leftStickValue.x;
-                            }
-                            else
-                            {
-                                powerX = 0;
-                            }
-                        }
-                        else // Thruster pointing right.
-                        {
-                            Debug.Log("Below-left-right");
-                            if (leftStickValue.x > 0 && leftStickValue.y >= 0)
-                            {
-                                powerX = leftStickValue.x;
-                            }
-                            else if (leftStickValue.x < 0 && leftStickValue.y < 0)
-                            {
-                                powerX = -leftStickValue.x;
-                            }
-                            else
-                            {
-                                powerX = 0;
-                            }
+                            powerX = leftStickValue.x;
+                            powerY = leftStickValue.y;
                         }
                     }
                 }
             }
+            else if (shipRelative.x > 0 && shipRelative.y < 0) // Lower right quadrant.
+            {
+                if (dot > 0.01) // Thruster pointing forwards.
+                {
+                    if (leftStickValue.x <= 0 && leftStickValue.y < 0)
+                    {
+                        powerX = leftStickValue.x;
+                        powerY = leftStickValue.y;
+                    }
+                }
+                else if (dot < -0.01) // Thruster pointing backwards.
+                {
+                    if ((leftStickValue.x <= 0 && leftStickValue.y > 0) ||
+                        (leftStickValue.x < 0 && leftStickValue.y == 0))
+                    {
+                        powerX = leftStickValue.x;
+                        powerY = leftStickValue.y;
+                    }
+                }
+                else
+                {
+                    if (crossZ > 0) // Thrusters pointing left.
+                    {
+                        if ((leftStickValue.x < 0 && leftStickValue.y >= 0) ||
+                            (leftStickValue.x > 0 && leftStickValue.y < 0))
+                        {
+                            powerX = leftStickValue.x;
+                            powerY = leftStickValue.y;
+                        }
+                    }
+                    else if (crossZ < 0) // Thruster pointing right.
+                    {
+                        if ((leftStickValue.x > 0 && leftStickValue.y >= 0) ||
+                            (leftStickValue.x < 0 && leftStickValue.y < 0))
+                        {
+                            powerX = leftStickValue.x;
+                            powerY = leftStickValue.y;
+                        }
+                    }
+                }
+            }
+
+            var powerTotal = Mathf.Abs(powerX) + Mathf.Abs(powerY);
             // DEBUG: Change sprite colour, when power is larger than 0.
-            GetComponent<SpriteRenderer>().color = powerX + powerY > 0 ? Color.magenta : Color.white;
-            Ship.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up) * ThrustPower * (powerX + powerY), transform.position);
+            GetComponent<SpriteRenderer>().color = powerTotal > 0 ? Color.magenta : Color.white;
+            Ship.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up) * ThrustPower * (powerTotal), transform.position);
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().color = Color.white;
         }
     }
 
     public void Activate(float power)
     {
-        Ship.GetComponent<Rigidbody2D>().AddForceAtPosition(transform.up * ThrustPower * power, transform.position);
+        Ship.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up) * ThrustPower * power, transform.position);
     }
 }
 
