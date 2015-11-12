@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEditor;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class Module : ShipComponent
 {
 
@@ -15,6 +16,51 @@ public class Module : ShipComponent
     public InputKeyType InputType;
     public GamepadInput.GamePad.Button ButtonKey;
     public GamepadInput.GamePad.Trigger TriggerKey;
+
+    public bool CanSpriteRotate;
+    public Sprite SpriteForward, SpriteSideways;
+    public Direction SpriteDireciton;
+
+    private SpriteRenderer spriteRenderer;
+
+    protected void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    protected void Start()
+    {
+        UpdateSprite();
+    }
+
+    protected void OnDestroy()
+    {
+        Core.GetComponent<Rigidbody2D>().mass -= Mass;
+    }
+
+    // Update the sprite.
+    public void UpdateSprite()
+    {
+        // If rotation is possible, rotate sprite if necessary.
+        if (CanSpriteRotate)
+        {
+            switch (SpriteDireciton)
+            {
+                case Direction.Forward:
+                    spriteRenderer.sprite = SpriteForward;
+                    break;
+                case Direction.Sideway:
+                    spriteRenderer.sprite = SpriteSideways;
+                    break;
+            }
+        }
+    }
+
+    // Direction used for instance for selecting correct sprite.
+    public enum Direction
+    {
+        Forward, Sideway
+    }
 
 }
 

@@ -246,9 +246,9 @@ public class BuilderHandler : MonoBehaviour
             // Rotate the sprite facing direction, if the module can rotate.
             if (moduleScr.CanSpriteRotate)
             {
-                moduleScr.SpriteDireciton = moduleScr.SpriteDireciton == ShipComponent.Direction.Forward
-                    ? ShipComponent.Direction.Sideway
-                    : ShipComponent.Direction.Forward;
+                moduleScr.SpriteDireciton = moduleScr.SpriteDireciton == Module.Direction.Forward
+                    ? Module.Direction.Sideway
+                    : Module.Direction.Forward;
                 moduleScr.UpdateSprite();
                 Debug.Log("Rotated to: " + moduleScr.SpriteDireciton);
             }
