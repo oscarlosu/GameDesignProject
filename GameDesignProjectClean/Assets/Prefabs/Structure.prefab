@@ -11,6 +11,7 @@ GameObject:
   - 212: {fileID: 21233172}
   - 114: {fileID: 11486362}
   - 61: {fileID: 6145862}
+  - 95: {fileID: 9532386}
   m_Layer: 0
   m_Name: Structure
   m_TagString: Structure
@@ -43,6 +44,23 @@ BoxCollider2D:
   m_Offset: {x: .0187884569, y: -.00375771523}
   serializedVersion: 2
   m_Size: {x: .800000012, y: .800000012}
+--- !u!95 &9532386
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153268}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f3ed46777b942474792f26ef40736e29, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11486362
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -54,8 +72,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e87c23163584854caca09273f4b9cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ship: {fileID: 0}
+  Core: {fileID: 0}
   Mass: 1
+  Hp: 0
 --- !u!212 &21233172
 SpriteRenderer:
   m_ObjectHideFlags: 1

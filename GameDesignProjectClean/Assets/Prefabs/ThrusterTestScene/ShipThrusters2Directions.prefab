@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758a7ea84353ab84d999c8dfd99aeef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ship: {fileID: 0}
+  Core: {fileID: 0}
   Mass: 1
   InputType: 1
   ButtonKey: 0
@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758a7ea84353ab84d999c8dfd99aeef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ship: {fileID: 0}
+  Core: {fileID: 0}
   Mass: 1
   InputType: 1
   ButtonKey: 0
@@ -345,9 +345,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5b16ce33ca4da449a4d3669cf849a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Core: {fileID: 164234}
+  Mass: 0
+  Hp: 0
   ControllerIndex: 1
-  MinCrashMagnitude: 0
-  HitFeedbackDuration: 1
 --- !u!114 &11427372
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -359,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758a7ea84353ab84d999c8dfd99aeef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ship: {fileID: 0}
+  Core: {fileID: 0}
   Mass: 1
   InputType: 0
   ButtonKey: 2
@@ -376,7 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758a7ea84353ab84d999c8dfd99aeef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ship: {fileID: 0}
+  Core: {fileID: 0}
   Mass: 1
   InputType: 0
   ButtonKey: 2
@@ -393,7 +394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758a7ea84353ab84d999c8dfd99aeef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ship: {fileID: 0}
+  Core: {fileID: 0}
   Mass: 1
   InputType: 0
   ButtonKey: 2
@@ -410,7 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758a7ea84353ab84d999c8dfd99aeef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ship: {fileID: 0}
+  Core: {fileID: 0}
   Mass: 1
   InputType: 1
   ButtonKey: 0
@@ -427,7 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758a7ea84353ab84d999c8dfd99aeef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ship: {fileID: 0}
+  Core: {fileID: 0}
   Mass: 1
   InputType: 1
   ButtonKey: 0
@@ -444,7 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758a7ea84353ab84d999c8dfd99aeef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ship: {fileID: 0}
+  Core: {fileID: 0}
   Mass: 1
   InputType: 0
   ButtonKey: 2

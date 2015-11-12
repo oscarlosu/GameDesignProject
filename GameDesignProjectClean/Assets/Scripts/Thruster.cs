@@ -16,7 +16,7 @@ public class Thruster : Module
     public void Update()
     {
         // If the ship hasn't been set yet, don't do ANYTHING!
-        if (Ship == null)
+        if (Core == null)
         {
             return;
         }
@@ -24,7 +24,7 @@ public class Thruster : Module
         switch (InputType)
         {
             case InputKeyType.Button:
-                if (GamePad.GetButton(ButtonKey, Ship.GetComponent<Ship>().ControllerIndex))
+                if (GamePad.GetButton(ButtonKey, Core.GetComponent<Core>().ControllerIndex))
                 {
                     Activate(1);
                     // DEBUG: Change sprite colour, when power is larger than 0.
@@ -38,7 +38,7 @@ public class Thruster : Module
 
                 break;
             case InputKeyType.Trigger:
-                var value = GamePad.GetTrigger(TriggerKey, Ship.GetComponent<Ship>().ControllerIndex);
+                var value = GamePad.GetTrigger(TriggerKey, Core.GetComponent<Core>().ControllerIndex);
                 if (value > 0)
                 {
                     Activate(value);
@@ -54,15 +54,15 @@ public class Thruster : Module
         }
 
         // Handle thumb stick input.
-        Vector2 leftStickValue = GamePad.GetAxis(GamePad.Axis.LeftStick, Ship.GetComponent<Ship>().ControllerIndex);
+        Vector2 leftStickValue = GamePad.GetAxis(GamePad.Axis.LeftStick, Core.GetComponent<Core>().ControllerIndex);
         if (leftStickValue.magnitude > 0.5)
         {
             float powerX = 0, powerY = 0;
-            var shipRelative = Ship.transform.InverseTransformPoint(transform.position);
+            var shipRelative = Core.transform.InverseTransformPoint(transform.position);
 
-            float dot = Vector3.Dot(Ship.transform.up, transform.up);
+            float dot = Vector3.Dot(Core.transform.up, transform.up);
             // Determines if thrusters point forwards, backwards or sideways.
-            float crossZ = Vector3.Cross(Ship.transform.up, transform.up).z;
+            float crossZ = Vector3.Cross(Core.transform.up, transform.up).z;
             // dot == 0 && z < 0 : thruster pointing right
 
             // Check which quadrant the thrusters are in.
@@ -234,7 +234,7 @@ public class Thruster : Module
             var powerTotal = Mathf.Abs(powerX) + Mathf.Abs(powerY);
             // DEBUG: Change sprite colour, when power is larger than 0.
             GetComponent<SpriteRenderer>().color = powerTotal > 0 ? Color.magenta : Color.white;
-            Ship.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up) * ThrustPower * (powerTotal), transform.position);
+            Core.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up) * ThrustPower * (powerTotal), transform.position);
         }
         else
         {
@@ -244,7 +244,7 @@ public class Thruster : Module
 
     public void Activate(float power)
     {
-        Ship.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up) * ThrustPower * power, transform.position);
+        Core.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up) * ThrustPower * power, transform.position);
     }
 }
 

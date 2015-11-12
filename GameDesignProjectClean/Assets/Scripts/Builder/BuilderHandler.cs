@@ -109,7 +109,7 @@ public class BuilderHandler : MonoBehaviour
         {
             grid[x, y] = obj;
             obj.transform.position = TranslateCellToPos(x, y);
-            ShipCore.GetComponent<Ship>().Assemble();
+            ShipCore.GetComponent<Core>().Assemble();
             UpdateAvailablePos();
         }
     }
@@ -120,7 +120,7 @@ public class BuilderHandler : MonoBehaviour
         {
             GameObject.Destroy(grid[x, y]);
             grid[x, y] = null;
-            ShipCore.GetComponent<Ship>().Assemble();
+            ShipCore.GetComponent<Core>().Assemble();
             UpdateAvailablePos();
         }
     }

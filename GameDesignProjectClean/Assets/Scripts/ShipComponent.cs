@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ShipComponent : MonoBehaviour
 {
-    public GameObject Ship;
+    public GameObject Core;
     public int Mass;
 
     protected void Start()
@@ -13,6 +13,6 @@ public class ShipComponent : MonoBehaviour
 
     protected void OnDestroy()
     {
-        Ship.GetComponent<Rigidbody2D>().mass -= Mass;
+        Core.GetComponent<Rigidbody2D>().mass -= Mass;
     }
 }
