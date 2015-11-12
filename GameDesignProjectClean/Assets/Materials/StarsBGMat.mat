@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: NebulaMat
-  m_Shader: {fileID: 4800000, guid: 533f41a6f5dc9d4419afde8d953b5d36, type: 3}
+  m_Name: StarsBGMat
+  m_Shader: {fileID: 4800000, guid: a1b284b4534561e42af2828e915e1cfb, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: 3000
@@ -80,42 +80,42 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _NebulaClouds2
+          name: _StarTexture
         second:
-          m_Texture: {fileID: 2800000, guid: a518279e23b41ee4485d02e1932f0d18, type: 3}
-          m_Scale: {x: .100000001, y: .100000001}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _NebulaClouds
-        second:
-          m_Texture: {fileID: 2800000, guid: a518279e23b41ee4485d02e1932f0d18, type: 3}
-          m_Scale: {x: .100000001, y: .100000001}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _node_6268
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _node_1242
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _NebulaClouds1
-        second:
-          m_Texture: {fileID: 2800000, guid: faf68c6dfbb1522428bfe4b225e9e8e2, type: 3}
+          m_Texture: {fileID: 2800000, guid: 5535889ab92c8424483d2b48f923bc84, type: 3}
           m_Scale: {x: .00999999978, y: .00999999978}
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _node_1020
+          name: _StarsBG
+        second:
+          m_Texture: {fileID: 2800000, guid: 5535889ab92c8424483d2b48f923bc84, type: 3}
+          m_Scale: {x: .0500000007, y: .0500000007}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _StarsMG
+        second:
+          m_Texture: {fileID: 2800000, guid: e64bcc94bc0442241b10995ef2167488, type: 3}
+          m_Scale: {x: .0500000007, y: .0500000007}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _StarsFG
+        second:
+          m_Texture: {fileID: 2800000, guid: 5535889ab92c8424483d2b48f923bc84, type: 3}
+          m_Scale: {x: .0500000007, y: .0500000007}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _node_265
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _node_300
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -133,10 +133,6 @@ Material:
         first:
           name: _Cutoff
         second: .5
-      data:
-        first:
-          name: PixelSnap
-        second: 0
       data:
         first:
           name: _Parallax
@@ -175,44 +171,16 @@ Material:
         second: 0
       data:
         first:
-          name: _node_6456
-        second: 2
+          name: _BGParaMod
+        second: .100000001
       data:
         first:
-          name: _USpeed
-        second: .5
-      data:
-        first:
-          name: _VSpeed
-        second: .5
-      data:
-        first:
-          name: _node_1073
-        second: 0
-      data:
-        first:
-          name: _TransparencyModifier
+          name: _MGParaMod
         second: .200000003
       data:
         first:
-          name: _Nebula1XOffsetModifier
-        second: -.899999976
-      data:
-        first:
-          name: _Nebula1YOffsetModifier
-        second: .699999988
-      data:
-        first:
-          name: _Nebula2XOffsetModifier
-        second: 1
-      data:
-        first:
-          name: _Nebula1YOffsetModifier_copy
-        second: 0
-      data:
-        first:
-          name: _Nebula2YOffsetModifier
-        second: -.400000006
+          name: _FGParaMod
+        second: .300000012
     m_Colors:
       data:
         first:
@@ -222,19 +190,3 @@ Material:
         first:
           name: _Color
         second: {r: 1, g: 1, b: 1, a: 1}
-      data:
-        first:
-          name: _NebColor
-        second: {r: .441176504, g: .178416997, b: .178416997, a: 1}
-      data:
-        first:
-          name: _node_9252
-        second: {r: .297577798, g: .479972601, b: .632352889, a: 1}
-      data:
-        first:
-          name: _NebColor1
-        second: {r: .558823526, g: 0, b: .520283997, a: 1}
-      data:
-        first:
-          name: _NebColor2
-        second: {r: .129054919, g: .258684069, b: .566176474, a: 1}
