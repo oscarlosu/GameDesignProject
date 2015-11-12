@@ -55,7 +55,7 @@ public class Thruster : Module
 
         // Handle thumb stick input.
         Vector2 leftStickValue = GamePad.GetAxis(GamePad.Axis.LeftStick, Core.GetComponent<Core>().ControllerIndex);
-        if (leftStickValue.magnitude > 0.5)
+        if (leftStickValue.magnitude > 0)
         {
             float powerX = 0, powerY = 0;
             var shipRelative = Core.transform.InverseTransformPoint(transform.position);

@@ -17,6 +17,7 @@ public class Core : Structure
     public new void Start()
     {
         // Add core and structure mass to rigidbody
+        Core = this.gameObject;
         Mass = GlobalValues.CoreMass;
         GetComponent<Rigidbody2D>().mass = GlobalValues.CoreMass;
         Assemble();
