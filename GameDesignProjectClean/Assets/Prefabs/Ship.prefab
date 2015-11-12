@@ -12,6 +12,7 @@ GameObject:
   - 50: {fileID: 5034100}
   - 114: {fileID: 11483260}
   - 61: {fileID: 6183928}
+  - 95: {fileID: 9594470}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Ship
@@ -60,6 +61,23 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 2.55999994, y: 2.55999994}
+--- !u!95 &9594470
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164392}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f3ed46777b942474792f26ef40736e29, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11483260
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -71,7 +89,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5b16ce33ca4da449a4d3669cf849a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinCrashMagnitude: 0
+  Core: {fileID: 0}
+  Mass: 0
+  Hp: 0
+  Anim: {fileID: 9594470}
+  ControllerIndex: 0
 --- !u!212 &21278050
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -109,6 +131,10 @@ Prefab:
       propertyPath: m_TagString
       value: Ship
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Anim
+      value: 
+      objectReference: {fileID: 9594470}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 164392}

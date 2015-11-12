@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 
 public class CameraHandler : MonoBehaviour
@@ -7,6 +8,7 @@ public class CameraHandler : MonoBehaviour
     // Zoom to fit params
     public float Margin;
     public float MaxSize;
+    public float MinSize;
     // Warning phase params
     public float CameraShakeMagnitude;
     public float WarningDuration;
@@ -18,7 +20,7 @@ public class CameraHandler : MonoBehaviour
     public float ShrinkExtraDistance;
     public float EarlyPushFactor;
 
-    private GameObject[] ships;
+    private List<GameObject> ships = new List<GameObject>();
     private Camera camera;
 
     private enum CameraState
@@ -35,7 +37,7 @@ public class CameraHandler : MonoBehaviour
     void Start()
     {
         camera = GetComponent<Camera>();
-        ships = GameObject.FindGameObjectsWithTag(GlobalValues.ShipTag);
+        ships = GameObject.FindGameObjectsWithTag(GlobalValues.ShipTag).OfType<GameObject>().ToList();
         state = CameraState.ZoomToFit;
         elapsedTime = 0;
 
@@ -112,7 +114,7 @@ public class CameraHandler : MonoBehaviour
         // The targert position for the camera is the average of the positions of the ships
         int counter = 0;
         Vector3 avg = Vector3.zero;
-        for (int i = 0; i < ships.Length; ++i)
+        for (int i = 0; i < ships.Count; ++i)
         {
             // Check if the ship has been destroyed
             if (ships[i] != null)
@@ -143,16 +145,23 @@ public class CameraHandler : MonoBehaviour
     private float GetMaxAxisDistanceToCamera()
     {
         float max = - Mathf.Infinity;
-        foreach(GameObject ship in ships)
+        for(int index = 0; index < ships.Count; ++index)
         {
-            float val = Mathf.Max(Mathf.Abs(Mathf.Abs(ship.transform.position.x) - Mathf.Abs(camera.transform.position.x)),
-                                  Mathf.Abs(Mathf.Abs(ship.transform.position.y) - Mathf.Abs(camera.transform.position.y)));
-            if (val > max)
+            if (ships[index] != null)
             {
-                max = val;
+                float val = Mathf.Max(Mathf.Abs(Mathf.Abs(ships[index].transform.position.x) - Mathf.Abs(camera.transform.position.x)),
+                                  Mathf.Abs(Mathf.Abs(ships[index].transform.position.y) - Mathf.Abs(camera.transform.position.y)));
+                if (val > max)
+                {
+                    max = val;
+                }
+            }
+            else
+            {
+                ships.RemoveAt(index);
             }
         }
-        return max;
+        return Mathf.Clamp(max, MinSize, Mathf.Infinity);
     }
 
     private void Shrink()

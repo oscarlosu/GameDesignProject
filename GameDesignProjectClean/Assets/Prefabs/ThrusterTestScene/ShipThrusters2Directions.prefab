@@ -114,6 +114,7 @@ GameObject:
   - 50: {fileID: 5057296}
   - 114: {fileID: 11421062}
   - 61: {fileID: 6186176}
+  - 95: {fileID: 9578486}
   m_Layer: 0
   m_Name: ShipThrusters2Directions
   m_TagString: Ship
@@ -300,6 +301,23 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 2.55999994, y: 2.55999994}
+--- !u!95 &9578486
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164234}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f3ed46777b942474792f26ef40736e29, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11409092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -348,6 +366,7 @@ MonoBehaviour:
   Core: {fileID: 164234}
   Mass: 0
   Hp: 0
+  Anim: {fileID: 9578486}
   ControllerIndex: 1
 --- !u!114 &11427372
 MonoBehaviour:
@@ -697,6 +716,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: a902ef0325da4c2499b96b963896ba04,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: Anim
+      value: 
+      objectReference: {fileID: 9578486}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 164234}

@@ -93,6 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Margin: 5
   MaxSize: 20
+  MinSize: 5
   CameraShakeMagnitude: 1
   WarningDuration: 3
   PushOffsetFromCenter: 5

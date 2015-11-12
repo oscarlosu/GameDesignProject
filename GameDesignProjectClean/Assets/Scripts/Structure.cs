@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Structure : ShipComponent
 {
     public int Hp;
+    public Animator Anim;
 
     public bool TakeDamage(int dmg)
     {
@@ -27,6 +28,7 @@ public class Structure : ShipComponent
         if(modules.Count > 0 || structures.Count == 0)
         {
             Hp -= dmg;
+            Anim.SetTrigger("TriggerDamage");
             LoseModule(modules);
             return true;
         }
@@ -40,7 +42,8 @@ public class Structure : ShipComponent
                 if(structures[rnd].TakeDamage(dmg))
                 {
                     // Trigger visual feedback and return true
-                    Debug.Log("Damage visual feedback not implemented.");
+                    Anim.SetTrigger("TriggerDamage");
+                    //Debug.Log("Damage visual feedback not implemented.");
                     return true;
                 }
                 else
@@ -61,7 +64,7 @@ public class Structure : ShipComponent
         if (coll.relativeVelocity.magnitude > GlobalValues.MinCrashMagnitude)
         {
             // If the other object has a higher mass, lose one random module.
-            if (coll.gameObject.GetComponent<Rigidbody2D>().mass >= GetComponent<Rigidbody2D>().mass)
+            if (coll.rigidbody.mass >= Core.GetComponent<Rigidbody2D>().mass)
             {
                 TakeDamage(GlobalValues.CrashDamage);
                 Debug.LogWarning("Ship " + gameObject.name + " collided with something with greater or equal mass.");

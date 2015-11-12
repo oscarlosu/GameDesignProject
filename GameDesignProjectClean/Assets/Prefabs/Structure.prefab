@@ -75,6 +75,7 @@ MonoBehaviour:
   Core: {fileID: 0}
   Mass: 1
   Hp: 0
+  Anim: {fileID: 9532386}
 --- !u!212 &21233172
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -120,6 +121,10 @@ Prefab:
       propertyPath: m_TagString
       value: Structure
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Anim
+      value: 
+      objectReference: {fileID: 9532386}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 153268}
