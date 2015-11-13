@@ -79,6 +79,7 @@ MonoBehaviour:
   ExplosionRadius: 0
   ThrusterDuration: 2
   GracePeriod: 4
+  ExplosionPrefab: {fileID: 123384, guid: 14d6b3a3b065ca2418069880043eb2f0, type: 2}
 --- !u!212 &21237674
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -148,6 +149,10 @@ Prefab:
       propertyPath: Damage
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ExplosionPrefab
+      value: 
+      objectReference: {fileID: 123384, guid: 14d6b3a3b065ca2418069880043eb2f0, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 155838}
