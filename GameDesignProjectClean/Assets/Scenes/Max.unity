@@ -252,8 +252,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d98b5afbb0ba42846b1a08add501e7d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 0}
-  pulse: {fileID: 0}
+  smallExplosion: {fileID: 176330, guid: d4ee06342a5af1d4f981cef146649c9d, type: 2}
+  largeExplosion: {fileID: 176330, guid: d4ee06342a5af1d4f981cef146649c9d, type: 2}
+  pulse: {fileID: 176330, guid: d4ee06342a5af1d4f981cef146649c9d, type: 2}
 --- !u!4 &2013933018
 Transform:
   m_ObjectHideFlags: 0
