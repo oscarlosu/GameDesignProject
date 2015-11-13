@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21272118}
   - 114: {fileID: 11411668}
   m_Layer: 0
-  m_Name: RocketLauncher
+  m_Name: HomingMissileLauncher
   m_TagString: Module
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,12 +46,12 @@ MonoBehaviour:
   ButtonKey: 0
   TriggerKey: 0
   CanSpriteRotate: 1
-  SpriteForward: {fileID: 21300000, guid: 5484d64469aacc64c8e3dcc868c6310d, type: 3}
-  SpriteSideways: {fileID: 21300000, guid: 39aa9a0e820e7ff4da306835324c0f2d, type: 3}
+  SpriteForward: {fileID: 21300000, guid: 1b78d195e5cf9ce41aa72cffa5b3dea0, type: 3}
+  SpriteSideways: {fileID: 21300000, guid: 73976a39986540246a9e93ba35d71a4f, type: 3}
   SpriteDireciton: 0
-  RocketPrefab: {fileID: 155838, guid: 05c2b4bd33473584d9d05b83800dc634, type: 2}
-  Cooldown: 1
-  RocketLaunchSpeed: 3
+  RocketPrefab: {fileID: 155838, guid: 946fed33d74bef54b9e9812c23af333e, type: 2}
+  Cooldown: 2
+  RocketLaunchSpeed: 4
   RocketLaunchPosOffset: .5
 --- !u!212 &21272118
 SpriteRenderer:
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 39aa9a0e820e7ff4da306835324c0f2d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 73976a39986540246a9e93ba35d71a4f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -90,6 +90,11 @@ Prefab:
       propertyPath: m_TagString
       value: Module
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 73976a39986540246a9e93ba35d71a4f,
+        type: 3}
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.x
       value: 0

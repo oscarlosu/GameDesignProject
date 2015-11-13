@@ -10,10 +10,10 @@ GameObject:
   - 4: {fileID: 488662}
   - 212: {fileID: 21237674}
   - 50: {fileID: 5063096}
-  - 114: {fileID: 11473834}
   - 61: {fileID: 6137388}
+  - 114: {fileID: 11438010}
   m_Layer: 0
-  m_Name: Rocket
+  m_Name: HomingMissile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,7 +39,7 @@ Rigidbody2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155838}
   m_Mass: 1
-  m_LinearDrag: .100000001
+  m_LinearDrag: .300000012
   m_AngularDrag: .0500000007
   m_GravityScale: 0
   m_IsKinematic: 0
@@ -60,7 +60,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: .200000003, y: .800000012}
---- !u!114 &11473834
+--- !u!114 &11438010
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -68,17 +68,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 155838}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b0f1c3b965329f49b82f668d2582c81, type: 3}
+  m_Script: {fileID: 11500000, guid: d05c8494fe6864a4db6dd6706f3962f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SourceCore: {fileID: 0}
   SourceStructure: {fileID: 0}
   Damage: 1
+  ThrusterActivateAt: 2
   ThrustPower: 5
+  ThrusterDuration: 4
+  TurnSpeed: .0500000007
   ExplosionSpeed: 0
   ExplosionRadius: 0
-  ThrusterDuration: 2
-  GracePeriod: 4
+  GracePeriod: 1
+  NewTargetTimer: 3
+  TimesNotTargetingSource: 2
+  Target: {fileID: 0}
 --- !u!212 &21237674
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -103,7 +108,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 01a1f07b7c1d29248b393030886a60f0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4e0dec5e7eeba554ab881cc664d8abc3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -118,11 +123,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: ThrusterDuration
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: GracePeriod
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_GravityScale
@@ -130,7 +135,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LinearDrag
-      value: .100000001
+      value: .300000012
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
@@ -145,8 +150,29 @@ Prefab:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4e0dec5e7eeba554ab881cc664d8abc3,
+        type: 3}
+    - target: {fileID: 0}
       propertyPath: Damage
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ThrusterActivateAt
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TurnSpeed
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: NewTargetTimer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TimesNotTargetingSource
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

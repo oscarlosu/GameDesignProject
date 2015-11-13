@@ -67,9 +67,17 @@ public class RocketLauncher : Module
     public void Activate()
     {
         ready = false;
-        GameObject missile = (GameObject)Instantiate(RocketPrefab, transform.position + RocketLaunchPosOffset * transform.up, transform.rotation);
-        missile.transform.parent = null;
-        missile.GetComponent<Rigidbody2D>().velocity = Core.GetComponent<Rigidbody2D>().velocity + (Vector2)(transform.up * RocketLaunchSpeed);
+        GameObject rocket = (GameObject)Instantiate(RocketPrefab, transform.position + RocketLaunchPosOffset * transform.up, transform.rotation);
+        rocket.transform.parent = null;
+        rocket.GetComponent<Rigidbody2D>().velocity = Core.GetComponent<Rigidbody2D>().velocity + (Vector2)(transform.up * RocketLaunchSpeed);
+
+        // Set common projectile variables.
+        var projectile = rocket.GetComponent<Projectile>();
+        if (projectile != null)
+        {
+            projectile.SourceCore = Core;
+            projectile.SourceStructure = transform.parent.gameObject;
+        }
     }
 }
 
