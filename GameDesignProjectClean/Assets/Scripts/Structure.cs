@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class Structure : ShipComponent
 {
-    public int MaxHp;
+    public int MaxHp = 1;
     public int hp;
     public Animator Anim;
 
