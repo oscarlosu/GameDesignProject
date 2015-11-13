@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class Laser : Projectile
-{    
+{
+    float laserDamage = 35f;
+    [Space(10)]
     public float EffectDuration;
     public float FadeDuration;
 
@@ -40,7 +42,7 @@ public class Laser : Projectile
         {            
             // Make ship lose a module
             Structure str = other.gameObject.GetComponent<Structure>();
-            str.LoseModule();
+            str.LoseHealth(laserDamage);
             
         }
         else if (other.gameObject.tag == "Asteroid")

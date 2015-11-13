@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Missile : Projectile
 {
+    float missileDamage = 75f;
+    [Space(10)]
     public float ThrustPower;
     public float ExplosionSpeed;
     public float ExplosionRadius;
@@ -40,7 +42,7 @@ public class Missile : Projectile
             {
                 // Make ship lose a module
                 Structure str = other.gameObject.GetComponent<Structure>();
-                str.LoseModule();
+                str.LoseHealth(missileDamage);
                 // Destroy Missile
                 GameObject.Destroy(this.gameObject);
             }            

@@ -31,6 +31,8 @@ public class ShipInspector : Editor
             core.Ship = ship.gameObject;
             core.rb = ship.GetComponent<Rigidbody2D>();
             LinkWithChildren(ship.gameObject, core.gameObject);
+            EditorUtility.SetDirty(ship);
+            EditorUtility.SetDirty(core);
         }
 
         if (GUILayout.Button("Clear links"))
@@ -52,6 +54,7 @@ public class ShipInspector : Editor
         currentObj.GetComponent<Module>().Ship = null;
         currentObj.GetComponent<Module>().rb = null;
         currentObj.GetComponent<Module>().Controller = GamepadInput.GamePad.Index.Any;
+        EditorUtility.SetDirty(currentObj);
         // Find all modules attached to the core module.
         for (var childId = 0; childId < currentObj.transform.childCount; childId++)
         {
@@ -74,6 +77,7 @@ public class ShipInspector : Editor
             // Set the controller of the module.
             module.GetComponent<Module>().Controller = controller;
             // Go into all structure modules attached to the core module.
+            EditorUtility.SetDirty(module);
             if (module.GetComponent<Structure>() != null)
             {
                 LinkWithChildren(ship, module.gameObject);
