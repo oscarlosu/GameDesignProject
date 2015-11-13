@@ -8,6 +8,7 @@ public class GlobalValues
     public static string AsteroidTag = "Asteroid";
     public static string ShipTag = "Ship";
     public static string DefensiveModuleTag = "DefensiveModule";
+    public static string ProjectileTag = "Projectile";
 
     //public static int StructureMass = 1;
     public static int CoreMass = 4;
