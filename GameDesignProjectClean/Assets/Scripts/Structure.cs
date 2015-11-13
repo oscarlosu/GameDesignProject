@@ -4,8 +4,14 @@ using System.Collections.Generic;
 
 public class Structure : ShipComponent
 {
-    public int Hp;
+    public int MaxHp;
+    public int hp;
     public Animator Anim;
+
+    public void Start()
+    {
+        hp = MaxHp;
+    }
 
     public bool TakeDamage(int dmg)
     {
@@ -27,7 +33,7 @@ public class Structure : ShipComponent
         // If the structure has child modules or has no children, lose module, else propagate damage to a random child struture
         if(modules.Count > 0 || structures.Count == 0)
         {
-            Hp -= dmg;
+            hp -= dmg;
             Anim.SetTrigger("TriggerDamage");
             LoseModule(modules);
             return true;
@@ -75,29 +81,37 @@ public class Structure : ShipComponent
 
     private void LoseModule(List<Module> modules)
     {
-        // If any child modules left on the structure, lose one.
-        if (modules.Count > 0)
+        // As long as the hp is lower or equal than zero
+        while(hp <= 0)
         {
-            // Defensive modules are removed first
-            foreach (Module m in modules)
+            // If any child modules left on the structure, lose one
+            if (modules.Count > 0)
             {
-                if (m.gameObject.tag == GlobalValues.DefensiveModuleTag)
+                // Defensive modules are removed first
+                foreach (Module m in modules)
                 {
-                    modules.Remove(m);
-                    Destroy(m.gameObject);
-                    return;
+                    if (m.gameObject.tag == GlobalValues.DefensiveModuleTag)
+                    {
+                        modules.Remove(m);
+                        Destroy(m.gameObject);
+                        return;
+                    }
                 }
+                // If there are no defensive modules, lose a random module            
+                int rnd = Random.Range(0, modules.Count);
+                GameObject module = modules[rnd].gameObject;
+                Destroy(module);
+                // Reset Hp, but apply excess damage
+                hp = MaxHp - Mathf.Abs(hp);
             }
-            // If there are no defensive modules, lose a random module            
-            int rnd = Random.Range(0, modules.Count);
-            GameObject module = modules[rnd].gameObject;
-            Destroy(module);
+            else
+            {
+                // If there are no child modules, destroy this structure
+                Destroy(gameObject);
+                return;
+            }
         }
-        else
-        {
-            // If there are no child modules, destroy this structure
-            Destroy(gameObject);
-        }
+        
     }
 
 

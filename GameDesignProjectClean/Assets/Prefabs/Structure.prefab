@@ -74,7 +74,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Core: {fileID: 0}
   Mass: 1
-  Hp: 0
+  MaxHp: 1
+  hp: 0
   Anim: {fileID: 9532386}
 --- !u!212 &21233172
 SpriteRenderer:
@@ -125,6 +126,10 @@ Prefab:
       propertyPath: Anim
       value: 
       objectReference: {fileID: 9532386}
+    - target: {fileID: 0}
+      propertyPath: MaxHp
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 153268}

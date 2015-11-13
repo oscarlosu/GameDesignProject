@@ -20,23 +20,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &165944
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 493968}
-  - 212: {fileID: 21283224}
-  - 114: {fileID: 11433394}
-  m_Layer: 0
-  m_Name: Thruster
-  m_TagString: Module
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &167526
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,21 +61,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.53999996, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 493968}
-  m_Father: {fileID: 406240}
-  m_RootOrder: 0
---- !u!4 &493968
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 165944}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.449, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 429528}
+  m_Father: {fileID: 406240}
   m_RootOrder: 0
 --- !u!50 &5050456
 Rigidbody2D:
@@ -183,26 +153,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Core: {fileID: 159236}
   Mass: 0
-  Hp: 0
+  MaxHp: 1
+  hp: 0
   Anim: {fileID: 9587612}
   ControllerIndex: 2
---- !u!114 &11433394
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 165944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 758a7ea84353ab84d999c8dfd99aeef4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Core: {fileID: 0}
-  Mass: 1
-  InputType: 0
-  ButtonKey: 0
-  TriggerKey: 0
-  ThrustPower: 8
 --- !u!114 &11439598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -216,7 +170,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Core: {fileID: 0}
   Mass: 1
-  Hp: 0
+  MaxHp: 1
+  hp: 0
   Anim: {fileID: 9596186}
 --- !u!212 &21222502
 SpriteRenderer:
@@ -269,32 +224,6 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9cd57da41998ef7438d4681403a7e270, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!212 &21283224
-SpriteRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 165944}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 0
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 150888e0ce0977848814cc76392b894a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

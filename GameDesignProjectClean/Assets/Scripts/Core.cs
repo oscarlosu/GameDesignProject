@@ -16,6 +16,7 @@ public class Core : Structure
     // Use this for initialization
     public new void Start()
     {
+        base.Start();
         // Add core and structure mass to rigidbody
         Core = this.gameObject;
         Mass = GlobalValues.CoreMass;
