@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class HomingMissile : Projectile
 {
     public float ThrusterActivateAt; // The thruser activates after this time period.
@@ -12,6 +13,8 @@ public class HomingMissile : Projectile
     public float GracePeriod;
     public float NewTargetTimer; // The time between each new target selection.
     public int TimesNotTargetingSource; // The number of times new target selection will not select the source.
+
+    public GameObject ExplosionPrefab;
 
     private Rigidbody2D rb;
     private float elapsedTime;
@@ -88,37 +91,14 @@ public class HomingMissile : Projectile
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == GlobalValues.StructureTag)
-        {
-            // Ignore source ship for a short period of time after the missile is fired
-            if (other.gameObject != SourceStructure || elapsedTime >= GracePeriod)
-            {
-                Debug.Log("Grace: " + GracePeriod + " Elapsed: " + elapsedTime);
-                Debug.Log("Other: " + other.gameObject + " source: " + SourceStructure);
-                // TODO Move the damage to the explosion.
-                // Make ship take damage.
-                //Structure str = other.gameObject.GetComponent<Structure>();
-                //str.TakeDamage(Damage);
-                // Destroy Missile
-                GameObject.Destroy(this.gameObject);
-            }
-        }
-        else if (other.gameObject.tag == GlobalValues.AsteroidTag)
-        {
-            // TODO Move asteroid breakdown to the explosion.
-            //other.gameObject.GetComponent<Asteroid>().Breakdown();
-            // Destroy Missile
-            GameObject.Destroy(this.gameObject);
-        }
-        else if (other.gameObject.tag == GlobalValues.ProjectileTag)
-        {
-            // If hit by another projectile, destroy.
-            GameObject.Destroy(gameObject);
-        }
+        GameObject.Destroy(gameObject);
     }
 
     private void OnDestroy()
     {
         // When destroyed, create an explosion, which damages objects around it.
+        var explosion = GameObject.Instantiate(ExplosionPrefab);
+        explosion.transform.position = transform.position;
+        explosion.GetComponent<Explosion>().Damage = Damage;
     }
 }

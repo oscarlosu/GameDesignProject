@@ -83,6 +83,7 @@ MonoBehaviour:
   GracePeriod: 1
   NewTargetTimer: 3
   TimesNotTargetingSource: 2
+  ExplosionPrefab: {fileID: 123384, guid: 14d6b3a3b065ca2418069880043eb2f0, type: 2}
   Target: {fileID: 0}
 --- !u!212 &21237674
 SpriteRenderer:
@@ -174,6 +175,10 @@ Prefab:
       propertyPath: TimesNotTargetingSource
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ExplosionPrefab
+      value: 
+      objectReference: {fileID: 123384, guid: 14d6b3a3b065ca2418069880043eb2f0, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 155838}
