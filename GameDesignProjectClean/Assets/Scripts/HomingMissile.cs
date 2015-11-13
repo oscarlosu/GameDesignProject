@@ -99,5 +99,6 @@ public class HomingMissile : Projectile
         // When destroyed, create an explosion, which damages objects around it.
         var explosion = GameObject.Instantiate(ExplosionPrefab);
         explosion.transform.position = transform.position;
+        explosion.GetComponent<Explosion>().Damage = Damage;
     }
 }
