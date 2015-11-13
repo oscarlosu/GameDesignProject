@@ -42,9 +42,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Core: {fileID: 0}
   Mass: 1
-  InputType: 0
+  InputType: 1
   ButtonKey: 0
-  TriggerKey: 0
+  TriggerKey: 1
+  CanSpriteRotate: 0
+  SpriteForward: {fileID: 0}
+  SpriteSideways: {fileID: 0}
+  SpriteDireciton: 0
   ThrustPower: 5
 --- !u!212 &21276574
 SpriteRenderer:
