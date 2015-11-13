@@ -1,13 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class BuilderHandler : MonoBehaviour
 {
+    public GameObject BuilderCanvas;
+    public GameObject BuilderModuleList;
+    public GameObject ModuleButtonPrefab;
     public int GridSizeX, GridSizeY;
     //public Vector2 GridCellSize;
     public GameObject ShipCore;
     public GameObject AvailablePosPrefab;
     public GameObject[] AvailableModules;
+    
 
     private Camera Cam;
     private GameObject[,] grid;
@@ -24,6 +29,8 @@ public class BuilderHandler : MonoBehaviour
         grid[GridSizeX / 2 - 1, GridSizeY / 2] = ShipCore;
         grid[GridSizeX / 2, GridSizeY / 2] = ShipCore;
         UpdateAvailablePos();
+        OpenPopup();
+        ClosePopup();
     }
 
     // Update is called once per frame
@@ -48,9 +55,12 @@ public class BuilderHandler : MonoBehaviour
                 // Save and select the position.
                 selectedCell = grid[(int)cellPos.x, (int)cellPos.y].GetComponent<AvailableBuildPos>();
                 selectedCell.Select();
+                OpenPopup();
             }
             else
             {
+                // TODO Make sure that you cannot deselect cell, while clicking inside the pop-up.
+                
                 // Deselect the selection, if not clicking on an available position.
                 if (selectedCell != null)
                 {
@@ -291,6 +301,28 @@ public class BuilderHandler : MonoBehaviour
                 RotateModule(x, y, rotateCount++);
             }
         }
+    }
+
+    private void OpenPopup()
+    {
+        BuilderCanvas.SetActive(true);
+        if (BuilderModuleList.transform.childCount == 0)
+        {
+            // Add modules to the UI list.
+            foreach (var module in AvailableModules)
+            {
+                var moduleButton = GameObject.Instantiate(ModuleButtonPrefab);
+                moduleButton.transform.SetParent(BuilderModuleList.transform);
+                moduleButton.transform.GetChild(0).GetComponent<Text>().text = module.GetComponent<ShipComponent>().ComponentName; // Name.
+                moduleButton.transform.GetChild(1).GetComponent<Image>().sprite = module.GetComponent<ShipComponent>().BuilderSprite; // Sprite.
+                moduleButton.transform.GetChild(2).GetComponent<Text>().text = module.GetComponent<ShipComponent>().Mass.ToString(); // Weight.
+            }
+        }
+    }
+
+    private void ClosePopup()
+    {
+        BuilderCanvas.SetActive(false);
     }
 
 }

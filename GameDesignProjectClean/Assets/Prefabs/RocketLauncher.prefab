@@ -40,6 +40,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8f05e22d0de04459fcfa6e821ede20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ComponentName: Rocket
+  BuilderSprite: {fileID: 21300000, guid: 5484d64469aacc64c8e3dcc868c6310d, type: 3}
   Core: {fileID: 0}
   Mass: 0
   InputType: 0

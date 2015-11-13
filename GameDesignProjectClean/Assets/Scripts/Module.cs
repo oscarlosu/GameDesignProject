@@ -69,18 +69,16 @@ public class Module : ShipComponent
 ****************/
 
 [CustomEditor(typeof(Module), true)]
-public class ModuleEditor : Editor
+public class ModuleEditor : ShipComponentEditor
 {
-    private Module module;
-    private bool toggleInput = false;
-
-    private void Awake()
-    {
-        module = (Module)target;
-    }
 
     public override void OnInspectorGUI()
     {
+
+        // The component GUI.
+        base.OnInspectorGUI();
+
+        Module module = (Module)target;
 
         // Create a heading.
         GUIStyle heading = new GUIStyle { fontSize = 14 };
