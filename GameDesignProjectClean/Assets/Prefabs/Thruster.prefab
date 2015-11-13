@@ -40,6 +40,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758a7ea84353ab84d999c8dfd99aeef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ComponentName: Thruster
+  BuilderSprite: {fileID: 21300000, guid: 150888e0ce0977848814cc76392b894a, type: 3}
   Core: {fileID: 0}
   Mass: 1
   InputType: 1

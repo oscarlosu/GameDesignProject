@@ -72,6 +72,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e87c23163584854caca09273f4b9cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ComponentName: Structure
+  BuilderSprite: {fileID: 21300000, guid: 9cd57da41998ef7438d4681403a7e270, type: 3}
   Core: {fileID: 0}
   Mass: 1
   MaxHp: 1

@@ -40,6 +40,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8f05e22d0de04459fcfa6e821ede20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ComponentName: Homing missile
+  BuilderSprite: {fileID: 21300000, guid: 1b78d195e5cf9ce41aa72cffa5b3dea0, type: 3}
   Core: {fileID: 0}
   Mass: 0
   InputType: 0
