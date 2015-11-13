@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class EnvironmentGenerator : MonoBehaviour
 {
+    public GameObject Camera;
 
     public int NSectorX, NSectorY;
     public int SectorSizeX, SectorSizeY;
@@ -54,8 +55,8 @@ public class EnvironmentGenerator : MonoBehaviour
         {
             Vector3 pos = new Vector3(count, count * 2, count * 3);
             int rnd = new System.Random(CalculatePositionId(pos)).Next(0, 1000);
-            Debug.Log("Position: " + pos + " Random int assigned (first): " + rnd);
-            Debug.Log("Position: " + pos + " Random int assigned (second): " + rnd);
+            Debug.Log("Position: " + pos + " Random int assigned: " + rnd);
+            //Debug.Log("Position: " + pos + " Random int assigned (second): " + rnd);
             ++count;
         }
 
