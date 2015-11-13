@@ -120,6 +120,27 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _TextureMG
+        second:
+          m_Texture: {fileID: 2800000, guid: e64bcc94bc0442241b10995ef2167488, type: 3}
+          m_Scale: {x: .0199999996, y: .0199999996}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _TextureBG
+        second:
+          m_Texture: {fileID: 2800000, guid: 5535889ab92c8424483d2b48f923bc84, type: 3}
+          m_Scale: {x: .0199999996, y: .0199999996}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _TextureFG
+        second:
+          m_Texture: {fileID: 2800000, guid: b6c96aea5b97d8546aca9cd8393bfc1b, type: 3}
+          m_Scale: {x: .0299999993, y: .0299999993}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -181,6 +202,18 @@ Material:
         first:
           name: _FGParaMod
         second: .300000012
+      data:
+        first:
+          name: _BGScrollSpeed
+        second: .800000012
+      data:
+        first:
+          name: _MGScrollSpeed
+        second: .600000024
+      data:
+        first:
+          name: _FGScrollSpeed
+        second: .400000006
     m_Colors:
       data:
         first:
