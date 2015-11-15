@@ -13,9 +13,7 @@ public class Laser : Projectile
     private SpriteRenderer rend;
     private float elapsedTime;
     
-
-    // Use this for initialization
-    void Start()
+    void Awake()
     {
         //rb = GetComponent<Rigidbody2D>();
 		this.GetComponent<AudioSource>().pitch = Random.Range(0.5f, 1.5f);

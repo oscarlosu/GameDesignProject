@@ -2,6 +2,7 @@
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(AudioSource))]
 public class HomingMissile : Projectile
 {
     public float ThrusterActivateAt; // The thruser activates after this time period.
@@ -22,9 +23,8 @@ public class HomingMissile : Projectile
     public GameObject Target;
     private int newTargetCount; // How many times a new target has been found.
     private float timeSinceLastTarget;
-
-    // Use this for initialization
-    void Start()
+    
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         this.GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);

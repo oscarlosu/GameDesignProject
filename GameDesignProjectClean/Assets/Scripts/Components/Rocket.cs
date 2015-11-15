@@ -3,6 +3,7 @@ using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(AudioSource))]
 public class Rocket : Projectile
 {
     public float ThrustPower;
@@ -21,6 +22,8 @@ public class Rocket : Projectile
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        this.GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
+        this.GetComponent<AudioSource>().volume = Random.Range(0.9f, 1.1f);
     }
 
     // Update is called once per frame
