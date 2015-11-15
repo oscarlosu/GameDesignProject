@@ -2,15 +2,14 @@
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(AudioSource))]
 public class HomingMissile : Projectile
 {
     public float ThrusterActivateAt; // The thruser activates after this time period.
     public float ThrustPower;
     public float ThrusterDuration;
     public float TurnSpeed;
-    public float ExplosionSpeed;
-    public float ExplosionRadius;
-    public float GracePeriod;
+    public float GracePeriod; // TODO Not used for anything yet...
     public float NewTargetTimer; // The time between each new target selection.
     public int TimesNotTargetingSource; // The number of times new target selection will not select the source.
 
@@ -22,11 +21,12 @@ public class HomingMissile : Projectile
     public GameObject Target;
     private int newTargetCount; // How many times a new target has been found.
     private float timeSinceLastTarget;
-
-    // Use this for initialization
-    void Start()
+    
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        this.GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
+		this.GetComponent<AudioSource>().volume = Random.Range(0.9f, 1.1f);
     }
 
     // Update is called once per frame
@@ -65,7 +65,7 @@ public class HomingMissile : Projectile
 
     private void SelectClosestTarget()
     {
-        var ships = GameObject.FindGameObjectsWithTag("Ship");
+        var ships = GameObject.FindGameObjectsWithTag(GlobalValues.ShipTag);
         GameObject closest = null;
         float distance = Mathf.Infinity;
         Vector3 position = transform.position;
@@ -91,14 +91,10 @@ public class HomingMissile : Projectile
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        GameObject.Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
         // When destroyed, create an explosion, which damages objects around it.
         var explosion = GameObject.Instantiate(ExplosionPrefab);
         explosion.transform.position = transform.position;
         explosion.GetComponent<Explosion>().Damage = Damage;
+        GameObject.Destroy(gameObject);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEditor;
 
 public class Structure : ShipComponent
 {
@@ -33,7 +34,7 @@ public class Structure : ShipComponent
         if(modules.Count > 0 || structures.Count == 0)
         {
             hp -= dmg;
-            Anim.SetTrigger("TriggerDamage");
+            TriggerAnimation("TriggerDamage");
             LoseModule(modules);
             return true;
         }
@@ -103,7 +104,7 @@ public class Structure : ShipComponent
 
     private void LoseModule(List<Module> modules)
     {
-        // As long as the hp is lower or equal than zero
+        // As long as the hp is lower or equal than zero lose module or structure.
         while(hp <= 0)
         {
             // If any child modules left on the structure, lose one
@@ -161,4 +162,33 @@ public class Structure : ShipComponent
     //    }
     //}
 
+}
+
+/****************
+* Editor tools.
+****************/
+
+[CustomEditor(typeof(Structure), true)]
+public class StructureEditor : ShipComponentEditor
+{
+
+    public override void OnInspectorGUI()
+    {
+        // Display the module's settings.
+        base.OnInspectorGUI();
+
+        // Create heading.
+        GUIStyle heading = new GUIStyle { fontSize = 14 };
+        EditorGUILayout.LabelField("Structure settings", heading);
+
+        // Get target and show/edit fields.
+        Structure t = (Structure)target;
+        t.MaxHp = EditorGUILayout.IntField("Hp", t.MaxHp);
+
+        // If the target was changed, set the target to dirty, so Unity will save the values.
+        if (GUI.changed)
+        {
+            EditorUtility.SetDirty(target);
+        }
+    }
 }

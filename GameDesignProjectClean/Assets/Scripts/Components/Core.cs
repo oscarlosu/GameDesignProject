@@ -1,15 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Core : Structure
 {
     public GamepadInput.GamePad.Index ControllerIndex;
-    
-    
-
-    
 
     // Public methods
 
@@ -58,5 +55,34 @@ public class Core : Structure
             myChildren.AddRange(RetrieveChildren(myChild));
         }
         return myChildren;
+    }
+}
+
+/****************
+* Editor tools.
+****************/
+
+[CustomEditor(typeof(Core), true)]
+public class CoreEditor : StructureEditor
+{
+
+    public override void OnInspectorGUI()
+    {
+        // Display the module's settings.
+        base.OnInspectorGUI();
+
+        // Create heading.
+        GUIStyle heading = new GUIStyle { fontSize = 14 };
+        EditorGUILayout.LabelField("Structure settings", heading);
+
+        // Get target and show/edit fields.
+        Core t = (Core)target;
+        t.ControllerIndex = (GamepadInput.GamePad.Index)EditorGUILayout.EnumPopup("Controller", t.ControllerIndex);
+
+        // If the target was changed, set the target to dirty, so Unity will save the values.
+        if (GUI.changed)
+        {
+            EditorUtility.SetDirty(target);
+        }
     }
 }

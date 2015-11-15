@@ -15,6 +15,7 @@ TagManager:
   - Moon
   - Asteroid
   - Debris
+  - DefensiveModule
   layers:
   - Default
   - TransparentFX
