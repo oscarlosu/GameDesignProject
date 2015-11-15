@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEditor;
 
 public class Structure : ShipComponent
 {
@@ -149,4 +150,33 @@ public class Structure : ShipComponent
     //    }
     //}
 
+}
+
+/****************
+* Editor tools.
+****************/
+
+[CustomEditor(typeof(Structure), true)]
+public class StructureEditor : ShipComponentEditor
+{
+
+    public override void OnInspectorGUI()
+    {
+        // Display the module's settings.
+        base.OnInspectorGUI();
+
+        // Create heading.
+        GUIStyle heading = new GUIStyle { fontSize = 14 };
+        EditorGUILayout.LabelField("Structure settings", heading);
+
+        // Get target and show/edit fields.
+        Structure t = (Structure)target;
+        t.MaxHp = EditorGUILayout.IntField("Hp", t.MaxHp);
+
+        // If the target was changed, set the target to dirty, so Unity will save the values.
+        if (GUI.changed)
+        {
+            EditorUtility.SetDirty(target);
+        }
+    }
 }
