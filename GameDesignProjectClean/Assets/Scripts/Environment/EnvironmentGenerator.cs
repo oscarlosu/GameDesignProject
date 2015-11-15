@@ -8,9 +8,17 @@ public class EnvironmentGenerator : MonoBehaviour
 
     public int NSectorX, NSectorY;
     public int SectorSizeX, SectorSizeY;
+
     public int StarRadiusMin, StarRadiusMax;
+	public int StarMassMin, StarMassMax;
+	public float StarToPlanetDistanceFactor;
+	public float PlanetToPlanetDistanceFactor;
+
     public int PlanetRadiusMin, PlanetRadiusMax;
-    public int MoonRadiusMin, MoonRadiusMax;
+	public int PlanetMassMin, PlanetMassMax;
+	public int PlanetAngularSpeedMin, PlanetAngularSpeedMax;
+
+	public int MoonRadiusMin, MoonRadiusMax;
 
     public float StarLikelihood;
     public float PlanetLikelihood, MoonLikelihood;
@@ -38,29 +46,22 @@ public class EnvironmentGenerator : MonoBehaviour
         timeSeed = (int)System.DateTime.Now.Ticks.GetHashCode();
         Initialize();
 
-    }
+	}
 
-    int CalculatePositionId(Vector3 position)
-    {
-        return (int)position.GetHashCode() * timeSeed;
-    }
-
-
-
-    int count = 0;
+    //int count = 0;
 
     // Update is called once per frame
     void Update()
     {
         // Testing
-        if (Input.GetKeyDown(KeyCode.Space))
+        /*if (Input.GetKeyDown(KeyCode.Space))
         {
             Vector3 pos = new Vector3(count, count * 2, count * 3);
             int rnd = new System.Random(CalculatePositionId(pos)).Next(0, 1000);
             Debug.Log("Position: " + pos + " Random int assigned: " + rnd);
             //Debug.Log("Position: " + pos + " Random int assigned (second): " + rnd);
             ++count;
-        }
+        }*/
 
 		// Calculate new first sector grid position
 		int newFirstX = (int)(Camera.transform.position.x / SectorSizeX) - Mathf.CeilToInt (NSectorX / 2);
@@ -109,52 +110,6 @@ public class EnvironmentGenerator : MonoBehaviour
 
     }
 
-	private void MoveColumn(int fromX, int toX)
-	{
-		Vector2 fromPos = new Vector2(fromX, 0);
-		Vector2 toPos = new Vector2(toX, 0);
-		for(int y = firstY; y < firstY + NSectorY; ++y)
-		{
-			fromPos.y = y;
-			toPos.y = y;
-			// Get sector from the sector dictionary
-			GameObject sector = sectors[fromPos];
-			// Remove sector from the dictionary
-			sectors.Remove(fromPos);
-			// Delete all the environment objects in the sector
-			ClearSector (sector);
-			// Update sector position
-			sector.transform.position = new Vector3(toPos.x * SectorSizeX, toPos.y * SectorSizeY, 0);
-			// Add sector to the dictionary with the new grid position as the key
-			sectors.Add (toPos, sector);
-			// Regenerate sector
-			GenerateSector(sector);
-		}
-	}
-
-	private void MoveRow(int fromY, int toY)
-	{
-		Vector2 fromPos = new Vector2(0, fromY);
-		Vector2 toPos = new Vector2(0, toY);
-		for(int x = firstX; x < firstX + NSectorX; ++x)
-		{
-			fromPos.x = x;
-			toPos.x = x;
-			// Get sector from the sector dictionary
-			GameObject sector = sectors[fromPos];
-			// Remove sector from the dictionary
-			sectors.Remove(fromPos);
-			// Delete all the environment objects in the sector
-			ClearSector (sector);
-			// Update sector position
-			sector.transform.position = new Vector3(toPos.x * SectorSizeX, toPos.y * SectorSizeY, 0);
-			// Add sector to the dictionary with the new grid position as the key
-			sectors.Add (toPos, sector);
-			// Regenerate sector
-			GenerateSector(sector);
-		}
-	}
-
     private void Initialize()
     {
 		// Set the first sector gird position
@@ -178,11 +133,49 @@ public class EnvironmentGenerator : MonoBehaviour
 
     }
 
-	private void ClearSector(GameObject sector)
+	private void MoveColumn(int fromX, int toX)
 	{
-		for(int n = sector.transform.childCount - 1; n >= 0; --n)
+		Vector2 fromPos = new Vector2(fromX, 0);
+		Vector2 toPos = new Vector2(toX, 0);
+		for(int y = firstY; y < firstY + NSectorY; ++y)
 		{
-			Destroy (sector.transform.GetChild (n).gameObject);
+			fromPos.y = y;
+			toPos.y = y;
+			// Get sector from the sector dictionary
+			GameObject sector = sectors[fromPos];
+			// Remove sector from the dictionary
+			sectors.Remove(fromPos);
+			// Delete all the environment objects in the sector
+			ClearSector (sector);
+			// Update sector position
+			sector.transform.position = new Vector3(toPos.x * SectorSizeX, toPos.y * SectorSizeY, 0);
+			// Add sector to the dictionary with the new grid position as the key
+			sectors.Add (toPos, sector);
+			// Regenerate sector
+			GenerateSector(sector);
+		}
+	}
+	
+	private void MoveRow(int fromY, int toY)
+	{
+		Vector2 fromPos = new Vector2(0, fromY);
+		Vector2 toPos = new Vector2(0, toY);
+		for(int x = firstX; x < firstX + NSectorX; ++x)
+		{
+			fromPos.x = x;
+			toPos.x = x;
+			// Get sector from the sector dictionary
+			GameObject sector = sectors[fromPos];
+			// Remove sector from the dictionary
+			sectors.Remove(fromPos);
+			// Delete all the environment objects in the sector
+			ClearSector (sector);
+			// Update sector position
+			sector.transform.position = new Vector3(toPos.x * SectorSizeX, toPos.y * SectorSizeY, 0);
+			// Add sector to the dictionary with the new grid position as the key
+			sectors.Add (toPos, sector);
+			// Regenerate sector
+			GenerateSector(sector);
 		}
 	}
 
@@ -198,7 +191,7 @@ public class EnvironmentGenerator : MonoBehaviour
         // Stars
         GenerateStars(sector, gen, minX, maxX, minY, maxY);
         // Planets
-
+		GeneratePlanets(sector, gen, minX, maxX, minY, maxY);
         // Asteroid fields
 
         // Asteroids
@@ -212,27 +205,107 @@ public class EnvironmentGenerator : MonoBehaviour
         if (gen.Next(0, RandomNumberMax) < StarLikelihood)
         {
             // Choose position for star
-            Vector3 starPos;
-            int starRadius;
-            for (int n = 0; n < MaxSpawnAttempts; ++n)
-            {
-                starPos = new Vector3(gen.Next(minX, maxX), gen.Next(minY, maxY));
-                starRadius = gen.Next(StarRadiusMin, StarRadiusMax);
-                // Check if the star is guaranteed to be completely inside of the sector
-                if (starPos.x + StarRadiusMax < maxX && starPos.x - StarRadiusMax > minX &&
-                   starPos.y + StarRadiusMax < maxY && starPos.y - StarRadiusMax > minY)
-                {
-                    // Create star
-                    GameObject star = Instantiate(StarPrefab);
-                    // Make it a child of this sector
-                    star.transform.parent = sector.transform;
-                    // Select a sprite
-                    Sprite starSprite = StarSprites[gen.Next(0, StarSprites.Count)];
-                    star.GetComponent<Star>().Create(starPos, starRadius, starSprite);
-                    break;
-                }
-            }
+			int starRadius = gen.Next(StarRadiusMin, StarRadiusMax);
+			Vector3 starPos = new Vector3(gen.Next(minX + starRadius, maxX - starRadius), gen.Next(minY + starRadius, maxY - starRadius));
+			int starMass = gen.Next(StarMassMin, StarMassMax);
+            // Create star
+            GameObject star = Instantiate(StarPrefab);
+            // Make it a child of this sector
+            star.transform.parent = sector.transform;
+            // Select a sprite
+            Sprite starSprite = StarSprites[gen.Next(0, StarSprites.Count)];
+			// Define the orbits around the star
+			List<int> orbits = DefineOrbits(sector, gen, starPos, starRadius);
+			star.GetComponent<Star>().Create(starPos, starRadius, starMass, orbits, starSprite);
         }
     }
+
+
+	private List<int> DefineOrbits(GameObject sector, System.Random gen, Vector3 starPos, int starRadius)
+	{
+		List<int> orbits = new List<int>();
+		// Calculate distance from star to origin of sector
+		float distBorder = Vector3.Distance (starPos, sector.transform.position);
+		// Define orbit radius so that the planets wont collide with the star and so they dont go too far outside of the sector
+		int minOrbit = starRadius + Mathf.CeilToInt(StarToPlanetDistanceFactor * PlanetRadiusMax);
+		int maxOrbit = (int)distBorder - PlanetRadiusMax;
+		// Only add planets if there is enough space between the star and the border of the sector
+		if(minOrbit < maxOrbit)
+		{
+			// Keep generating orbits until the "spawn check" fails
+			bool noSpace = false;
+			while(gen.Next(0, RandomNumberMax) < PlanetLikelihood && !noSpace)
+			{
+				noSpace = true;
+				for(int n = 0; n < MaxSpawnAttempts; ++n)
+				{
+					int newOrbit = gen.Next(minOrbit, maxOrbit);
+					// Make sure planets inside the same planetary system dont collide with each other
+					bool valid = true;
+					foreach(int otherOrbit in orbits)
+					{
+						if((otherOrbit < newOrbit && otherOrbit + PlanetToPlanetDistanceFactor * PlanetRadiusMax > newOrbit - PlanetRadiusMax) || 
+						   (otherOrbit > newOrbit && otherOrbit - PlanetToPlanetDistanceFactor * PlanetRadiusMax < newOrbit + PlanetRadiusMax))
+						{
+							valid = false;
+							break;
+						}
+					}
+					// If the orbit is valid, add it to the star's list of orbits
+					if(valid)
+					{
+						orbits.Add(newOrbit);
+						noSpace = false;
+						break;
+					}
+				}
+			}
+		}
+		return orbits;
+	}
+		
+	private void GeneratePlanets(GameObject sector, System.Random gen, int minX, int maxX, int minY, int maxY)
+	{
+		// Find all objects with a collider in the sector
+		// Default parameters: int layerMask = DefaultRaycastLayers, float minDepth = -Mathf.Infinity, float maxDepth = Mathf.Infinity
+		Collider2D[] objectsInSector = Physics2D.OverlapAreaAll(new Vector2(minX, minY), new Vector2(maxX, maxY));
+		// For every star, create planets to orbit around it
+		foreach(Collider2D col in objectsInSector)
+		{
+			if(col.gameObject.tag == GlobalValues.StarTag)
+			{
+				Star star = col.gameObject.GetComponent<Star>();
+				foreach(int orbit in star.OrbitRadii)
+				{
+					Vector3 planetDir = Random.insideUnitCircle;
+					int planetRadius = gen.Next(PlanetRadiusMin, PlanetRadiusMax);
+					int planetMass = gen.Next(PlanetMassMin, PlanetMassMax);
+					int planetTranslationDir = gen.Next (0, 1) < 0.5f ? -1 : 1;
+					int planetAngularSpeed = planetTranslationDir * gen.Next (PlanetAngularSpeedMin, PlanetAngularSpeedMax);
+					Vector3 planetPos = star.transform.position + planetDir * orbit;
+					// Create planet
+					GameObject planet = Instantiate(PlanetPrefab);
+					// Make it a child of this sector
+					planet.transform.parent = sector.transform;
+					// Select a sprite
+					Sprite planetSprite = PlanetSprites[gen.Next(0, PlanetSprites.Count)];
+					planet.GetComponent<Planet>().Create(planetPos, planetRadius, planetMass, col.gameObject, planetAngularSpeed, planetSprite);					
+				}
+			}
+		}
+	}
+
+	private void ClearSector(GameObject sector)
+	{
+		for(int n = sector.transform.childCount - 1; n >= 0; --n)
+		{
+			Destroy (sector.transform.GetChild (n).gameObject);
+		}
+	}
+
+	private int CalculatePositionId(Vector3 position)
+	{
+		return (int)position.GetHashCode() * timeSeed;
+	}
 
 }

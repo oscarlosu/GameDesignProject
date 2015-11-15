@@ -47,6 +47,7 @@ public class CameraHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		ships = GameObject.FindGameObjectsWithTag(GlobalValues.ShipTag).OfType<GameObject>().ToList();
         UpdateState();
         switch(state)
         {

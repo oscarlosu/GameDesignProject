@@ -10,6 +10,11 @@ TagManager:
   - AvailablePos
   - BuilderHandler
   - Projectile
+  - Star
+  - Planet
+  - Moon
+  - Asteroid
+  - Debris
   layers:
   - Default
   - TransparentFX
