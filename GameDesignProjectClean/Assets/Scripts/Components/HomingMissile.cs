@@ -9,9 +9,7 @@ public class HomingMissile : Projectile
     public float ThrustPower;
     public float ThrusterDuration;
     public float TurnSpeed;
-    public float ExplosionSpeed;
-    public float ExplosionRadius;
-    public float GracePeriod;
+    public float GracePeriod; // TODO Not used for anything yet...
     public float NewTargetTimer; // The time between each new target selection.
     public int TimesNotTargetingSource; // The number of times new target selection will not select the source.
 

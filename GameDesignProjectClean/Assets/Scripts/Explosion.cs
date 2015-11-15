@@ -6,6 +6,7 @@
 public class Explosion : MonoBehaviour
 {
     public int Damage;
+    public float PushForce;
 
     void Awake()
     {
@@ -24,6 +25,8 @@ public class Explosion : MonoBehaviour
         {
             //other.gameObject.GetComponent<Asteroid>().Breakdown();
         }
+
+        other.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up)*PushForce, transform.position);
     }
 
     private void DestroyExplosion()

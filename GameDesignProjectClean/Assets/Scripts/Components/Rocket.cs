@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using ADBannerView = UnityEngine.iOS.ADBannerView;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
@@ -7,10 +8,8 @@ using System.Collections;
 public class Rocket : Projectile
 {
     public float ThrustPower;
-    public float ExplosionSpeed;
-    public float ExplosionRadius;
     public float ThrusterDuration;
-    public float GracePeriod;
+    public float GracePeriod; // TODO Not used for anything yet...
 
     public GameObject ExplosionPrefab;
 
@@ -19,7 +18,7 @@ public class Rocket : Projectile
 
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         this.GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
@@ -29,21 +28,25 @@ public class Rocket : Projectile
     // Update is called once per frame
     void Update()
     {
+        elapsedTime += Time.deltaTime;
         // Handle thruster
         if (elapsedTime <= ThrusterDuration)
         {
-            elapsedTime += Time.deltaTime;
+            
             rb.AddForceAtPosition(transform.up * ThrustPower, transform.position);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        // Create the explosion, when the rocket is destroyed. The explosion should be the one doing the damage.
-        // When destroyed, create an explosion, which damages objects around it.
-        var explosion = GameObject.Instantiate(ExplosionPrefab);
-        explosion.transform.position = transform.position;
-        explosion.GetComponent<Explosion>().Damage = Damage;
-        GameObject.Destroy(gameObject);
+        if (elapsedTime >= GracePeriod)
+        {
+            // Create the explosion, when the rocket is destroyed. The explosion should be the one doing the damage.
+            // When destroyed, create an explosion, which damages objects around it.
+            var explosion = GameObject.Instantiate(ExplosionPrefab);
+            explosion.transform.position = transform.position;
+            explosion.GetComponent<Explosion>().Damage = Damage;
+            GameObject.Destroy(gameObject);
+        }
     }
 }
