@@ -17,6 +17,7 @@ public class Laser : Projectile
     void Start()
     {
         //rb = GetComponent<Rigidbody2D>();
+		this.GetComponent<AudioSource>().pitch = Random.Range(0.5f, 1.5f);
         rend = GetComponent<SpriteRenderer>();
     }
 
