@@ -20,6 +20,11 @@ public class EnvironmentGenerator : MonoBehaviour
 
 	public int MoonRadiusMin, MoonRadiusMax;
 
+	public int AsteroidRadiusMax;
+
+	public int AsteroidFieldMinRadius, AsteroidFieldMaxRadius;
+	public int AsteroidFieldMinSize, AsteroidFieldMaxSize;
+
     public float StarLikelihood;
     public float PlanetLikelihood, MoonLikelihood;
     public float AsteroidFieldLikelihood, InFieldAsteroidLikelihood;
@@ -103,11 +108,6 @@ public class EnvironmentGenerator : MonoBehaviour
 		}
 		// Update first y grid coordinate
 		firstY = newFirstY;
-
-		// Handle sector generation
-		
-        // Handle sector destruction
-
     }
 
     private void Initialize()
@@ -193,9 +193,9 @@ public class EnvironmentGenerator : MonoBehaviour
         // Planets
 		GeneratePlanets(sector, gen, minX, maxX, minY, maxY);
         // Asteroid fields
-
-        // Asteroids
-
+		GenerateAsteroidFields(sector, gen, minX, maxX, minY, maxY);
+        // Asteroid cloud
+		GenerateAsteroidCloud(sector, gen, minX, maxX, minY, maxY);
         // Debris
 
     }
@@ -291,6 +291,62 @@ public class EnvironmentGenerator : MonoBehaviour
 					Sprite planetSprite = PlanetSprites[gen.Next(0, PlanetSprites.Count)];
 					planet.GetComponent<Planet>().Create(planetPos, planetRadius, planetMass, col.gameObject, planetAngularSpeed, planetSprite);					
 				}
+			}
+		}
+	}
+
+	private void GenerateAsteroidFields(GameObject sector, System.Random gen, int minX, int maxX, int minY, int maxY)
+	{
+		while(gen.Next(0, RandomNumberMax) < AsteroidFieldLikelihood)
+		{
+			// Select clear area
+			Vector3 fieldCenter = Vector3.zero;
+			int asteroidFieldRadius = 0;
+			bool success = false;
+			for(int n = 0; n < MaxSpawnAttempts; ++n)
+			{
+				fieldCenter = new Vector3(gen.Next(minX, maxX), gen.Next(minY, maxY));
+				asteroidFieldRadius = gen.Next (AsteroidFieldMinRadius, AsteroidFieldMaxRadius);
+				if(Physics2D.OverlapCircleAll(fieldCenter, asteroidFieldRadius).Length == 0)
+				{
+					success = true;
+					break;
+				}
+			}
+			// If the field could not be placed, assume the sector is overpopulated and dont place any more fields
+			if(!success)
+			{
+				return;
+			}
+			// Create first generation
+			int fieldSize = gen.Next (AsteroidFieldMinSize, AsteroidFieldMaxSize);
+			for(int n = 0; n < fieldSize; ++n)
+			{
+				Vector3 asteroidPos = fieldCenter + (Vector3)(Random.insideUnitCircle * asteroidFieldRadius);
+				if(Physics2D.OverlapCircleAll(asteroidPos, AsteroidRadiusMax).Length == 0)
+				{
+					// Create asteroid
+					GameObject asteroid = Instantiate(AsteroidPrefab);
+					// Make it a child of this sector
+					asteroid.transform.parent = sector.transform;
+					asteroid.GetComponent<Asteroid>().Create(asteroidPos, AsteroidRadiusMax);
+				}
+			}
+		}
+	}
+
+	private void GenerateAsteroidCloud(GameObject sector, System.Random gen, int minX, int maxX, int minY, int maxY)
+	{
+		while(gen.Next(0, RandomNumberMax) < GlobalAsteroidLikelihood)
+		{
+			Vector3 asteroidPos = new Vector3(gen.Next(minX, maxX), gen.Next(minY, maxY));
+			if(Physics2D.OverlapCircleAll(asteroidPos, AsteroidRadiusMax).Length == 0)
+			{
+				// Create asteroid
+				GameObject asteroid = Instantiate(AsteroidPrefab);
+				// Make it a child of this sector
+				asteroid.transform.parent = sector.transform;
+				asteroid.GetComponent<Asteroid>().Create(asteroidPos, AsteroidRadiusMax);
 			}
 		}
 	}

@@ -1,23 +1,27 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class DirtyAsteroid : MonoBehaviour
+[RequireComponent(typeof(CircleCollider2D))]
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Rigidbody2D))]
+public class Asteroid : MonoBehaviour
 {
     public int Size;
-    public int SizeMin, SizeMax;
+	public int MinSize, MaxSize;
     public Sprite[] SmallSprites;
     public Sprite[] MediumSprites;
+	public Sprite[] LargeSprites;
     public float SmallColRadius, MediumColRadius;
     public float SmallMinWeight, SmallMaxWeight;
     public float MediumMinWeight, MediumMaxWeight;
     public int SplitMinNum, SplitMaxNum;
     public float MinBreakdownForce, MaxBreakdownForce;
     public float DisableTime;
-    public float MinCrashMagnitude;
+
+	public GameObject AsteroidPrefab;
 
     private float elapsedTime;
-
 
     void Update()
     {
@@ -30,8 +34,11 @@ public class DirtyAsteroid : MonoBehaviour
             GetComponent<CircleCollider2D>().enabled = true;
         }
     }
-    public void Initialise()
+    public void Create(Vector3 asteroidPosition, int size)
     {
+		transform.position = asteroidPosition;
+		//Size = Random.Range (MinSize, MaxSize + 1);
+		Size = size;
         int index;
         switch (Size)
         {
@@ -48,8 +55,8 @@ public class DirtyAsteroid : MonoBehaviour
                 GetComponent<CircleCollider2D>().radius = MediumColRadius;
                 break;
             default:
-                Size = 1;
-                Initialise();
+				//Debug.Log ("Large asteroids not implemented!");
+                Create(transform.position, 2);
                 break;
         }
     }
@@ -64,29 +71,31 @@ public class DirtyAsteroid : MonoBehaviour
             int num = Random.Range(SplitMinNum, SplitMaxNum);
             for(int i = 0; i < num; ++i)
             {
-                var go = (GameObject)Instantiate(this.gameObject);
-                go.GetComponent<DirtyAsteroid>().Size = Size;
-				go.GetComponent<DirtyAsteroid>().Initialise();
+				var go = Instantiate(AsteroidPrefab);
+				go.transform.parent = transform.parent;
+				go.GetComponent<Asteroid>().Create(transform.position, Size);
                 // Disable collider
                 go.GetComponent<CircleCollider2D>().enabled = false;
                 // Generate random force
                 Vector2 forceDir = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
-                Debug.Log(forceDir);
+                //Debug.Log(forceDir);
                 forceDir.Normalize();
                 float breakdownForce = Random.Range(MinBreakdownForce, MaxBreakdownForce);
                 go.GetComponent<Rigidbody2D>().AddForce(forceDir * breakdownForce);
             }
         }
-        // Play sound just before destroying the DirtyAsteroid game object.
+        // Play sound just before destroying the asteroid game object.
 
         // Destroy game object.
-        GameObject.Destroy(this.gameObject);
+		gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
     void OnCollisionEnter2D(Collision2D coll)
     {
+		Debug.Log("asteroid collision");
         // Only "crash" if the force with which the objects hit each other is large enough.
-        if (coll.relativeVelocity.magnitude > MinCrashMagnitude)
+        if (coll.relativeVelocity.magnitude > GlobalValues.MinCrashMagnitude)
         {
             Debug.Log("Crashed with a magnitude of: " + coll.relativeVelocity.magnitude);
             // If the other object has a higher mass, break down.
@@ -97,4 +106,14 @@ public class DirtyAsteroid : MonoBehaviour
             }
         }
     }
+
+	void OnTriggerStay2D(Collider2D col)
+	{
+		// If the other object has a higher mass, break down.
+		if (col.gameObject.GetComponent<Rigidbody2D>().mass > GetComponent<Rigidbody2D>().mass)
+		{
+			Debug.Log(this.gameObject + " destroyed!");
+			Breakdown();
+		}
+	}
 }

@@ -40,8 +40,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 0}
-  NSectorX: 5
-  NSectorY: 5
+  NSectorX: 3
+  NSectorY: 3
   SectorSizeX: 1500
   SectorSizeY: 1500
   StarRadiusMin: 50
@@ -58,17 +58,22 @@ MonoBehaviour:
   PlanetAngularSpeedMax: 5
   MoonRadiusMin: 0
   MoonRadiusMax: 0
+  AsteroidRadiusMax: 2
+  AsteroidFieldMinRadius: 20
+  AsteroidFieldMaxRadius: 80
+  AsteroidFieldMinSize: 20
+  AsteroidFieldMaxSize: 50
   StarLikelihood: 500
   PlanetLikelihood: 700
   MoonLikelihood: 0
-  AsteroidFieldLikelihood: 0
+  AsteroidFieldLikelihood: 500
   InFieldAsteroidLikelihood: 0
-  GlobalAsteroidLikelihood: 0
+  GlobalAsteroidLikelihood: 950
   GlobalDebrisLikelihood: 0
   StarPrefab: {fileID: 103684, guid: c36e56272bade584e9bf4691249d3c8f, type: 2}
   PlanetPrefab: {fileID: 180870, guid: c1cd7c669ea0ff64f9ed3be16120d0f2, type: 2}
   MoonPrefab: {fileID: 0}
-  AsteroidPrefab: {fileID: 0}
+  AsteroidPrefab: {fileID: 198102, guid: cd511508377f16249ac9c135518de956, type: 2}
   DebrisPrefab: {fileID: 0}
   StarSprites:
   - {fileID: 21300000, guid: de5396ee954744bccb15b13670b90320, type: 3}
