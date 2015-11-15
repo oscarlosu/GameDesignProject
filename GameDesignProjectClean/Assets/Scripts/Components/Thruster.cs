@@ -15,6 +15,12 @@ public class Thruster : Module
 
     public void Update()
     {
+		//Thruster sound depending on velocity. This should not be here, but couldn't get it to work in Activate().
+		//It still needs some work, becuase right now, thrusters are playing all the time, not just when they are fired
+		//Feel free to move to a better location.
+		this.GetComponent<AudioSource>().pitch = Mathf.Clamp(Core.GetComponent<Rigidbody2D>().velocity.magnitude,0f,2.5f)+ Random.Range(0f,0.5f);
+		this.GetComponent<AudioSource>().volume = Mathf.Clamp(Core.GetComponent<Rigidbody2D>().velocity.magnitude,0f,0.2f);
+        
         // If the ship hasn't been set yet, don't do ANYTHING!
         if (Core == null)
         {
