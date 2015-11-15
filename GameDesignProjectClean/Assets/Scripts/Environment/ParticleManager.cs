@@ -14,10 +14,6 @@ public class ParticleManager : Singleton<ParticleManager> {
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            SpawnParticle(ParticleType.SmallExplosion, Random.insideUnitCircle * 3);
-        }
     }
 
     public void SpawnParticle(ParticleType type, Vector3 pos)

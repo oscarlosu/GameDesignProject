@@ -73,7 +73,7 @@ public class CoreEditor : StructureEditor
 
         // Create heading.
         GUIStyle heading = new GUIStyle { fontSize = 14 };
-        EditorGUILayout.LabelField("Structure settings", heading);
+        EditorGUILayout.LabelField("Core settings", heading);
 
         // Get target and show/edit fields.
         Core t = (Core)target;
