@@ -35,7 +35,10 @@ public class Module : ShipComponent
 
     protected void OnDestroy()
     {
-        Core.GetComponent<Rigidbody2D>().mass -= Mass;
+        if (Core != null)
+        {
+            Core.GetComponent<Rigidbody2D>().mass -= Mass;
+        }
     }
 
     // Update the sprite.
