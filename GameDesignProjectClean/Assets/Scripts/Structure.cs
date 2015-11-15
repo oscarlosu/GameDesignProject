@@ -33,7 +33,7 @@ public class Structure : ShipComponent
         if(modules.Count > 0 || structures.Count == 0)
         {
             hp -= dmg;
-            Anim.SetTrigger("TriggerDamage");
+            TriggerAnimation("TriggerDamage");
             LoseModule(modules);
             return true;
         }
