@@ -47,8 +47,8 @@ public class BuilderHandler : MonoBehaviour
                 var cellPos = TranslatePosToCell(mousePos.x, mousePos.y);
 
                 // Check if there is something in the grid at that position and if it is an available position (for building).
-                if (Get((int) cellPos.x, (int) cellPos.y) != null &&
-                    Get((int) cellPos.x, (int) cellPos.y).tag == "AvailablePos")
+                if (Get((int)cellPos.x, (int)cellPos.y) != null &&
+                    Get((int)cellPos.x, (int)cellPos.y).tag == "AvailablePos")
                 {
                     // Deselect all the available positions.
                     foreach (var availablePos in GameObject.FindGameObjectsWithTag("AvailablePos"))
@@ -56,7 +56,7 @@ public class BuilderHandler : MonoBehaviour
                         availablePos.GetComponent<AvailableBuildPos>().Deselect();
                     }
                     // Save and select the position.
-                    selectedCell = grid[(int) cellPos.x, (int) cellPos.y].GetComponent<AvailableBuildPos>();
+                    selectedCell = grid[(int)cellPos.x, (int)cellPos.y].GetComponent<AvailableBuildPos>();
                     selectedCell.Select();
                     OpenPopup();
                 }
@@ -74,10 +74,10 @@ public class BuilderHandler : MonoBehaviour
                 }
 
                 // If clicking on a component, rotate it.
-                if (Get((int) cellPos.x, (int) cellPos.y) != null &&
-                    Get((int) cellPos.x, (int) cellPos.y).tag == "Module")
+                if (Get((int)cellPos.x, (int)cellPos.y) != null &&
+                    Get((int)cellPos.x, (int)cellPos.y).tag == "Module")
                 {
-                    RotateModule((int) cellPos.x, (int) cellPos.y, 0);
+                    RotateModule((int)cellPos.x, (int)cellPos.y, 0);
                 }
             }
 
@@ -87,11 +87,11 @@ public class BuilderHandler : MonoBehaviour
                 var mousePos = Cam.ScreenToWorldPoint(Input.mousePosition);
                 var cellPos = TranslatePosToCell(mousePos.x, mousePos.y);
 
-                if (Get((int) cellPos.x, (int) cellPos.y) != null &&
-                    Get((int) cellPos.x, (int) cellPos.y).tag != "AvailablePos" &&
-                    Get((int) cellPos.x, (int) cellPos.y).tag != "Ship")
+                if (Get((int)cellPos.x, (int)cellPos.y) != null &&
+                    Get((int)cellPos.x, (int)cellPos.y).tag != "AvailablePos" &&
+                    Get((int)cellPos.x, (int)cellPos.y).tag != "Ship")
                 {
-                    RemoveObject((int) cellPos.x, (int) cellPos.y);
+                    RemoveObject((int)cellPos.x, (int)cellPos.y);
                 }
             }
 
@@ -119,7 +119,7 @@ public class BuilderHandler : MonoBehaviour
 
     public void PlaceObject(GameObject obj, int x, int y)
     {
-        if ((grid[x, y] != null && grid[x, y].tag == "AvailablePos") || grid[x, y] == null)
+        if ((grid[x, y] != null && grid[x, y].tag == GlobalValues.AvailablePosTag) || grid[x, y] == null)
         {
             grid[x, y] = obj;
             obj.transform.position = TranslateCellToPos(x, y);
@@ -130,8 +130,16 @@ public class BuilderHandler : MonoBehaviour
 
     public void RemoveObject(int x, int y)
     {
-        if ((grid[x, y] != null && grid[x, y].tag != "AvailablePos") && grid[x, y].tag != "Ship")
+        if ((grid[x, y] != null && grid[x, y].tag != GlobalValues.AvailablePosTag) && grid[x, y].tag != GlobalValues.ShipTag)
         {
+            if (grid[x, y].tag == GlobalValues.StructureTag)
+            {
+                if (grid[x, y].transform.childCount > 0)
+                {
+                    grid[x, y].GetComponent<Structure>().TriggerAnimation("TriggerDamage");
+                    return;
+                }
+            }
             GameObject.Destroy(grid[x, y]);
             grid[x, y] = null;
             ShipCore.GetComponent<Core>().Assemble();
@@ -143,11 +151,25 @@ public class BuilderHandler : MonoBehaviour
     {
         GameObject availablePos;
 
+        // Remove all available pos objects. // TODO Do this in the other loop, to make it more efficient.
         for (int y = 0; y < GridSizeY; y++)
         {
             for (int x = 0; x < GridSizeX; x++)
             {
-                if (grid[x, y] != null && (grid[x, y].tag == "Ship" || grid[x, y].tag == "Structure"))
+                if (grid[x, y] != null && grid[x, y].tag == GlobalValues.AvailablePosTag)
+                {
+                    GameObject.Destroy(grid[x, y]);
+                    grid[x, y] = null;
+                }
+            }
+        }
+
+        // Insert all available pos objects needed.
+        for (int y = 0; y < GridSizeY; y++)
+        {
+            for (int x = 0; x < GridSizeX; x++)
+            {
+                if (grid[x, y] != null && (grid[x, y].tag == GlobalValues.ShipTag || grid[x, y].tag == GlobalValues.StructureTag))
                 {
                     if (x > 0 && grid[x - 1, y] == null)
                     {
