@@ -28,6 +28,8 @@ public class EnvironmentGenerator : MonoBehaviour
     private int timeSeed;
 
     private Dictionary<Vector2, GameObject> sectors = new Dictionary<Vector2, GameObject>();
+	private int firstX;
+	private int firstY;
 
     // Use this for initialization
     void Start()
@@ -60,19 +62,108 @@ public class EnvironmentGenerator : MonoBehaviour
             ++count;
         }
 
+		// Calculate new first sector grid position
+		int newFirstX = (int)(Camera.transform.position.x / SectorSizeX) - Mathf.CeilToInt (NSectorX / 2);
+		int newFirstY = (int)(Camera.transform.position.y / SectorSizeY) - Mathf.CeilToInt (NSectorY / 2);
+        // Update sector positions
+		// Move right
+		if(newFirstX > firstX)
+		{
+			for(int x = firstX; x < newFirstX; ++x)
+			{
+				MoveColumn (x, x + NSectorX);
+			}
+		}
+		// Move left
+		if(newFirstX < firstX)
+		{
+			for(int x = firstX + NSectorX - 1; x >= newFirstX + NSectorX; --x)
+			{
+				MoveColumn (x, x - NSectorX);
+			}
+		}
+		// Update first x grid coordinate
+		firstX = newFirstX;
+		// Move up
+		if(newFirstY > firstY)
+		{
+			for(int y = firstY; y < newFirstY; ++y)
+			{
+				MoveRow (y, y + NSectorY);
+			}
+		}
+		// Move down
+		if(newFirstY < firstY)
+		{
+			for(int y = firstY + NSectorY - 1; y >= newFirstY + NSectorY; --y)
+			{
+				MoveRow (y, y - NSectorY);
+			}
+		}
+		// Update first y grid coordinate
+		firstY = newFirstY;
 
-        // Handle sector generation
-
+		// Handle sector generation
+		
         // Handle sector destruction
 
     }
 
-    public void Initialize()
+	private void MoveColumn(int fromX, int toX)
+	{
+		Vector2 fromPos = new Vector2(fromX, 0);
+		Vector2 toPos = new Vector2(toX, 0);
+		for(int y = firstY; y < firstY + NSectorY; ++y)
+		{
+			fromPos.y = y;
+			toPos.y = y;
+			// Get sector from the sector dictionary
+			GameObject sector = sectors[fromPos];
+			// Remove sector from the dictionary
+			sectors.Remove(fromPos);
+			// Delete all the environment objects in the sector
+			ClearSector (sector);
+			// Update sector position
+			sector.transform.position = new Vector3(toPos.x * SectorSizeX, toPos.y * SectorSizeY, 0);
+			// Add sector to the dictionary with the new grid position as the key
+			sectors.Add (toPos, sector);
+			// Regenerate sector
+			GenerateSector(sector);
+		}
+	}
+
+	private void MoveRow(int fromY, int toY)
+	{
+		Vector2 fromPos = new Vector2(0, fromY);
+		Vector2 toPos = new Vector2(0, toY);
+		for(int x = firstX; x < firstX + NSectorX; ++x)
+		{
+			fromPos.x = x;
+			toPos.x = x;
+			// Get sector from the sector dictionary
+			GameObject sector = sectors[fromPos];
+			// Remove sector from the dictionary
+			sectors.Remove(fromPos);
+			// Delete all the environment objects in the sector
+			ClearSector (sector);
+			// Update sector position
+			sector.transform.position = new Vector3(toPos.x * SectorSizeX, toPos.y * SectorSizeY, 0);
+			// Add sector to the dictionary with the new grid position as the key
+			sectors.Add (toPos, sector);
+			// Regenerate sector
+			GenerateSector(sector);
+		}
+	}
+
+    private void Initialize()
     {
+		// Set the first sector gird position
+		firstX = (int)(Camera.transform.position.x / SectorSizeX) - Mathf.CeilToInt (NSectorX / 2);
+		firstY = (int)(Camera.transform.position.y / SectorSizeY) - Mathf.CeilToInt (NSectorY / 2);
         // Create sectors
-        for(int x = 0; x < NSectorX; ++x)
+        for(int x = firstX; x < firstX + NSectorX; ++x)
         {
-            for (int y = 0; y < NSectorY; ++y)
+            for (int y = firstY; y < firstY + NSectorY; ++y)
             {
                 // Create sector, set this object as its parent and add it to the dictionary with its x,y grid coords as key
                 GameObject sector = new GameObject("Sector");
@@ -87,7 +178,15 @@ public class EnvironmentGenerator : MonoBehaviour
 
     }
 
-    void GenerateSector(GameObject sector)
+	private void ClearSector(GameObject sector)
+	{
+		for(int n = sector.transform.childCount - 1; n >= 0; --n)
+		{
+			Destroy (sector.transform.GetChild (n).gameObject);
+		}
+	}
+
+	private void GenerateSector(GameObject sector)
     {
         // Calculate position bounds for sector
         int minX = (int)sector.transform.position.x;
@@ -108,7 +207,7 @@ public class EnvironmentGenerator : MonoBehaviour
 
     }
 
-    void GenerateStars(GameObject sector, System.Random gen, int minX, int maxX, int minY, int maxY)
+	private void GenerateStars(GameObject sector, System.Random gen, int minX, int maxX, int minY, int maxY)
     {
         if (gen.Next(0, RandomNumberMax) < StarLikelihood)
         {
