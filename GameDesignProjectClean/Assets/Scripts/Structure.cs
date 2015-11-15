@@ -47,7 +47,7 @@ public class Structure : ShipComponent
                 if(structures[rnd].TakeDamage(dmg))
                 {
                     // Trigger visual feedback and return true
-                    Anim.SetTrigger("TriggerDamage");
+                    TriggerAnimation("TriggerDamage");
                     //Debug.Log("Damage visual feedback not implemented.");
                     return true;
                 }
@@ -61,6 +61,17 @@ public class Structure : ShipComponent
             Debug.LogWarning("Structure couldnt propagate the damage! This should never happen!");
             return true;
         }
+    }
+
+    
+    /// <summary>
+    /// Runs an animation of this object, if exists.
+    /// </summary>
+    /// <param name="animation">The animation name: (TriggerDamage)</param>
+    public void TriggerAnimation(string animation)
+    {
+        // Trigger visual feedback and return true
+        Anim.SetTrigger(animation);
     }
 
     void OnCollisionEnter2D(Collision2D coll)
