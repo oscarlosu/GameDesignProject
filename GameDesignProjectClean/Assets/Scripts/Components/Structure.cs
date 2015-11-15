@@ -91,7 +91,7 @@ public class Structure : ShipComponent
 
     private void LoseModule(List<Module> modules)
     {
-        // As long as the hp is lower or equal than zero
+        // As long as the hp is lower or equal than zero lose module or structure.
         while(hp <= 0)
         {
             // If any child modules left on the structure, lose one

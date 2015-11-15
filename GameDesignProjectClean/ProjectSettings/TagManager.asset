@@ -10,6 +10,7 @@ TagManager:
   - AvailablePos
   - BuilderHandler
   - Projectile
+  - DefensiveModule
   layers:
   - Default
   - TransparentFX

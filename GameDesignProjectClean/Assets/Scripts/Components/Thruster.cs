@@ -2,6 +2,7 @@
 using GamepadInput;
 using UnityEditor;
 
+[RequireComponent(typeof(AudioSource))]
 public class Thruster : Module
 {
 

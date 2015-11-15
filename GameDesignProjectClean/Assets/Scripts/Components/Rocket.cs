@@ -36,14 +36,11 @@ public class Rocket : Projectile
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        GameObject.Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
         // Create the explosion, when the rocket is destroyed. The explosion should be the one doing the damage.
         // When destroyed, create an explosion, which damages objects around it.
         var explosion = GameObject.Instantiate(ExplosionPrefab);
         explosion.transform.position = transform.position;
+        explosion.GetComponent<Explosion>().Damage = Damage;
+        GameObject.Destroy(gameObject);
     }
 }

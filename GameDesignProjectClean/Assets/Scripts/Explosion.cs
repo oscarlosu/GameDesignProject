@@ -2,12 +2,14 @@
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
+[RequireComponent(typeof(AudioSource))]
 public class Explosion : MonoBehaviour
 {
     public int Damage;
-    
-    void Start(){
-    this.GetComponent<AudioSource>().pitch = Random.Range(0.5f, 1.5f);
+
+    void Awake()
+    {
+        GetComponent<AudioSource>().pitch = Random.Range(0.5f, 1.5f);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

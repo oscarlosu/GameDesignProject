@@ -67,7 +67,7 @@ public class HomingMissile : Projectile
 
     private void SelectClosestTarget()
     {
-        var ships = GameObject.FindGameObjectsWithTag("Ship");
+        var ships = GameObject.FindGameObjectsWithTag(GlobalValues.ShipTag);
         GameObject closest = null;
         float distance = Mathf.Infinity;
         Vector3 position = transform.position;
@@ -93,14 +93,10 @@ public class HomingMissile : Projectile
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        GameObject.Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
         // When destroyed, create an explosion, which damages objects around it.
         var explosion = GameObject.Instantiate(ExplosionPrefab);
         explosion.transform.position = transform.position;
         explosion.GetComponent<Explosion>().Damage = Damage;
+        GameObject.Destroy(gameObject);
     }
 }
