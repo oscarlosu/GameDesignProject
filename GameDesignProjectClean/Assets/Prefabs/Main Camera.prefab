@@ -242,17 +242,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3753e2b5f7bd8b44591a7ccb1ca8587a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Margin: 10
   MaxSize: 20
   MinSize: 5
-  CameraShakeMagnitude: 1
-  WarningDuration: 3
-  PushOffsetFromCenter: 5
-  PushForceFactor: 200
-  PushTorqueMagnitude: 50
-  ShrinkSpeed: .5
-  ShrinkExtraDistance: 10
-  EarlyPushFactor: .800000012
+  InsideMargin: 5
+  OutsideMargin: 5
+  PushInForce: 200
+  PushInTorque: 100
   LerpingFactor: 10
 --- !u!114 &11486820
 MonoBehaviour:
