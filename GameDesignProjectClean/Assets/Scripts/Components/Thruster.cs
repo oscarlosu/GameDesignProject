@@ -256,13 +256,16 @@ public class Thruster : Module
             // DEBUG: Change sprite colour, when power is larger than 0.
             GetComponent<SpriteRenderer>().color = powerTotal > 0 ? Color.magenta : Color.white;
             Core.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up) * ThrustPower * (powerTotal), transform.position);
-            if(powerTotal > 0 && !childParticles[0].isPlaying)
+            if (childParticles.Length > 0)
             {
-                Debug.Log("analoge stick");
-                for (int i = 0; i < childParticles.Length; i++)
+                if (powerTotal > 0 && !childParticles[0].isPlaying)
                 {
+                    Debug.Log("analoge stick");
+                    for (int i = 0; i < childParticles.Length; i++)
+                    {
 
-                    childParticles[i].Play();
+                        childParticles[i].Play();
+                    }
                 }
             }
         }
