@@ -5,13 +5,19 @@ using UnityEditor;
 [RequireComponent(typeof(AudioSource))]
 public class Thruster : Module
 {
-
+    private ParticleSystem[] childParticles;
     public float ThrustPower;
 
     // Use this for initialization
     new void Start()
     {
         base.Start();
+        childParticles = gameObject.GetComponentsInChildren<ParticleSystem>();
+        for (int i = 0; i < childParticles.Length; i++)
+        {
+            if (childParticles[i].isPlaying)
+                childParticles[i].Stop();
+        }
     }
 
     public void Update()
@@ -47,6 +53,13 @@ public class Thruster : Module
                 {
                     // DEBUG: Change sprite colour, when deactivating.
                     GetComponent<SpriteRenderer>().color = Color.white;
+                    if (childParticles[0].isPlaying)
+                    {
+                        for (int i = 0; i < childParticles.Length; i++)
+                        {
+                            childParticles[i].Stop();
+                        }
+                    }
                 }
 
                 break;
@@ -62,6 +75,13 @@ public class Thruster : Module
                 {
                     // DEBUG: Change sprite colour, when deactivating.
                     GetComponent<SpriteRenderer>().color = Color.white;
+                    if (childParticles[0].isPlaying)
+                    {
+                        for (int i = 0; i < childParticles.Length; i++)
+                        {
+                            childParticles[i].Stop();
+                        }
+                    }
                 }
                 break;
         }
@@ -252,12 +272,27 @@ public class Thruster : Module
         else
         {
             GetComponent<SpriteRenderer>().color = Color.white;
+            if (childParticles[0].isPlaying)
+            {
+                for (int i = 0; i < childParticles.Length; i++)
+                {
+                    childParticles[i].Stop();
+                }
+            }
         }
     }
 
     public void Activate(float power)
     {
         Core.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up) * ThrustPower * power, transform.position);
+        if (!childParticles[0].isPlaying)
+        {
+            for (int i = 0; i < childParticles.Length; i++)
+            {
+
+                childParticles[i].Play();
+            }
+        }
     }
 }
 
