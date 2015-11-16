@@ -19,6 +19,7 @@ public class CameraHandler : MonoBehaviour
     public float ShrinkSpeed;
     public float ShrinkExtraDistance;
     public float EarlyPushFactor;
+	public float LerpingFactor;
 
     private List<GameObject> ships = new List<GameObject>();
     private Camera cam;
@@ -89,10 +90,14 @@ public class CameraHandler : MonoBehaviour
                 }
                 break;
             case CameraState.Shrink:
-                if (cam.orthographicSize <= MaxSize - ShrinkExtraDistance)
+				/*if (GetMaxAxisDistanceToCamera() <= MaxSize - ShrinkExtraDistance)
                 {
                     state = CameraState.ZoomToFit;
-                }
+                }*/
+				if (cam.orthographicSize <= MaxSize - ShrinkExtraDistance)
+				{
+					state = CameraState.ZoomToFit;
+				}
                 break;
         }
     }
@@ -102,8 +107,10 @@ public class CameraHandler : MonoBehaviour
     private void CenterAndZoomToFit()
     {
         // Update the orthographic size of the camera
-        float targetSize = GetMaxAxisDistanceToCamera() + Margin;
-        cam.orthographicSize = targetSize;
+		float targetSize = GetMaxAxisDistanceToCamera();
+
+        //cam.orthographicSize = targetSize;
+		cam.orthographicSize = Mathf.Lerp (cam.orthographicSize, targetSize, Time.deltaTime * LerpingFactor);
         // Update position of the camera
         Vector3 targetCenter = CameraTargetPosition();
         cam.transform.position = new Vector3(targetCenter.x, targetCenter.y, cam.transform.position.z);
@@ -145,24 +152,38 @@ public class CameraHandler : MonoBehaviour
 
     private float GetMaxAxisDistanceToCamera()
     {
-        float max = - Mathf.Infinity;
+		Vector2 max = new Vector2(MinSize, MinSize);
         for(int index = 0; index < ships.Count; ++index)
         {
             if (ships[index] != null)
             {
-                float val = Mathf.Max(Mathf.Abs(Mathf.Abs(ships[index].transform.position.x) - Mathf.Abs(cam.transform.position.x)),
-                                  Mathf.Abs(Mathf.Abs(ships[index].transform.position.y) - Mathf.Abs(cam.transform.position.y)));
-                if (val > max)
+                float valX = Mathf.Abs(Mathf.Abs(ships[index].transform.position.x) - Mathf.Abs(cam.transform.position.x));
+				float valY = Mathf.Abs(Mathf.Abs(ships[index].transform.position.y) - Mathf.Abs(cam.transform.position.y));
+                if (valX > max.x)
                 {
-                    max = val;
+                    max.x = valX;
                 }
+				if (valY > max.y)
+				{
+					max.y = valY;
+				}
             }
             else
             {
                 ships.RemoveAt(index);
             }
         }
-        return Mathf.Clamp(max, MinSize, Mathf.Infinity);
+
+		float targetSize;
+		if(max.x > max.y)
+		{
+			targetSize = max.x / cam.aspect + Margin;
+		}
+		else
+		{
+			targetSize = max.y + Margin;
+		}
+		return targetSize;
     }
 
     private void Shrink()
