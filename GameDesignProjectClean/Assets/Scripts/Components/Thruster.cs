@@ -53,13 +53,7 @@ public class Thruster : Module
                 {
                     // DEBUG: Change sprite colour, when deactivating.
                     GetComponent<SpriteRenderer>().color = Color.white;
-                    if (childParticles[0].isPlaying)
-                    {
-                        for (int i = 0; i < childParticles.Length; i++)
-                        {
-                            childParticles[i].Stop();
-                        }
-                    }
+                    Deactivate();
                 }
 
                 break;
@@ -75,13 +69,7 @@ public class Thruster : Module
                 {
                     // DEBUG: Change sprite colour, when deactivating.
                     GetComponent<SpriteRenderer>().color = Color.white;
-                    if (childParticles[0].isPlaying)
-                    {
-                        for (int i = 0; i < childParticles.Length; i++)
-                        {
-                            childParticles[i].Stop();
-                        }
-                    }
+                    Deactivate();
                 }
                 break;
         }
@@ -268,17 +256,20 @@ public class Thruster : Module
             // DEBUG: Change sprite colour, when power is larger than 0.
             GetComponent<SpriteRenderer>().color = powerTotal > 0 ? Color.magenta : Color.white;
             Core.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up) * ThrustPower * (powerTotal), transform.position);
+            if(powerTotal > 0 && !childParticles[0].isPlaying)
+            {
+                Debug.Log("analoge stick");
+                for (int i = 0; i < childParticles.Length; i++)
+                {
+
+                    childParticles[i].Play();
+                }
+            }
         }
         else
         {
             GetComponent<SpriteRenderer>().color = Color.white;
-            if (childParticles[0].isPlaying)
-            {
-                for (int i = 0; i < childParticles.Length; i++)
-                {
-                    childParticles[i].Stop();
-                }
-            }
+            Deactivate();
         }
     }
 
@@ -287,11 +278,45 @@ public class Thruster : Module
         Core.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up) * ThrustPower * power, transform.position);
         if (!childParticles[0].isPlaying)
         {
+            Debug.Log("activate function");
             for (int i = 0; i < childParticles.Length; i++)
             {
-
                 childParticles[i].Play();
             }
+        }
+    }
+
+    void Deactivate()
+    {
+        bool input = false;
+        switch (InputType)
+        {
+            case InputKeyType.Button:
+                if (GamePad.GetButton(ButtonKey, Core.GetComponent<Core>().ControllerIndex))
+                    input = true;
+                break;
+            case InputKeyType.Trigger:
+                var value = GamePad.GetTrigger(TriggerKey, Core.GetComponent<Core>().ControllerIndex);
+                if (value > 0)
+                    input = true;
+                break;
+            default:
+                Debug.LogError("AAAARRRGGGHHHH");
+                break;
+        }
+        Vector2 leftStickValue = GamePad.GetAxis(GamePad.Axis.LeftStick, Core.GetComponent<Core>().ControllerIndex);
+        if (leftStickValue.magnitude > 0.2f)
+        {
+            input = true;
+        }
+
+        if (!input)
+        {
+            for (int i = 0; i < childParticles.Length; i++)
+            {
+                childParticles[i].Stop();
+            }
+
         }
     }
 }
