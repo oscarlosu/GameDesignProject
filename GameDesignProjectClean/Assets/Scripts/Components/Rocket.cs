@@ -7,7 +7,7 @@ public class Rocket : Projectile
 {
     public float ThrustPower;
     public float ThrusterDuration;
-    public float GracePeriod; // TODO Not used for anything yet...
+    public float GracePeriod;
 
     public GameObject ExplosionPrefab;
 

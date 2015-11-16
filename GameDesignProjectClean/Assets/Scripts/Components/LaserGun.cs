@@ -99,7 +99,7 @@ public class LaserGun : Module
         Vector2 sprSize = laser.GetComponent<SpriteRenderer>().sprite.bounds.size;
         Vector2 size = new Vector2(scale.x * sprSize.x, scale.y * sprSize.y);
         //Debug.Log("LaserSize = " + size);
-        laser.transform.position += laser.transform.up * size.y / 2;
+        laser.transform.position += laser.transform.up * 0.5f;
         // Save source structure
         laser.GetComponent<Laser>().SourceStructure = transform.parent.gameObject;
         laser.GetComponent<Laser>().SourceCore = Core;
