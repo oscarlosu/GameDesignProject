@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using ADBannerView = UnityEngine.iOS.ADBannerView;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
@@ -32,14 +30,19 @@ public class Rocket : Projectile
         // Handle thruster
         if (elapsedTime <= ThrusterDuration)
         {
-            
-            rb.AddForceAtPosition(transform.up * ThrustPower, transform.position);
+
+            rb.AddForceAtPosition(transform.up*ThrustPower, transform.position);
+        }
+        else
+        {
+            GetComponent<AudioSource>().Stop();
         }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (elapsedTime >= GracePeriod)
+        // The grace period should only make the missiles not hurt their own ship
+        if (elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceCore.GetInstanceID())
         {
             // Create the explosion, when the rocket is destroyed. The explosion should be the one doing the damage.
             // When destroyed, create an explosion, which damages objects around it.

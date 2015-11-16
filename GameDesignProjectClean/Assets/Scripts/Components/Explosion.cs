@@ -20,13 +20,17 @@ public class Explosion : MonoBehaviour
             // Make ship take damage.
             Structure str = other.gameObject.GetComponent<Structure>();
             str.TakeDamage(Damage);
+            str.Core.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up) * PushForce, transform.position);
         }
         else if (other.gameObject.tag == GlobalValues.AsteroidTag)
         {
-            //other.gameObject.GetComponent<Asteroid>().Breakdown();
+            other.gameObject.GetComponent<Asteroid>().Breakdown();
         }
-
-        other.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up)*PushForce, transform.position);
+        else if (other.GetComponent<Rigidbody2D>() != null)
+        {
+            
+            other.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up) * PushForce, transform.position);
+        }
     }
 
     private void DestroyExplosion()
