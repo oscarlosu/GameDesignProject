@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(BoxCollider2D))]
-[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof (Rigidbody2D))]
+[RequireComponent(typeof (BoxCollider2D))]
+[RequireComponent(typeof (AudioSource))]
 public class HomingMissile : Projectile
 {
     public float ThrusterActivateAt; // The thruser activates after this time period.
@@ -21,12 +21,12 @@ public class HomingMissile : Projectile
     public GameObject Target;
     private int newTargetCount; // How many times a new target has been found.
     private float timeSinceLastTarget;
-    
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         this.GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
-		this.GetComponent<AudioSource>().volume = Random.Range(0.9f, 1.1f);
+        this.GetComponent<AudioSource>().volume = Random.Range(0.9f, 1.1f);
     }
 
     // Update is called once per frame
@@ -37,7 +37,7 @@ public class HomingMissile : Projectile
         // Handle thruster
         if (elapsedTime >= ThrusterActivateAt && elapsedTime <= ThrusterDuration + ThrusterActivateAt)
         {
-            rb.AddForceAtPosition(transform.up * ThrustPower, transform.position);
+            rb.AddForceAtPosition(transform.up*ThrustPower, transform.position);
 
             // Select target if no target present.
             if (Target == null)
@@ -48,7 +48,7 @@ public class HomingMissile : Projectile
             {
                 // Handle turning.
                 Vector3 moveDirection = Target.transform.position - transform.position;
-                float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg - 90;
+                float angle = Mathf.Atan2(moveDirection.y, moveDirection.x)*Mathf.Rad2Deg - 90;
                 var rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotation, TurnSpeed);
             }
@@ -90,6 +90,24 @@ public class HomingMissile : Projectile
     }
 
     void OnCollisionEnter2D(Collision2D other)
+    {
+        if (elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceCore.GetInstanceID())
+        {
+            Debug.Log("Homing missile detected collision with " + other.gameObject.name);
+            Activate();
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceCore.GetInstanceID())
+        {
+            Debug.Log("Homing missile trigger detected collision with " + other.gameObject.name);
+            Activate();
+        }
+    }
+
+    void Activate()
     {
         // When destroyed, create an explosion, which damages objects around it.
         var explosion = GameObject.Instantiate(ExplosionPrefab);

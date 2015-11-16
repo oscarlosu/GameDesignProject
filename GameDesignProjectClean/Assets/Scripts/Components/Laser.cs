@@ -38,6 +38,7 @@ public class Laser : Projectile
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("Laser detected collision with " + other.gameObject.name);
         if (other.gameObject.tag == GlobalValues.StructureTag && other.gameObject != SourceStructure)
         {            
             // Make ship lose hp
@@ -48,7 +49,8 @@ public class Laser : Projectile
         else if (other.gameObject.tag == GlobalValues.AsteroidTag)
         {
             // TODO Make it collide with asteroid.
-            //other.gameObject.GetComponent<Asteroid>().Breakdown();            
+            other.gameObject.GetComponent<Asteroid>().Breakdown();            
         }
+
     }
 }
