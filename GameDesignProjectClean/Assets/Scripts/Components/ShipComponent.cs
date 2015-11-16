@@ -29,6 +29,7 @@ public class ShipComponentEditor : Editor
         EditorGUILayout.LabelField("Ship component settings", heading);
 
         component.ComponentName = EditorGUILayout.TextField("Component name", component.ComponentName);
+        component.Mass = EditorGUILayout.IntField("Mass", component.Mass);
         component.BuilderSprite = (Sprite)EditorGUILayout.ObjectField("Builder sprite", component.BuilderSprite, typeof(Sprite), false);
 
         // Add a separator between the component settings and the settings of the actual component.

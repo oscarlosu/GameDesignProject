@@ -5,7 +5,7 @@ public class CameraZoomToFit : MonoBehaviour {
     public Transform ship1;
     public Transform ship2;
     private float zOffset = 0.0f;
-    private Camera camera;
+    private Camera cam;
 
     public AnimationCurve cameraScale = new AnimationCurve() { keys = new Keyframe[] { new Keyframe(0, 0), new Keyframe(50, 25) } };
     public AnimationCurve cameraScaleY = new AnimationCurve() { keys = new Keyframe[] { new Keyframe(0, 0), new Keyframe(50, 25) } };
@@ -13,7 +13,7 @@ public class CameraZoomToFit : MonoBehaviour {
     void Start()
     {
         zOffset = transform.position.z;
-        camera = this.GetComponent<Camera>();
+        cam = this.GetComponent<Camera>();
     }
 
     void Update()
@@ -31,6 +31,6 @@ public class CameraZoomToFit : MonoBehaviour {
         else
             desiredSize = cameraScaleY.Evaluate(Vector3.Distance(ship1.position, ship2.position));
 
-        camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, desiredSize, Time.deltaTime * 3);
+        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, desiredSize, Time.deltaTime * 3);
     }
 }

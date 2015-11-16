@@ -48,10 +48,10 @@ public class BuilderHandler : MonoBehaviour
 
                 // Check if there is something in the grid at that position and if it is an available position (for building).
                 if (Get((int)cellPos.x, (int)cellPos.y) != null &&
-                    Get((int)cellPos.x, (int)cellPos.y).tag == "AvailablePos")
+                    Get((int)cellPos.x, (int)cellPos.y).tag == GlobalValues.AvailablePosTag)
                 {
                     // Deselect all the available positions.
-                    foreach (var availablePos in GameObject.FindGameObjectsWithTag("AvailablePos"))
+                    foreach (var availablePos in GameObject.FindGameObjectsWithTag(GlobalValues.AvailablePosTag))
                     {
                         availablePos.GetComponent<AvailableBuildPos>().Deselect();
                     }
@@ -75,7 +75,7 @@ public class BuilderHandler : MonoBehaviour
 
                 // If clicking on a component, rotate it.
                 if (Get((int)cellPos.x, (int)cellPos.y) != null &&
-                    Get((int)cellPos.x, (int)cellPos.y).tag == "Module")
+                    Get((int)cellPos.x, (int)cellPos.y).tag == GlobalValues.ModuleTag)
                 {
                     RotateModule((int)cellPos.x, (int)cellPos.y, 0);
                 }
@@ -88,8 +88,8 @@ public class BuilderHandler : MonoBehaviour
                 var cellPos = TranslatePosToCell(mousePos.x, mousePos.y);
 
                 if (Get((int)cellPos.x, (int)cellPos.y) != null &&
-                    Get((int)cellPos.x, (int)cellPos.y).tag != "AvailablePos" &&
-                    Get((int)cellPos.x, (int)cellPos.y).tag != "Ship")
+                    Get((int)cellPos.x, (int)cellPos.y).tag != GlobalValues.AvailablePosTag &&
+                    Get((int)cellPos.x, (int)cellPos.y).tag != GlobalValues.ShipTag)
                 {
                     RemoveObject((int)cellPos.x, (int)cellPos.y);
                 }

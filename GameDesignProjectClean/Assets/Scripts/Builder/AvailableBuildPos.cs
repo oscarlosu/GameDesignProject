@@ -11,7 +11,7 @@ public class AvailableBuildPos : MonoBehaviour
     public BuilderHandler BuilderHandler;
     public Camera Cam;
 
-    private bool selected = false;
+    //private bool selected = false;
     
 	// Use this for initialization
 	void Start ()
@@ -103,13 +103,13 @@ public class AvailableBuildPos : MonoBehaviour
 
     public void Select()
     {
-        selected = true;
+        //selected = true;
         GetComponent<SpriteRenderer>().color = Color.blue;
     }
 
     public void Deselect()
     {
-        selected = false;
+        //selected = false;
         GetComponent<SpriteRenderer>().color = Color.white;
     }
 }

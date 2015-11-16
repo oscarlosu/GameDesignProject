@@ -37,7 +37,7 @@ public class ArmorEditor : ModuleEditor
         // Take the module inspector.
         base.OnInspectorGUI();
 
-        Armor armor = (Armor)target;
+        //Armor armor = (Armor)target;
 
         // Selector for projectile prefab
 

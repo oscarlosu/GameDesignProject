@@ -43,7 +43,7 @@ MonoBehaviour:
   ComponentName: Armor
   BuilderSprite: {fileID: 21300000, guid: c5e46c01c05204f4f99b3fa8b64f823e, type: 3}
   Core: {fileID: 0}
-  Mass: 0
+  Mass: 2
   InputType: 0
   ButtonKey: 0
   TriggerKey: 0

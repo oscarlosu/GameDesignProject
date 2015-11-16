@@ -21,7 +21,7 @@ public class CameraHandler : MonoBehaviour
     public float EarlyPushFactor;
 
     private List<GameObject> ships = new List<GameObject>();
-    private Camera camera;
+    private Camera cam;
 
     private enum CameraState
     {
@@ -36,7 +36,7 @@ public class CameraHandler : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        camera = GetComponent<Camera>();
+        cam = GetComponent<Camera>();
         ships = GameObject.FindGameObjectsWithTag(GlobalValues.ShipTag).OfType<GameObject>().ToList();
         state = CameraState.ZoomToFit;
         elapsedTime = 0;
@@ -73,13 +73,13 @@ public class CameraHandler : MonoBehaviour
         switch(state)
         {
             case CameraState.ZoomToFit:
-                if(camera.orthographicSize > MaxSize)
+                if(cam.orthographicSize > MaxSize)
                 {
                     state = CameraState.Warning;
                 }
                 break;
             case CameraState.Warning:
-                if(camera.orthographicSize <= MaxSize)
+                if(cam.orthographicSize <= MaxSize)
                 {
                     state = CameraState.ZoomToFit;
                 }
@@ -89,7 +89,7 @@ public class CameraHandler : MonoBehaviour
                 }
                 break;
             case CameraState.Shrink:
-                if (camera.orthographicSize <= MaxSize - ShrinkExtraDistance)
+                if (cam.orthographicSize <= MaxSize - ShrinkExtraDistance)
                 {
                     state = CameraState.ZoomToFit;
                 }
@@ -103,10 +103,10 @@ public class CameraHandler : MonoBehaviour
     {
         // Update the orthographic size of the camera
         float targetSize = GetMaxAxisDistanceToCamera() + Margin;
-        camera.orthographicSize = targetSize;
+        cam.orthographicSize = targetSize;
         // Update position of the camera
         Vector3 targetCenter = CameraTargetPosition();
-        camera.transform.position = new Vector3(targetCenter.x, targetCenter.y, camera.transform.position.z);
+        cam.transform.position = new Vector3(targetCenter.x, targetCenter.y, cam.transform.position.z);
         
     }
 
@@ -133,14 +133,14 @@ public class CameraHandler : MonoBehaviour
         }
         else
         {
-            return camera.transform.position;
+            return cam.transform.position;
         }
     }
 
     private void ShakeCamera()
     {
         Vector3 shakeOffset = Random.insideUnitCircle * Mathf.Lerp(0, CameraShakeMagnitude, elapsedTime / WarningDuration);
-        camera.transform.position += shakeOffset;
+        cam.transform.position += shakeOffset;
     }
 
     private float GetMaxAxisDistanceToCamera()
@@ -150,8 +150,8 @@ public class CameraHandler : MonoBehaviour
         {
             if (ships[index] != null)
             {
-                float val = Mathf.Max(Mathf.Abs(Mathf.Abs(ships[index].transform.position.x) - Mathf.Abs(camera.transform.position.x)),
-                                  Mathf.Abs(Mathf.Abs(ships[index].transform.position.y) - Mathf.Abs(camera.transform.position.y)));
+                float val = Mathf.Max(Mathf.Abs(Mathf.Abs(ships[index].transform.position.x) - Mathf.Abs(cam.transform.position.x)),
+                                  Mathf.Abs(Mathf.Abs(ships[index].transform.position.y) - Mathf.Abs(cam.transform.position.y)));
                 if (val > max)
                 {
                     max = val;
@@ -168,10 +168,10 @@ public class CameraHandler : MonoBehaviour
     private void Shrink()
     {
         // Reduce orthographic size of camera
-        camera.orthographicSize -= ShrinkSpeed;
+        cam.orthographicSize -= ShrinkSpeed;
         // Update position of the camera
         Vector3 targetCenter = CameraTargetPosition();
-        camera.transform.position = new Vector3(targetCenter.x, targetCenter.y, camera.transform.position.z);
+        cam.transform.position = new Vector3(targetCenter.x, targetCenter.y, cam.transform.position.z);
     }
 
     private void KeepShipsInsideViewport()
@@ -188,9 +188,9 @@ public class CameraHandler : MonoBehaviour
 
     private bool IsShipOutsideViewport(GameObject ship)
     {
-        float cameraHalfWidth = camera.aspect * camera.orthographicSize;
-        return Mathf.Abs(ship.transform.position.x - camera.transform.position.x) >= cameraHalfWidth * EarlyPushFactor ||
-               Mathf.Abs(ship.transform.position.y - camera.transform.position.y) >= camera.orthographicSize * EarlyPushFactor;
+        float cameraHalfWidth = cam.aspect * cam.orthographicSize;
+        return Mathf.Abs(ship.transform.position.x - cam.transform.position.x) >= cameraHalfWidth * EarlyPushFactor ||
+               Mathf.Abs(ship.transform.position.y - cam.transform.position.y) >= cam.orthographicSize * EarlyPushFactor;
     }
 
     private void ThrowShip(GameObject ship)
@@ -200,11 +200,11 @@ public class CameraHandler : MonoBehaviour
         ship.GetComponent<Rigidbody2D>().angularVelocity = 0;
         // Add force roughly towaards the center of the viewport
         Vector3 offsetFromCenter = Random.insideUnitCircle * PushOffsetFromCenter;
-        Vector3 squeezeDest = camera.transform.position;
+        Vector3 squeezeDest = cam.transform.position;
         squeezeDest += offsetFromCenter;
         Vector2 direction = squeezeDest - ship.transform.position;
         direction.Normalize();
-        ship.GetComponent<Rigidbody2D>().AddForce(direction * PushForceFactor * camera.orthographicSize);
+        ship.GetComponent<Rigidbody2D>().AddForce(direction * PushForceFactor * cam.orthographicSize);
         // Add torque
         // Positive rotation (counterclockwise)
         if (Random.value >= 0.5f)

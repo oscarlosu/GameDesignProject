@@ -122,7 +122,7 @@ MonoBehaviour:
   SpriteForward: {fileID: 0}
   SpriteSideways: {fileID: 0}
   SpriteDireciton: 0
-  ThrustPower: 5
+  ThrustPower: 8
 --- !u!212 &21276574
 SpriteRenderer:
   m_ObjectHideFlags: 1

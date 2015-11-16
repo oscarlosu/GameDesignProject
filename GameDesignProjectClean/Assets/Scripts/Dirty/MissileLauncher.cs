@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using GamepadInput;
-
+/*
 public class DirtyMissileLauncher : DirtyModule
 {
     public GamePad.Button Button;
@@ -57,3 +57,4 @@ public class DirtyMissileLauncher : DirtyModule
         missile.GetComponent<DirtyProjectile>().SourceShip = Ship;
     }
 }
+*/

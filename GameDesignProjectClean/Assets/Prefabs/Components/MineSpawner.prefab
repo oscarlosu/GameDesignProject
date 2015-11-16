@@ -9,9 +9,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 495076}
   - 212: {fileID: 21272118}
-  - 114: {fileID: 11411668}
+  - 114: {fileID: 11479908}
   m_Layer: 0
-  m_Name: RocketLauncher
+  m_Name: MineSpawner
   m_TagString: Module
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11411668
+--- !u!114 &11479908
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -37,24 +37,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 195576}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b8f05e22d0de04459fcfa6e821ede20, type: 3}
+  m_Script: {fileID: 11500000, guid: 86febddc67388684e99d645fc1836fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ComponentName: Rocket
-  BuilderSprite: {fileID: 21300000, guid: 5484d64469aacc64c8e3dcc868c6310d, type: 3}
+  ComponentName: Mine spawner
+  BuilderSprite: {fileID: 21300000, guid: 4ddbfbf56ffd28c43bd9d12fb1787957, type: 3}
   Core: {fileID: 0}
-  Mass: 0
+  Mass: 1
   InputType: 0
   ButtonKey: 0
   TriggerKey: 0
-  CanSpriteRotate: 1
-  SpriteForward: {fileID: 21300000, guid: 5484d64469aacc64c8e3dcc868c6310d, type: 3}
-  SpriteSideways: {fileID: 21300000, guid: 39aa9a0e820e7ff4da306835324c0f2d, type: 3}
+  CanSpriteRotate: 0
+  SpriteForward: {fileID: 0}
+  SpriteSideways: {fileID: 0}
   SpriteDireciton: 0
-  RocketPrefab: {fileID: 155838, guid: 05c2b4bd33473584d9d05b83800dc634, type: 2}
-  Cooldown: 1
-  RocketLaunchSpeed: 3
-  RocketLaunchPosOffset: .5
+  MinePrefab: {fileID: 155838, guid: a749b9803894116428f767a7635d7b5a, type: 2}
+  SpawnOffset: .200000003
+  Cooldown: 2
 --- !u!212 &21272118
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -79,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5484d64469aacc64c8e3dcc868c6310d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4ddbfbf56ffd28c43bd9d12fb1787957, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -103,7 +102,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 5484d64469aacc64c8e3dcc868c6310d,
+      objectReference: {fileID: 21300000, guid: 4ddbfbf56ffd28c43bd9d12fb1787957,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

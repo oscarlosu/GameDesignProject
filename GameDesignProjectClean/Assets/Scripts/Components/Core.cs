@@ -16,8 +16,6 @@ public class Core : Structure
         base.Start();
         // Add core and structure mass to rigidbody
         Core = this.gameObject;
-        Mass = GlobalValues.CoreMass;
-        GetComponent<Rigidbody2D>().mass = GlobalValues.CoreMass;
         Assemble();
     }
 
@@ -29,6 +27,8 @@ public class Core : Structure
 
     public void Assemble()
     {
+        // Set initial mass to core mass.
+        GetComponent<Rigidbody2D>().mass = Mass;
         // Retrieve all children
         List<GameObject> children = RetrieveChildren(gameObject);
         // Set itself as the ship of each component
@@ -36,6 +36,7 @@ public class Core : Structure
         {
             if(child.GetComponent<ShipComponent>() != null)
             {
+                Debug.Log("ShipComponend mass: " + child.GetComponent<ShipComponent>().Mass);
                 child.GetComponent<ShipComponent>().Core = gameObject;
                 GetComponent<Rigidbody2D>().mass += child.GetComponent<ShipComponent>().Mass;                
             }
