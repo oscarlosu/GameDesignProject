@@ -75,12 +75,8 @@ public class Module : ShipComponent
 public class ModuleEditor : ShipComponentEditor
 {
 
-    public override void OnInspectorGUI()
+    protected new void DrawCustomInspector()
     {
-
-        // The component GUI.
-        base.OnInspectorGUI();
-
         Module module = (Module)target;
 
         // Create a heading.
@@ -101,6 +97,7 @@ public class ModuleEditor : ShipComponentEditor
         }
         // Select if the module can rotate (has more than one sprite direction).
         module.CanSpriteRotate = EditorGUILayout.Toggle("Can sprite rotate", module.CanSpriteRotate);
+        EditorGUILayout.HelpBox("Can sprite rotate should be true, if the modules needs extra sprites for the rotation.", MessageType.Info);
         // If it can rotate, also show sprite variables.
         if (module.CanSpriteRotate)
         {
@@ -115,6 +112,15 @@ public class ModuleEditor : ShipComponentEditor
         if (GUI.changed)
         {
             EditorUtility.SetDirty(target);
+        }
+    }
+
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        if (CustomInspectorOpen)
+        {
+            DrawCustomInspector();
         }
     }
 }

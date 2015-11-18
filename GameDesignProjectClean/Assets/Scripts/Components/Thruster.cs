@@ -332,11 +332,8 @@ public class Thruster : Module
 public class ThrusterEditor : ModuleEditor
 {
 
-    public override void OnInspectorGUI()
+    public new void DrawCustomInspector()
     {
-        // Display the module's settings.
-        base.OnInspectorGUI();
-
         // Create heading.
         GUIStyle heading = new GUIStyle { fontSize = 14 };
         EditorGUILayout.LabelField("Thrusters settings", heading);
@@ -349,6 +346,15 @@ public class ThrusterEditor : ModuleEditor
         if (GUI.changed)
         {
             EditorUtility.SetDirty(target);
+        }
+    }
+
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        if (CustomInspectorOpen)
+        {
+            DrawCustomInspector();
         }
     }
 }

@@ -124,11 +124,8 @@ public class LaserGun : Module
 public class LaserGunEditor : ModuleEditor
 {
 
-    public override void OnInspectorGUI()
+    public new void DrawCustomInspector()
     {
-        // Take the module inspector.
-        base.OnInspectorGUI();
-
         LaserGun laserGun = (LaserGun)target;
 
         // Selector for projectile prefab
@@ -141,6 +138,14 @@ public class LaserGunEditor : ModuleEditor
         laserGun.MaxLaserBreadth = EditorGUILayout.FloatField("Max laser breadth", laserGun.MaxLaserBreadth);
         laserGun.MinLaserLength = EditorGUILayout.FloatField("Min laser length", laserGun.MinLaserLength);
         laserGun.MaxLaserLength = EditorGUILayout.FloatField("Max laser length", laserGun.MaxLaserLength);
+    }
 
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        if (CustomInspectorOpen)
+        {
+            DrawCustomInspector();
+        }
     }
 }

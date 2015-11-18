@@ -67,11 +67,8 @@ public class Core : Structure
 public class CoreEditor : StructureEditor
 {
 
-    public override void OnInspectorGUI()
+    protected new void DrawCustomInspector()
     {
-        // Display the module's settings.
-        base.OnInspectorGUI();
-
         // Create heading.
         GUIStyle heading = new GUIStyle { fontSize = 14 };
         EditorGUILayout.LabelField("Core settings", heading);
@@ -84,6 +81,15 @@ public class CoreEditor : StructureEditor
         if (GUI.changed)
         {
             EditorUtility.SetDirty(target);
+        }
+    }
+
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        if (CustomInspectorOpen)
+        {
+            DrawCustomInspector();
         }
     }
 }

@@ -19,8 +19,9 @@ public class ShipComponent : MonoBehaviour
 [CustomEditor(typeof(ShipComponent), true)]
 public class ShipComponentEditor : Editor
 {
+    protected bool DefaultInspectorOpen, CustomInspectorOpen;
 
-    public override void OnInspectorGUI()
+    protected void DrawCustomInspector()
     {
         ShipComponent component = (ShipComponent)target;
 
@@ -31,9 +32,22 @@ public class ShipComponentEditor : Editor
         component.ComponentName = EditorGUILayout.TextField("Component name", component.ComponentName);
         component.Mass = EditorGUILayout.IntField("Mass", component.Mass);
         component.BuilderSprite = (Sprite)EditorGUILayout.ObjectField("Builder sprite", component.BuilderSprite, typeof(Sprite), false);
+    }
 
-        // Add a separator between the component settings and the settings of the actual component.
-        EditorGUILayout.Separator();
+    public override void OnInspectorGUI()
+    {
+
+        DefaultInspectorOpen = EditorGUILayout.Foldout(DefaultInspectorOpen, "Default inspector (Hardcore mode)");
+        if (DefaultInspectorOpen)
+        {
+            DrawDefaultInspector();
+        }
+
+        CustomInspectorOpen = EditorGUILayout.Foldout(CustomInspectorOpen, "Custom inspector (Easy mode)");
+        if (CustomInspectorOpen)
+        {
+            DrawCustomInspector();
+        }
 
         // If anything was changed, set the object to dirty, so Unity will save the values.
         if (GUI.changed)
