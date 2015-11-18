@@ -32,14 +32,4 @@ public class Armor : Module
 public class ArmorEditor : ModuleEditor
 {
 
-    public override void OnInspectorGUI()
-    {
-        // Take the module inspector.
-        base.OnInspectorGUI();
-
-        //Armor armor = (Armor)target;
-
-        // Selector for projectile prefab
-
-    }
 }

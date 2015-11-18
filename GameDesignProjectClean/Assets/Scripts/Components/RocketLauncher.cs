@@ -89,11 +89,8 @@ public class RocketLauncher : Module
 public class RocketLauncherEditor : ModuleEditor
 {
 
-    public override void OnInspectorGUI()
+    public new void DrawCustomInspector()
     {
-        // Take the module inspector.
-        base.OnInspectorGUI();
-
         RocketLauncher launcher = (RocketLauncher)target;
 
         // Selector for projectile prefab
@@ -103,5 +100,14 @@ public class RocketLauncherEditor : ModuleEditor
         launcher.RocketLaunchSpeed = EditorGUILayout.FloatField("Rocket launch speed", launcher.RocketLaunchSpeed);
         launcher.RocketLaunchPosOffset = EditorGUILayout.FloatField("Rocket launch offset", launcher.RocketLaunchPosOffset);
 
+    }
+
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        if (CustomInspectorOpen)
+        {
+            DrawCustomInspector();
+        }
     }
 }

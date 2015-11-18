@@ -170,23 +170,29 @@ public class Structure : ShipComponent
 public class StructureEditor : ShipComponentEditor
 {
 
-    public override void OnInspectorGUI()
+    protected new void DrawCustomInspector()
     {
-        // Display the module's settings.
-        base.OnInspectorGUI();
-
         // Create heading.
         GUIStyle heading = new GUIStyle { fontSize = 14 };
         EditorGUILayout.LabelField("Structure settings", heading);
 
         // Get target and show/edit fields.
         Structure t = (Structure)target;
-        t.MaxHp = EditorGUILayout.IntField("Hp", t.MaxHp);
+        t.MaxHp = EditorGUILayout.IntField("Max HP", t.MaxHp);
 
         // If the target was changed, set the target to dirty, so Unity will save the values.
         if (GUI.changed)
         {
             EditorUtility.SetDirty(target);
+        }
+    }
+
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        if (CustomInspectorOpen)
+        {
+            DrawCustomInspector();
         }
     }
 }
