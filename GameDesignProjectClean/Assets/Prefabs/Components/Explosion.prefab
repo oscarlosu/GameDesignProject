@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 1
-  PushForce: 2
+  PushForce: 500
 --- !u!212 &21270900
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -210,7 +210,7 @@ Prefab:
       objectReference: {fileID: 8300000, guid: c919b2d876c6d4ce6a458dc1ae593938, type: 3}
     - target: {fileID: 0}
       propertyPath: PushForce
-      value: 2
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

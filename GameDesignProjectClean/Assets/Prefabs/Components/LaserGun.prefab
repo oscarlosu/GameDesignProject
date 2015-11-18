@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 402072}
   - 212: {fileID: 21274370}
   - 114: {fileID: 11470398}
+  - 61: {fileID: 6178200}
   m_Layer: 0
   m_Name: LaserGun
   m_TagString: Module
@@ -24,11 +25,24 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 139010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.27999973, y: -3.38000011, z: 0}
+  m_LocalPosition: {x: 30.6177006, y: 7.36707354, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!61 &6178200
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139010}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -1.90734863e-06, y: .207653999}
+  serializedVersion: 2
+  m_Size: {x: .41590625, y: .927308083}
 --- !u!114 &11470398
 MonoBehaviour:
   m_ObjectHideFlags: 1

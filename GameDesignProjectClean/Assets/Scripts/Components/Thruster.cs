@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using GamepadInput;
 using UnityEditor;
 
@@ -322,6 +323,13 @@ public class Thruster : Module
 
         }
     }
+
+	public IEnumerator Disable(float time)
+	{
+		enabled = false;
+		yield return new WaitForSeconds(time);
+		enabled = true;
+	}
 }
 
 /****************

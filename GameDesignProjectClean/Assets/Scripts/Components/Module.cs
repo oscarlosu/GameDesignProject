@@ -78,7 +78,7 @@ public class ModuleEditor : ShipComponentEditor
     public override void OnInspectorGUI()
     {
 
-        // The component GUI.
+        // The structure GUI.
         base.OnInspectorGUI();
 
         Module module = (Module)target;
@@ -109,7 +109,10 @@ public class ModuleEditor : ShipComponentEditor
         }
 
         // Add a separator between the module settings and the settings of the actual module.
-        EditorGUILayout.Separator();
+        //EditorGUILayout.Separator();
+
+
+		DrawDefaultInspector ();
 
         // If anything was changed, set the object to dirty, so Unity will save the values.
         if (GUI.changed)

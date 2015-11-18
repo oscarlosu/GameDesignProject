@@ -77,7 +77,7 @@ public class Structure : ShipComponent
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-		Debug.LogWarning("Ship collided with something");
+		Debug.LogWarning(Core.name + " OnCollisionEnter2D");
         // Only "crash" if the force with which the objects hit each other is large enough.
         if (coll.relativeVelocity.magnitude > GlobalValues.MinCrashMagnitude)
         {
@@ -91,16 +91,14 @@ public class Structure : ShipComponent
         }
     }
 
-	void OnTriggerStay2D(Collider2D col)
+/*	void OnTriggerEnter2D(Collider2D col)
 	{
-		Debug.LogWarning("Ship collided with something");
-		// If the other object has a higher mass, lose one random module.
-		if (col.attachedRigidbody.mass >= Core.GetComponent<Rigidbody2D>().mass)
+		Debug.LogWarning(Core.name + " detected a trigger!");
+		if (col.gameObject.GetComponent<Laser>() != null)
 		{
 			TakeDamage(GlobalValues.CrashDamage);
-			Debug.LogWarning("Ship " + gameObject.name + " collided with something with greater or equal mass.");
 		}
-	}
+	}*/
 
     private void LoseModule(List<Module> modules)
     {

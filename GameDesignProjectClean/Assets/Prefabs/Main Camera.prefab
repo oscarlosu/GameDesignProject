@@ -141,7 +141,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 30
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -243,12 +243,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxSize: 20
-  MinSize: 5
+  MinSize: 10
   InsideMargin: 5
-  OutsideMargin: 5
-  PushInForce: 200
+  OutsideMargin: 0
+  PushInForce: 3000
   PushInTorque: 100
-  LerpingFactor: 10
+  ThrusterDisableTime: .5
+  cameraScale:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!114 &11486820
 MonoBehaviour:
   m_ObjectHideFlags: 1

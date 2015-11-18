@@ -13,8 +13,9 @@ public class CameraHandler : MonoBehaviour
 
 	public float PushInForce;
     public float PushInTorque;
+	public float ThrusterDisableTime;
 
-	public float LerpingFactor;
+	public AnimationCurve CameraScaleGraph = new AnimationCurve() { keys = new Keyframe[] { new Keyframe(0, 0), new Keyframe(20, 20) } };
 
     private List<GameObject> ships = new List<GameObject>();
     private Camera cam;
@@ -33,27 +34,21 @@ public class CameraHandler : MonoBehaviour
 		// Update the ship list
 		ships = GameObject.FindGameObjectsWithTag(GlobalValues.ShipTag).OfType<GameObject>().ToList();
 		// Only zoom to fit if the camera size is below the maximum size
-		if(cam.orthographicSize < MaxSize)
-		{
-			CenterAndZoomToFit();
-		}
-		else
-		{
-			KeepShipsInsideViewport();
-		}
-
+		CenterAndZoomToFit();
+		KeepShipsInsideViewport();
     }
 
     private void CenterAndZoomToFit()
     {
         // Update the orthographic size of the camera
-		float targetSize = GetMaxAxisDistanceToCamera();
-
-        cam.orthographicSize = targetSize;
-		//cam.orthographicSize = Mathf.Lerp (cam.orthographicSize, targetSize, Time.deltaTime * LerpingFactor);
+		float maxAxisDistance = GetMaxAxisDistanceToCamera() + InsideMargin;
+		cam.orthographicSize = CameraScaleGraph.Evaluate(maxAxisDistance);
+		//cam.orthographicSize = Mathf.Clamp (maxAxisDistance, MinSize, MaxSize);
+		//cam.orthographicSize = Mathf.Lerp (cam.orthographicSize, maxAxisDistance, Time.deltaTime * LerpingFactor);
         // Update position of the camera
         Vector3 targetCenter = CameraTargetPosition();
-        cam.transform.position = new Vector3(targetCenter.x, targetCenter.y, cam.transform.position.z);
+		targetCenter.z = cam.transform.position.z;
+		cam.transform.position = Vector3.Lerp(cam.transform.position, targetCenter, Time.deltaTime);
         
     }
 
@@ -107,15 +102,17 @@ public class CameraHandler : MonoBehaviour
                 ships.RemoveAt(index);
             }
         }
-
+		// Scale x axis with the aspect ratio
+		max.x = max.x / cam.aspect;
+		// Take the greatest value
 		float targetSize;
 		if(max.x > max.y)
 		{
-			targetSize = max.x / cam.aspect + InsideMargin;
+			targetSize = max.x;
 		}
 		else
 		{
-			targetSize = max.y + InsideMargin;
+			targetSize = max.y;
 		}
 		return targetSize;
     }
@@ -159,5 +156,12 @@ public class CameraHandler : MonoBehaviour
         {
             ship.GetComponent<Rigidbody2D>().AddTorque(-Random.Range(0.5f, 1) * PushInTorque, ForceMode2D.Impulse);
         }
+		// Disable ship's thrusters for DisableTime seconds
+		Thruster[] thrusters = ship.GetComponentsInChildren<Thruster>();
+		foreach(Thruster t in thrusters)
+		{
+			StartCoroutine(t.Disable(ThrusterDisableTime));
+		}
+
     }    
 }
