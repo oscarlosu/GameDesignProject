@@ -25,7 +25,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195576}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.4890881, y: 7.16427612, z: 0}
+  m_LocalPosition: {x: -8.84126854, y: -2.46837449, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -40,9 +40,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: .0132217407, y: -.00440835953}
+  m_Offset: {x: -.0218105316, y: -.0681045055}
   serializedVersion: 2
-  m_Size: {x: .681921363, y: .382132769}
+  m_Size: {x: 1.12142527, y: 1.13374865}
 --- !u!114 &11455930
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -55,7 +55,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ComponentName: Armor
-  BuilderSprite: {fileID: 21300000, guid: c5e46c01c05204f4f99b3fa8b64f823e, type: 3}
+  BuilderSprite: {fileID: 21300000, guid: 2206ea89ca6aa0541b5caace84f6c417, type: 3}
   Core: {fileID: 0}
   Mass: 2
   InputType: 0
@@ -89,7 +89,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c5e46c01c05204f4f99b3fa8b64f823e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2206ea89ca6aa0541b5caace84f6c417, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -113,7 +113,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c5e46c01c05204f4f99b3fa8b64f823e,
+      objectReference: {fileID: 21300000, guid: 2206ea89ca6aa0541b5caace84f6c417,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

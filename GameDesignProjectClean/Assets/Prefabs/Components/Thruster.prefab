@@ -172,15 +172,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ComponentName: Thruster
-  BuilderSprite: {fileID: 21300000, guid: 150888e0ce0977848814cc76392b894a, type: 3}
+  BuilderSprite: {fileID: 21300000, guid: 70ad43e50e8c87e4eb36505bda7d86b6, type: 3}
   Core: {fileID: 0}
   Mass: 1
   InputType: 1
   ButtonKey: 0
   TriggerKey: 1
-  CanSpriteRotate: 0
-  SpriteForward: {fileID: 0}
-  SpriteSideways: {fileID: 0}
+  CanSpriteRotate: 1
+  SpriteForward: {fileID: 21300000, guid: 70ad43e50e8c87e4eb36505bda7d86b6, type: 3}
+  SpriteSideways: {fileID: 21300000, guid: 67455f3e4cfca594393859a55f8f26e2, type: 3}
   SpriteDireciton: 0
   ThrustPower: 8
 --- !u!198 &19817670
@@ -2365,7 +2365,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 150888e0ce0977848814cc76392b894a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 70ad43e50e8c87e4eb36505bda7d86b6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -2389,7 +2389,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 150888e0ce0977848814cc76392b894a,
+      objectReference: {fileID: 21300000, guid: 70ad43e50e8c87e4eb36505bda7d86b6,
         type: 3}
     - target: {fileID: 0}
       propertyPath: m_audioClip

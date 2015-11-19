@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 495076}
   - 212: {fileID: 21272118}
   - 114: {fileID: 11411668}
-  - 61: {fileID: 6102388}
   m_Layer: 0
   m_Name: RocketLauncher
   m_TagString: Module
@@ -30,19 +29,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!61 &6102388
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 195576}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: -.0220432281, y: .383999825}
-  serializedVersion: 2
-  m_Size: {x: .442357749, y: 1.27999997}
 --- !u!114 &11411668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -55,20 +41,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ComponentName: Rocket
-  BuilderSprite: {fileID: 21300000, guid: 5484d64469aacc64c8e3dcc868c6310d, type: 3}
+  BuilderSprite: {fileID: 21300000, guid: c044709db96e8f34893c31a5a5b7a785, type: 3}
   Core: {fileID: 0}
   Mass: 1
   InputType: 0
   ButtonKey: 0
   TriggerKey: 0
   CanSpriteRotate: 1
-  SpriteForward: {fileID: 21300000, guid: 5484d64469aacc64c8e3dcc868c6310d, type: 3}
-  SpriteSideways: {fileID: 21300000, guid: 39aa9a0e820e7ff4da306835324c0f2d, type: 3}
+  SpriteForward: {fileID: 21300000, guid: c044709db96e8f34893c31a5a5b7a785, type: 3}
+  SpriteSideways: {fileID: 21300000, guid: 132b41595b1b3a64093d70b6eac76462, type: 3}
   SpriteDireciton: 0
   RocketPrefab: {fileID: 155838, guid: 05c2b4bd33473584d9d05b83800dc634, type: 2}
   Cooldown: 1
   RocketLaunchSpeed: 3
-  RocketLaunchPosOffset: .5
+  RocketLaunchPosOffset: 1
 --- !u!212 &21272118
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -93,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5484d64469aacc64c8e3dcc868c6310d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c044709db96e8f34893c31a5a5b7a785, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -117,8 +103,12 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 5484d64469aacc64c8e3dcc868c6310d,
+      objectReference: {fileID: 21300000, guid: c044709db96e8f34893c31a5a5b7a785,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: RocketLaunchPosOffset
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 195576}
