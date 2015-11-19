@@ -91,12 +91,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ComponentName: Core
   BuilderSprite: {fileID: 21300000, guid: a902ef0325da4c2499b96b963896ba04, type: 3}
-  Core: {fileID: 0}
+  ShipCore: {fileID: 0}
   Mass: 4
   MaxHp: 1
   hp: 0
   Anim: {fileID: 9536642}
   ControllerIndex: 0
+  ShipControlMode: 0
+  AngularDragHigh: 5
+  MaxSpinBeforeAngularDrag: 30
 --- !u!212 &21220594
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -173,7 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ComponentName: Thruster
   BuilderSprite: {fileID: 21300000, guid: 70ad43e50e8c87e4eb36505bda7d86b6, type: 3}
-  Core: {fileID: 0}
+  ShipCore: {fileID: 0}
   Mass: 1
   InputType: 1
   ButtonKey: 0
@@ -183,6 +183,8 @@ MonoBehaviour:
   SpriteSideways: {fileID: 21300000, guid: 67455f3e4cfca594393859a55f8f26e2, type: 3}
   SpriteDireciton: 0
   ThrustPower: 8
+  DotMargin: .00999999978
+  CrossMargin: .00999999978
 --- !u!198 &19817670
 ParticleSystem:
   m_ObjectHideFlags: 1
