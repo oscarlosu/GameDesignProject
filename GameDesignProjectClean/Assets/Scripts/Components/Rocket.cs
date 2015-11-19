@@ -52,4 +52,18 @@ public class Rocket : Projectile
             GameObject.Destroy(gameObject);
         }
     }
+
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		// The grace period should only make the missiles not hurt their own ship
+		if (elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceCore.GetInstanceID())
+		{
+			// Create the explosion, when the rocket is destroyed. The explosion should be the one doing the damage.
+			// When destroyed, create an explosion, which damages objects around it.
+			var explosion = GameObject.Instantiate(ExplosionPrefab);
+			explosion.transform.position = transform.position;
+			explosion.GetComponent<Explosion>().Damage = Damage;
+			GameObject.Destroy(gameObject);
+		}
+	}
 }

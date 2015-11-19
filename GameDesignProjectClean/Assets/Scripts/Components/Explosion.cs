@@ -15,23 +15,32 @@ public class Explosion : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == GlobalValues.StructureTag)
+		//Debug.Log ("Explosion detected OnTriggerEnter2D with " + other.gameObject.name);
+		Structure str = other.gameObject.GetComponent<Structure>();
+		Asteroid ast = other.gameObject.GetComponent<Asteroid>();
+        if (str != null)
         {
-            // Make ship take damage.
-            Structure str = other.gameObject.GetComponent<Structure>();
+            // Make ship take damage.            
             str.TakeDamage(Damage);
-            str.Core.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up) * PushForce, transform.position);
+			// Calculate push force direction
+			Vector3 dir = other.transform.position - transform.position;
+			dir.Normalize();
+            str.Core.GetComponent<Rigidbody2D>().AddForceAtPosition(dir * PushForce, transform.position);
         }
-        else if (other.gameObject.tag == GlobalValues.AsteroidTag)
+        else if (ast != null)
         {
             other.gameObject.GetComponent<Asteroid>().Breakdown();
         }
-        else if (other.GetComponent<Rigidbody2D>() != null)
+		// Only affects rigidbodies with a mass 
+		else if (other.GetComponent<Rigidbody2D>() != null && other.GetComponent<Rigidbody2D>().mass > GlobalValues.EffectiveZeroMass)
         {
-            
-            other.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up) * PushForce, transform.position);
+			Vector3 dir = other.transform.position - transform.position;
+			dir.Normalize();
+			other.GetComponent<Rigidbody2D>().AddForceAtPosition(dir * PushForce, transform.position);
         }
     }
+
+
 
     private void DestroyExplosion()
     {

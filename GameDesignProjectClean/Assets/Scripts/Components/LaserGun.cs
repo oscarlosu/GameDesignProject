@@ -12,7 +12,6 @@ public class LaserGun : Module
     public float MinLaserLength, MaxLaserLength;
     public float MinChargeTime, MaxChargeTime;
 
-
     private float elapsedTime;
     private bool ready;
 
@@ -94,11 +93,6 @@ public class LaserGun : Module
         // Calculate breadth and length of laser and scale
         Vector2 scale = calculateLaserScale();
         laser.transform.localScale = scale;
-        //Debug.Log("ScaleFactor = " + scale);
-        // Calculate size of laser and position accordingly
-        Vector2 sprSize = laser.GetComponent<SpriteRenderer>().sprite.bounds.size;
-        Vector2 size = new Vector2(scale.x * sprSize.x, scale.y * sprSize.y);
-        //Debug.Log("LaserSize = " + size);
         laser.transform.position += laser.transform.up * 0.5f;
         // Save source structure
         laser.GetComponent<Laser>().SourceStructure = transform.parent.gameObject;

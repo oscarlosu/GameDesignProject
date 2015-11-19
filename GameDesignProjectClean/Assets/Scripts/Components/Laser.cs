@@ -38,19 +38,44 @@ public class Laser : Projectile
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Laser detected collision with " + other.gameObject.name);
-        if (other.gameObject.tag == GlobalValues.StructureTag && other.gameObject != SourceStructure)
+        Debug.Log("Laser OnTriggerEnter2D with " + other.gameObject.name);
+		Structure str = other.gameObject.GetComponent<Structure>();
+		Asteroid ast = other.gameObject.GetComponent<Asteroid>();
+        if (str != null && other.gameObject != SourceStructure)
         {            
-            // Make ship lose hp
-            Structure str = other.gameObject.GetComponent<Structure>();
-            str.TakeDamage(Damage);
-            
+            // Make ship lose hp            
+            str.TakeDamage(Damage);            
         }
-        else if (other.gameObject.tag == GlobalValues.AsteroidTag)
+        else if (ast != null)
         {
-            // TODO Make it collide with asteroid.
-            other.gameObject.GetComponent<Asteroid>().Breakdown();            
+			// Make asteroid break into pieces
+            ast.Breakdown();            
         }
-
+		else
+		{
+			Debug.Log("Laser OnTriggerEnter2D with UNEXPECTED ENTITY: " + other.gameObject.name);
+		}
     }
+
+	void OnCollisionEnter2D(Collision2D coll)
+	{
+		Debug.Log("Laser OnCollisionEnter2D with " + coll.gameObject.name);
+		Structure str = coll.gameObject.GetComponent<Structure>();
+		Asteroid ast = coll.gameObject.GetComponent<Asteroid>();
+		if (str != null && coll.gameObject != SourceStructure)
+		{            
+			// Make ship lose hp
+			str.TakeDamage(Damage);
+			
+		}
+		else if (ast != null)
+		{
+			// Make asteroid break into pieces
+			ast.Breakdown();            
+		}
+		else
+		{
+			Debug.Log("Laser OnCollisionEnter2D with UNEXPECTED ENTITY: " + coll.gameObject.name);
+		}
+	}
 }
