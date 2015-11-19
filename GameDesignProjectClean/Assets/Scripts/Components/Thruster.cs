@@ -90,20 +90,24 @@ public class Thruster : Module
             float dotThruster = Vector3.Dot(Core.transform.up, transform.up);
             float crossZThruster = Vector3.Cross(Core.transform.up, transform.up).z;
 
-            if (dot > 1 - float.Epsilon) // If it is, power all forwards thrusters.
+            float dotMargin = 0.01f;
+
+            if (dot > 1 - dotMargin) // If it is, power all forwards thrusters.
             {
+                Debug.Log("Ship is facing same direction as the we point.");
                 // If thruster is pointing backwards, fire.
-                if (dotThruster < -0.01) // Thruster pointing backwards.
+                if (dotThruster < -dotMargin) // Thruster pointing backwards.
                 {
                     powerX = ThrustPower;
                     //powerY = ThrustPower;
                 }
 
             }
-            else if (dot < -1 + float.Epsilon) // Go backwards (possibly turn as well?).
+            else if (dot < -1 + dotMargin) // Go backwards (possibly turn as well?).
             {
+                Debug.Log("Ship is facing opposite direction of what we want.");
                 // If thruster is pointing forwards, fire.
-                if (dotThruster > 0.01)
+                if (dotThruster > dotMargin)
                 {
                     powerX = ThrustPower;
                     //powerY = leftStickValue.y;
@@ -112,10 +116,10 @@ public class Thruster : Module
             else if (crossZ > 0) // Turn left.
             {
                 // If moving forwards, fire thrusters pointing backwards on the right side and thrusters pointing right on the upper right side and pointing left on the lower left.
-                if (dot > float.Epsilon)
+                if (dot > dotMargin)
                 {
-                    // Thrusters pointing backwards.
-                    if (dotThruster < -0.01 && shipRelative.x > 0)
+                    // Thrusters pointing backwards on the right side.
+                    if (dotThruster < -dotMargin && shipRelative.x > 0)
                     {
                         powerX = ThrustPower;
                         //powerY = ThrustPower;
@@ -134,10 +138,10 @@ public class Thruster : Module
                     }
                 }
                 // If moving backwards, fire thrusters pointing forwards on the right side and thrusters pointing right on the lower right side and pointing left on the upper left.
-                else if (dot < float.Epsilon)
+                else if (dot < dotMargin)
                 {
-                    // Thrusters pointing forwards.
-                    if (dotThruster > 0.01 && shipRelative.x > 0)
+                    // Thrusters pointing forwards on the right side.
+                    if (dotThruster > dotMargin && shipRelative.x > 0)
                     {
                         powerX = ThrustPower;
                         //powerY = ThrustPower;
@@ -156,7 +160,7 @@ public class Thruster : Module
                     }
                 }
                 // If not moving forwards or backwards, but just rotating, fire thrusters pointing right on upper right side and thrusters pointing left on lower left side.
-                else if (Mathf.Abs(dot) < float.Epsilon)
+                else if (Mathf.Abs(dot) < dotMargin)
                 {
                     // Thrusters pointing right in upper right corner.
                     if (crossZThruster < 0 && shipRelative.x > 0 && shipRelative.y > 0)
@@ -164,6 +168,7 @@ public class Thruster : Module
                         powerX = ThrustPower;
                         //powerY = ThrustPower;
                     }
+                    // Thrusters pointing left in lower left corner.
                     else if (crossZThruster > 0 && shipRelative.x < 0 && shipRelative.y < 0)
                     {
                         powerX = ThrustPower;
@@ -175,26 +180,71 @@ public class Thruster : Module
             else if (crossZ < 0) // Turn right. // TODO I'M RIGHT HERE IN THE SEARCH FOR BETTER MOVEMENT CONTROLS!
             {
                 // If moving forwards, fire thrusters pointing backwards on the left side and thrusters pointing left on the upper left side and pointing right on the lower right.
-                if (dot > float.Epsilon)
+                if (dot > dotMargin)
                 {
-
+                    // Thrusters pointing backwards on the left side.
+                    if (dotThruster < -dotMargin && shipRelative.x < 0)
+                    {
+                        powerX = ThrustPower;
+                        //powerY = ThrustPower;
+                    }
+                    // Thrusters pointing left on the upper left side.
+                    else if (crossZThruster > 0 && shipRelative.x < 0 && shipRelative.y > 0)
+                    {
+                        powerX = ThrustPower;
+                        //powerY = ThrustPower;
+                    }
+                    // Thrusters pointing right on the lower right.
+                    else if (crossZThruster < 0 && shipRelative.x > 0 && shipRelative.y < 0)
+                    {
+                        powerX = ThrustPower;
+                        //powerY = ThrustPower;
+                    }
                 }
                 // If moving backwards, fire thrusters pointing forwards on the left side and thrusters pointing left on the lower left side and pointing right on the upper right.
-                else if (dot < float.Epsilon)
+                else if (dot < dotMargin)
                 {
-
+                    // Thrusters pointing forwards on the left side.
+                    if (dotThruster > dotMargin && shipRelative.x < 0)
+                    {
+                        powerX = ThrustPower;
+                        //powerY = ThrustPower;
+                    }
+                    // Thrusters pointing left on the lower left side.
+                    else if (crossZThruster > 0 && shipRelative.x < 0 && shipRelative.y < 0)
+                    {
+                        powerX = ThrustPower;
+                        //powerY = ThrustPower;
+                    }
+                    // Thrusters pointing right on the upper right side.
+                    else if (crossZThruster < 0 && shipRelative.x > 0 && shipRelative.y > 0)
+                    {
+                        powerX = ThrustPower;
+                        //powerY = ThrustPower;
+                    }
                 }
-                // If not moving forwards or backwards, but just rotating, fire thrusters pointing left on upper left side and thrusters pointing right on lower right side..
-                else if (Mathf.Abs(dot) < float.Epsilon)
+                // If not moving forwards or backwards, but just rotating, fire thrusters pointing left in upper left side and thrusters pointing right in lower right side.
+                else if (Mathf.Abs(dot) < dotMargin)
                 {
-
+                    // Thrusters pointing left in upper left side.
+                    if (crossZThruster > 0 && shipRelative.x < 0 && shipRelative.y > 0)
+                    {
+                        powerX = ThrustPower;
+                        //powerY = ThrustPower;
+                    }
+                    // Thrusters pointing right in lower right side.
+                    else if (crossZThruster < 0 && shipRelative.x > 0 && shipRelative.y < 0)
+                    {
+                        powerX = ThrustPower;
+                        //powerY = ThrustPower;
+                    }
                 }
             }
 
             var powerTotal = powerX + powerY;
             // DEBUG: Change sprite colour, when power is larger than 0.
             GetComponent<SpriteRenderer>().color = powerTotal > 0 ? Color.magenta : Color.white;
-            Core.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up) * ThrustPower * (powerTotal), transform.position);
+            //Core.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up) * ThrustPower * (powerTotal), transform.position);
             if (childParticles.Length > 0)
             {
                 if (powerTotal > 0 && !childParticles[0].isPlaying)
