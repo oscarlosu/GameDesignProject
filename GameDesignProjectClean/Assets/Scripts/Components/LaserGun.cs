@@ -99,7 +99,7 @@ public class LaserGun : Module
         Vector2 sprSize = laser.GetComponent<SpriteRenderer>().sprite.bounds.size;
         Vector2 size = new Vector2(scale.x * sprSize.x, scale.y * sprSize.y);
         //Debug.Log("LaserSize = " + size);
-        laser.transform.position += laser.transform.up * size.y / 2;
+        laser.transform.position += laser.transform.up * 0.5f;
         // Save source structure
         laser.GetComponent<Laser>().SourceStructure = transform.parent.gameObject;
         laser.GetComponent<Laser>().SourceCore = Core;
@@ -124,11 +124,8 @@ public class LaserGun : Module
 public class LaserGunEditor : ModuleEditor
 {
 
-    public override void OnInspectorGUI()
+    public new void DrawCustomInspector()
     {
-        // Take the module inspector.
-        base.OnInspectorGUI();
-
         LaserGun laserGun = (LaserGun)target;
 
         // Selector for projectile prefab
@@ -141,6 +138,14 @@ public class LaserGunEditor : ModuleEditor
         laserGun.MaxLaserBreadth = EditorGUILayout.FloatField("Max laser breadth", laserGun.MaxLaserBreadth);
         laserGun.MinLaserLength = EditorGUILayout.FloatField("Min laser length", laserGun.MinLaserLength);
         laserGun.MaxLaserLength = EditorGUILayout.FloatField("Max laser length", laserGun.MaxLaserLength);
+    }
 
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        if (CustomInspectorOpen)
+        {
+            DrawCustomInspector();
+        }
     }
 }

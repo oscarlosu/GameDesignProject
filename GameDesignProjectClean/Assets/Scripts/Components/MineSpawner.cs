@@ -87,11 +87,8 @@ public class MineSpawner : Module
 public class MineSpawnerEditor : ModuleEditor
 {
 
-    public override void OnInspectorGUI()
+    public new void DrawCustomInspector()
     {
-        // Take the module inspector.
-        base.OnInspectorGUI();
-
         MineSpawner launcher = (MineSpawner)target;
 
         // Selector for projectile prefab
@@ -100,5 +97,14 @@ public class MineSpawnerEditor : ModuleEditor
         launcher.SpawnOffset = EditorGUILayout.FloatField("Spawn offset", launcher.SpawnOffset);
         launcher.Cooldown = EditorGUILayout.FloatField("Cooldown", launcher.Cooldown);
 
+    }
+
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        if (CustomInspectorOpen)
+        {
+            DrawCustomInspector();
+        }
     }
 }

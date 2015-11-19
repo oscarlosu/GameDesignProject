@@ -45,7 +45,7 @@ MonoBehaviour:
   Core: {fileID: 0}
   Mass: 1
   InputType: 0
-  ButtonKey: 0
+  ButtonKey: 1
   TriggerKey: 0
   CanSpriteRotate: 1
   SpriteForward: {fileID: 21300000, guid: 4ba6b6a7b07b59642b6c30ba7e3e25ed, type: 3}
@@ -54,11 +54,11 @@ MonoBehaviour:
   LaserPrefab: {fileID: 108826, guid: cfdb46d2623fd1647822b1423ccf8d20, type: 2}
   Cooldown: 1
   MinLaserBreadth: .200000003
-  MaxLaserBreadth: 2
+  MaxLaserBreadth: 3
   MinLaserLength: .5
-  MaxLaserLength: 3
+  MaxLaserLength: 4
   MinChargeTime: .200000003
-  MaxChargeTime: 3
+  MaxChargeTime: 4
 --- !u!212 &21274370
 SpriteRenderer:
   m_ObjectHideFlags: 1
