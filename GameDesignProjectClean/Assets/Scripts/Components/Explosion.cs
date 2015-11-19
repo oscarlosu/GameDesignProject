@@ -25,7 +25,7 @@ public class Explosion : MonoBehaviour
 			// Calculate push force direction
 			Vector3 dir = other.transform.position - transform.position;
 			dir.Normalize();
-            str.Core.GetComponent<Rigidbody2D>().AddForceAtPosition(dir * PushForce, transform.position);
+            str.ShipCore.GetComponent<Rigidbody2D>().AddForceAtPosition(dir * PushForce, transform.position);
         }
         else if (ast != null)
         {

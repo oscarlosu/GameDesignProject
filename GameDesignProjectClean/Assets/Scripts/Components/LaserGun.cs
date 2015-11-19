@@ -35,22 +35,22 @@ public class LaserGun : Module
             switch (InputType)
             {
                 case InputKeyType.Button:
-                    if (GamePad.GetButtonDown(ButtonKey, Core.GetComponent<Core>().ControllerIndex))
+                    if (GamePad.GetButtonDown(ButtonKey, ShipCore.GetComponent<Core>().ControllerIndex))
                     {
                         elapsedTime = 0;
                     }
-                    else if (GamePad.GetButton(ButtonKey, Core.GetComponent<Core>().ControllerIndex))
+                    else if (GamePad.GetButton(ButtonKey, ShipCore.GetComponent<Core>().ControllerIndex))
                     {
                         elapsedTime += Time.deltaTime;
                     }
-                    else if (GamePad.GetButtonUp(ButtonKey, Core.GetComponent<Core>().ControllerIndex))
+                    else if (GamePad.GetButtonUp(ButtonKey, ShipCore.GetComponent<Core>().ControllerIndex))
                     {
                         elapsedTime += Time.deltaTime;
                         Activate();
                     }
                     break;
                 case InputKeyType.Trigger:
-                    var value = GamePad.GetTrigger(TriggerKey, Core.GetComponent<Core>().ControllerIndex);
+                    var value = GamePad.GetTrigger(TriggerKey, ShipCore.GetComponent<Core>().ControllerIndex);
                     if (value > 0 && !triggerDown) // Activation threshold.
                     {
                         elapsedTime = 0;
@@ -96,7 +96,7 @@ public class LaserGun : Module
         laser.transform.position += laser.transform.up * 0.5f;
         // Save source structure
         laser.GetComponent<Laser>().SourceStructure = transform.parent.gameObject;
-        laser.GetComponent<Laser>().SourceCore = Core;
+        laser.GetComponent<Laser>().SourceCore = ShipCore;
         // Reset elapsedTime
         elapsedTime = 0;
     }

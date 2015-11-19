@@ -1,4 +1,4 @@
-﻿ using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEditor;
 
@@ -77,12 +77,12 @@ public class Structure : ShipComponent
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-		Debug.LogWarning(Core.name + " OnCollisionEnter2D");
+		Debug.LogWarning("Ship collided with something");
         // Only "crash" if the force with which the objects hit each other is large enough.
         if (coll.relativeVelocity.magnitude > GlobalValues.MinCrashMagnitude)
         {
             // If the other object has a higher mass, lose one random module.
-            if (coll.rigidbody.mass >= Core.GetComponent<Rigidbody2D>().mass)
+            if (coll.rigidbody.mass >= ShipCore.GetComponent<Rigidbody2D>().mass)
             {
                 TakeDamage(GlobalValues.CrashDamage);
                 Debug.LogWarning("Ship " + gameObject.name + " collided with something with greater or equal mass.");
@@ -91,14 +91,16 @@ public class Structure : ShipComponent
         }
     }
 
-/*	void OnTriggerEnter2D(Collider2D col)
+	void OnTriggerStay2D(Collider2D col)
 	{
-		Debug.LogWarning(Core.name + " detected a trigger!");
-		if (col.gameObject.GetComponent<Laser>() != null)
+		Debug.LogWarning("Ship collided with something");
+		// If the other object has a higher mass, lose one random module.
+		if (col.attachedRigidbody.mass >= ShipCore.GetComponent<Rigidbody2D>().mass)
 		{
 			TakeDamage(GlobalValues.CrashDamage);
+			Debug.LogWarning("Ship " + gameObject.name + " collided with something with greater or equal mass.");
 		}
-	}*/
+	}
 
     private void LoseModule(List<Module> modules)
     {
@@ -170,29 +172,23 @@ public class Structure : ShipComponent
 public class StructureEditor : ShipComponentEditor
 {
 
-    protected new void DrawCustomInspector()
+    public override void OnInspectorGUI()
     {
+        // Display the module's settings.
+        base.OnInspectorGUI();
+
         // Create heading.
         GUIStyle heading = new GUIStyle { fontSize = 14 };
         EditorGUILayout.LabelField("Structure settings", heading);
 
         // Get target and show/edit fields.
         Structure t = (Structure)target;
-        t.MaxHp = EditorGUILayout.IntField("Max HP", t.MaxHp);
+        t.MaxHp = EditorGUILayout.IntField("Hp", t.MaxHp);
 
         // If the target was changed, set the target to dirty, so Unity will save the values.
         if (GUI.changed)
         {
             EditorUtility.SetDirty(target);
-        }
-    }
-
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-        if (CustomInspectorOpen)
-        {
-            DrawCustomInspector();
         }
     }
 }
