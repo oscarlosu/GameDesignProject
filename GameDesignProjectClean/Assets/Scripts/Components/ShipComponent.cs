@@ -8,7 +8,7 @@ public class ShipComponent : MonoBehaviour
     public Sprite BuilderSprite;
 
     // For game.
-    public GameObject Core;
+    public GameObject ShipCore;
     public int Mass;
 }
 

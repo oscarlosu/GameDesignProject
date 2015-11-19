@@ -82,7 +82,7 @@ public class Structure : ShipComponent
         if (coll.relativeVelocity.magnitude > GlobalValues.MinCrashMagnitude)
         {
             // If the other object has a higher mass, lose one random module.
-            if (coll.rigidbody.mass >= Core.GetComponent<Rigidbody2D>().mass)
+            if (coll.rigidbody.mass >= ShipCore.GetComponent<Rigidbody2D>().mass)
             {
                 TakeDamage(GlobalValues.CrashDamage);
                 Debug.LogWarning("Ship " + gameObject.name + " collided with something with greater or equal mass.");
@@ -95,7 +95,7 @@ public class Structure : ShipComponent
 	{
 		Debug.LogWarning("Ship collided with something");
 		// If the other object has a higher mass, lose one random module.
-		if (col.attachedRigidbody.mass >= Core.GetComponent<Rigidbody2D>().mass)
+		if (col.attachedRigidbody.mass >= ShipCore.GetComponent<Rigidbody2D>().mass)
 		{
 			TakeDamage(GlobalValues.CrashDamage);
 			Debug.LogWarning("Ship " + gameObject.name + " collided with something with greater or equal mass.");
