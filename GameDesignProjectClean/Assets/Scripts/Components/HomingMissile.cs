@@ -102,7 +102,7 @@ public class HomingMissile : Projectile
     {
         if (elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceCore.GetInstanceID())
         {
-            Debug.Log("Homing missile trigger detected collision with " + other.gameObject.name);
+            Debug.Log("Homing missile trigger detected trigger with " + other.gameObject.name);
             Activate();
         }
     }

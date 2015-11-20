@@ -91,7 +91,7 @@ public class Structure : ShipComponent
         }
     }
 
-	void OnTriggerStay2D(Collider2D col)
+/*	void OnTriggerStay2D(Collider2D col)
 	{
 		Debug.LogWarning("Ship collided with something");
 		// If the other object has a higher mass, lose one random module.
@@ -100,7 +100,7 @@ public class Structure : ShipComponent
 			TakeDamage(GlobalValues.CrashDamage);
 			Debug.LogWarning("Ship " + gameObject.name + " collided with something with greater or equal mass.");
 		}
-	}
+	}*/
 
     private void LoseModule(List<Module> modules)
     {
@@ -136,6 +136,12 @@ public class Structure : ShipComponent
         }
         
     }
+
+	public void IncreaseMaxHp(int inc)
+	{
+		MaxHp += inc;
+		hp = MaxHp;
+	}
 
 
     //IEnumerator HandleHitColor(GameObject obj)

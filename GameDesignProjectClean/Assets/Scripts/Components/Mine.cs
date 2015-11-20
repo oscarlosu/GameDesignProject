@@ -8,7 +8,7 @@ public class Mine : Projectile
 {
     public float TimeTillActive; // The time from it's spawned till the mine is active (will start detect objects in its vicinity).
     public float DetectionToExplosionTime; // The time it takes from something being in its vicinity till it will blow up.
-    public float GracePeriod; // TODO Not used for anything yet...
+    public float GracePeriod;
 
     public GameObject ExplosionPrefab;
 
@@ -38,14 +38,28 @@ public class Mine : Projectile
             }
         }
     }
+	// If we want mines to denote as soon as they collide with anything with a non-trigger collider, we just need to uncomment this function
+	/*private void OnCollisionEnter2D(Collision2D coll)
+	{
+		Debug.Log ("Mine detected collision with " + coll.gameObject.name);
+		if(elapsedTime > GracePeriod || coll.gameObject.GetInstanceID() != SourceCore.GetInstanceID())
+		{
+			Activate();
+		}
+	}*/
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (elapsedTime > TimeTillActive)
+		if(other.gameObject.GetComponent<Explosion>() != null || other.gameObject.GetComponent<Laser>() != null)
+		{
+			Activate();
+		}
+        else if (elapsedTime > TimeTillActive)
         {
             detected = true;
             anim.SetTrigger("TriggerDamage");
         }
+
     }
 
     private void Activate()

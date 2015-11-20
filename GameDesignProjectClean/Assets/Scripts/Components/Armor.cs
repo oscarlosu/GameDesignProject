@@ -5,11 +5,12 @@ using UnityEditor;
 
 public class Armor : Module
 {
-
+	public int ExtraHp;
     // Use this for initialization
     new void Start()
     {
         base.Start();
+		Activate();
     }
 
     // Update is called once per frame
@@ -20,7 +21,9 @@ public class Armor : Module
 
     public void Activate()
     {
-
+		// Armor increases the maximum hp of the structure its attached, 
+		// effectively making every module attached to that same structure more resistant
+		transform.parent.GetComponent<Structure>().IncreaseMaxHp(ExtraHp);
     }
 }
 

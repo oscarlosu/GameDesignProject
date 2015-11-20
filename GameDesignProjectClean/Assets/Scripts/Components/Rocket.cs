@@ -30,7 +30,6 @@ public class Rocket : Projectile
         // Handle thruster
         if (elapsedTime <= ThrusterDuration)
         {
-
             rb.AddForceAtPosition(transform.up*ThrustPower, transform.position);
         }
         else
@@ -44,12 +43,7 @@ public class Rocket : Projectile
         // The grace period should only make the missiles not hurt their own ship
         if (elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceCore.GetInstanceID())
         {
-            // Create the explosion, when the rocket is destroyed. The explosion should be the one doing the damage.
-            // When destroyed, create an explosion, which damages objects around it.
-            var explosion = GameObject.Instantiate(ExplosionPrefab);
-            explosion.transform.position = transform.position;
-            explosion.GetComponent<Explosion>().Damage = Damage;
-            GameObject.Destroy(gameObject);
+			Activate ();
         }
     }
 
@@ -58,12 +52,17 @@ public class Rocket : Projectile
 		// The grace period should only make the missiles not hurt their own ship
 		if (elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceCore.GetInstanceID())
 		{
-			// Create the explosion, when the rocket is destroyed. The explosion should be the one doing the damage.
-			// When destroyed, create an explosion, which damages objects around it.
-			var explosion = GameObject.Instantiate(ExplosionPrefab);
-			explosion.transform.position = transform.position;
-			explosion.GetComponent<Explosion>().Damage = Damage;
-			GameObject.Destroy(gameObject);
+			Activate ();
 		}
+	}
+
+	void Activate()
+	{
+		// Create the explosion, when the rocket is destroyed. The explosion should be the one doing the damage.
+		// When destroyed, create an explosion, which damages objects around it.
+		var explosion = GameObject.Instantiate(ExplosionPrefab);
+		explosion.transform.position = transform.position;
+		explosion.GetComponent<Explosion>().Damage = Damage;
+		GameObject.Destroy(gameObject);
 	}
 }

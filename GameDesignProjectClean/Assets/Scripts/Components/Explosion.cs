@@ -32,7 +32,8 @@ public class Explosion : MonoBehaviour
             other.gameObject.GetComponent<Asteroid>().Breakdown();
         }
 		// Only affects rigidbodies with a mass 
-		else if (other.GetComponent<Rigidbody2D>() != null && other.GetComponent<Rigidbody2D>().mass > GlobalValues.EffectiveZeroMass)
+		else if (other.GetComponent<Rigidbody2D>() != null && 
+		         other.GetComponent<Collider2D>() != null && !other.GetComponent<Collider2D>().isTrigger/*other.GetComponent<Rigidbody2D>().mass > GlobalValues.EffectiveZeroMass*/)
         {
 			Vector3 dir = other.transform.position - transform.position;
 			dir.Normalize();
