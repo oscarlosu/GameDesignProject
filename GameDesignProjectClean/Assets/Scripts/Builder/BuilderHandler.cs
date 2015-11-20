@@ -1,23 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
+using GamepadInput;
 using UnityEngine.UI;
 
 public class BuilderHandler : MonoBehaviour
 {
+    public GamePad.Index ControllerIndex;
+    public GameObject ShipCore;
     public GameObject BuilderCanvas;
     public GameObject BuilderModuleList;
     public GameObject ModuleButtonPrefab;
     public int GridSizeX, GridSizeY;
-    //public Vector2 GridCellSize;
-    public GameObject ShipCore;
     public GameObject AvailablePosPrefab;
     public GameObject[] AvailableModules;
+    public GameObject SelectedCellPrefab;
 
-    private bool isPopupOpen = false;
+    private GameObject selectedCell;
+    private int selectedCellX, selectedCellY;
     private int moduleSelected;
     private Camera Cam;
     private GameObject[,] grid;
-    private AvailableBuildPos selectedCell;
+
+    private bool InBuildMode;
 
     // Use this for initialization
     void Start()
@@ -29,15 +33,29 @@ public class BuilderHandler : MonoBehaviour
         grid[GridSizeX / 2, GridSizeY / 2 - 1] = ShipCore;
         grid[GridSizeX / 2 - 1, GridSizeY / 2] = ShipCore;
         grid[GridSizeX / 2, GridSizeY / 2] = ShipCore;
+
+        EnterBuildMode();
+    }
+
+    private void EnterBuildMode()
+    {
+        InBuildMode = true;
         UpdateAvailablePos();
-        OpenPopup();
-        ClosePopup();
+        ShipCore.transform.position = new Vector3(0, 0); // Move the ship back to the builder.
+        ShipCore.transform.rotation = Quaternion.identity; // Rotate the ship correctly for the builder.
+        selectedCell = GameObject.Instantiate(SelectedCellPrefab);
+    }
+
+    private void ExitBuildMode()
+    {
+        InBuildMode = false;
+        RemoveAvailablePos();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isPopupOpen)
+        if (InBuildMode)
         {
             // If the left mouse button is down, we want to check if an buildable position is under the mouse.
             if (Input.GetMouseButtonDown(0))
@@ -56,21 +74,6 @@ public class BuilderHandler : MonoBehaviour
                         availablePos.GetComponent<AvailableBuildPos>().Deselect();
                     }
                     // Save and select the position.
-                    selectedCell = grid[(int)cellPos.x, (int)cellPos.y].GetComponent<AvailableBuildPos>();
-                    selectedCell.Select();
-                    OpenPopup();
-                }
-                else
-                {
-                    // TODO Make sure that you cannot deselect cell, while clicking inside the pop-up.
-
-                    // Deselect the selection, if not clicking on an available position.
-                    if (selectedCell != null)
-                    {
-                        selectedCell.Deselect();
-                        selectedCell = null;
-                    }
-
                 }
 
                 // If clicking on a component, rotate it.
@@ -92,26 +95,6 @@ public class BuilderHandler : MonoBehaviour
                     Get((int)cellPos.x, (int)cellPos.y).tag != GlobalValues.ShipTag)
                 {
                     RemoveObject((int)cellPos.x, (int)cellPos.y);
-                }
-            }
-
-            // If a position has been selected, listen for which component should be placed.
-            if (selectedCell != null)
-            {
-                for (int i = 0; i < AvailableModules.Length; i++)
-                {
-                    if (Input.GetKeyDown(i.ToString()))
-                    {
-                        // Create ship component.
-                        var component = GameObject.Instantiate(AvailableModules[i]);
-                        // Setup component.
-                        SetupShipComponent(component, selectedCell);
-                        // Place in grid (and in the scene).
-                        PlaceObject(component, selectedCell.X, selectedCell.Y);
-                        // Destroy availableBuildPos object.
-                        GameObject.Destroy(selectedCell.gameObject);
-                        selectedCell = null;
-                    }
                 }
             }
         }
@@ -147,10 +130,8 @@ public class BuilderHandler : MonoBehaviour
         }
     }
 
-    private void UpdateAvailablePos()
+    private void RemoveAvailablePos()
     {
-        GameObject availablePos;
-
         // Remove all available pos objects. // TODO Do this in the other loop, to make it more efficient.
         for (int y = 0; y < GridSizeY; y++)
         {
@@ -163,6 +144,24 @@ public class BuilderHandler : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void PlaceAvailablePos(int x, int y, GameObject parent, int parentX, int parentY)
+    {
+        var availablePos = GameObject.Instantiate(AvailablePosPrefab);
+        availablePos.transform.position = TranslateCellToPos(x, y);
+        availablePos.GetComponent<AvailableBuildPos>().X = x;
+        availablePos.GetComponent<AvailableBuildPos>().Y = y;
+        availablePos.GetComponent<AvailableBuildPos>().Parent = parent;
+        availablePos.GetComponent<AvailableBuildPos>().ParentX = parentX;
+        availablePos.GetComponent<AvailableBuildPos>().ParentY = parentY;
+        grid[x, y] = availablePos;
+    }
+
+    private void UpdateAvailablePos()
+    {
+        // Remove all previously places available positions.
+        RemoveAvailablePos();
 
         // Insert all available pos objects needed.
         for (int y = 0; y < GridSizeY; y++)
@@ -173,47 +172,19 @@ public class BuilderHandler : MonoBehaviour
                 {
                     if (x > 0 && grid[x - 1, y] == null)
                     {
-                        availablePos = GameObject.Instantiate(AvailablePosPrefab);
-                        availablePos.transform.position = TranslateCellToPos(x - 1, y);
-                        availablePos.GetComponent<AvailableBuildPos>().X = x - 1;
-                        availablePos.GetComponent<AvailableBuildPos>().Y = y;
-                        availablePos.GetComponent<AvailableBuildPos>().Parent = grid[x, y];
-                        availablePos.GetComponent<AvailableBuildPos>().ParentX = x;
-                        availablePos.GetComponent<AvailableBuildPos>().ParentY = y;
-                        grid[x - 1, y] = availablePos;
+                        PlaceAvailablePos(x - 1, y, grid[x, y], x, y);
                     }
                     if (x < GridSizeX - 1 && grid[x + 1, y] == null)
                     {
-                        availablePos = GameObject.Instantiate(AvailablePosPrefab);
-                        availablePos.transform.position = TranslateCellToPos(x + 1, y);
-                        availablePos.GetComponent<AvailableBuildPos>().X = x + 1;
-                        availablePos.GetComponent<AvailableBuildPos>().Y = y;
-                        availablePos.GetComponent<AvailableBuildPos>().Parent = grid[x, y];
-                        availablePos.GetComponent<AvailableBuildPos>().ParentX = x;
-                        availablePos.GetComponent<AvailableBuildPos>().ParentY = y;
-                        grid[x + 1, y] = availablePos;
+                        PlaceAvailablePos(x + 1, y, grid[x, y], x, y);
                     }
                     if (y > 0 && grid[x, y - 1] == null)
                     {
-                        availablePos = GameObject.Instantiate(AvailablePosPrefab);
-                        availablePos.transform.position = TranslateCellToPos(x, y - 1);
-                        availablePos.GetComponent<AvailableBuildPos>().X = x;
-                        availablePos.GetComponent<AvailableBuildPos>().Y = y - 1;
-                        availablePos.GetComponent<AvailableBuildPos>().Parent = grid[x, y];
-                        availablePos.GetComponent<AvailableBuildPos>().ParentX = x;
-                        availablePos.GetComponent<AvailableBuildPos>().ParentY = y;
-                        grid[x, y - 1] = availablePos;
+                        PlaceAvailablePos(x, y - 1, grid[x, y], x, y);
                     }
                     if (y < GridSizeY - 1 && grid[x, y + 1] == null)
                     {
-                        availablePos = GameObject.Instantiate(AvailablePosPrefab);
-                        availablePos.transform.position = TranslateCellToPos(x, y + 1);
-                        availablePos.GetComponent<AvailableBuildPos>().X = x;
-                        availablePos.GetComponent<AvailableBuildPos>().Y = y + 1;
-                        availablePos.GetComponent<AvailableBuildPos>().Parent = grid[x, y];
-                        availablePos.GetComponent<AvailableBuildPos>().ParentX = x;
-                        availablePos.GetComponent<AvailableBuildPos>().ParentY = y;
-                        grid[x, y + 1] = availablePos;
+                        PlaceAvailablePos(x, y + 1, grid[x, y], x, y);
                     }
                 }
             }
@@ -327,55 +298,6 @@ public class BuilderHandler : MonoBehaviour
                 RotateModule(x, y, rotateCount++);
             }
         }
-    }
-
-    public void OpenPopup()
-    {
-        isPopupOpen = true;
-        BuilderCanvas.SetActive(true);
-        if (BuilderModuleList.transform.childCount == 0)
-        {
-            // Add modules to the UI list.
-            for (int i = 0; i < AvailableModules.Length; i++)
-            {
-                var index = i;
-                var module = AvailableModules[index];
-                var moduleButton = GameObject.Instantiate(ModuleButtonPrefab);
-                moduleButton.transform.SetParent(BuilderModuleList.transform);
-                moduleButton.transform.GetChild(0).GetComponent<Text>().text = module.GetComponent<ShipComponent>().ComponentName; // Name.
-                moduleButton.transform.GetChild(1).GetComponent<Image>().sprite = module.GetComponent<ShipComponent>().BuilderSprite; // Sprite.
-                moduleButton.transform.GetChild(2).GetComponent<Text>().text = module.GetComponent<ShipComponent>().Mass.ToString(); // Weight.
-                moduleButton.GetComponent<Button>().onClick.AddListener(delegate { SelectModule(index); });
-            }
-        }
-    }
-
-    public void ClosePopup()
-    {
-        isPopupOpen = false;
-        BuilderCanvas.SetActive(false);
-    }
-
-    public void SelectModule(int index)
-    {
-        if (index >= 0 && index < AvailableModules.Length)
-        {
-            moduleSelected = index;
-        }
-    }
-
-    public void PlaceComponent()
-    {
-        // Create ship component.
-        var component = GameObject.Instantiate(AvailableModules[moduleSelected]);
-        // Setup component.
-        SetupShipComponent(component, selectedCell);
-        // Place in grid (and in the scene).
-        PlaceObject(component, selectedCell.X, selectedCell.Y);
-        // Destroy availableBuildPos object.
-        GameObject.Destroy(selectedCell.gameObject);
-        selectedCell = null;
-        ClosePopup();
     }
 
 }
