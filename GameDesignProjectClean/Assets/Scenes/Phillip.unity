@@ -13014,6 +13014,7 @@ MonoBehaviour:
   SpriteForward: {fileID: 0}
   SpriteSideways: {fileID: 0}
   SpriteDireciton: 0
+  ExtraHp: 0
 --- !u!212 &1082971503
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13248,6 +13249,7 @@ MonoBehaviour:
   SpriteForward: {fileID: 0}
   SpriteSideways: {fileID: 0}
   SpriteDireciton: 0
+  ExtraHp: 0
 --- !u!212 &1140006838
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -25,21 +25,9 @@ public class Thruster : Module
                 childParticles[i].Stop();
         }
     }
-
     public void Update()
     {
-        // If velocity magnitude is larger than 0, play thruster sound.
-        if (ShipCore.GetComponent<Rigidbody2D>().velocity.magnitude > 0)
-        {
-            //Thruster sound depending on velocity. This should not be here, but couldn't get it to work in Activate().
-            //It still needs some work, becuase right now, thrusters are playing all the time, not just when they are fired
-            //Feel free to move to a better location.
-            this.GetComponent<AudioSource>().pitch =
-                Mathf.Clamp(ShipCore.GetComponent<Rigidbody2D>().velocity.magnitude, 0f, 2.5f) + Random.Range(0f, 0.5f);
-            this.GetComponent<AudioSource>().volume = Mathf.Clamp(ShipCore.GetComponent<Rigidbody2D>().velocity.magnitude,
-                0f, 0.2f);
-        }
-
+ 
         // If the ship hasn't been set yet, don't do ANYTHING!
         if (ShipCore == null)
         {
@@ -477,6 +465,7 @@ public class Thruster : Module
             // Activate particles.
 
             // Activate sound.
+			PlayThrusters();
 
             // Activate colouring.
             GetComponent<SpriteRenderer>().color = Color.magenta;
@@ -486,12 +475,36 @@ public class Thruster : Module
             // Deactivate particles.
 
             // Deactivate sounds.
-
+			ThrusterFalloff();
             // Deactivate colouring.
             GetComponent<SpriteRenderer>().color = Color.white;
         }
     }
+	public void PlayThrusters()
+	{
+		//Duration it takes to have "full" thrust power
+		float Duration = 2f;
+		
+		if (!this.GetComponent<AudioSource> ().isPlaying) {
+			this.GetComponent<AudioSource> ().Play ();
+		} else {
+			this.GetComponent<AudioSource>().pitch = Mathf.MoveTowards(this.GetComponent<AudioSource>().pitch,2f,Time.deltaTime/Duration);
+		}
+	}
+	
+	public void ThrusterFalloff()
+	{
+		float Duration = 1f; 
+		
+		if (!this.GetComponent<AudioSource> ().isPlaying) {
+			this.GetComponent<AudioSource> ().Play ();
+		} else {
+			this.GetComponent<AudioSource>().pitch = Mathf.MoveTowards(this.GetComponent<AudioSource>().pitch,0f,Time.deltaTime/Duration);
+		}
+		
+	}
 }
+
 
 /****************
 * Editor tools.
