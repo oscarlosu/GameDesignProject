@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class BuilderHandler : MonoBehaviour
 {
     public GamePad.Index ControllerIndex;
+    public GamePad.Button ButtonExitBuildMode; // When pressed in build mode, go to play mode.
+    public GamePad.Button ButtonEnterBuildMode; // When pressed in play mode, go to build mode.
+
     public GameObject ShipCore;
     public GameObject BuilderCanvas;
     public GameObject BuilderModuleList;
@@ -21,7 +24,7 @@ public class BuilderHandler : MonoBehaviour
     private Camera Cam;
     private GameObject[,] grid;
 
-    private bool InBuildMode;
+    private bool inBuildMode;
 
     // Use this for initialization
     void Start()
@@ -39,24 +42,31 @@ public class BuilderHandler : MonoBehaviour
 
     private void EnterBuildMode()
     {
-        InBuildMode = true;
+        inBuildMode = true;
         UpdateAvailablePos();
         ShipCore.transform.position = new Vector3(0, 0); // Move the ship back to the builder.
         ShipCore.transform.rotation = Quaternion.identity; // Rotate the ship correctly for the builder.
-        selectedCell = GameObject.Instantiate(SelectedCellPrefab);
+        selectedCell = GameObject.Instantiate(SelectedCellPrefab); // Create the object to move around the builder.
     }
 
     private void ExitBuildMode()
     {
-        InBuildMode = false;
+        inBuildMode = false;
         RemoveAvailablePos();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (InBuildMode)
+        if (inBuildMode)
         {
+            // Exit build mode to test the ship.
+            if (GamePad.GetButtonDown(ButtonExitBuildMode, ControllerIndex))
+            {
+                inBuildMode = false;
+                return;
+            }
+
             // If the left mouse button is down, we want to check if an buildable position is under the mouse.
             if (Input.GetMouseButtonDown(0))
             {
@@ -65,8 +75,8 @@ public class BuilderHandler : MonoBehaviour
                 var cellPos = TranslatePosToCell(mousePos.x, mousePos.y);
 
                 // Check if there is something in the grid at that position and if it is an available position (for building).
-                if (Get((int)cellPos.x, (int)cellPos.y) != null &&
-                    Get((int)cellPos.x, (int)cellPos.y).tag == GlobalValues.AvailablePosTag)
+                if (Get((int) cellPos.x, (int) cellPos.y) != null &&
+                    Get((int) cellPos.x, (int) cellPos.y).tag == GlobalValues.AvailablePosTag)
                 {
                     // Deselect all the available positions.
                     foreach (var availablePos in GameObject.FindGameObjectsWithTag(GlobalValues.AvailablePosTag))
@@ -77,10 +87,10 @@ public class BuilderHandler : MonoBehaviour
                 }
 
                 // If clicking on a component, rotate it.
-                if (Get((int)cellPos.x, (int)cellPos.y) != null &&
-                    Get((int)cellPos.x, (int)cellPos.y).tag == GlobalValues.ModuleTag)
+                if (Get((int) cellPos.x, (int) cellPos.y) != null &&
+                    Get((int) cellPos.x, (int) cellPos.y).tag == GlobalValues.ModuleTag)
                 {
-                    RotateModule((int)cellPos.x, (int)cellPos.y, 0);
+                    RotateModule((int) cellPos.x, (int) cellPos.y, 0);
                 }
             }
 
@@ -90,13 +100,25 @@ public class BuilderHandler : MonoBehaviour
                 var mousePos = Cam.ScreenToWorldPoint(Input.mousePosition);
                 var cellPos = TranslatePosToCell(mousePos.x, mousePos.y);
 
-                if (Get((int)cellPos.x, (int)cellPos.y) != null &&
-                    Get((int)cellPos.x, (int)cellPos.y).tag != GlobalValues.AvailablePosTag &&
-                    Get((int)cellPos.x, (int)cellPos.y).tag != GlobalValues.ShipTag)
+                if (Get((int) cellPos.x, (int) cellPos.y) != null &&
+                    Get((int) cellPos.x, (int) cellPos.y).tag != GlobalValues.AvailablePosTag &&
+                    Get((int) cellPos.x, (int) cellPos.y).tag != GlobalValues.ShipTag)
                 {
-                    RemoveObject((int)cellPos.x, (int)cellPos.y);
+                    RemoveObject((int) cellPos.x, (int) cellPos.y);
                 }
             }
+        }
+        // If not in build mode, nothing from the builder should be active.
+        else
+        {
+            // Go back to build mode to build the ship.
+            if (GamePad.GetButtonDown(ButtonEnterBuildMode, ControllerIndex))
+            {
+                inBuildMode = true;
+                return;
+            }
+
+            // The builder UI should be hidden and maybe a small icon and text should explain what to do, to go back to build mode.
         }
     }
 
@@ -191,7 +213,7 @@ public class BuilderHandler : MonoBehaviour
         }
     }
 
-    private Vector3 TranslateCellToPos(int x, int y)
+    public Vector3 TranslateCellToPos(int x, int y)
     {
         return new Vector3(x - (GridSizeX / 2) + 0.5f, y - (GridSizeY / 2) - 0.5f + 1);
     }
