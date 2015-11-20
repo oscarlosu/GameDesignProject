@@ -24,4 +24,5 @@ public class GlobalValues
     public static int CrashDamage = 1;
     public static int MissileDamage = 1;
     public static int LaserDamage = 1;
+	public static float EffectiveZeroMass = 0.1f;
 }

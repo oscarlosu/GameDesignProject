@@ -25,7 +25,7 @@ public class MineSpawner : Module
     void Update()
     {
         // If the ship hasn't been set yet, don't do ANYTHING!
-        if (Core == null)
+        if (ShipCore == null)
         {
             return;
         }
@@ -35,13 +35,13 @@ public class MineSpawner : Module
             switch (InputType)
             {
                 case InputKeyType.Button:
-                    if (GamePad.GetButton(ButtonKey, Core.GetComponent<Core>().ControllerIndex))
+                    if (GamePad.GetButton(ButtonKey, ShipCore.GetComponent<Core>().ControllerIndex))
                     {
                         Activate();
                     }
                     break;
                 case InputKeyType.Trigger:
-                    var value = GamePad.GetTrigger(TriggerKey, Core.GetComponent<Core>().ControllerIndex);
+                    var value = GamePad.GetTrigger(TriggerKey, ShipCore.GetComponent<Core>().ControllerIndex);
                     if (value > 0.5) // Activation threshold.
                     {
                         Activate();
@@ -73,7 +73,7 @@ public class MineSpawner : Module
         var projectile = rocket.GetComponent<Projectile>();
         if (projectile != null)
         {
-            projectile.SourceCore = Core;
+            projectile.SourceCore = ShipCore;
             projectile.SourceStructure = transform.parent.gameObject;
         }
     }

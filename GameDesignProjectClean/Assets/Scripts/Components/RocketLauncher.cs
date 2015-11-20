@@ -26,7 +26,7 @@ public class RocketLauncher : Module
     void Update()
     {
         // If the ship hasn't been set yet, don't do ANYTHING!
-        if (Core == null)
+        if (ShipCore == null)
         {
             return;
         }
@@ -36,13 +36,13 @@ public class RocketLauncher : Module
             switch (InputType)
             {
                 case InputKeyType.Button:
-                    if (GamePad.GetButton(ButtonKey, Core.GetComponent<Core>().ControllerIndex))
+                    if (GamePad.GetButton(ButtonKey, ShipCore.GetComponent<Core>().ControllerIndex))
                     {
                         Activate();
                     }
                     break;
                 case InputKeyType.Trigger:
-                    var value = GamePad.GetTrigger(TriggerKey, Core.GetComponent<Core>().ControllerIndex);
+                    var value = GamePad.GetTrigger(TriggerKey, ShipCore.GetComponent<Core>().ControllerIndex);
                     if (value > 0.5) // Activation threshold.
                     {
                         Activate();
@@ -69,13 +69,13 @@ public class RocketLauncher : Module
         ready = false;
         GameObject rocket = (GameObject)Instantiate(RocketPrefab, transform.position + RocketLaunchPosOffset * transform.up, transform.rotation);
         rocket.transform.parent = null;
-        rocket.GetComponent<Rigidbody2D>().velocity = Core.GetComponent<Rigidbody2D>().velocity + (Vector2)(transform.up * RocketLaunchSpeed);
+        rocket.GetComponent<Rigidbody2D>().velocity = ShipCore.GetComponent<Rigidbody2D>().velocity + (Vector2)(transform.up * RocketLaunchSpeed);
 
         // Set common projectile variables.
         var projectile = rocket.GetComponent<Projectile>();
         if (projectile != null)
         {
-            projectile.SourceCore = Core;
+            projectile.SourceCore = ShipCore;
             projectile.SourceStructure = transform.parent.gameObject;
         }
     }

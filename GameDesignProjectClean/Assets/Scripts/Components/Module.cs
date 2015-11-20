@@ -35,9 +35,9 @@ public class Module : ShipComponent
 
     protected void OnDestroy()
     {
-        if (Core != null)
+        if (ShipCore != null)
         {
-            Core.GetComponent<Rigidbody2D>().mass -= Mass;
+            ShipCore.GetComponent<Rigidbody2D>().mass -= Mass;
         }
     }
 
