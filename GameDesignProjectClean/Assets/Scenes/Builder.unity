@@ -312,9 +312,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1159505638}
   - {fileID: 1503708255}
   - {fileID: 1019068702}
-  - {fileID: 1159505638}
   m_Father: {fileID: 473330658}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
@@ -376,15 +376,15 @@ Prefab:
     - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
       propertyPath: ImageLeft
       value: 
-      objectReference: {fileID: 1503708256}
+      objectReference: {fileID: 1159505639}
     - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
       propertyPath: ImageCenter
       value: 
-      objectReference: {fileID: 1019068703}
+      objectReference: {fileID: 1503708256}
     - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
       propertyPath: ImageRight
       value: 
-      objectReference: {fileID: 1159505639}
+      objectReference: {fileID: 1019068703}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 787f576714bc35540a684f062d7010cf, type: 2}
   m_IsPrefabParent: 0
@@ -399,7 +399,7 @@ GameObject:
   - 222: {fileID: 1019068704}
   - 114: {fileID: 1019068703}
   m_Layer: 5
-  m_Name: SelectedComponent
+  m_Name: NextComponent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -416,7 +416,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 571010581}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 110, y: 0}
@@ -466,7 +466,7 @@ GameObject:
   - 222: {fileID: 1159505640}
   - 114: {fileID: 1159505639}
   m_Layer: 5
-  m_Name: NextComponent
+  m_Name: PreviousComponent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -483,7 +483,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 571010581}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: -110, y: -4.68489998e-06}
@@ -614,7 +614,7 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1818878923
   m_SortingOrder: 0
 --- !u!1 &1503708254
 GameObject:
@@ -627,7 +627,7 @@ GameObject:
   - 222: {fileID: 1503708257}
   - 114: {fileID: 1503708256}
   m_Layer: 5
-  m_Name: PreviousComponent
+  m_Name: SelectedComponent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -644,7 +644,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 571010581}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: 0}

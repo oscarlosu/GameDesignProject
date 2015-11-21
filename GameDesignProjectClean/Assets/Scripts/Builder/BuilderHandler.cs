@@ -63,19 +63,16 @@ public class BuilderHandler : MonoBehaviour
         // Create the selected cell object and place it.
         selectedCell = GameObject.Instantiate(SelectedCellPrefab); // Create the object to move around the builder.
         selectedCell.transform.position = TranslateCellToPos(selectedCellX, selectedCellY);
-        // Update available positions in the grid.
-        //UpdateAvailablePos();
-
         // Update component selector UI.
         UpdateComponentSelectionUi();
+        // Update selected cell object.
+        UpdateSelectedCellObject();
     }
 
     private void GoToPlayMode()
     {
         // Set build mode flag.
         inBuildMode = false;
-        // Remove all available build position objects.
-        //RemoveAvailablePos();
         // Remove grid selection object.
         if (selectedCell != null)
         {
@@ -194,50 +191,36 @@ public class BuilderHandler : MonoBehaviour
                     }
                     elapsedMoveTime = 0; // Reset the timer after move.
                 }
+                UpdateSelectedCellObject();
             }
             else
             {
                 elapsedMoveTime = 0;
             }
 
-            // If the left mouse button is down, we want to check if an buildable position is under the mouse.
-            if (Input.GetMouseButtonDown(0))
+            // Place module.
+            if (GamePad.GetButtonDown(GamePad.Button.A, ControllerIndex))
             {
-                // Get mouse position in the world and translate it to a grid position.
-                var mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-                var cellPos = TranslatePosToCell(mousePos.x, mousePos.y);
-
-                // Check if there is something in the grid at that position and if it is an available position (for building).
-                if (Get((int)cellPos.x, (int)cellPos.y) != null &&
-                    Get((int)cellPos.x, (int)cellPos.y).tag == GlobalValues.AvailablePosTag)
+                GameObject parent;
+                int parentX, parentY;
+                // If position is available.
+                if (IsPosAvailable(selectedCellX, selectedCellY, out parent, out parentX, out parentY))
                 {
-                    // Deselect all the available positions.
-                    foreach (var availablePos in GameObject.FindGameObjectsWithTag(GlobalValues.AvailablePosTag))
-                    {
-                        availablePos.GetComponent<AvailableBuildPos>().Deselect();
-                    }
-                    // Save and select the position.
-                }
-
-                // If clicking on a component, rotate it.
-                if (Get((int)cellPos.x, (int)cellPos.y) != null &&
-                    Get((int)cellPos.x, (int)cellPos.y).tag == GlobalValues.ModuleTag)
-                {
-                    RotateModule((int)cellPos.x, (int)cellPos.y, 0);
+                    var component = GameObject.Instantiate(AvailableComponents[selectedComponent]);
+                    SetupShipComponent(component, selectedCellX, selectedCellY, parent, parentX, parentY);
+                    grid[selectedCellX, selectedCellY] = component;
+                    UpdateSelectedCellObject();
                 }
             }
 
-            if (Input.GetMouseButtonDown(1))
+            // Delete module. // TODO Do this in a better way around structures, since you can destroy big parts of the ship at once.
+            if (GamePad.GetButtonDown(GamePad.Button.B, ControllerIndex))
             {
-                // Get mouse position in the world and translate it to a grid position.
-                var mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-                var cellPos = TranslatePosToCell(mousePos.x, mousePos.y);
-
-                if (Get((int)cellPos.x, (int)cellPos.y) != null &&
-                    Get((int)cellPos.x, (int)cellPos.y).tag != GlobalValues.AvailablePosTag &&
-                    Get((int)cellPos.x, (int)cellPos.y).tag != GlobalValues.ShipTag)
+                var found = Get(selectedCellX, selectedCellY);
+                if (found != null && found.tag != GlobalValues.ShipTag)
                 {
-                    RemoveObject((int)cellPos.x, (int)cellPos.y);
+                    GameObject.Destroy(found);
+                    grid[selectedCellX, selectedCellY] = null;
                 }
             }
         }
@@ -255,15 +238,67 @@ public class BuilderHandler : MonoBehaviour
         }
     }
 
-    public void PlaceObject(GameObject obj, int x, int y)
+    private void UpdateSelectedCellObject()
     {
-        if ((grid[x, y] != null && grid[x, y].tag == GlobalValues.AvailablePosTag) || grid[x, y] == null)
+        selectedCell.GetComponent<SpriteRenderer>().color = IsPosAvailable(selectedCellX, selectedCellY)
+                    ? Color.green
+                    : Color.red;
+    }
+
+    private bool IsPosAvailable(int x, int y)
+    {
+        GameObject parent;
+        int parentX, parentY;
+        return IsPosAvailable(x, y, out parent, out parentX, out parentY);
+    }
+
+    private bool IsPosAvailable(int x, int y, out GameObject parent, out int parentX, out int parentY)
+    {
+        parent = null;
+        parentX = -1;
+        parentY = -1;
+        // If there is already something at this position, return false;
+        if (grid[x, y] != null)
         {
-            grid[x, y] = obj;
-            obj.transform.position = TranslateCellToPos(x, y);
-            ShipCore.GetComponent<Core>().Assemble();
-            UpdateAvailablePos();
+            return false;
         }
+
+        //Check if there is a structure in an adjacent cell.
+        if (grid[x + 1, y] != null &&
+            (grid[x + 1, y].tag == GlobalValues.StructureTag || grid[x + 1, y].tag == GlobalValues.ShipTag))
+        {
+            parent = grid[x + 1, y];
+            parentX = x + 1;
+            parentY = y;
+            return true;
+        }
+        if (grid[x - 1, y] != null &&
+            (grid[x - 1, y].tag == GlobalValues.StructureTag || grid[x - 1, y].tag == GlobalValues.ShipTag))
+        {
+            parent = grid[x - 1, y];
+            parentX = x - 1;
+            parentY = y;
+            return true;
+        }
+        if (grid[x, y + 1] != null &&
+            (grid[x, y + 1].tag == GlobalValues.StructureTag || grid[x, y + 1].tag == GlobalValues.ShipTag))
+        {
+            parent = grid[x, y + 1];
+            parentX = x;
+            parentY = y + 1;
+            return true;
+        }
+        if (grid[x, y - 1] != null &&
+            (grid[x, y - 1].tag == GlobalValues.StructureTag || grid[x, y - 1].tag == GlobalValues.ShipTag))
+        {
+            parent = grid[x, y - 1];
+            parentX = x;
+            parentY = y - 1;
+            return true;
+        }
+
+        // If no adjacent structures, return false.
+        return false;
     }
 
     public void RemoveObject(int x, int y)
@@ -281,68 +316,6 @@ public class BuilderHandler : MonoBehaviour
             GameObject.Destroy(grid[x, y]);
             grid[x, y] = null;
             ShipCore.GetComponent<Core>().Assemble();
-            UpdateAvailablePos();
-        }
-    }
-
-    private void RemoveAvailablePos()
-    {
-        // Remove all available pos objects. // TODO Do this in the other loop, to make it more efficient.
-        for (int y = 0; y < GridSizeY; y++)
-        {
-            for (int x = 0; x < GridSizeX; x++)
-            {
-                if (grid[x, y] != null && grid[x, y].tag == GlobalValues.AvailablePosTag)
-                {
-                    GameObject.Destroy(grid[x, y]);
-                    grid[x, y] = null;
-                }
-            }
-        }
-    }
-
-    private void PlaceAvailablePos(int x, int y, GameObject parent, int parentX, int parentY)
-    {
-        var availablePos = GameObject.Instantiate(AvailablePosPrefab);
-        availablePos.transform.position = TranslateCellToPos(x, y);
-        availablePos.GetComponent<AvailableBuildPos>().X = x;
-        availablePos.GetComponent<AvailableBuildPos>().Y = y;
-        availablePos.GetComponent<AvailableBuildPos>().Parent = parent;
-        availablePos.GetComponent<AvailableBuildPos>().ParentX = parentX;
-        availablePos.GetComponent<AvailableBuildPos>().ParentY = parentY;
-        grid[x, y] = availablePos;
-    }
-
-    private void UpdateAvailablePos()
-    {
-        // Remove all previously places available positions.
-        RemoveAvailablePos();
-
-        // Insert all available pos objects needed.
-        for (int y = 0; y < GridSizeY; y++)
-        {
-            for (int x = 0; x < GridSizeX; x++)
-            {
-                if (grid[x, y] != null && (grid[x, y].tag == GlobalValues.ShipTag || grid[x, y].tag == GlobalValues.StructureTag))
-                {
-                    if (x > 0 && grid[x - 1, y] == null)
-                    {
-                        PlaceAvailablePos(x - 1, y, grid[x, y], x, y);
-                    }
-                    if (x < GridSizeX - 1 && grid[x + 1, y] == null)
-                    {
-                        PlaceAvailablePos(x + 1, y, grid[x, y], x, y);
-                    }
-                    if (y > 0 && grid[x, y - 1] == null)
-                    {
-                        PlaceAvailablePos(x, y - 1, grid[x, y], x, y);
-                    }
-                    if (y < GridSizeY - 1 && grid[x, y + 1] == null)
-                    {
-                        PlaceAvailablePos(x, y + 1, grid[x, y], x, y);
-                    }
-                }
-            }
         }
     }
 
@@ -366,34 +339,36 @@ public class BuilderHandler : MonoBehaviour
     }
 
     // Sets the parent and rotates the component according to placement.
-    public void SetupShipComponent(GameObject component, AvailableBuildPos availablePos)
+    public void SetupShipComponent(GameObject component, int cX, int cY, GameObject parent, int pX, int pY)
     {
+        // Move component.
+        component.transform.position = TranslateCellToPos(cX, cY);
         // Add parent to the object.
-        component.transform.parent = availablePos.Parent.transform;
+        component.transform.parent = parent.transform;
         // Rotate object compared to where the parent is.
-        if (availablePos.X < availablePos.ParentX)
+        if (cX < pX)
         {
             component.transform.Rotate(new Vector3(0, 0, 90));
         }
-        else if (availablePos.X > availablePos.ParentX)
+        else if (cX > pX)
         {
             component.transform.Rotate(new Vector3(0, 0, 270));
         }
-        else if (availablePos.Y < availablePos.ParentY)
+        else if (cY < pY)
         {
             component.transform.Rotate(new Vector3(0, 0, 180));
         }
-        else if (availablePos.Y > availablePos.ParentY)
+        else if (cY > pY)
         {
             // Do nothing, rotation should be fine.
         }
+        // Set the components "Core" to the core of the ship it was just attached to.
+        component.GetComponent<ShipComponent>().ShipCore = ShipCore;
     }
 
     // Rotates the module to the next free rotation (so it doesn't point into a cell with other components).
     private void RotateModule(int x, int y, int rotateCount)
     {
-        Debug.Log("Rotate module...");
-
         // If rotation has been tried more than 3 times, stop trying...
         if (rotateCount > 3)
         {

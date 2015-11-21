@@ -16,6 +16,7 @@ TagManager:
   - Asteroid
   - Debris
   - DefensiveModule
+  - Defensive
   layers:
   - Default
   - TransparentFX
@@ -58,4 +59,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 2476088373
     locked: 0
