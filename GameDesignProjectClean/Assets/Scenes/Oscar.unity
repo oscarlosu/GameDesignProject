@@ -308,6 +308,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11401216, guid: f802371a3ff740b4c94f6b8b7a63cd38, type: 2}
+      propertyPath: RepulsionForce
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f802371a3ff740b4c94f6b8b7a63cd38, type: 2}
   m_IsPrefabParent: 0

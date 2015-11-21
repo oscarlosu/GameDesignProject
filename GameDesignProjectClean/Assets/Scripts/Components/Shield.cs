@@ -9,6 +9,7 @@ public class Shield : Module
 	public float DurationAfterFirstHit;
 	public float Cooldown;
 	public float GracePeriod;
+	public float RepulsionForce;
 
 	private CircleCollider2D col;
 	private Animator anim;
@@ -57,12 +58,30 @@ public class Shield : Module
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		// The shield starts deactivating when it collides with a projectile (only when it is active)
-		if(Active && other.gameObject.GetComponent<Projectile>() != null && other.gameObject.GetComponent<Projectile>().SourceCore.GetInstanceID() != ShipCore.GetInstanceID())
+		if(Active)
 		{
-			elapsedTime = 0;
-			deactivating = true;
+			if(other.gameObject.GetComponent<Projectile>() != null && other.gameObject.GetComponent<Projectile>().SourceCore.GetInstanceID() != ShipCore.GetInstanceID())
+			{
+				elapsedTime = 0;
+				deactivating = true;
+			}
+			else if(other.attachedRigidbody != null)
+			{
+				elapsedTime = 0;
+				deactivating = true;
+				// Cancel velocity in the direction of the shield device and apply force to rigidbody
+				Vector2 dir = other.attachedRigidbody.transform.position - transform.position;
+				dir.Normalize();
+				// Calculate orthogonal vector to dir
+				Vector2 orthogonal = new Vector2(- dir.y, dir.x);
+				// Project velocity on orthogonal direction
+				other.attachedRigidbody.velocity = Vector2.Dot (orthogonal, other.attachedRigidbody.velocity) * orthogonal;
+				other.attachedRigidbody.AddForce(RepulsionForce * dir);
+			}
+
 
 		}
+
 	}
 
 
