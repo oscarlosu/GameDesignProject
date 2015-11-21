@@ -49,6 +49,7 @@ public class BuilderHandler : MonoBehaviour
     {
         // Set build mode flag.
         inBuildMode = true;
+        ShipCore.GetComponent<Core>().InBuildMode = true;
         // Remove play mode clone of ship.
         if (cloneShip != null)
         {
@@ -69,6 +70,7 @@ public class BuilderHandler : MonoBehaviour
     {
         // Set build mode flag.
         inBuildMode = false;
+        ShipCore.GetComponent<Core>().InBuildMode = false;
         // Remove grid selection object.
         if (selectedCell != null)
         {
@@ -113,7 +115,7 @@ public class BuilderHandler : MonoBehaviour
         {
             selectedComponent = 0;
         }
-        
+
         UpdateComponentSelectionUi();
     }
 
@@ -194,7 +196,7 @@ public class BuilderHandler : MonoBehaviour
                 elapsedMoveTime = 0;
             }
 
-            // Place module.
+            // Place component.
             if (GamePad.GetButtonDown(GamePad.Button.A, ControllerIndex))
             {
                 GameObject parent;
@@ -209,7 +211,7 @@ public class BuilderHandler : MonoBehaviour
                 }
             }
 
-            // Delete module. // TODO Do this in a better way around structures, since you can destroy big parts of the ship at once.
+            // Delete component. // TODO Do this in a better way around structures, since you can destroy big parts of the ship at once.
             if (GamePad.GetButtonDown(GamePad.Button.B, ControllerIndex))
             {
                 var found = Get(selectedCellX, selectedCellY);
@@ -217,6 +219,17 @@ public class BuilderHandler : MonoBehaviour
                 {
                     GameObject.Destroy(found);
                     grid[selectedCellX, selectedCellY] = null;
+                    UpdateSelectedCellObject();
+                }
+            }
+
+            // Rotate component.
+            if (GamePad.GetButtonDown(GamePad.Button.Y, ControllerIndex))
+            {
+                var found = Get(selectedCellX, selectedCellY);
+                if (found != null && found.tag != GlobalValues.ShipTag)
+                {
+                    RotateComponent(selectedCellX, selectedCellY);
                 }
             }
         }
@@ -341,88 +354,44 @@ public class BuilderHandler : MonoBehaviour
         component.transform.position = TranslateCellToPos(cX, cY);
         // Add parent to the object.
         component.transform.parent = parent.transform;
-        // Rotate object compared to where the parent is.
-        if (cX < pX)
-        {
-            component.transform.Rotate(new Vector3(0, 0, 90));
-        }
-        else if (cX > pX)
-        {
-            component.transform.Rotate(new Vector3(0, 0, 270));
-        }
-        else if (cY < pY)
-        {
-            component.transform.Rotate(new Vector3(0, 0, 180));
-        }
-        else if (cY > pY)
-        {
-            // Do nothing, rotation should be fine.
-        }
         // Set the components "Core" to the core of the ship it was just attached to.
         component.GetComponent<ShipComponent>().ShipCore = ShipCore;
+        // If it is a module, rotate it compared to where the parent is.
+        if (component.GetComponent<Module>() != null)
+        {
+            if (cX < pX)
+            {
+                component.GetComponent<Module>().ParentDirection = Module.Direction.Right;
+                component.GetComponent<Module>().RotateModuleTo(Module.Direction.Left);
+            }
+            else if (cX > pX)
+            {
+                component.transform.Rotate(new Vector3(0, 0, 270));
+                component.GetComponent<Module>().ParentDirection = Module.Direction.Left;
+                component.GetComponent<Module>().RotateModuleTo(Module.Direction.Right);
+            }
+            else if (cY < pY)
+            {
+                component.transform.Rotate(new Vector3(0, 0, 180));
+                component.GetComponent<Module>().ParentDirection = Module.Direction.Up;
+                component.GetComponent<Module>().RotateModuleTo(Module.Direction.Down);
+            }
+            else if (cY > pY)
+            {
+                component.GetComponent<Module>().ParentDirection = Module.Direction.Down;
+                component.GetComponent<Module>().RotateModuleTo(Module.Direction.Up);
+            }
+        }
+
+
     }
 
-    // Rotates the module to the next free rotation (so it doesn't point into a cell with other components).
-    private void RotateModule(int x, int y, int rotateCount)
+    private void RotateComponent(int x, int y)
     {
-        // If rotation has been tried more than 3 times, stop trying...
-        if (rotateCount > 3)
+        var found = Get(x, y);
+        if (found != null && found.tag != GlobalValues.ShipTag && found.tag != GlobalValues.StructureTag && found.GetComponent<Module>() != null)
         {
-            return;
-        }
-        var module = Get(x, y);
-        if (module != null && module.GetComponent<Module>() != null)
-        {
-            // Rotate module.
-            module.transform.Rotate(new Vector3(0, 0, -90));
-            var moduleScr = module.GetComponent<Module>();
-            // Rotate the sprite facing direction, if the module can rotate.
-            if (moduleScr.CanSpriteRotate)
-            {
-                moduleScr.SpriteDireciton = moduleScr.SpriteDireciton == Module.Direction.Forward
-                    ? Module.Direction.Sideway
-                    : Module.Direction.Forward;
-                moduleScr.UpdateSprite();
-                Debug.Log("Rotated to: " + moduleScr.SpriteDireciton);
-            }
-
-            // If new direction is blocked, rotate again.
-            if (module.transform.rotation.eulerAngles.z > -1 &&
-                module.transform.rotation.eulerAngles.z < 1)
-            {
-                if (Get(x, y + 1) == null || Get(x, y + 1).tag == "AvailablePos")
-                {
-                    return;
-                }
-                RotateModule(x, y, rotateCount++);
-            }
-            else if (module.transform.rotation.eulerAngles.z > 89 &&
-                module.transform.rotation.eulerAngles.z < 91)
-            {
-                if (Get(x - 1, y) == null || Get(x - 1, y).tag == "AvailablePos")
-                {
-                    return;
-                }
-                RotateModule(x, y, rotateCount++);
-            }
-            else if (module.transform.rotation.eulerAngles.z > 179 &&
-                     module.transform.rotation.eulerAngles.z < 181)
-            {
-                if (Get(x, y - 1) == null || Get(x, y - 1).tag == "AvailablePos")
-                {
-                    return;
-                }
-                RotateModule(x, y, rotateCount++);
-            }
-            else if (module.transform.rotation.eulerAngles.z > 269 &&
-                     module.transform.rotation.eulerAngles.z < 271)
-            {
-                if (Get(x + 1, y) == null || Get(x + 1, y).tag == "AvailablePos")
-                {
-                    return;
-                }
-                RotateModule(x, y, rotateCount++);
-            }
+            found.GetComponent<Module>().RotateModule();
         }
     }
 

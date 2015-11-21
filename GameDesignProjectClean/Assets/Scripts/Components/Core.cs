@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 
@@ -12,6 +11,8 @@ public class Core : Structure
     public float AngularDragHigh; // The drag set, when the ship is pointing in the right direction (if the control scheme is direction based).
     public float DefaultAngularDrag { get; private set; } // Getter for the rigid body's default/initial angular drag.
     public float MaxSpinBeforeAngularDrag; // How many degrees per second the ship should at least spin, before applying high angular drag.
+
+    public bool InBuildMode;
 
     // Public methods
 

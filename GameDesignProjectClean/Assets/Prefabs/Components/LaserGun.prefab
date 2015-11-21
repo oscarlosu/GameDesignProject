@@ -41,15 +41,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ComponentName: Laser Gun
-  BuilderSprite: {fileID: 21300000, guid: f0fd41aef85818241a0f865f6340c62d, type: 3}
-  Core: {fileID: 0}
+  BuilderSprite: {fileID: 21300000, guid: ebb39fafdaa16274fb2a84600cf33cbf, type: 3}
+  ShipCore: {fileID: 0}
   Mass: 1
   InputType: 0
   ButtonKey: 1
   TriggerKey: 0
   CanSpriteRotate: 1
-  SpriteForward: {fileID: 21300000, guid: f0fd41aef85818241a0f865f6340c62d, type: 3}
-  SpriteSideways: {fileID: 21300000, guid: 01e07236d4f4cd54a8cc5d2d6e6a2b17, type: 3}
+  SpriteForward: {fileID: 21300000, guid: ebb39fafdaa16274fb2a84600cf33cbf, type: 3}
+  SpriteLeft: {fileID: 21300000, guid: 9d37266f8aef5744b9edb6ea79e83e89, type: 3}
+  SpriteRight: {fileID: 21300000, guid: f0adc05d70a51f64f82e50ea3b76e196, type: 3}
   SpriteDireciton: 0
   LaserPrefab: {fileID: 108826, guid: cfdb46d2623fd1647822b1423ccf8d20, type: 2}
   Cooldown: 1

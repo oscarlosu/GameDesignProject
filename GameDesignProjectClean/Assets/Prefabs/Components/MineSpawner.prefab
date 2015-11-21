@@ -42,14 +42,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ComponentName: Mine spawner
   BuilderSprite: {fileID: 21300000, guid: d4937d6d633812b489e6d241958a4b8d, type: 3}
-  Core: {fileID: 0}
+  ShipCore: {fileID: 0}
   Mass: 1
   InputType: 0
   ButtonKey: 0
   TriggerKey: 0
   CanSpriteRotate: 0
   SpriteForward: {fileID: 0}
-  SpriteSideways: {fileID: 0}
+  SpriteLeft: {fileID: 0}
+  SpriteRight: {fileID: 0}
   SpriteDireciton: 0
   MinePrefab: {fileID: 155838, guid: a749b9803894116428f767a7635d7b5a, type: 2}
   SpawnOffset: .200000003

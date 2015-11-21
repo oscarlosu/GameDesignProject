@@ -41,15 +41,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ComponentName: Homing missile
-  BuilderSprite: {fileID: 21300000, guid: bb9343e1e3f82b74880d33c968c73e86, type: 3}
-  Core: {fileID: 0}
+  BuilderSprite: {fileID: 21300000, guid: ce7521aeccd67124bae914a6d2080b7e, type: 3}
+  ShipCore: {fileID: 0}
   Mass: 1
   InputType: 0
   ButtonKey: 0
   TriggerKey: 0
   CanSpriteRotate: 1
-  SpriteForward: {fileID: 21300000, guid: bb9343e1e3f82b74880d33c968c73e86, type: 3}
-  SpriteSideways: {fileID: 21300000, guid: 68243389fdfa5e74cb36c15c563eb474, type: 3}
+  SpriteForward: {fileID: 21300000, guid: ce7521aeccd67124bae914a6d2080b7e, type: 3}
+  SpriteLeft: {fileID: 21300000, guid: 49e14be8130d7bf478ebee247cc2ac87, type: 3}
+  SpriteRight: {fileID: 21300000, guid: 7fb4ef4793c42a14ebf69c3885224853, type: 3}
   SpriteDireciton: 0
   RocketPrefab: {fileID: 155838, guid: 946fed33d74bef54b9e9812c23af333e, type: 2}
   Cooldown: 2
