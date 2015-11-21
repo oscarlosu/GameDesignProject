@@ -27,7 +27,6 @@ GameObject:
   - 212: {fileID: 21288920}
   - 95: {fileID: 9584438}
   - 114: {fileID: 11478482}
-  - 50: {fileID: 5024570}
   - 58: {fileID: 5887814}
   m_Layer: 0
   m_Name: Shield
@@ -61,22 +60,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 423864}
   m_RootOrder: 0
---- !u!50 &5024570
-Rigidbody2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 142234}
-  m_Mass: 9.99999975e-05
-  m_LinearDrag: 0
-  m_AngularDrag: .0500000007
-  m_GravityScale: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!58 &5887814
 CircleCollider2D:
   m_ObjectHideFlags: 1

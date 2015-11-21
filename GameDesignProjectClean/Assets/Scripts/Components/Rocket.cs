@@ -38,24 +38,26 @@ public class Rocket : Projectile
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        // The grace period should only make the missiles not hurt their own ship
-		if ((elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceStructure.GetInstanceID()) && 
-		    (other.gameObject.GetComponent<Shield>() == null || (elapsedTime > GracePeriod || other.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID())))
-        {
-			Activate ();
-        }
-    }
-
-	/*private void OnTriggerEnter2D(Collider2D other)
+	void OnCollisionEnter2D(Collision2D other)
 	{
-		// The grace period should only make the missiles not hurt their own ship
-		if (elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceCore.GetInstanceID())
+		// With something that is not the source ship or after the grace period
+		if (elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceStructure.GetInstanceID())
 		{
-			Activate ();
+			Debug.Log("Rocket detected collision with " + other.gameObject.name);
+			Activate();
 		}
-	}*/
+	}
+	
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		// Missiles only activate with shield or laser triggers
+		if ((other.gameObject.GetComponent<Shield>() != null && (elapsedTime > GracePeriod || other.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID()))
+		    || other.gameObject.GetComponent<Laser>() != null)
+		{
+			Debug.Log("Rocket trigger detected trigger with " + other.gameObject.name);
+			Activate();
+		}
+	}
 
 	void Activate()
 	{

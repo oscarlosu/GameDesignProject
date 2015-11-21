@@ -9,6 +9,7 @@ public class Mine : Projectile
     public float TimeTillActive; // The time from it's spawned till the mine is active (will start detect objects in its vicinity).
     public float DetectionToExplosionTime; // The time it takes from something being in its vicinity till it will blow up.
     public float GracePeriod;
+	public Collider2D MineCollider;
 
     public GameObject ExplosionPrefab;
 
@@ -17,6 +18,7 @@ public class Mine : Projectile
     private float timeFromDetection;
 
     private Animator anim;
+
 
     // Use this for initialization
     void Start()
@@ -42,27 +44,21 @@ public class Mine : Projectile
 	private void OnCollisionEnter2D(Collision2D coll)
 	{
 		Debug.Log ("Mine detected collision with " + coll.gameObject.name);
-		/*if(elapsedTime > GracePeriod || coll.gameObject.GetInstanceID() != SourceCore.GetInstanceID())
-		{
-			Activate();
-		}*/
-
-		// The mine explosion is triggered by explosions, lasers and shields. In the case of the shields, 
-		// the mine will only activate if the grace period is over or the shield is not from the same ship
-		if(coll.gameObject.GetComponent<Explosion>() != null || coll.gameObject.GetComponent<Laser>() != null || 
-		   (coll.gameObject.GetComponent<Shield>() != null && (elapsedTime > GracePeriod || coll.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID())))
-		{
-			Activate();
-		}
+		// Rockets and missiles will be activated and will their explosion will make the mine explode in an OnTriggerEnter2D call
 	}
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-		if (elapsedTime > TimeTillActive)
+
+		if (elapsedTime > TimeTillActive && ShouldTrigger(other))
         {
             detected = true;
             anim.SetTrigger("TriggerDamage");
         }
+		else if(ShouldExplode(other) && other.IsTouching (MineCollider))
+		{
+			Activate();
+		}
 
     }
 
@@ -75,4 +71,16 @@ public class Mine : Projectile
         explosion.GetComponent<Explosion>().Damage = Damage;
         GameObject.Destroy(gameObject);
     }
+
+	private bool ShouldTrigger(Collider2D other)
+	{
+		return other.gameObject.GetComponent<Structure>() != null || other.gameObject.GetComponent<Rocket>() != null ||
+		       other.gameObject.GetComponent<HomingMissile>() != null || other.gameObject.GetComponent<Mine>() != null;
+	}
+
+	private bool ShouldExplode(Collider2D other)
+	{
+		return other.gameObject.GetComponent<Explosion>() != null || other.gameObject.GetComponent<Laser>() != null || 
+			(other.gameObject.GetComponent<Shield>() != null && (elapsedTime > GracePeriod || other.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID()));
+	}
 }
