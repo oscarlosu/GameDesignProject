@@ -42,7 +42,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ComponentName: Homing missile
   BuilderSprite: {fileID: 21300000, guid: bb9343e1e3f82b74880d33c968c73e86, type: 3}
-  Core: {fileID: 0}
+  ShipCore: {fileID: 0}
   Mass: 1
   InputType: 0
   ButtonKey: 0

@@ -31,37 +31,45 @@ public class Structure : ShipComponent
             }
         }
         // If the structure has child modules or has no children, lose module, else propagate damage to a random child struture
-        if(modules.Count > 0 || structures.Count == 0)
-        {
-            hp -= dmg;
-            TriggerAnimation("TriggerDamage");
-            LoseModule(modules);
-            return true;
-        }
-        else
-        {
-            // Find a child structure that either has child modules or has no children, or has descendants with child modules or no children
-            for(int index = 0; index < structures.Count; ++index)
-            {
-                // We choose which strcuture to try first at random
-                int rnd = Random.Range(0, structures.Count);
-                if(structures[rnd].TakeDamage(dmg))
-                {
-                    // Trigger visual feedback and return true
-                    TriggerAnimation("TriggerDamage");
-                    //Debug.Log("Damage visual feedback not implemented.");
-                    return true;
-                }
-                else
-                {
-                    // If the child structure couldnt take the damage, remove it from the list and try the next structure
-                    structures.RemoveAt(rnd);
-                }
-            }
-            // This point should never be reached
-            Debug.LogWarning("Structure couldnt propagate the damage! This should never happen!");
-            return true;
-        }
+		if(!IsProtected())
+		{
+			if(modules.Count > 0 || structures.Count == 0)
+			{
+				hp -= dmg;
+				TriggerAnimation("TriggerDamage");
+				LoseModule(modules);
+				return true;
+			}
+			else
+			{
+				// Find a child structure that either has child modules or has no children, or has descendants with child modules or no children
+				for(int index = 0; index < structures.Count; ++index)
+				{
+					// We choose which strcuture to try first at random
+					int rnd = Random.Range(0, structures.Count);
+					if(structures[rnd].TakeDamage(dmg))
+					{
+						// Trigger visual feedback and return true
+						TriggerAnimation("TriggerDamage");
+						//Debug.Log("Damage visual feedback not implemented.");
+						return true;
+					}
+					else
+					{
+						// If the child structure couldnt take the damage, remove it from the list and try the next structure
+						structures.RemoveAt(rnd);
+					}
+				}
+				// This point should never be reached
+				Debug.LogWarning("Structure couldnt propagate the damage! This should never happen!");
+				return true;
+			}
+		}
+		else
+		{
+			// Shields should not block propagation from other structures
+			return false;
+		}
     }
 
     
@@ -143,30 +151,21 @@ public class Structure : ShipComponent
 		hp = MaxHp;
 	}
 
-
-    //IEnumerator HandleHitColor(GameObject obj)
-    //{
-    //    SpriteRenderer rend = obj.GetComponent<SpriteRenderer>();
-    //    rend.color = Color.red;
-    //    for (int index = 0; index < obj.transform.childCount; ++index)
-    //    {
-    //        GameObject child = obj.transform.GetChild(index).gameObject;
-    //        if (child.GetComponent<Module>() != null)
-    //        {
-    //            child.GetComponent<SpriteRenderer>().color = Color.red;
-    //        }
-    //    }
-    //    yield return new WaitForSeconds(GlobalValues.HitFeedbackDuration);
-    //    rend.color = Color.white;
-    //    for (int index = 0; index < obj.transform.childCount; ++index)
-    //    {
-    //        GameObject child = obj.transform.GetChild(index).gameObject;
-    //        if (child.GetComponent<Module>() != null)
-    //        {
-    //            child.GetComponent<SpriteRenderer>().color = Color.white;
-    //        }
-    //    }
-    //}
+	public bool IsProtected()
+	{
+		// Find structures with shield modules
+		Shield[] shields = (Shield[])FindObjectsOfType(typeof(Shield));
+		// Find active shields in this ship near this structure
+		for(int i = 0; i < shields.Length; ++i)
+		{
+			if(shields[i].ShipCore.GetInstanceID() == ShipCore.GetInstanceID() && 
+			   shields[i].Active && Vector3.Distance(transform.position, shields[i].transform.position) < shields[i].Radius)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 
 }
 

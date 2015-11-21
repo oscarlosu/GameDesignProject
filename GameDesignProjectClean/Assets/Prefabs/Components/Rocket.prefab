@@ -147,7 +147,7 @@ MonoBehaviour:
   Damage: 1
   ThrustPower: 5
   ThrusterDuration: 2
-  GracePeriod: 4
+  GracePeriod: 1
   ExplosionPrefab: {fileID: 123384, guid: 14d6b3a3b065ca2418069880043eb2f0, type: 2}
 --- !u!212 &21237674
 SpriteRenderer:
@@ -192,7 +192,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: GracePeriod
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_GravityScale

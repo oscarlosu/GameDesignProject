@@ -41,20 +41,21 @@ public class Rocket : Projectile
     private void OnCollisionEnter2D(Collision2D other)
     {
         // The grace period should only make the missiles not hurt their own ship
-        if (elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceCore.GetInstanceID())
+		if ((elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceStructure.GetInstanceID()) && 
+		    (other.gameObject.GetComponent<Shield>() == null || (elapsedTime > GracePeriod || other.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID())))
         {
 			Activate ();
         }
     }
 
-	private void OnTriggerEnter2D(Collider2D other)
+	/*private void OnTriggerEnter2D(Collider2D other)
 	{
 		// The grace period should only make the missiles not hurt their own ship
 		if (elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceCore.GetInstanceID())
 		{
 			Activate ();
 		}
-	}
+	}*/
 
 	void Activate()
 	{

@@ -91,7 +91,8 @@ public class HomingMissile : Projectile
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceCore.GetInstanceID())
+        if ((elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceStructure.GetInstanceID()) && 
+		    (other.gameObject.GetComponent<Shield>() == null || (elapsedTime > GracePeriod || other.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID())))
         {
             Debug.Log("Homing missile detected collision with " + other.gameObject.name);
             Activate();
@@ -99,10 +100,11 @@ public class HomingMissile : Projectile
     }
 
     void OnTriggerEnter2D(Collider2D other)
-    {
-        if (elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceCore.GetInstanceID())
+	{
+		if (elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceCore.GetInstanceID() && 
+		    (other.gameObject.GetComponent<Shield>() == null || (elapsedTime > GracePeriod || other.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID())))
         {
-            Debug.Log("Homing missile trigger detected trigger with " + other.gameObject.name);
+            //Debug.Log("Homing missile trigger detected trigger with " + other.gameObject.name);
             Activate();
         }
     }

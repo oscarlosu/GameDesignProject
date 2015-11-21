@@ -42,7 +42,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ComponentName: Laser Gun
   BuilderSprite: {fileID: 21300000, guid: f0fd41aef85818241a0f865f6340c62d, type: 3}
-  Core: {fileID: 0}
+  ShipCore: {fileID: 0}
   Mass: 1
   InputType: 0
   ButtonKey: 1
