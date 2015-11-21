@@ -39,13 +39,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4165426537e57046b8e67e56e0dd25c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ControllerIndex: 0
+  ButtonGoToPlayMode: 9
+  ButtonGoToBuildMode: 8
+  MovePauseTime: .100000001
+  ShipCore: {fileID: 0}
   BuilderCanvas: {fileID: 0}
-  BuilderModuleList: {fileID: 0}
-  ModuleButtonPrefab: {fileID: 160792, guid: 4ba7a986f268bf44aa5e970a430a9ae3, type: 2}
+  ImageLeft: {fileID: 0}
+  ImageCenter: {fileID: 0}
+  ImageRight: {fileID: 0}
   GridSizeX: 20
   GridSizeY: 20
-  ShipCore: {fileID: 0}
   AvailablePosPrefab: {fileID: 151368, guid: fc280ededd0abc747beb64b7264929cb, type: 2}
+  SelectedCellPrefab: {fileID: 197206, guid: 12e65f12972ddc3429da60f54552f9ac, type: 2}
   AvailableModules:
   - {fileID: 153268, guid: 543bc4c95ab883843b907f74c5007db3, type: 2}
   - {fileID: 153796, guid: 107e5e0fac9af0a42829fc9ff5d22224, type: 2}

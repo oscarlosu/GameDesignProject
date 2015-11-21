@@ -1,35 +1,37 @@
 ﻿using UnityEngine;
-using System.Collections;
-using GamepadInput;
 using UnityEngine.UI;
+using GamepadInput;
 
 public class BuilderHandler : MonoBehaviour
 {
     public GamePad.Index ControllerIndex;
-    public GamePad.Button ButtonExitBuildMode; // When pressed in build mode, go to play mode.
-    public GamePad.Button ButtonEnterBuildMode; // When pressed in play mode, go to build mode.
+    public GamePad.Button ButtonGoToPlayMode; // When pressed in build mode, go to play mode.
+    public GamePad.Button ButtonGoToBuildMode; // When pressed in play mode, go to build mode.
+    public float MovePauseTime;
 
     public GameObject ShipCore;
     public GameObject BuilderCanvas;
-    public GameObject BuilderModuleList;
-    public GameObject ModuleButtonPrefab;
+    public Image ImageLeft, ImageCenter, ImageRight;
     public int GridSizeX, GridSizeY;
     public GameObject AvailablePosPrefab;
-    public GameObject[] AvailableModules;
     public GameObject SelectedCellPrefab;
+    public GameObject[] AvailableComponents;
 
     private GameObject selectedCell;
     private int selectedCellX, selectedCellY;
     private int moduleSelected;
-    private Camera Cam;
+    private Camera cam;
     private GameObject[,] grid;
 
     private bool inBuildMode;
+    private int selectedComponent;
+    private GameObject cloneShip; // The ship used in play mode to test the build.
+    private float elapsedMoveTime; // The time elapsed since last move (used to restrict how fast the player can move the selection).
 
     // Use this for initialization
     void Start()
     {
-        Cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 
         grid = new GameObject[GridSizeX, GridSizeY];
         grid[GridSizeX / 2 - 1, GridSizeY / 2 - 1] = ShipCore;
@@ -37,22 +39,108 @@ public class BuilderHandler : MonoBehaviour
         grid[GridSizeX / 2 - 1, GridSizeY / 2] = ShipCore;
         grid[GridSizeX / 2, GridSizeY / 2] = ShipCore;
 
-        EnterBuildMode();
+        // Select cell selection start position.
+        selectedCellX = GridSizeX / 2 - 1;
+        selectedCellY = GridSizeY / 2 - 1;
+
+        // Make sure that the player can move the selection immediately.
+        elapsedMoveTime = MovePauseTime;
+
+        GoToBuildMode();
     }
 
-    private void EnterBuildMode()
+    private void GoToBuildMode()
     {
+        // Set build mode flag.
         inBuildMode = true;
-        UpdateAvailablePos();
-        ShipCore.transform.position = new Vector3(0, 0); // Move the ship back to the builder.
-        ShipCore.transform.rotation = Quaternion.identity; // Rotate the ship correctly for the builder.
+        // Remove play mode clone of ship.
+        if (cloneShip != null)
+        {
+            GameObject.Destroy(cloneShip);
+        }
+        // Reactivate original ship.
+        ShipCore.SetActive(true);
+        // Create the selected cell object and place it.
         selectedCell = GameObject.Instantiate(SelectedCellPrefab); // Create the object to move around the builder.
+        selectedCell.transform.position = TranslateCellToPos(selectedCellX, selectedCellY);
+        // Update available positions in the grid.
+        //UpdateAvailablePos();
+
+        // Update component selector UI.
+        UpdateComponentSelectionUi();
     }
 
-    private void ExitBuildMode()
+    private void GoToPlayMode()
     {
+        // Set build mode flag.
         inBuildMode = false;
-        RemoveAvailablePos();
+        // Remove all available build position objects.
+        //RemoveAvailablePos();
+        // Remove grid selection object.
+        if (selectedCell != null)
+        {
+            GameObject.Destroy(selectedCell);
+        }
+        // Create clone of ship that the players can test and play around with.
+        cloneShip = GameObject.Instantiate(ShipCore);
+        // Deactivate the original in order for it to stay intact, while the other player is testing.
+        ShipCore.SetActive(false);
+    }
+
+    private void UpdateComponentSelectionUi()
+    {
+        // Only update UI, if there are components to choose from.
+        if (AvailableComponents.Length > 0)
+        {
+            // Alpha of previous and next images.
+            const float alpha = 0.5f;
+
+            // Set left image. Has wrap-around.
+            ImageLeft.sprite = selectedComponent == 0
+                ? AvailableComponents[AvailableComponents.Length - 1].GetComponent<ShipComponent>().BuilderSprite
+                : AvailableComponents[selectedComponent - 1].GetComponent<ShipComponent>().BuilderSprite;
+            ImageLeft.color = new Color(ImageLeft.color.r, ImageLeft.color.g, ImageLeft.color.b, alpha);
+            // Set center image.
+            ImageCenter.sprite = AvailableComponents[selectedComponent].GetComponent<ShipComponent>().BuilderSprite;
+            // Set right image. Has wrap-around.
+            ImageRight.sprite = selectedComponent + 1 >= AvailableComponents.Length
+                ? AvailableComponents[0].GetComponent<ShipComponent>().BuilderSprite
+                : AvailableComponents[selectedComponent + 1].GetComponent<ShipComponent>().BuilderSprite;
+            ImageRight.color = new Color(ImageRight.color.r, ImageRight.color.g, ImageRight.color.b, alpha);
+        }
+    }
+
+    private void SelectNextComponent()
+    {
+        if (selectedComponent < AvailableComponents.Length - 1)
+        {
+            selectedComponent++;
+        }
+        else
+        {
+            selectedComponent = 0;
+        }
+        
+        UpdateComponentSelectionUi();
+    }
+
+    private void SelectPreviousComponent()
+    {
+        if (selectedComponent > 0)
+        {
+            selectedComponent--;
+        }
+        else
+        {
+            selectedComponent = AvailableComponents.Length - 1;
+        }
+
+        UpdateComponentSelectionUi();
+    }
+
+    private bool IsInsideGrid(int x, int y)
+    {
+        return x >= 0 && x < grid.GetLength(0) && y >= 0 && y < grid.GetLength(1);
     }
 
     // Update is called once per frame
@@ -61,22 +149,67 @@ public class BuilderHandler : MonoBehaviour
         if (inBuildMode)
         {
             // Exit build mode to test the ship.
-            if (GamePad.GetButtonDown(ButtonExitBuildMode, ControllerIndex))
+            if (GamePad.GetButtonDown(ButtonGoToPlayMode, ControllerIndex))
             {
-                inBuildMode = false;
+                GoToPlayMode();
                 return;
+            }
+
+            // Select component.
+            if (GamePad.GetButtonDown(GamePad.Button.LeftShoulder, ControllerIndex))
+            {
+                SelectPreviousComponent();
+            }
+            if (GamePad.GetButtonDown(GamePad.Button.RightShoulder, ControllerIndex))
+            {
+                SelectNextComponent();
+            }
+
+            // Cell selection movement.
+            var dPadInput = GamePad.GetAxis(GamePad.Axis.Dpad, ControllerIndex);
+            if (dPadInput.magnitude > 0)
+            {
+                elapsedMoveTime += Time.deltaTime; // Add to the time elapsed since last move.
+                if (elapsedMoveTime >= MovePauseTime)
+                {
+                    if (dPadInput.x > 0 && IsInsideGrid(selectedCellX + 1, selectedCellY))
+                    {
+                        selectedCellX += 1;
+                        selectedCell.transform.position = TranslateCellToPos(selectedCellX, selectedCellY);
+                    }
+                    else if (dPadInput.x < 0 && IsInsideGrid(selectedCellX - 1, selectedCellY))
+                    {
+                        selectedCellX -= 1;
+                        selectedCell.transform.position = TranslateCellToPos(selectedCellX, selectedCellY);
+                    }
+                    if (dPadInput.y > 0 && IsInsideGrid(selectedCellX, selectedCellY + 1))
+                    {
+                        selectedCellY += 1;
+                        selectedCell.transform.position = TranslateCellToPos(selectedCellX, selectedCellY);
+                    }
+                    else if (dPadInput.y < 0 && IsInsideGrid(selectedCellX, selectedCellY - 1))
+                    {
+                        selectedCellY -= 1;
+                        selectedCell.transform.position = TranslateCellToPos(selectedCellX, selectedCellY);
+                    }
+                    elapsedMoveTime = 0; // Reset the timer after move.
+                }
+            }
+            else
+            {
+                elapsedMoveTime = 0;
             }
 
             // If the left mouse button is down, we want to check if an buildable position is under the mouse.
             if (Input.GetMouseButtonDown(0))
             {
                 // Get mouse position in the world and translate it to a grid position.
-                var mousePos = Cam.ScreenToWorldPoint(Input.mousePosition);
+                var mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
                 var cellPos = TranslatePosToCell(mousePos.x, mousePos.y);
 
                 // Check if there is something in the grid at that position and if it is an available position (for building).
-                if (Get((int) cellPos.x, (int) cellPos.y) != null &&
-                    Get((int) cellPos.x, (int) cellPos.y).tag == GlobalValues.AvailablePosTag)
+                if (Get((int)cellPos.x, (int)cellPos.y) != null &&
+                    Get((int)cellPos.x, (int)cellPos.y).tag == GlobalValues.AvailablePosTag)
                 {
                     // Deselect all the available positions.
                     foreach (var availablePos in GameObject.FindGameObjectsWithTag(GlobalValues.AvailablePosTag))
@@ -87,24 +220,24 @@ public class BuilderHandler : MonoBehaviour
                 }
 
                 // If clicking on a component, rotate it.
-                if (Get((int) cellPos.x, (int) cellPos.y) != null &&
-                    Get((int) cellPos.x, (int) cellPos.y).tag == GlobalValues.ModuleTag)
+                if (Get((int)cellPos.x, (int)cellPos.y) != null &&
+                    Get((int)cellPos.x, (int)cellPos.y).tag == GlobalValues.ModuleTag)
                 {
-                    RotateModule((int) cellPos.x, (int) cellPos.y, 0);
+                    RotateModule((int)cellPos.x, (int)cellPos.y, 0);
                 }
             }
 
             if (Input.GetMouseButtonDown(1))
             {
                 // Get mouse position in the world and translate it to a grid position.
-                var mousePos = Cam.ScreenToWorldPoint(Input.mousePosition);
+                var mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
                 var cellPos = TranslatePosToCell(mousePos.x, mousePos.y);
 
-                if (Get((int) cellPos.x, (int) cellPos.y) != null &&
-                    Get((int) cellPos.x, (int) cellPos.y).tag != GlobalValues.AvailablePosTag &&
-                    Get((int) cellPos.x, (int) cellPos.y).tag != GlobalValues.ShipTag)
+                if (Get((int)cellPos.x, (int)cellPos.y) != null &&
+                    Get((int)cellPos.x, (int)cellPos.y).tag != GlobalValues.AvailablePosTag &&
+                    Get((int)cellPos.x, (int)cellPos.y).tag != GlobalValues.ShipTag)
                 {
-                    RemoveObject((int) cellPos.x, (int) cellPos.y);
+                    RemoveObject((int)cellPos.x, (int)cellPos.y);
                 }
             }
         }
@@ -112,9 +245,9 @@ public class BuilderHandler : MonoBehaviour
         else
         {
             // Go back to build mode to build the ship.
-            if (GamePad.GetButtonDown(ButtonEnterBuildMode, ControllerIndex))
+            if (GamePad.GetButtonDown(ButtonGoToBuildMode, ControllerIndex))
             {
-                inBuildMode = true;
+                GoToBuildMode();
                 return;
             }
 
