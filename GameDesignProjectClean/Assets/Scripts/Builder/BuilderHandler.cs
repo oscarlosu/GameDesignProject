@@ -19,8 +19,6 @@ public class BuilderHandler : MonoBehaviour
 
     private GameObject selectedCell;
     private int selectedCellX, selectedCellY;
-    private int moduleSelected;
-    private Camera cam;
     private GameObject[,] grid;
 
     private bool inBuildMode;
@@ -31,8 +29,6 @@ public class BuilderHandler : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-
         grid = new GameObject[GridSizeX, GridSizeY];
         grid[GridSizeX / 2 - 1, GridSizeY / 2 - 1] = ShipCore;
         grid[GridSizeX / 2, GridSizeY / 2 - 1] = ShipCore;
