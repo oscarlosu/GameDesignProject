@@ -19,11 +19,7 @@ public class Pulse : Projectile
 	// Update is called once per frame
 	void Update ()
 	{
-		col.radius += Time.deltaTime * Speed;
-		if(col.radius >= Radius)
-		{
-			Destroy (gameObject);
-		}
+
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
@@ -41,5 +37,10 @@ public class Pulse : Projectile
 			other.attachedRigidbody.AddForce(RepulsionForce * dir);
 			other.attachedRigidbody.AddTorque(TorqueMagnitude * (Random.Range(0, 1) == 0 ? -1 : 1));
 		}
+	}
+
+	private void DestroyPulse ()
+	{
+		GameObject.Destroy (gameObject);
 	}
 }

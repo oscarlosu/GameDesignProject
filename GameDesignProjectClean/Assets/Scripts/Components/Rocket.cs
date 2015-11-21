@@ -30,7 +30,7 @@ public class Rocket : Projectile
         // Handle thruster
         if (elapsedTime <= ThrusterDuration)
         {
-            rb.AddForceAtPosition(transform.up*ThrustPower, transform.position);
+            rb.AddForceAtPosition(transform.up * ThrustPower, transform.position);
         }
         else
         {

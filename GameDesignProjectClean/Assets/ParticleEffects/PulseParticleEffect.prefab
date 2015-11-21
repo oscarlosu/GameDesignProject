@@ -12,7 +12,7 @@ GameObject:
   - 199: {fileID: 19974560}
   - 114: {fileID: 11469508}
   m_Layer: 0
-  m_Name: Pulse
+  m_Name: PulseParticleEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

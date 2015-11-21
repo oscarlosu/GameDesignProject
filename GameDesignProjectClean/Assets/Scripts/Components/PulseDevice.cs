@@ -73,6 +73,7 @@ public class PulseDevice : Module
 		//pulse.transform.parent = transform;
 		// Reduce ship's velocity to zero
 		ShipCore.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+		ShipCore.GetComponent<Rigidbody2D>().angularVelocity = 0;
 
 		ready = false;
 	}

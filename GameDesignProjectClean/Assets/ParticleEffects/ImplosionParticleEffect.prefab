@@ -12,7 +12,7 @@ GameObject:
   - 199: {fileID: 19936170}
   - 114: {fileID: 11493078}
   m_Layer: 0
-  m_Name: Implosion
+  m_Name: ImplosionParticleEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
