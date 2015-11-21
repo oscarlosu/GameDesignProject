@@ -4,18 +4,26 @@ using System.Collections;
 public class Pulse : Projectile
 {
 	public float RepulsionForce;
+	public float TorqueMagnitude;
 	public float Radius;
 	public float Speed;
+
+	private CircleCollider2D col;
 	// Use this for initialization
 	void Start ()
 	{
-
+		col = GetComponent<CircleCollider2D>();
+		ParticleManager.Instance.SpawnParticle(ParticleType.Pulse, transform.position);
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-	
+		col.radius += Time.deltaTime * Speed;
+		if(col.radius >= Radius)
+		{
+			Destroy (gameObject);
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
@@ -31,6 +39,7 @@ public class Pulse : Projectile
 			// Project velocity on orthogonal direction
 			other.attachedRigidbody.velocity = Vector2.Dot (orthogonal, other.attachedRigidbody.velocity) * orthogonal;
 			other.attachedRigidbody.AddForce(RepulsionForce * dir);
+			other.attachedRigidbody.AddTorque(TorqueMagnitude * (Random.Range(0, 1) == 0 ? -1 : 1));
 		}
 	}
 }

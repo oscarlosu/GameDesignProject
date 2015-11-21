@@ -22,6 +22,11 @@ public class PulseDevice : Module
 	// Update is called once per frame
 	void Update ()
 	{
+		// If the ship hasn't been set yet, don't do ANYTHING!
+		if (ShipCore == null)
+		{
+			return;
+		}
 		if(ready)
 		{
 			switch (InputType)
@@ -40,7 +45,6 @@ public class PulseDevice : Module
 				}
 				break;
 			}
-			ready = false;
 		}
 		else
 		{
@@ -58,9 +62,18 @@ public class PulseDevice : Module
 	void Activate()
 	{
 		// Create pulse
-		GameObject pulse = Instantiate (PulsePrefab);
+		GameObject pulse = (GameObject)Instantiate (PulsePrefab, transform.position, Quaternion.identity);
+		// Set common projectile variables.
+		var projectile = pulse.GetComponent<Projectile>();
+		if (projectile != null)
+		{
+			projectile.SourceCore = ShipCore;
+			projectile.SourceStructure = transform.parent.gameObject;
+		}
 		//pulse.transform.parent = transform;
 		// Reduce ship's velocity to zero
 		ShipCore.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+		ready = false;
 	}
 }

@@ -51,6 +51,8 @@ MonoBehaviour:
   SpriteForward: {fileID: 0}
   SpriteSideways: {fileID: 0}
   SpriteDireciton: 0
+  PulsePrefab: {fileID: 134662, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+  Cooldown: 5
 --- !u!212 &21287972
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -96,6 +98,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: Mass
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: PulsePrefab
+      value: 
+      objectReference: {fileID: 134662, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+    - target: {fileID: 0}
+      propertyPath: Cooldown
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
