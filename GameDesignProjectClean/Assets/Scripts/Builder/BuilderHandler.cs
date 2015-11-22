@@ -196,7 +196,7 @@ public class BuilderHandler : MonoBehaviour
                 elapsedMoveTime = 0;
             }
 
-            // Place component.
+            // Place component or attach existing component to new parent.
             if (GamePad.GetButtonDown(GamePad.Button.A, ControllerIndex))
             {
                 GameObject parent;
@@ -208,6 +208,28 @@ public class BuilderHandler : MonoBehaviour
                     SetupShipComponent(component, selectedCellX, selectedCellY, parent, parentX, parentY);
                     grid[selectedCellX, selectedCellY] = component;
                     UpdateSelectedCellObject();
+                }
+                // If position is already taken and it's a module, change connection point.
+                else if (Get(selectedCellX, selectedCellY).tag == GlobalValues.ModuleTag)
+                {
+                    Debug.Log("Parent direction: " +
+                              Get(selectedCellX, selectedCellY).GetComponent<Module>().ParentDirection);
+                    switch (Get(selectedCellX, selectedCellY).GetComponent<Module>().ParentDirection)
+                    {
+                        case Module.Direction.Up:
+                            RotateModuleToParent(selectedCellX, selectedCellY, Module.Direction.Right);
+                            break;
+                        case Module.Direction.Right:
+                            RotateModuleToParent(selectedCellX, selectedCellY, Module.Direction.Down);
+                            break;
+                        case Module.Direction.Down:
+                            RotateModuleToParent(selectedCellX, selectedCellY, Module.Direction.Left);
+                            break;
+                        case Module.Direction.Left:
+                            RotateModuleToParent(selectedCellX, selectedCellY, Module.Direction.Up);
+                            break;
+                    }
+                    
                 }
             }
 
@@ -244,6 +266,69 @@ public class BuilderHandler : MonoBehaviour
             }
 
             // The builder UI should be hidden and maybe a small icon and text should explain what to do, to go back to build mode.
+        }
+    }
+
+    private void RotateModuleToParent(int x, int y, Module.Direction direction)
+    {
+        var module = Get(x, y);
+        while (true)
+        {
+            Debug.Log("Attaching module to: " + direction);
+            // If module not found, or rotation all the way around has been tried, return.
+            if (module == null || direction == module.GetComponent<Module>().ParentDirection)
+            {
+                return;
+            }
+            GameObject newParent;
+            switch (direction)
+            {
+                case Module.Direction.Up:
+                    newParent = Get(x, y + 1);
+                    if (newParent != null && (newParent.tag == GlobalValues.ShipTag || newParent.tag == GlobalValues.StructureTag))
+                    {
+                        module.transform.parent = newParent.transform;
+                        module.GetComponent<Module>().ParentDirection = Module.Direction.Up;
+                        module.GetComponent<Module>().RotateModuleTo(Module.Direction.Down);
+                        return;
+                    }
+                    direction = Module.Direction.Right;
+                    continue;
+                case Module.Direction.Right:
+                    newParent = Get(x + 1, y);
+                    if (newParent != null && (newParent.tag == GlobalValues.ShipTag || newParent.tag == GlobalValues.StructureTag))
+                    {
+                        module.transform.parent = newParent.transform;
+                        module.GetComponent<Module>().ParentDirection = Module.Direction.Right;
+                        module.GetComponent<Module>().RotateModuleTo(Module.Direction.Left);
+                        return;
+                    }
+                    direction = Module.Direction.Down;
+                    continue;
+                case Module.Direction.Down:
+                    newParent = Get(x, y - 1);
+                    if (newParent != null && (newParent.tag == GlobalValues.ShipTag || newParent.tag == GlobalValues.StructureTag))
+                    {
+                        module.transform.parent = newParent.transform;
+                        module.GetComponent<Module>().ParentDirection = Module.Direction.Down;
+                        module.GetComponent<Module>().RotateModuleTo(Module.Direction.Up);
+                        return;
+                    }
+                    direction = Module.Direction.Left;
+                    Debug.Log("Try again with: " + direction);
+                    continue;
+                case Module.Direction.Left:
+                    newParent = Get(x - 1, y);
+                    if (newParent != null && (newParent.tag == GlobalValues.ShipTag || newParent.tag == GlobalValues.StructureTag))
+                    {
+                        module.transform.parent = newParent.transform;
+                        module.GetComponent<Module>().ParentDirection = Module.Direction.Left;
+                        module.GetComponent<Module>().RotateModuleTo(Module.Direction.Right);
+                        return;
+                    }
+                    direction = Module.Direction.Up;
+                    continue;
+            }
         }
     }
 
