@@ -65,7 +65,7 @@ public class Shield : Module
 				elapsedTime = 0;
 				deactivating = true;
 			}
-			else if(other.attachedRigidbody != null)
+			else if(other.gameObject.GetComponent<Projectile>() == null && other.attachedRigidbody != null)
 			{
 				elapsedTime = 0;
 				deactivating = true;
