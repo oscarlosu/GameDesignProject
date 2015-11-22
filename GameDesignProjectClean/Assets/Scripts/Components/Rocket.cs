@@ -30,8 +30,7 @@ public class Rocket : Projectile
         // Handle thruster
         if (elapsedTime <= ThrusterDuration)
         {
-
-            rb.AddForceAtPosition(transform.up*ThrustPower, transform.position);
+            rb.AddForceAtPosition(transform.up * ThrustPower, transform.position);
         }
         else
         {
@@ -39,31 +38,34 @@ public class Rocket : Projectile
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        // The grace period should only make the missiles not hurt their own ship
-        if (elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceCore.GetInstanceID())
-        {
-            // Create the explosion, when the rocket is destroyed. The explosion should be the one doing the damage.
-            // When destroyed, create an explosion, which damages objects around it.
-            var explosion = GameObject.Instantiate(ExplosionPrefab);
-            explosion.transform.position = transform.position;
-            explosion.GetComponent<Explosion>().Damage = Damage;
-            GameObject.Destroy(gameObject);
-        }
-    }
-
-	private void OnTriggerEnter2D(Collider2D other)
+	void OnCollisionEnter2D(Collision2D other)
 	{
-		// The grace period should only make the missiles not hurt their own ship
-		if (elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceCore.GetInstanceID())
+		// With something that is not the source ship or after the grace period
+		if (elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceStructure.GetInstanceID())
 		{
-			// Create the explosion, when the rocket is destroyed. The explosion should be the one doing the damage.
-			// When destroyed, create an explosion, which damages objects around it.
-			var explosion = GameObject.Instantiate(ExplosionPrefab);
-			explosion.transform.position = transform.position;
-			explosion.GetComponent<Explosion>().Damage = Damage;
-			GameObject.Destroy(gameObject);
+			Debug.Log("Rocket detected collision with " + other.gameObject.name);
+			Activate();
 		}
+	}
+	
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		// Missiles only activate with shield or laser triggers
+		if ((other.gameObject.GetComponent<Shield>() != null && (elapsedTime > GracePeriod || other.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID()))
+		    || other.gameObject.GetComponent<Laser>() != null)
+		{
+			Debug.Log("Rocket trigger detected trigger with " + other.gameObject.name);
+			Activate();
+		}
+	}
+
+	void Activate()
+	{
+		// Create the explosion, when the rocket is destroyed. The explosion should be the one doing the damage.
+		// When destroyed, create an explosion, which damages objects around it.
+		var explosion = GameObject.Instantiate(ExplosionPrefab);
+		explosion.transform.position = transform.position;
+		explosion.GetComponent<Explosion>().Damage = Damage;
+		GameObject.Destroy(gameObject);
 	}
 }

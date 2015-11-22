@@ -36,7 +36,7 @@ public class RocketLauncher : Module
             switch (InputType)
             {
                 case InputKeyType.Button:
-                    if (GamePad.GetButton(ButtonKey, ShipCore.GetComponent<Core>().ControllerIndex))
+                    if (GamePad.GetButtonDown(ButtonKey, ShipCore.GetComponent<Core>().ControllerIndex))
                     {
                         Activate();
                     }
@@ -47,7 +47,7 @@ public class RocketLauncher : Module
                     {
                         Activate();
                     }
-                    break;
+					break;
             }
         }
 

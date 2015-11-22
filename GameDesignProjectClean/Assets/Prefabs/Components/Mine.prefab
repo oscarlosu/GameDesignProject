@@ -109,6 +109,7 @@ MonoBehaviour:
   TimeTillActive: 2
   DetectionToExplosionTime: 1
   GracePeriod: 1
+  MineCollider: {fileID: 5836638}
   ExplosionPrefab: {fileID: 123384, guid: 14d6b3a3b065ca2418069880043eb2f0, type: 2}
 --- !u!212 &21237674
 SpriteRenderer:
@@ -204,6 +205,10 @@ Prefab:
       propertyPath: TimeTillActive
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MineCollider
+      value: 
+      objectReference: {fileID: 5836638}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 155838}

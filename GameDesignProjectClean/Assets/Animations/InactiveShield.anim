@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: shield
+  m_Name: InactiveShield
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -14,30 +14,42 @@ AnimationClip:
   m_CompressedRotationCurves: []
   m_PositionCurves: []
   m_ScaleCurves: []
-  m_FloatCurves: []
+  m_FloatCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Enabled
+    path: EnergyField
+    classID: 212
+    script: {fileID: 0}
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: ccfa4cf3bbc9432419af19857305575e, type: 3}
-    - time: .100000001
-      value: {fileID: 21300000, guid: 1aa74c5fc55fe4e4086627543545ce5a, type: 3}
-    - time: .200000003
-      value: {fileID: 21300000, guid: 8ae30171286d12b49b28674f2ff30559, type: 3}
-    - time: .300000012
-      value: {fileID: 21300000, guid: d1328605eccb5124b92bf130a062330f, type: 3}
-    - time: .400000006
       value: {fileID: 21300000, guid: 5fc0cce31204cbe4fbf5a9f18af3aebf, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 30
+  m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
     genericBindings:
+    - path: 3307065767
+      attribute: 3305885265
+      script: {fileID: 0}
+      classID: 212
+      customType: 0
+      isPPtrCurve: 0
     - path: 0
       attribute: 0
       script: {fileID: 0}
@@ -45,15 +57,11 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: ccfa4cf3bbc9432419af19857305575e, type: 3}
-    - {fileID: 21300000, guid: 1aa74c5fc55fe4e4086627543545ce5a, type: 3}
-    - {fileID: 21300000, guid: 8ae30171286d12b49b28674f2ff30559, type: 3}
-    - {fileID: 21300000, guid: d1328605eccb5124b92bf130a062330f, type: 3}
     - {fileID: 21300000, guid: 5fc0cce31204cbe4fbf5a9f18af3aebf, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: .433333337
+    m_StopTime: .0166666675
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -67,7 +75,21 @@ AnimationClip:
     m_KeepOriginalPositionXZ: 0
     m_HeightFromFeet: 0
     m_Mirror: 0
-  m_EditorCurves: []
+  m_EditorCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Enabled
+    path: EnergyField
+    classID: 212
+    script: {fileID: 0}
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0

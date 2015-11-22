@@ -8,7 +8,8 @@ public class Mine : Projectile
 {
     public float TimeTillActive; // The time from it's spawned till the mine is active (will start detect objects in its vicinity).
     public float DetectionToExplosionTime; // The time it takes from something being in its vicinity till it will blow up.
-    public float GracePeriod; // TODO Not used for anything yet...
+    public float GracePeriod;
+	public Collider2D MineCollider;
 
     public GameObject ExplosionPrefab;
 
@@ -17,6 +18,7 @@ public class Mine : Projectile
     private float timeFromDetection;
 
     private Animator anim;
+
 
     // Use this for initialization
     void Start()
@@ -38,14 +40,26 @@ public class Mine : Projectile
             }
         }
     }
+	// If we want mines to explode as soon as they collide with anything with a non-trigger collider, we just need to uncomment this function
+	private void OnCollisionEnter2D(Collision2D coll)
+	{
+		Debug.Log ("Mine detected collision with " + coll.gameObject.name);
+		// Rockets and missiles will be activated and will their explosion will make the mine explode in an OnTriggerEnter2D call
+	}
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (elapsedTime > TimeTillActive)
+
+		if (elapsedTime > TimeTillActive && ShouldTrigger(other))
         {
             detected = true;
             anim.SetTrigger("TriggerDamage");
         }
+		else if(ShouldExplode(other) && other.IsTouching (MineCollider))
+		{
+			Activate();
+		}
+
     }
 
     private void Activate()
@@ -57,4 +71,16 @@ public class Mine : Projectile
         explosion.GetComponent<Explosion>().Damage = Damage;
         GameObject.Destroy(gameObject);
     }
+
+	private bool ShouldTrigger(Collider2D other)
+	{
+		return other.gameObject.GetComponent<Structure>() != null || other.gameObject.GetComponent<Rocket>() != null ||
+		       other.gameObject.GetComponent<HomingMissile>() != null || other.gameObject.GetComponent<Mine>() != null;
+	}
+
+	private bool ShouldExplode(Collider2D other)
+	{
+		return other.gameObject.GetComponent<Explosion>() != null || other.gameObject.GetComponent<Laser>() != null || 
+			(other.gameObject.GetComponent<Shield>() != null && (elapsedTime > GracePeriod || other.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID()));
+	}
 }

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(AudioSource))]
 public class Explosion : MonoBehaviour
@@ -30,14 +29,19 @@ public class Explosion : MonoBehaviour
         else if (ast != null)
         {
             other.gameObject.GetComponent<Asteroid>().Breakdown();
+			// Calculate push force direction
+			Vector3 dir = other.transform.position - transform.position;
+			dir.Normalize();
+			ast.GetComponent<Rigidbody2D>().AddForceAtPosition(dir * PushForce, transform.position);
         }
 		// Only affects rigidbodies with a mass 
-		else if (other.GetComponent<Rigidbody2D>() != null && other.GetComponent<Rigidbody2D>().mass > GlobalValues.EffectiveZeroMass)
-        {
+		/*else if (other.GetComponent<Rigidbody2D>() != null && 
+		         other.GetComponent<Collider2D>() != null && !other.GetComponent<Collider2D>().isTrigger/*other.GetComponent<Rigidbody2D>().mass > GlobalValues.EffectiveZeroMass)
+        /*{
 			Vector3 dir = other.transform.position - transform.position;
 			dir.Normalize();
 			other.GetComponent<Rigidbody2D>().AddForceAtPosition(dir * PushForce, transform.position);
-        }
+        }*/
     }
 
 

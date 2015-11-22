@@ -1,4 +1,4 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using GamepadInput;
 using UnityEditor;
@@ -9,6 +9,7 @@ public class Thruster : Module
 {
     private ParticleSystem[] childParticles;
     public float ThrustPower;
+    public bool IsActivated { get; private set; }
 
     public float DotMargin; // Default 0.01 .
     public float CrossMargin; // Default 0.01 .
@@ -24,21 +25,9 @@ public class Thruster : Module
                 childParticles[i].Stop();
         }
     }
-
     public void Update()
     {
-        // If velocity magnitude is larger than 0, play thruster sound.
-        if (ShipCore.GetComponent<Rigidbody2D>().velocity.magnitude > 0)
-        {
-            //Thruster sound depending on velocity. This should not be here, but couldn't get it to work in Activate().
-            //It still needs some work, becuase right now, thrusters are playing all the time, not just when they are fired
-            //Feel free to move to a better location.
-            this.GetComponent<AudioSource>().pitch =
-                Mathf.Clamp(ShipCore.GetComponent<Rigidbody2D>().velocity.magnitude, 0f, 2.5f) + Random.Range(0f, 0.5f);
-            this.GetComponent<AudioSource>().volume = Mathf.Clamp(ShipCore.GetComponent<Rigidbody2D>().velocity.magnitude,
-                0f, 0.2f);
-        }
-
+ 
         // If the ship hasn't been set yet, don't do ANYTHING!
         if (ShipCore == null)
         {
@@ -50,15 +39,12 @@ public class Thruster : Module
             case InputKeyType.Button:
                 if (GamePad.GetButton(ButtonKey, ShipCore.GetComponent<Core>().ControllerIndex))
                 {
+                    IsActivated = true;
                     Activate(1);
-                    // DEBUG: Change sprite colour, when power is larger than 0.
-                    GetComponent<SpriteRenderer>().color = Color.magenta;
                 }
                 else
                 {
-                    // DEBUG: Change sprite colour, when deactivating.
-                    GetComponent<SpriteRenderer>().color = Color.white;
-                    Deactivate();
+                    IsActivated = false;
                 }
 
                 break;
@@ -66,15 +52,12 @@ public class Thruster : Module
                 var value = GamePad.GetTrigger(TriggerKey, ShipCore.GetComponent<Core>().ControllerIndex);
                 if (value > 0)
                 {
+                    IsActivated = true;
                     Activate(value);
-                    // DEBUG: Change sprite colour, when power is larger than 0.
-                    GetComponent<SpriteRenderer>().color = Color.magenta;
                 }
                 else
                 {
-                    // DEBUG: Change sprite colour, when deactivating.
-                    GetComponent<SpriteRenderer>().color = Color.white;
-                    Deactivate();
+                    IsActivated = false;
                 }
                 break;
         }
@@ -84,6 +67,7 @@ public class Thruster : Module
         if (leftStickValue.magnitude > 0)
         {
             var powerTotal = 0f;
+
             // Control ship depending on the selected control mode.
             switch (ShipCore.GetComponent<Core>().ShipControlMode)
             {
@@ -94,26 +78,18 @@ public class Thruster : Module
                     powerTotal = DirectionStickControl(leftStickValue);
                     break;
             }
-                
-            // DEBUG: Change sprite colour, when power is larger than 0.
-            GetComponent<SpriteRenderer>().color = powerTotal > 0 ? Color.magenta : Color.white;
-            ShipCore.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up) * ThrustPower * (powerTotal), transform.position);
-            if (childParticles.Length > 0)
+
+            // If the power total is larger than 0, the thrusters are active.
+            if (powerTotal > 0)
             {
-                if (powerTotal > 0 && !childParticles[0].isPlaying)
-                {
-                    for (int i = 0; i < childParticles.Length; i++)
-                    {
-                        childParticles[i].Play();
-                    }
-                }
+                IsActivated = true;
             }
+
+            ShipCore.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up) * ThrustPower * (powerTotal), transform.position);
         }
-        else
-        {
-            GetComponent<SpriteRenderer>().color = Color.white;
-            Deactivate();
-        }
+
+        // Handle thruster state depending on if it is active or not.
+        HandleThrusterState();
     }
 
     public float RotationStickControl(Vector2 leftStickValue)
@@ -291,7 +267,7 @@ public class Thruster : Module
                 }
             }
         }
-        return Mathf.Abs(powerX) + Mathf.Abs(powerY);;
+        return Mathf.Abs(powerX) + Mathf.Abs(powerY); ;
     }
 
     public float DirectionStickControl(Vector2 leftStickValue)
@@ -473,57 +449,65 @@ public class Thruster : Module
     public void Activate(float power)
     {
         ShipCore.GetComponent<Rigidbody2D>().AddForceAtPosition((-transform.up) * ThrustPower * power, transform.position);
-        if (!childParticles[0].isPlaying)
-        {
-            Debug.Log("activate function");
-            for (int i = 0; i < childParticles.Length; i++)
-            {
-                childParticles[i].Play();
-            }
-        }
     }
 
-    void Deactivate()
+    public IEnumerator Disable(float time)
     {
-        bool input = false;
-        switch (InputType)
-        {
-            case InputKeyType.Button:
-                if (GamePad.GetButton(ButtonKey, ShipCore.GetComponent<Core>().ControllerIndex))
-                    input = true;
-                break;
-            case InputKeyType.Trigger:
-                var value = GamePad.GetTrigger(TriggerKey, ShipCore.GetComponent<Core>().ControllerIndex);
-                if (value > 0)
-                    input = true;
-                break;
-            default:
-                Debug.LogError("AAAARRRGGGHHHH");
-                break;
-        }
-        Vector2 leftStickValue = GamePad.GetAxis(GamePad.Axis.LeftStick, ShipCore.GetComponent<Core>().ControllerIndex);
-        if (leftStickValue.magnitude > 0.2f)
-        {
-            input = true;
-        }
-
-        if (!input)
-        {
-            for (int i = 0; i < childParticles.Length; i++)
-            {
-                childParticles[i].Stop();
-            }
-
-        }
+        enabled = false;
+        yield return new WaitForSeconds(time);
+        enabled = true;
     }
 
-	public IEnumerator Disable(float time)
+    public void HandleThrusterState()
+    {
+        if (IsActivated)
+        {
+            // Activate particles.
+
+            // Activate sound.
+			PlayThrusters();
+
+            // Activate colouring.
+            GetComponent<SpriteRenderer>().color = Color.magenta;
+        }
+        else
+        {
+            // Deactivate particles.
+
+            // Deactivate sounds.
+			ThrusterFalloff();
+            // Deactivate colouring.
+            GetComponent<SpriteRenderer>().color = Color.white;
+        }
+    }
+	public void PlayThrusters()
 	{
-		enabled = false;
-		yield return new WaitForSeconds(time);
-		enabled = true;
+		//Duration it takes to have "full" thrust power
+		float Duration = 1f;
+		
+		if (!this.GetComponent<AudioSource> ().isPlaying) {
+			this.GetComponent<AudioSource> ().Play ();
+		} else {
+            this.GetComponent<AudioSource>().volume = 1;
+            this.GetComponent<AudioSource>().pitch = Mathf.MoveTowards(this.GetComponent<AudioSource>().pitch,2f,Time.deltaTime/Duration);
+		}
+	}
+	
+	public void ThrusterFalloff()
+	{
+		float Duration = 0.25f;
+        float VolumeFalloff = 0.25f;
+		
+		if (!this.GetComponent<AudioSource> ().isPlaying) {
+			this.GetComponent<AudioSource> ().Play ();
+		} else {
+            this.GetComponent<AudioSource>().volume = Mathf.MoveTowards(this.GetComponent<AudioSource>().volume, 0, Time.deltaTime / VolumeFalloff);
+			this.GetComponent<AudioSource>().pitch = Mathf.MoveTowards(this.GetComponent<AudioSource>().pitch,0f,Time.deltaTime/Duration);
+		}
+		
 	}
 }
+
 
 /****************
 * Editor tools.

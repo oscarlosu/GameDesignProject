@@ -41,14 +41,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smallExplosion: {fileID: 176330, guid: d4ee06342a5af1d4f981cef146649c9d, type: 2}
   largeExplosion: {fileID: 176330, guid: d4ee06342a5af1d4f981cef146649c9d, type: 2}
-  pulse: {fileID: 176330, guid: d4ee06342a5af1d4f981cef146649c9d, type: 2}
+  pulse: {fileID: 107028, guid: 6bfacfacac7d8c2428f936b08457936b, type: 2}
+  implosion: {fileID: 151446, guid: 2974d2787698c334ca6ac9abc2673fbd, type: 2}
+  part: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: implosion
+      value: 
+      objectReference: {fileID: 151446, guid: 2974d2787698c334ca6ac9abc2673fbd, type: 2}
+    - target: {fileID: 0}
+      propertyPath: pulse
+      value: 
+      objectReference: {fileID: 107028, guid: 6bfacfacac7d8c2428f936b08457936b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 177662}
