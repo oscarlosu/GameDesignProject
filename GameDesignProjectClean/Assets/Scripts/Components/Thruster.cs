@@ -483,22 +483,25 @@ public class Thruster : Module
 	public void PlayThrusters()
 	{
 		//Duration it takes to have "full" thrust power
-		float Duration = 2f;
+		float Duration = 1f;
 		
 		if (!this.GetComponent<AudioSource> ().isPlaying) {
 			this.GetComponent<AudioSource> ().Play ();
 		} else {
-			this.GetComponent<AudioSource>().pitch = Mathf.MoveTowards(this.GetComponent<AudioSource>().pitch,2f,Time.deltaTime/Duration);
+            this.GetComponent<AudioSource>().volume = 1;
+            this.GetComponent<AudioSource>().pitch = Mathf.MoveTowards(this.GetComponent<AudioSource>().pitch,2f,Time.deltaTime/Duration);
 		}
 	}
 	
 	public void ThrusterFalloff()
 	{
-		float Duration = 1f; 
+		float Duration = 0.25f;
+        float VolumeFalloff = 0.25f;
 		
 		if (!this.GetComponent<AudioSource> ().isPlaying) {
 			this.GetComponent<AudioSource> ().Play ();
 		} else {
+            this.GetComponent<AudioSource>().volume = Mathf.MoveTowards(this.GetComponent<AudioSource>().volume, 0, Time.deltaTime / VolumeFalloff);
 			this.GetComponent<AudioSource>().pitch = Mathf.MoveTowards(this.GetComponent<AudioSource>().pitch,0f,Time.deltaTime/Duration);
 		}
 		
