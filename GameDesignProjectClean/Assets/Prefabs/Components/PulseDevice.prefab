@@ -49,7 +49,8 @@ MonoBehaviour:
   TriggerKey: 0
   CanSpriteRotate: 0
   SpriteForward: {fileID: 0}
-  SpriteSideways: {fileID: 0}
+  SpriteLeft: {fileID: 0}
+  SpriteRight: {fileID: 0}
   SpriteDireciton: 0
   PulsePrefab: {fileID: 134662, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
   Cooldown: 5

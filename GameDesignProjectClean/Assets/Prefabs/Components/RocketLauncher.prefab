@@ -41,15 +41,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ComponentName: Rocket
-  BuilderSprite: {fileID: 21300000, guid: c044709db96e8f34893c31a5a5b7a785, type: 3}
+  BuilderSprite: {fileID: 21300000, guid: 84837f32f0d5bd140bc68e613d4bcbfc, type: 3}
   ShipCore: {fileID: 0}
   Mass: 1
   InputType: 0
   ButtonKey: 0
   TriggerKey: 0
   CanSpriteRotate: 1
-  SpriteForward: {fileID: 21300000, guid: c044709db96e8f34893c31a5a5b7a785, type: 3}
-  SpriteSideways: {fileID: 21300000, guid: 132b41595b1b3a64093d70b6eac76462, type: 3}
+  SpriteForward: {fileID: 21300000, guid: 84837f32f0d5bd140bc68e613d4bcbfc, type: 3}
+  SpriteLeft: {fileID: 21300000, guid: 15cdeb41531889646ac0cb8fd53a029b, type: 3}
+  SpriteRight: {fileID: 21300000, guid: b7650d9a552156b49b97581a89bb5fb9, type: 3}
   SpriteDireciton: 0
   RocketPrefab: {fileID: 155838, guid: 05c2b4bd33473584d9d05b83800dc634, type: 2}
   Cooldown: 1

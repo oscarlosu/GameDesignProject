@@ -41,15 +41,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ComponentName: Implosion Bomb Launcher
-  BuilderSprite: {fileID: 21300000, guid: ff61557447e882449b35e3b0b666b333, type: 3}
+  BuilderSprite: {fileID: 21300000, guid: 9e5386481c136f5458bc01b344de0dc3, type: 3}
   ShipCore: {fileID: 0}
   Mass: 1
   InputType: 0
   ButtonKey: 0
   TriggerKey: 0
   CanSpriteRotate: 1
-  SpriteForward: {fileID: 21300000, guid: ff61557447e882449b35e3b0b666b333, type: 3}
-  SpriteSideways: {fileID: 21300000, guid: bce278aaf81acc1488afff5bd5061b3f, type: 3}
+  SpriteForward: {fileID: 21300000, guid: 9e5386481c136f5458bc01b344de0dc3, type: 3}
+  SpriteLeft: {fileID: 21300000, guid: cd664b2a031ab3b47b05b6677f5d4779, type: 3}
+  SpriteRight: {fileID: 21300000, guid: 4a26bf35e7a318e4baf1a2082e2da616, type: 3}
   SpriteDireciton: 0
   RocketPrefab: {fileID: 108902, guid: 0807933e5ed136b41a5589dedc9d0fbb, type: 2}
   Cooldown: 5
