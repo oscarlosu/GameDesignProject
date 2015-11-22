@@ -31,7 +31,13 @@ public class Shield : Module
 	// Update is called once per frame
 	void Update ()
 	{
-		elapsedTime += Time.deltaTime;
+        // If in build mode, don't do anything.
+        if (ShipCore.GetComponent<Core>().InBuildMode)
+        {
+            return;
+        }
+
+        elapsedTime += Time.deltaTime;
 		if(deactivating)
 		{
 			// When the shield blocked something, it remains active for a short period of time

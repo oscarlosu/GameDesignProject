@@ -28,6 +28,11 @@ public class LaserGun : Module
     // Update is called once per frame
     void Update()
     {
+        // If in build mode, don't do anything.
+        if (ShipCore.GetComponent<Core>().InBuildMode)
+        {
+            return;
+        }
 
         // Handle normal input.
         if (ready)

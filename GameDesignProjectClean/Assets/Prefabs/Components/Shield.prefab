@@ -110,7 +110,8 @@ MonoBehaviour:
   TriggerKey: 0
   CanSpriteRotate: 0
   SpriteForward: {fileID: 0}
-  SpriteSideways: {fileID: 0}
+  SpriteLeft: {fileID: 0}
+  SpriteRight: {fileID: 0}
   SpriteDireciton: 0
   Active: 1
   Radius: 3.32999992

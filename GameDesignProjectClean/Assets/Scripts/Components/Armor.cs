@@ -16,7 +16,11 @@ public class Armor : Module
     // Update is called once per frame
     void Update()
     {
-        
+        // If in build mode, don't do anything.
+        if (ShipCore.GetComponent<Core>().InBuildMode)
+        {
+            return;
+        }
     }
 
     public void Activate()

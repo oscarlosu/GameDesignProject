@@ -27,6 +27,11 @@ public class Thruster : Module
     }
     public void Update()
     {
+        // If in build mode, don't do anything.
+        if (ShipCore.GetComponent<Core>().InBuildMode)
+        {
+            return;
+        }
  
         // If the ship hasn't been set yet, don't do ANYTHING!
         if (ShipCore == null)

@@ -24,6 +24,12 @@ public class MineSpawner : Module
     // Update is called once per frame
     void Update()
     {
+        // If in build mode, don't do anything.
+        if (ShipCore.GetComponent<Core>().InBuildMode)
+        {
+            return;
+        }
+
         // If the ship hasn't been set yet, don't do ANYTHING!
         if (ShipCore == null)
         {
