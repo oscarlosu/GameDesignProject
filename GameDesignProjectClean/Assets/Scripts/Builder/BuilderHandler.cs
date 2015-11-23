@@ -204,9 +204,8 @@ public class BuilderHandler : MonoBehaviour
             }
 
             // Cell selection movement.
-            var dPadInput = GamePad.GetAxis(GamePad.Axis.Dpad, ControllerIndex);
             var leftStickInput = GamePad.GetAxis(GamePad.Axis.LeftStick, ControllerIndex);
-            var moveInput = dPadInput.magnitude > 0 ? dPadInput : leftStickInput;
+            var moveInput = leftStickInput;
             if (moveInput.magnitude > 0.1)
             {
                 elapsedMoveTime += Time.deltaTime; // Add to the time elapsed since last move.
