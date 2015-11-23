@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 482654}
   - 114: {fileID: 11487204}
+  - 82: {fileID: 8296370}
   m_Layer: 0
   m_Name: BuilderHandler
   m_TagString: BuilderHandler
@@ -28,6 +29,76 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!82 &8296370
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 137746}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!114 &11487204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -73,13 +144,32 @@ MonoBehaviour:
   - {fileID: 103126, guid: 29d50de0aaaa3654e90bcdf60850b2dd, type: 2}
   - {fileID: 116820, guid: 99b767e080033e1498a3fc293e5e2f4e, type: 2}
   - {fileID: 142234, guid: 2de80f27c9dc65d47941d2b714b2966c, type: 2}
+  CellMoveSound: {fileID: 8300000, guid: 16048635d0634492191dc79a634b05d3, type: 3}
+  PlaceModuleSound: {fileID: 8300000, guid: 8381844ad593145f4b8bdf9a885c2e35, type: 3}
+  NextModuleSound: {fileID: 8300000, guid: 89f00afaa84d846b58b40a89cbd7c0d7, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: CellMoveSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 16048635d0634492191dc79a634b05d3, type: 3}
+    - target: {fileID: 0}
+      propertyPath: PlaceModuleSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 8381844ad593145f4b8bdf9a885c2e35, type: 3}
+    - target: {fileID: 0}
+      propertyPath: NextModuleSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 89f00afaa84d846b58b40a89cbd7c0d7, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 137746}
