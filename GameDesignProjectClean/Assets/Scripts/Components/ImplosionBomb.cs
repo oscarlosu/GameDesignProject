@@ -10,15 +10,25 @@ public class ImplosionBomb : Projectile
 	private Rigidbody2D rb;
 	private float elapsedTime;
 
-	
-	// Use this for initialization
-	void Awake ()
+    private ParticleSystem[] childParticles;
+
+
+    // Use this for initialization
+    void Awake ()
 	{
 		rb = GetComponent<Rigidbody2D> ();
 		/*this.GetComponent<AudioSource> ().pitch = Random.Range (0.9f, 1.1f);
 		this.GetComponent<AudioSource> ().volume = Random.Range (0.9f, 1.1f);*/
 		InGrace = true;
-	}
+
+        childParticles = gameObject.GetComponentsInChildren<ParticleSystem>();
+
+        for (int i = 0; i < childParticles.Length; i++)
+        {
+            if (!childParticles[i].isPlaying)
+                childParticles[i].Play();
+        }
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -43,8 +53,13 @@ public class ImplosionBomb : Projectile
 		}
 		else
 		{
-			//GetComponent<AudioSource>().Stop();
-		}
+            for (int i = 0; i < childParticles.Length; i++)
+            {
+                if (childParticles[i].isPlaying)
+                    childParticles[i].Stop();
+            }
+            //GetComponent<AudioSource>().Stop();
+        }
 	}
 	
 	void OnCollisionEnter2D (Collision2D other)

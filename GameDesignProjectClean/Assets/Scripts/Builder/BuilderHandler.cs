@@ -24,7 +24,6 @@ public class BuilderHandler : MonoBehaviour
     public GameObject SelectedCellPrefab;
     public GameObject[] AvailableComponents;
 
-
     private GameObject shipCore;
     private GameObject selectedCell;
     private int selectedCellX, selectedCellY;
@@ -36,6 +35,10 @@ public class BuilderHandler : MonoBehaviour
     private int selectedComponent;
     private GameObject cloneShip; // The ship used in play mode to test the build.
     private float elapsedMoveTime; // The time elapsed since last move (used to restrict how fast the player can move the selection).
+
+	public AudioClip CellMoveSound;
+	public AudioClip PlaceModuleSound;
+	public AudioClip NextModuleSound;
 
     // Use this for initialization
     void Start()
@@ -196,10 +199,14 @@ public class BuilderHandler : MonoBehaviour
             // Select component.
             if (GamePad.GetButtonDown(GamePad.Button.LeftShoulder, ControllerIndex))
             {
+				GetComponent<AudioSource>().clip = NextModuleSound;
+				GetComponent<AudioSource>().Play();
                 SelectPreviousComponent();
             }
             if (GamePad.GetButtonDown(GamePad.Button.RightShoulder, ControllerIndex))
             {
+				GetComponent<AudioSource>().clip = NextModuleSound;
+				GetComponent<AudioSource>().Play();
                 SelectNextComponent();
             }
 
@@ -208,9 +215,13 @@ public class BuilderHandler : MonoBehaviour
             var moveInput = leftStickInput;
             if (moveInput.magnitude > 0.1)
             {
+
                 elapsedMoveTime += Time.deltaTime; // Add to the time elapsed since last move.
                 if (elapsedMoveTime >= MovePauseTime)
                 {
+					GetComponent<AudioSource>().clip = CellMoveSound;
+					GetComponent<AudioSource>().Play();
+
                     if (moveInput.x > 0 && IsInsideGrid(selectedCellX + 1, selectedCellY))
                     {
                         selectedCellX += 1;
@@ -255,6 +266,13 @@ public class BuilderHandler : MonoBehaviour
                     grid[selectedCellX, selectedCellY] = component;
                     UpdateBuilderUi();
                     shipCore.GetComponent<Core>().Assemble();
+
+					GetComponent<AudioSource>().clip = PlaceModuleSound;
+					if (!GetComponent<AudioSource>().isPlaying)
+					{
+						GetComponent<AudioSource>().Play();
+					}
+
                     // Select module input.
                     if (component.GetComponent<Module>() != null)
                     {
