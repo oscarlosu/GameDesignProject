@@ -9,7 +9,7 @@ public class HomingMissile : Projectile
     public float ThrustPower;
     public float ThrusterDuration;
     public float TurnSpeed;
-    public float GracePeriod; // TODO Not used for anything yet...
+    public float GracePeriod;
     public float NewTargetTimer; // The time between each new target selection.
     public int TimesNotTargetingSource; // The number of times new target selection will not select the source.
 
@@ -22,13 +22,12 @@ public class HomingMissile : Projectile
     private int newTargetCount; // How many times a new target has been found.
     private float timeSinceLastTarget;
 
-	public bool InGrace {get; private set;}
-
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         this.GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
         this.GetComponent<AudioSource>().volume = Random.Range(0.9f, 1.1f);
+		InGrace = true;
     }
 
     // Update is called once per frame

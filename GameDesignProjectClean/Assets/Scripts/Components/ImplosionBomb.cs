@@ -9,7 +9,7 @@ public class ImplosionBomb : Projectile
 	public GameObject ImplosionPrefab;
 	private Rigidbody2D rb;
 	private float elapsedTime;
-	public bool InGrace {get; private set;}
+
 	
 	// Use this for initialization
 	void Awake ()
@@ -17,6 +17,7 @@ public class ImplosionBomb : Projectile
 		rb = GetComponent<Rigidbody2D> ();
 		/*this.GetComponent<AudioSource> ().pitch = Random.Range (0.9f, 1.1f);
 		this.GetComponent<AudioSource> ().volume = Random.Range (0.9f, 1.1f);*/
+		InGrace = true;
 	}
 	
 	// Update is called once per frame
