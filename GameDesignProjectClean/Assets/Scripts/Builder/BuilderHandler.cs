@@ -13,6 +13,7 @@ public class BuilderHandler : MonoBehaviour
     public GameObject ShipCore;
     public GameObject BuilderCanvas;
     public Image ImageLeft, ImageCenter, ImageRight;
+    public Text ComponentNameText;
     public int GridSizeX, GridSizeY;
     public GameObject AvailablePosPrefab;
     public GameObject SelectedCellPrefab;
@@ -105,6 +106,9 @@ public class BuilderHandler : MonoBehaviour
                 ? AvailableComponents[0].GetComponent<ShipComponent>().BuilderSprite
                 : AvailableComponents[selectedComponent + 1].GetComponent<ShipComponent>().BuilderSprite;
             ImageRight.color = new Color(ImageRight.color.r, ImageRight.color.g, ImageRight.color.b, alpha);
+
+            // Set component name.
+            ComponentNameText.text = AvailableComponents[selectedComponent].GetComponent<ShipComponent>().ComponentName;
         }
     }
 
