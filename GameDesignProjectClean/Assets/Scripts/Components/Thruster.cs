@@ -19,11 +19,6 @@ public class Thruster : Module
     {
         base.Start();
         childParticles = gameObject.GetComponentsInChildren<ParticleSystem>();
-        for (int i = 0; i < childParticles.Length; i++)
-        {
-            if (childParticles[i].isPlaying)
-                childParticles[i].Stop();
-        }
     }
     public void Update()
     {
@@ -468,9 +463,14 @@ public class Thruster : Module
         if (IsActivated)
         {
             // Activate particles.
+            for (int i = 0; i < childParticles.Length; i++)
+            {
+                if (!childParticles[i].isPlaying)
+                    childParticles[i].Play();
+            }
 
             // Activate sound.
-			PlayThrusters();
+            PlayThrusters();
 
             // Activate colouring.
             GetComponent<SpriteRenderer>().color = Color.magenta;
@@ -478,9 +478,14 @@ public class Thruster : Module
         else
         {
             // Deactivate particles.
+            for (int i = 0; i < childParticles.Length; i++)
+            {
+                if (childParticles[i].isPlaying)
+                    childParticles[i].Stop();
+            }
 
             // Deactivate sounds.
-			ThrusterFalloff();
+            ThrusterFalloff();
             // Deactivate colouring.
             GetComponent<SpriteRenderer>().color = Color.white;
         }
