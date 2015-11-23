@@ -67,6 +67,11 @@ public class BuilderHandler : MonoBehaviour
         {
             GameObject.Destroy(cloneShip);
         }
+        // Remove all projectiles and particles etc.
+        foreach (var projectile in GameObject.FindGameObjectsWithTag(GlobalValues.ProjectileTag))
+        {
+            GameObject.Destroy(projectile);
+        }
         // Reactivate original ship.
         shipCore.SetActive(true);
         // Create the selected cell object and place it.
@@ -616,7 +621,7 @@ public class BuilderHandler : MonoBehaviour
 
     public void RemoveObject(int x, int y)
     {
-        if ((grid[x, y] != null && grid[x, y].tag != GlobalValues.AvailablePosTag) && grid[x, y].tag != GlobalValues.ShipTag)
+        if (grid[x, y] != null && grid[x, y].tag != GlobalValues.ShipTag)
         {
             if (grid[x, y].tag == GlobalValues.StructureTag)
             {

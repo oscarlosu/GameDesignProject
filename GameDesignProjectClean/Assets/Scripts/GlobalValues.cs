@@ -5,11 +5,8 @@ public class GlobalValues
 {
 	public static string ShipTag = "Ship";
     public static string ModuleTag = "Module";
-    public static string StructureTag = "Structure";    
-    public static string DefensiveModuleTag = "Defensive";
+    public static string StructureTag = "Structure";
     public static string ProjectileTag = "Projectile";
-
-    public static string AvailablePosTag = "AvailablePos";
 
 	public static string StarTag = "Star";
 	public static string PlanetTag = "Planet";
