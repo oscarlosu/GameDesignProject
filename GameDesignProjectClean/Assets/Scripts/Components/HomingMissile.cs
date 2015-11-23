@@ -22,7 +22,7 @@ public class HomingMissile : Projectile
     private int newTargetCount; // How many times a new target has been found.
     private float timeSinceLastTarget;
 
-	public bool InGrace {get; private set;};
+	public bool InGrace {get; private set;}
 
     void Awake()
     {
@@ -34,8 +34,20 @@ public class HomingMissile : Projectile
     // Update is called once per frame
     void Update()
     {
-        elapsedTime += Time.deltaTime;
-        timeSinceLastTarget += Time.deltaTime;
+		// Update elapsed time until the mine is active
+		if(elapsedTime <= ThrusterDuration)
+		{
+			elapsedTime += Time.deltaTime;
+		}
+		// Handle grace period
+		if(InGrace)
+		{
+			if(elapsedTime > GracePeriod)
+			{
+				InGrace = false;
+			}
+		}   
+		timeSinceLastTarget += Time.deltaTime;
         // Handle thruster
         if (elapsedTime >= ThrusterActivateAt && elapsedTime <= ThrusterDuration + ThrusterActivateAt)
         {
@@ -94,7 +106,7 @@ public class HomingMissile : Projectile
     void OnCollisionEnter2D(Collision2D other)
     {
 		// With something that is not the source ship or after the grace period
-		if (elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceStructure.GetInstanceID())
+		if (!InGrace || other.gameObject.GetInstanceID() != SourceStructure.GetInstanceID())
         {
             Debug.Log("Homing missile detected collision with " + other.gameObject.name);
             Activate();
@@ -104,7 +116,7 @@ public class HomingMissile : Projectile
     void OnTriggerEnter2D(Collider2D other)
 	{
 		// Missiles only activate with shield or laser triggers
-		if ((other.gameObject.GetComponent<Shield>() != null && (elapsedTime > GracePeriod || other.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID()))
+		if ((other.gameObject.GetComponent<Shield>() != null && (!InGrace  || other.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID()))
 		    || other.gameObject.GetComponent<Laser>() != null)
 		{
             Debug.Log("Homing missile trigger detected trigger with " + other.gameObject.name);
