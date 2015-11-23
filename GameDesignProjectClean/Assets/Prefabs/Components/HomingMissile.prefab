@@ -149,8 +149,6 @@ MonoBehaviour:
   ThrustPower: 5
   ThrusterDuration: 4
   TurnSpeed: .0500000007
-  ExplosionSpeed: 0
-  ExplosionRadius: 0
   GracePeriod: 1
   NewTargetTimer: 3
   TimesNotTargetingSource: 2

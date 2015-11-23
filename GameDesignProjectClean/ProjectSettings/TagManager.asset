@@ -7,7 +7,6 @@ TagManager:
   - Module
   - Structure
   - Ship
-  - AvailablePos
   - BuilderHandler
   - Projectile
   - Star
