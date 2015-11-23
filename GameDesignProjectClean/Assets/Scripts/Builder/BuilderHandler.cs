@@ -8,6 +8,7 @@ public class BuilderHandler : MonoBehaviour
     public GamePad.Button ButtonGoToPlayMode; // When pressed in build mode, go to play mode.
     public GamePad.Button ButtonGoToBuildMode; // When pressed in play mode, go to build mode.
     public float MovePauseTime;
+    public Camera BuilderCamera;
 
     public GameObject ShipCore;
     public GameObject BuilderCanvas;
@@ -64,6 +65,8 @@ public class BuilderHandler : MonoBehaviour
         UpdateComponentSelectionUi();
         // Update selected cell object.
         UpdateSelectedCellObject();
+        // Center camera on selected cell.
+        BuilderCamera.transform.position = new Vector3(selectedCell.transform.position.x, selectedCell.transform.position.y, BuilderCamera.transform.position.z);
     }
 
     private void GoToPlayMode()
@@ -162,32 +165,36 @@ public class BuilderHandler : MonoBehaviour
 
             // Cell selection movement.
             var dPadInput = GamePad.GetAxis(GamePad.Axis.Dpad, ControllerIndex);
-            if (dPadInput.magnitude > 0)
+            var leftStickInput = GamePad.GetAxis(GamePad.Axis.LeftStick, ControllerIndex);
+            var moveInput = dPadInput.magnitude > 0 ? dPadInput : leftStickInput;
+            if (moveInput.magnitude > 0)
             {
                 elapsedMoveTime += Time.deltaTime; // Add to the time elapsed since last move.
                 if (elapsedMoveTime >= MovePauseTime)
                 {
-                    if (dPadInput.x > 0 && IsInsideGrid(selectedCellX + 1, selectedCellY))
+                    if (moveInput.x > 0 && IsInsideGrid(selectedCellX + 1, selectedCellY))
                     {
                         selectedCellX += 1;
                         selectedCell.transform.position = TranslateCellToPos(selectedCellX, selectedCellY);
                     }
-                    else if (dPadInput.x < 0 && IsInsideGrid(selectedCellX - 1, selectedCellY))
+                    else if (moveInput.x < 0 && IsInsideGrid(selectedCellX - 1, selectedCellY))
                     {
                         selectedCellX -= 1;
                         selectedCell.transform.position = TranslateCellToPos(selectedCellX, selectedCellY);
                     }
-                    if (dPadInput.y > 0 && IsInsideGrid(selectedCellX, selectedCellY + 1))
+                    if (moveInput.y > 0 && IsInsideGrid(selectedCellX, selectedCellY + 1))
                     {
                         selectedCellY += 1;
                         selectedCell.transform.position = TranslateCellToPos(selectedCellX, selectedCellY);
                     }
-                    else if (dPadInput.y < 0 && IsInsideGrid(selectedCellX, selectedCellY - 1))
+                    else if (moveInput.y < 0 && IsInsideGrid(selectedCellX, selectedCellY - 1))
                     {
                         selectedCellY -= 1;
                         selectedCell.transform.position = TranslateCellToPos(selectedCellX, selectedCellY);
                     }
                     elapsedMoveTime = 0; // Reset the timer after move.
+                                         // Center camera on selected cell.
+                    BuilderCamera.transform.position = new Vector3(selectedCell.transform.position.x, selectedCell.transform.position.y, BuilderCamera.transform.position.z);
                 }
                 UpdateSelectedCellObject();
             }
