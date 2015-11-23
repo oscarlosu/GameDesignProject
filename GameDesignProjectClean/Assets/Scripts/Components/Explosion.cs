@@ -1,15 +1,34 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(AudioSource))]
 public class Explosion : MonoBehaviour
 {
+    public float scaleFactor = 1.0f;
+    public float duration = 1.0f;
+    public AnimationCurve explosionAnim = new AnimationCurve(new Keyframe(0, 0.05f), new Keyframe(0.5f, 1), new Keyframe(1, 0.05f));
+    [Space(10)]
     public int Damage;
     public float PushForce;
+
+    public Material[] explosionMats;
+
+    private float counter = 0.0f;
 
     void Awake()
     {
         GetComponent<AudioSource>().pitch = Random.Range(0.5f, 1.5f);
+        Material mat = explosionMats[Random.Range(0, explosionMats.Length)];
+        GetComponent<MeshRenderer>().material = mat;
+        StartCoroutine("DestroyExplosion");
+    }
+
+    void Update()
+    {
+        float newScale = explosionAnim.Evaluate(counter) * scaleFactor;
+        transform.localScale = Vector3.one * newScale;
+        counter += Time.deltaTime/duration;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -44,10 +63,11 @@ public class Explosion : MonoBehaviour
         }*/
     }
 
+    
 
-
-    private void DestroyExplosion()
+    IEnumerator DestroyExplosion()
     {
+        yield return new WaitForSeconds(duration);
         GameObject.Destroy(gameObject);
     }
 }
