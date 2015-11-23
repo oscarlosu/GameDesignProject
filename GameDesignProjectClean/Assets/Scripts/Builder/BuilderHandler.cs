@@ -74,6 +74,9 @@ public class BuilderHandler : MonoBehaviour
         selectedCell.transform.position = TranslateCellToPos(selectedCellX, selectedCellY);
         // Update component selector UI.
         UpdateComponentSelectionUi();
+        // Activate component selector UI.
+        ComponentSelectorPanel.SetActive(true);
+        ComponentNamePanel.SetActive(true);
         // Update selected cell object.
         UpdateBuilderUi();
         // Center camera on selected cell.
@@ -90,6 +93,14 @@ public class BuilderHandler : MonoBehaviour
         {
             GameObject.Destroy(selectedCell);
         }
+        // Disable builder UI elements.
+        ComponentSelectorPanel.SetActive(false);
+        ComponentNamePanel.SetActive(false);
+        PlacePanel.SetActive(false);
+        RotatePanel.SetActive(false);
+        ParentPanel.SetActive(false);
+        InputPanel.SetActive(false);
+        RemovePanel.SetActive(false);
         // Create clone of ship that the players can test and play around with.
         cloneShip = GameObject.Instantiate(shipCore);
         // Deactivate the original in order for it to stay intact, while the other player is testing.
