@@ -85,6 +85,48 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &25041025
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 420770, guid: ca7f175ac0755c74da3a8aa8fbe00bc7, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420770, guid: ca7f175ac0755c74da3a8aa8fbe00bc7, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420770, guid: ca7f175ac0755c74da3a8aa8fbe00bc7, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420770, guid: ca7f175ac0755c74da3a8aa8fbe00bc7, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420770, guid: ca7f175ac0755c74da3a8aa8fbe00bc7, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420770, guid: ca7f175ac0755c74da3a8aa8fbe00bc7, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420770, guid: ca7f175ac0755c74da3a8aa8fbe00bc7, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 420770, guid: ca7f175ac0755c74da3a8aa8fbe00bc7, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: ca7f175ac0755c74da3a8aa8fbe00bc7, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &32375278
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,10 +666,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1111491322}
   m_RootOrder: 1
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: -204}
-  m_SizeDelta: {x: 634, y: 80}
+  m_AnchorMin: {x: .246805117, y: .0596590899}
+  m_AnchorMax: {x: .753194869, y: .173295453}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &855731367
 MonoBehaviour:
