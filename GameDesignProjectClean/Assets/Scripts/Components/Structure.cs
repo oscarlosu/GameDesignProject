@@ -18,6 +18,7 @@ public class Structure : ShipComponent
 				IncreaseMaxHp(child.GetComponent<Armor>().ExtraHp);
 			}
 		}
+		hp = MaxHp;
     }
 
     public bool TakeDamage(int dmg)
@@ -38,45 +39,70 @@ public class Structure : ShipComponent
             }
         }
         // If the structure has child modules or has no children, lose module, else propagate damage to a random child struture
-		if(!IsProtected())
+		bool hasShieldAttached;
+		bool isProtected = IsProtected(out hasShieldAttached);
+		if(!isProtected && (modules.Count > 0 || structures.Count == 0))
 		{
-			if(modules.Count > 0 || structures.Count == 0)
+			hp -= dmg;
+			TriggerAnimation("TriggerDamage");
+			LoseModule(modules);
+			// If it isnt protected and has shields attached to it, disable one of them (actually only resets the cooldown timer)
+			if(!isProtected && hasShieldAttached)
 			{
-				hp -= dmg;
-				TriggerAnimation("TriggerDamage");
-				LoseModule(modules);
-				return true;
-			}
-			else
-			{
-				// Find a child structure that either has child modules or has no children, or has descendants with child modules or no children
-				for(int index = 0; index < structures.Count; ++index)
+				foreach(Module m in modules)
 				{
-					// We choose which strcuture to try first at random
-					int rnd = Random.Range(0, structures.Count);
-					if(structures[rnd].TakeDamage(dmg))
+					Shield s = m.gameObject.GetComponent<Shield>();
+					if(s != null)
 					{
-						// Trigger visual feedback and return true
-						TriggerAnimation("TriggerDamage");
-						//Debug.Log("Damage visual feedback not implemented.");
+						s.DisableShield();
 						return true;
 					}
-					else
-					{
-						// If the child structure couldnt take the damage, remove it from the list and try the next structure
-						structures.RemoveAt(rnd);
-					}
 				}
-				// This point should never be reached
-				Debug.LogWarning("Structure couldnt propagate the damage! This should never happen!");
-				return true;
+			}
+		}
+		else if((!isProtected || !hasShieldAttached) && structures.Count > 0)
+		{
+			// Find a child structure that either has child modules or has no children, or has descendants with child modules or no children
+			for(int index = 0; index < structures.Count; ++index)
+			{
+				// We choose which structure to try first at random
+				int rnd = Random.Range(0, structures.Count);
+				if(structures[rnd].TakeDamage(dmg))
+				{
+					// Trigger visual feedback and return true
+					TriggerAnimation("TriggerDamage");
+					//Debug.Log("Damage visual feedback not implemented.");
+					return true;
+				}
+				else
+				{
+					// If the child structure couldnt take the damage, remove it from the list and try the next structure
+					structures.RemoveAt(rnd);
+				}
+			}
+			// This point should never be reached
+			Debug.LogWarning("Structure couldnt propagate the damage! This should never happen!");
+			return true;
+		}
+		else if (isProtected && hasShieldAttached)
+		{
+			// Pick a shield attached to this structure and disable it
+			foreach(Module m in modules)
+			{
+				Shield s = m.gameObject.GetComponent<Shield>();
+				if(s != null)
+				{
+					s.DisableShield();
+					return true;
+				}
 			}
 		}
 		else
 		{
-			// Shields should not block propagation from other structures
+			Debug.Log ("Unknown propagation case encountered");
 			return false;
 		}
+		return false;
     }
 
     
@@ -159,8 +185,9 @@ public class Structure : ShipComponent
 		hp = MaxHp;
 	}
 
-	public bool IsProtected()
+	public bool IsProtected(out bool hasShieldAttached)
 	{
+		hasShieldAttached = false;
 		// Find structures with shield modules
 		Shield[] shields = (Shield[])FindObjectsOfType(typeof(Shield));
 		// Find active shields in this ship near this structure
@@ -169,6 +196,11 @@ public class Structure : ShipComponent
 			if(shields[i].ShipCore.GetInstanceID() == ShipCore.GetInstanceID() && 
 			   shields[i].Active && Vector3.Distance(transform.position, shields[i].transform.position) < shields[i].Radius)
 			{
+				// If the shield is attached to this structure, save it in the attachedShield values
+				if(shields[i].transform.parent.GetInstanceID() == transform.GetInstanceID())
+				{
+					hasShieldAttached = true;
+				}
 				return true;
 			}
 		}
