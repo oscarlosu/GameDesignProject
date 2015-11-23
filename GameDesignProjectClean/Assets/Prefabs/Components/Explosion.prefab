@@ -9,10 +9,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 493556}
   - 58: {fileID: 5862892}
-  - 212: {fileID: 21270900}
   - 82: {fileID: 8285986}
   - 114: {fileID: 11432936}
-  - 95: {fileID: 9505440}
+  - 23: {fileID: 2319306}
+  - 33: {fileID: 3399938}
   m_Layer: 0
   m_Name: Explosion
   m_TagString: Untagged
@@ -32,6 +32,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!23 &2319306
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 123384}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!33 &3399938
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 123384}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!58 &5862892
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -44,7 +75,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: .400000006
 --- !u!82 &8285986
 AudioSource:
   m_ObjectHideFlags: 1
@@ -115,23 +146,6 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!95 &9505440
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 123384}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: feb36e9056d540f4e90cdd414f2e9abe, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11432936
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -143,34 +157,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fb121780d064e64ab39b3de3c99f7c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleFactor: 1
+  duration: 1
+  explosionAnim:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: .0500000007
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: .5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: .0500000007
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
   Damage: 1
   PushForce: 500
---- !u!212 &21270900
-SpriteRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 123384}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 0
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 12b1aaac5c35864449b07b1e226f459b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  explosionMats:
+  - {fileID: 2100000, guid: 8af654bf6fa1b5642b36c707b07f3eb5, type: 2}
+  - {fileID: 2100000, guid: 848b81c94da3010439894594d1acd0bb, type: 2}
+  - {fileID: 2100000, guid: 0bd81280932b3054a8e9b7e6e3c810a9, type: 2}
+  - {fileID: 2100000, guid: ba96cb40778c19e4dae27a26873b44fd, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
