@@ -10,7 +10,7 @@ public class Armor : Module
     new void Start()
     {
         base.Start();
-		Activate();
+		//Activate();
     }
 
     // Update is called once per frame
