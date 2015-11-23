@@ -44,11 +44,13 @@ MonoBehaviour:
   ButtonGoToBuildMode: 8
   MovePauseTime: .100000001
   BuilderCamera: {fileID: 0}
-  ShipCore: {fileID: 0}
+  CorePrefab: {fileID: 152432, guid: c7cfe646891c1ad4b8a01844ed01116c, type: 2}
   BuilderCanvas: {fileID: 0}
+  ComponentSelectorPanel: {fileID: 0}
   ImageLeft: {fileID: 0}
   ImageCenter: {fileID: 0}
   ImageRight: {fileID: 0}
+  ComponentNamePanel: {fileID: 0}
   ComponentNameText: {fileID: 0}
   InfoBox: {fileID: 0}
   RotatePanel: {fileID: 0}

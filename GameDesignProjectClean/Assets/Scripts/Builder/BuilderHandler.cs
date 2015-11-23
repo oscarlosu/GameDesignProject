@@ -11,7 +11,7 @@ public class BuilderHandler : MonoBehaviour
     public float MovePauseTime;
     public Camera BuilderCamera;
 
-    public GameObject ShipCore;
+    public GameObject CorePrefab;
     public GameObject BuilderCanvas;
     public GameObject ComponentSelectorPanel;
     public Image ImageLeft, ImageCenter, ImageRight;
@@ -24,6 +24,8 @@ public class BuilderHandler : MonoBehaviour
     public GameObject SelectedCellPrefab;
     public GameObject[] AvailableComponents;
 
+
+    private GameObject shipCore;
     private GameObject selectedCell;
     private int selectedCellX, selectedCellY;
     private GameObject[,] grid;
@@ -39,10 +41,11 @@ public class BuilderHandler : MonoBehaviour
     void Start()
     {
         grid = new GameObject[GridSizeX, GridSizeY];
-        grid[GridSizeX / 2 - 1, GridSizeY / 2 - 1] = ShipCore;
-        grid[GridSizeX / 2, GridSizeY / 2 - 1] = ShipCore;
-        grid[GridSizeX / 2 - 1, GridSizeY / 2] = ShipCore;
-        grid[GridSizeX / 2, GridSizeY / 2] = ShipCore;
+        shipCore = GameObject.Instantiate(CorePrefab);
+        grid[GridSizeX / 2 - 1, GridSizeY / 2 - 1] = shipCore;
+        grid[GridSizeX / 2, GridSizeY / 2 - 1] = shipCore;
+        grid[GridSizeX / 2 - 1, GridSizeY / 2] = shipCore;
+        grid[GridSizeX / 2, GridSizeY / 2] = shipCore;
 
         // Select cell selection start position.
         selectedCellX = GridSizeX / 2 - 1;
@@ -58,14 +61,14 @@ public class BuilderHandler : MonoBehaviour
     {
         // Set build mode flag.
         inBuildMode = true;
-        ShipCore.GetComponent<Core>().InBuildMode = true;
+        shipCore.GetComponent<Core>().InBuildMode = true;
         // Remove play mode clone of ship.
         if (cloneShip != null)
         {
             GameObject.Destroy(cloneShip);
         }
         // Reactivate original ship.
-        ShipCore.SetActive(true);
+        shipCore.SetActive(true);
         // Create the selected cell object and place it.
         selectedCell = GameObject.Instantiate(SelectedCellPrefab); // Create the object to move around the builder.
         selectedCell.transform.position = TranslateCellToPos(selectedCellX, selectedCellY);
@@ -81,16 +84,16 @@ public class BuilderHandler : MonoBehaviour
     {
         // Set build mode flag.
         inBuildMode = false;
-        ShipCore.GetComponent<Core>().InBuildMode = false;
+        shipCore.GetComponent<Core>().InBuildMode = false;
         // Remove grid selection object.
         if (selectedCell != null)
         {
             GameObject.Destroy(selectedCell);
         }
         // Create clone of ship that the players can test and play around with.
-        cloneShip = GameObject.Instantiate(ShipCore);
+        cloneShip = GameObject.Instantiate(shipCore);
         // Deactivate the original in order for it to stay intact, while the other player is testing.
-        ShipCore.SetActive(false);
+        shipCore.SetActive(false);
     }
 
     private void UpdateComponentSelectionUi()
@@ -236,7 +239,7 @@ public class BuilderHandler : MonoBehaviour
                     SetupShipComponent(component, selectedCellX, selectedCellY, parent, parentX, parentY);
                     grid[selectedCellX, selectedCellY] = component;
                     UpdateBuilderUi();
-                    ShipCore.GetComponent<Core>().Assemble();
+                    shipCore.GetComponent<Core>().Assemble();
                     // Select module input.
                     if (component.GetComponent<Module>() != null)
                     {
@@ -244,7 +247,7 @@ public class BuilderHandler : MonoBehaviour
                     }
                 }
                 // If position is already taken and it's a module, change connection point.
-                else if (Get(selectedCellX, selectedCellY) != null && Get(selectedCellX, selectedCellY).tag == GlobalValues.ModuleTag)
+                else if (Get(selectedCellX, selectedCellY) != null && Get(selectedCellX, selectedCellY).GetComponent<Module>() != null)
                 {
                     switch (Get(selectedCellX, selectedCellY).GetComponent<Module>().ParentDirection)
                     {
@@ -614,7 +617,7 @@ public class BuilderHandler : MonoBehaviour
             }
             GameObject.Destroy(grid[x, y]);
             grid[x, y] = null;
-            ShipCore.GetComponent<Core>().Assemble();
+            shipCore.GetComponent<Core>().Assemble();
         }
     }
 
@@ -645,7 +648,7 @@ public class BuilderHandler : MonoBehaviour
         // Add parent to the object.
         component.transform.parent = parent.transform;
         // Set the components "Core" to the core of the ship it was just attached to.
-        component.GetComponent<ShipComponent>().ShipCore = ShipCore;
+        component.GetComponent<ShipComponent>().ShipCore = shipCore;
         // If it is a module, rotate it compared to where the parent is.
         if (component.GetComponent<Module>() != null)
         {
