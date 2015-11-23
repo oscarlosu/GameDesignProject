@@ -14,7 +14,6 @@ public class Mine : Projectile
     public GameObject ExplosionPrefab;
 
     private float elapsedTime;
-	public bool InGrace {get; private set;}
     private bool detected = false; // If any object has been detected in its vicinity.
     private float timeFromDetection;
 
