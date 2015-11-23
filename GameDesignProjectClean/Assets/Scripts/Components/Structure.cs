@@ -10,7 +10,14 @@ public class Structure : ShipComponent
 
     public void Start()
     {
-        hp = MaxHp;
+		for(int index = 0; index < transform.childCount; ++index)
+		{
+			GameObject child = transform.GetChild(index).gameObject;
+			if (child.GetComponent<Armor>() != null)
+			{
+				IncreaseMaxHp(child.GetComponent<Armor>().ExtraHp);
+			}
+		}
     }
 
     public bool TakeDamage(int dmg)
@@ -124,6 +131,7 @@ public class Structure : ShipComponent
                     if (m.gameObject.tag == GlobalValues.DefensiveModuleTag)
                     {
                         modules.Remove(m);
+						IncreaseMaxHp(- m.GetComponent<Armor>().ExtraHp);
                         Destroy(m.gameObject);
                         return;
                     }

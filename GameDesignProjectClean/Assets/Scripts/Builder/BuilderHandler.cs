@@ -11,16 +11,21 @@ public class BuilderHandler : MonoBehaviour
     public float MovePauseTime;
     public Camera BuilderCamera;
 
-    public GameObject ShipCore;
+    public GameObject CorePrefab;
     public GameObject BuilderCanvas;
+    public GameObject ComponentSelectorPanel;
     public Image ImageLeft, ImageCenter, ImageRight;
+    public GameObject ComponentNamePanel;
     public Text ComponentNameText;
     public GameObject InfoBox;
+    public GameObject RotatePanel, PlacePanel, RemovePanel, ParentPanel, InputPanel;
     public int GridSizeX, GridSizeY;
     public GameObject AvailablePosPrefab;
     public GameObject SelectedCellPrefab;
     public GameObject[] AvailableComponents;
 
+
+    private GameObject shipCore;
     private GameObject selectedCell;
     private int selectedCellX, selectedCellY;
     private GameObject[,] grid;
@@ -36,10 +41,11 @@ public class BuilderHandler : MonoBehaviour
     void Start()
     {
         grid = new GameObject[GridSizeX, GridSizeY];
-        grid[GridSizeX / 2 - 1, GridSizeY / 2 - 1] = ShipCore;
-        grid[GridSizeX / 2, GridSizeY / 2 - 1] = ShipCore;
-        grid[GridSizeX / 2 - 1, GridSizeY / 2] = ShipCore;
-        grid[GridSizeX / 2, GridSizeY / 2] = ShipCore;
+        shipCore = GameObject.Instantiate(CorePrefab);
+        grid[GridSizeX / 2 - 1, GridSizeY / 2 - 1] = shipCore;
+        grid[GridSizeX / 2, GridSizeY / 2 - 1] = shipCore;
+        grid[GridSizeX / 2 - 1, GridSizeY / 2] = shipCore;
+        grid[GridSizeX / 2, GridSizeY / 2] = shipCore;
 
         // Select cell selection start position.
         selectedCellX = GridSizeX / 2 - 1;
@@ -55,21 +61,24 @@ public class BuilderHandler : MonoBehaviour
     {
         // Set build mode flag.
         inBuildMode = true;
-        ShipCore.GetComponent<Core>().InBuildMode = true;
+        shipCore.GetComponent<Core>().InBuildMode = true;
         // Remove play mode clone of ship.
         if (cloneShip != null)
         {
             GameObject.Destroy(cloneShip);
         }
         // Reactivate original ship.
-        ShipCore.SetActive(true);
+        shipCore.SetActive(true);
         // Create the selected cell object and place it.
         selectedCell = GameObject.Instantiate(SelectedCellPrefab); // Create the object to move around the builder.
         selectedCell.transform.position = TranslateCellToPos(selectedCellX, selectedCellY);
         // Update component selector UI.
         UpdateComponentSelectionUi();
+        // Activate component selector UI.
+        ComponentSelectorPanel.SetActive(true);
+        ComponentNamePanel.SetActive(true);
         // Update selected cell object.
-        UpdateSelectedCellObject();
+        UpdateBuilderUi();
         // Center camera on selected cell.
         BuilderCamera.transform.position = new Vector3(selectedCell.transform.position.x, selectedCell.transform.position.y, BuilderCamera.transform.position.z);
     }
@@ -78,16 +87,24 @@ public class BuilderHandler : MonoBehaviour
     {
         // Set build mode flag.
         inBuildMode = false;
-        ShipCore.GetComponent<Core>().InBuildMode = false;
+        shipCore.GetComponent<Core>().InBuildMode = false;
         // Remove grid selection object.
         if (selectedCell != null)
         {
             GameObject.Destroy(selectedCell);
         }
+        // Disable builder UI elements.
+        ComponentSelectorPanel.SetActive(false);
+        ComponentNamePanel.SetActive(false);
+        PlacePanel.SetActive(false);
+        RotatePanel.SetActive(false);
+        ParentPanel.SetActive(false);
+        InputPanel.SetActive(false);
+        RemovePanel.SetActive(false);
         // Create clone of ship that the players can test and play around with.
-        cloneShip = GameObject.Instantiate(ShipCore);
+        cloneShip = GameObject.Instantiate(shipCore);
         // Deactivate the original in order for it to stay intact, while the other player is testing.
-        ShipCore.SetActive(false);
+        shipCore.SetActive(false);
     }
 
     private void UpdateComponentSelectionUi()
@@ -214,7 +231,7 @@ public class BuilderHandler : MonoBehaviour
                     // Center camera on selected cell.
                     BuilderCamera.transform.position = new Vector3(selectedCell.transform.position.x, selectedCell.transform.position.y, BuilderCamera.transform.position.z);
                 }
-                UpdateSelectedCellObject();
+                UpdateBuilderUi();
             }
             else
             {
@@ -232,8 +249,8 @@ public class BuilderHandler : MonoBehaviour
                     var component = GameObject.Instantiate(AvailableComponents[selectedComponent]);
                     SetupShipComponent(component, selectedCellX, selectedCellY, parent, parentX, parentY);
                     grid[selectedCellX, selectedCellY] = component;
-                    UpdateSelectedCellObject();
-                    ShipCore.GetComponent<Core>().Assemble();
+                    UpdateBuilderUi();
+                    shipCore.GetComponent<Core>().Assemble();
                     // Select module input.
                     if (component.GetComponent<Module>() != null)
                     {
@@ -241,7 +258,7 @@ public class BuilderHandler : MonoBehaviour
                     }
                 }
                 // If position is already taken and it's a module, change connection point.
-                else if (Get(selectedCellX, selectedCellY) != null && Get(selectedCellX, selectedCellY).tag == GlobalValues.ModuleTag)
+                else if (Get(selectedCellX, selectedCellY) != null && Get(selectedCellX, selectedCellY).GetComponent<Module>() != null)
                 {
                     switch (Get(selectedCellX, selectedCellY).GetComponent<Module>().ParentDirection)
                     {
@@ -269,7 +286,7 @@ public class BuilderHandler : MonoBehaviour
                 if (found != null && found.tag != GlobalValues.ShipTag)
                 {
                     RemoveObject(selectedCellX, selectedCellY);
-                    UpdateSelectedCellObject();
+                    UpdateBuilderUi();
                 }
             }
 
@@ -334,6 +351,16 @@ public class BuilderHandler : MonoBehaviour
 
     private void OpenInfoBox(string header, string body, bool closeOnAnyKey)
     {
+        // Disable builder help panels.
+        PlacePanel.SetActive(false);
+        RotatePanel.SetActive(false);
+        ParentPanel.SetActive(false);
+        InputPanel.SetActive(false);
+        RemovePanel.SetActive(false);
+        // Disable the component selector panels.
+        ComponentSelectorPanel.SetActive(false);
+        ComponentNamePanel.SetActive(false);
+        // Setup the info box.
         closeInfoBoxOnAnyKey = closeOnAnyKey;
         InfoBox.transform.GetChild(0).GetComponent<Text>().text = header;
         InfoBox.transform.GetChild(1).GetComponent<Text>().text = body;
@@ -342,7 +369,13 @@ public class BuilderHandler : MonoBehaviour
 
     private void CloseInfoBox()
     {
+        // Close the info box.
         InfoBox.SetActive(false);
+        // Update available builder help panels.
+        UpdateBuilderUi();
+        // Enable the component selector panels.
+        ComponentSelectorPanel.SetActive(true);
+        ComponentNamePanel.SetActive(true);
     }
 
     private bool AnyButtonPressed()
@@ -479,11 +512,46 @@ public class BuilderHandler : MonoBehaviour
         }
     }
 
-    private void UpdateSelectedCellObject()
+    private void UpdateBuilderUi()
     {
-        selectedCell.GetComponent<SpriteRenderer>().color = IsPosAvailable(selectedCellX, selectedCellY)
-                    ? Color.green
-                    : Color.red;
+        if (IsPosAvailable(selectedCellX, selectedCellY))
+        {
+            selectedCell.GetComponent<SpriteRenderer>().color = Color.green;
+            PlacePanel.SetActive(true);
+            RotatePanel.SetActive(false);
+            ParentPanel.SetActive(false);
+            InputPanel.SetActive(false);
+            RemovePanel.SetActive(false);
+        }
+        else if (Get(selectedCellX, selectedCellY) != null)
+        {
+            selectedCell.GetComponent<SpriteRenderer>().color = Color.white;
+            PlacePanel.SetActive(false);
+            var obj = Get(selectedCellX, selectedCellY);
+            if (obj.GetComponent<Module>() != null)
+            {
+                RotatePanel.SetActive(true);
+                ParentPanel.SetActive(true);
+                InputPanel.SetActive(true);
+                RemovePanel.SetActive(true);
+            }
+            else if (obj.tag != GlobalValues.ShipTag)
+            {
+                RotatePanel.SetActive(false);
+                ParentPanel.SetActive(false);
+                InputPanel.SetActive(false);
+                RemovePanel.SetActive(true);
+            }
+        }
+        else
+        {
+            selectedCell.GetComponent<SpriteRenderer>().color = Color.red;
+            PlacePanel.SetActive(false);
+            RotatePanel.SetActive(false);
+            ParentPanel.SetActive(false);
+            InputPanel.SetActive(false);
+            RemovePanel.SetActive(false);
+        }
     }
 
     private bool IsPosAvailable(int x, int y)
@@ -560,7 +628,7 @@ public class BuilderHandler : MonoBehaviour
             }
             GameObject.Destroy(grid[x, y]);
             grid[x, y] = null;
-            ShipCore.GetComponent<Core>().Assemble();
+            shipCore.GetComponent<Core>().Assemble();
         }
     }
 
@@ -591,7 +659,7 @@ public class BuilderHandler : MonoBehaviour
         // Add parent to the object.
         component.transform.parent = parent.transform;
         // Set the components "Core" to the core of the ship it was just attached to.
-        component.GetComponent<ShipComponent>().ShipCore = ShipCore;
+        component.GetComponent<ShipComponent>().ShipCore = shipCore;
         // If it is a module, rotate it compared to where the parent is.
         if (component.GetComponent<Module>() != null)
         {
