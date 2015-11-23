@@ -128,7 +128,7 @@ public class Structure : ShipComponent
                 // Defensive modules are removed first
                 foreach (Module m in modules)
                 {
-                    if (m.gameObject.tag == GlobalValues.DefensiveModuleTag)
+                    if (m.gameObject.GetComponent<Armor>() != null)
                     {
                         modules.Remove(m);
 						IncreaseMaxHp(- m.GetComponent<Armor>().ExtraHp);

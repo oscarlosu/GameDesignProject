@@ -9,7 +9,7 @@ public class HomingMissile : Projectile
     public float ThrustPower;
     public float ThrusterDuration;
     public float TurnSpeed;
-    public float GracePeriod; // TODO Not used for anything yet...
+    public float GracePeriod;
     public float NewTargetTimer; // The time between each new target selection.
     public int TimesNotTargetingSource; // The number of times new target selection will not select the source.
 
@@ -27,13 +27,26 @@ public class HomingMissile : Projectile
         rb = GetComponent<Rigidbody2D>();
         this.GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
         this.GetComponent<AudioSource>().volume = Random.Range(0.9f, 1.1f);
+		InGrace = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        elapsedTime += Time.deltaTime;
-        timeSinceLastTarget += Time.deltaTime;
+		// Update elapsed time until the mine is active
+		if(elapsedTime <= ThrusterDuration)
+		{
+			elapsedTime += Time.deltaTime;
+		}
+		// Handle grace period
+		if(InGrace)
+		{
+			if(elapsedTime > GracePeriod)
+			{
+				InGrace = false;
+			}
+		}   
+		timeSinceLastTarget += Time.deltaTime;
         // Handle thruster
         if (elapsedTime >= ThrusterActivateAt && elapsedTime <= ThrusterDuration + ThrusterActivateAt)
         {
@@ -92,7 +105,7 @@ public class HomingMissile : Projectile
     void OnCollisionEnter2D(Collision2D other)
     {
 		// With something that is not the source ship or after the grace period
-		if (elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceStructure.GetInstanceID())
+		if (!InGrace || other.gameObject.GetInstanceID() != SourceStructure.GetInstanceID())
         {
             Debug.Log("Homing missile detected collision with " + other.gameObject.name);
             Activate();
@@ -102,7 +115,7 @@ public class HomingMissile : Projectile
     void OnTriggerEnter2D(Collider2D other)
 	{
 		// Missiles only activate with shield or laser triggers
-		if ((other.gameObject.GetComponent<Shield>() != null && (elapsedTime > GracePeriod || other.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID()))
+		if ((other.gameObject.GetComponent<Shield>() != null && (!InGrace  || other.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID()))
 		    || other.gameObject.GetComponent<Laser>() != null)
 		{
             Debug.Log("Homing missile trigger detected trigger with " + other.gameObject.name);

@@ -67,6 +67,11 @@ public class BuilderHandler : MonoBehaviour
         {
             GameObject.Destroy(cloneShip);
         }
+        // Remove all projectiles and particles etc.
+        foreach (var projectile in GameObject.FindGameObjectsWithTag(GlobalValues.ProjectileTag))
+        {
+            GameObject.Destroy(projectile);
+        }
         // Reactivate original ship.
         shipCore.SetActive(true);
         // Create the selected cell object and place it.
@@ -199,9 +204,8 @@ public class BuilderHandler : MonoBehaviour
             }
 
             // Cell selection movement.
-            var dPadInput = GamePad.GetAxis(GamePad.Axis.Dpad, ControllerIndex);
             var leftStickInput = GamePad.GetAxis(GamePad.Axis.LeftStick, ControllerIndex);
-            var moveInput = dPadInput.magnitude > 0 ? dPadInput : leftStickInput;
+            var moveInput = leftStickInput;
             if (moveInput.magnitude > 0.1)
             {
                 elapsedMoveTime += Time.deltaTime; // Add to the time elapsed since last move.
@@ -616,7 +620,7 @@ public class BuilderHandler : MonoBehaviour
 
     public void RemoveObject(int x, int y)
     {
-        if ((grid[x, y] != null && grid[x, y].tag != GlobalValues.AvailablePosTag) && grid[x, y].tag != GlobalValues.ShipTag)
+        if (grid[x, y] != null && grid[x, y].tag != GlobalValues.ShipTag)
         {
             if (grid[x, y].tag == GlobalValues.StructureTag)
             {
