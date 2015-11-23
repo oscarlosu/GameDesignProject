@@ -13,9 +13,12 @@ public class BuilderHandler : MonoBehaviour
 
     public GameObject ShipCore;
     public GameObject BuilderCanvas;
+    public GameObject ComponentSelectorPanel;
     public Image ImageLeft, ImageCenter, ImageRight;
+    public GameObject ComponentNamePanel;
     public Text ComponentNameText;
     public GameObject InfoBox;
+    public GameObject RotatePanel, PlacePanel, RemovePanel, ParentPanel, InputPanel;
     public int GridSizeX, GridSizeY;
     public GameObject AvailablePosPrefab;
     public GameObject SelectedCellPrefab;
@@ -69,7 +72,7 @@ public class BuilderHandler : MonoBehaviour
         // Update component selector UI.
         UpdateComponentSelectionUi();
         // Update selected cell object.
-        UpdateSelectedCellObject();
+        UpdateBuilderUi();
         // Center camera on selected cell.
         BuilderCamera.transform.position = new Vector3(selectedCell.transform.position.x, selectedCell.transform.position.y, BuilderCamera.transform.position.z);
     }
@@ -214,7 +217,7 @@ public class BuilderHandler : MonoBehaviour
                     // Center camera on selected cell.
                     BuilderCamera.transform.position = new Vector3(selectedCell.transform.position.x, selectedCell.transform.position.y, BuilderCamera.transform.position.z);
                 }
-                UpdateSelectedCellObject();
+                UpdateBuilderUi();
             }
             else
             {
@@ -232,7 +235,7 @@ public class BuilderHandler : MonoBehaviour
                     var component = GameObject.Instantiate(AvailableComponents[selectedComponent]);
                     SetupShipComponent(component, selectedCellX, selectedCellY, parent, parentX, parentY);
                     grid[selectedCellX, selectedCellY] = component;
-                    UpdateSelectedCellObject();
+                    UpdateBuilderUi();
                     ShipCore.GetComponent<Core>().Assemble();
                     // Select module input.
                     if (component.GetComponent<Module>() != null)
@@ -269,7 +272,7 @@ public class BuilderHandler : MonoBehaviour
                 if (found != null && found.tag != GlobalValues.ShipTag)
                 {
                     RemoveObject(selectedCellX, selectedCellY);
-                    UpdateSelectedCellObject();
+                    UpdateBuilderUi();
                 }
             }
 
@@ -334,6 +337,16 @@ public class BuilderHandler : MonoBehaviour
 
     private void OpenInfoBox(string header, string body, bool closeOnAnyKey)
     {
+        // Disable builder help panels.
+        PlacePanel.SetActive(false);
+        RotatePanel.SetActive(false);
+        ParentPanel.SetActive(false);
+        InputPanel.SetActive(false);
+        RemovePanel.SetActive(false);
+        // Disable the component selector panels.
+        ComponentSelectorPanel.SetActive(false);
+        ComponentNamePanel.SetActive(false);
+        // Setup the info box.
         closeInfoBoxOnAnyKey = closeOnAnyKey;
         InfoBox.transform.GetChild(0).GetComponent<Text>().text = header;
         InfoBox.transform.GetChild(1).GetComponent<Text>().text = body;
@@ -342,7 +355,13 @@ public class BuilderHandler : MonoBehaviour
 
     private void CloseInfoBox()
     {
+        // Close the info box.
         InfoBox.SetActive(false);
+        // Update available builder help panels.
+        UpdateBuilderUi();
+        // Enable the component selector panels.
+        ComponentSelectorPanel.SetActive(true);
+        ComponentNamePanel.SetActive(true);
     }
 
     private bool AnyButtonPressed()
@@ -479,11 +498,46 @@ public class BuilderHandler : MonoBehaviour
         }
     }
 
-    private void UpdateSelectedCellObject()
+    private void UpdateBuilderUi()
     {
-        selectedCell.GetComponent<SpriteRenderer>().color = IsPosAvailable(selectedCellX, selectedCellY)
-                    ? Color.green
-                    : Color.red;
+        if (IsPosAvailable(selectedCellX, selectedCellY))
+        {
+            selectedCell.GetComponent<SpriteRenderer>().color = Color.green;
+            PlacePanel.SetActive(true);
+            RotatePanel.SetActive(false);
+            ParentPanel.SetActive(false);
+            InputPanel.SetActive(false);
+            RemovePanel.SetActive(false);
+        }
+        else if (Get(selectedCellX, selectedCellY) != null)
+        {
+            selectedCell.GetComponent<SpriteRenderer>().color = Color.white;
+            PlacePanel.SetActive(false);
+            var obj = Get(selectedCellX, selectedCellY);
+            if (obj.GetComponent<Module>() != null)
+            {
+                RotatePanel.SetActive(true);
+                ParentPanel.SetActive(true);
+                InputPanel.SetActive(true);
+                RemovePanel.SetActive(true);
+            }
+            else if (obj.tag != GlobalValues.ShipTag)
+            {
+                RotatePanel.SetActive(false);
+                ParentPanel.SetActive(false);
+                InputPanel.SetActive(false);
+                RemovePanel.SetActive(true);
+            }
+        }
+        else
+        {
+            selectedCell.GetComponent<SpriteRenderer>().color = Color.red;
+            PlacePanel.SetActive(false);
+            RotatePanel.SetActive(false);
+            ParentPanel.SetActive(false);
+            InputPanel.SetActive(false);
+            RemovePanel.SetActive(false);
+        }
     }
 
     private bool IsPosAvailable(int x, int y)

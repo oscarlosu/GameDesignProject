@@ -43,11 +43,19 @@ MonoBehaviour:
   ButtonGoToPlayMode: 9
   ButtonGoToBuildMode: 8
   MovePauseTime: .100000001
+  BuilderCamera: {fileID: 0}
   ShipCore: {fileID: 0}
   BuilderCanvas: {fileID: 0}
   ImageLeft: {fileID: 0}
   ImageCenter: {fileID: 0}
   ImageRight: {fileID: 0}
+  ComponentNameText: {fileID: 0}
+  InfoBox: {fileID: 0}
+  RotatePanel: {fileID: 0}
+  PlacePanel: {fileID: 0}
+  RemovePanel: {fileID: 0}
+  ParentPanel: {fileID: 0}
+  InputPanel: {fileID: 0}
   GridSizeX: 20
   GridSizeY: 20
   AvailablePosPrefab: {fileID: 151368, guid: fc280ededd0abc747beb64b7264929cb, type: 2}
