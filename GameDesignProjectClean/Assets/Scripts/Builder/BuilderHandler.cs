@@ -221,7 +221,7 @@ public class BuilderHandler : MonoBehaviour
                     UpdateSelectedCellObject();
                 }
                 // If position is already taken and it's a module, change connection point.
-                else if (Get(selectedCellX, selectedCellY).tag == GlobalValues.ModuleTag)
+                else if (Get(selectedCellX, selectedCellY) != null && Get(selectedCellX, selectedCellY).tag == GlobalValues.ModuleTag)
                 {
                     Debug.Log("Parent direction: " +
                               Get(selectedCellX, selectedCellY).GetComponent<Module>().ParentDirection);
@@ -362,41 +362,45 @@ public class BuilderHandler : MonoBehaviour
         parent = null;
         parentX = -1;
         parentY = -1;
-        // If there is already something at this position, return false;
-        if (grid[x, y] != null)
+        // If there is already something at this position (or outside grid), return false;
+        if (Get(x, y) != null)
         {
             return false;
         }
 
         //Check if there is a structure in an adjacent cell.
-        if (grid[x + 1, y] != null &&
-            (grid[x + 1, y].tag == GlobalValues.StructureTag || grid[x + 1, y].tag == GlobalValues.ShipTag))
+        var obj = Get(x + 1, y);
+        if (obj != null &&
+            (obj.tag == GlobalValues.StructureTag || obj.tag == GlobalValues.ShipTag))
         {
-            parent = grid[x + 1, y];
+            parent = obj;
             parentX = x + 1;
             parentY = y;
             return true;
         }
-        if (grid[x - 1, y] != null &&
-            (grid[x - 1, y].tag == GlobalValues.StructureTag || grid[x - 1, y].tag == GlobalValues.ShipTag))
+        obj = Get(x - 1, y);
+        if (obj != null &&
+            (obj.tag == GlobalValues.StructureTag || obj.tag == GlobalValues.ShipTag))
         {
-            parent = grid[x - 1, y];
+            parent = obj;
             parentX = x - 1;
             parentY = y;
             return true;
         }
-        if (grid[x, y + 1] != null &&
-            (grid[x, y + 1].tag == GlobalValues.StructureTag || grid[x, y + 1].tag == GlobalValues.ShipTag))
+        obj = Get(x, y + 1);
+        if (obj != null &&
+            (obj.tag == GlobalValues.StructureTag || obj.tag == GlobalValues.ShipTag))
         {
-            parent = grid[x, y + 1];
+            parent = obj;
             parentX = x;
             parentY = y + 1;
             return true;
         }
-        if (grid[x, y - 1] != null &&
-            (grid[x, y - 1].tag == GlobalValues.StructureTag || grid[x, y - 1].tag == GlobalValues.ShipTag))
+        obj = Get(x, y - 1);
+        if (obj != null &&
+            (obj.tag == GlobalValues.StructureTag || obj.tag == GlobalValues.ShipTag))
         {
-            parent = grid[x, y - 1];
+            parent = obj;
             parentX = x;
             parentY = y - 1;
             return true;
