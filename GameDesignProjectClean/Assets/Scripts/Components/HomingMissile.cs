@@ -22,12 +22,21 @@ public class HomingMissile : Projectile
     private int newTargetCount; // How many times a new target has been found.
     private float timeSinceLastTarget;
 
+    private ParticleSystem[] childParticles;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         this.GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
         this.GetComponent<AudioSource>().volume = Random.Range(0.9f, 1.1f);
 		InGrace = true;
+        childParticles = gameObject.GetComponentsInChildren<ParticleSystem>();
+
+        for (int i = 0; i < childParticles.Length; i++)
+        {
+            if (!childParticles[i].isPlaying)
+                childParticles[i].Play();
+        }
     }
 
     // Update is called once per frame
@@ -38,6 +47,14 @@ public class HomingMissile : Projectile
 		{
 			elapsedTime += Time.deltaTime;
 		}
+        else
+        {
+            for (int i = 0; i < childParticles.Length; i++)
+            {
+                if (childParticles[i].isPlaying)
+                    childParticles[i].Stop();
+            }
+        }
 		// Handle grace period
 		if(InGrace)
 		{
@@ -72,7 +89,6 @@ public class HomingMissile : Projectile
                 timeSinceLastTarget = 0;
             }
         }
-
 
     }
 

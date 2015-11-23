@@ -14,6 +14,8 @@ public class Rocket : Projectile
     private Rigidbody2D rb;
     private float elapsedTime;
 
+    private ParticleSystem[] childParticles;
+
 
     // Use this for initialization
     void Awake()
@@ -22,6 +24,13 @@ public class Rocket : Projectile
         this.GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
         this.GetComponent<AudioSource>().volume = Random.Range(0.9f, 1.1f);
 		InGrace = true;
+        childParticles = gameObject.GetComponentsInChildren<ParticleSystem>();
+
+        for (int i = 0; i < childParticles.Length; i++)
+        {
+            if (!childParticles[i].isPlaying)
+                childParticles[i].Play();
+        }
     }
 
     // Update is called once per frame
@@ -48,6 +57,11 @@ public class Rocket : Projectile
         else
         {
             GetComponent<AudioSource>().Stop();
+            for (int i = 0; i < childParticles.Length; i++)
+            {
+                if (childParticles[i].isPlaying)
+                    childParticles[i].Stop();
+            }
         }
     }
 
