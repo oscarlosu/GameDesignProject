@@ -13,6 +13,7 @@ public class Pulse : Projectile
 	{
 		col = GetComponent<CircleCollider2D>();
 		ParticleManager.Instance.SpawnParticle(ParticleType.Pulse, transform.position);
+		InGrace = true;
 	}
 	
 	// Update is called once per frame

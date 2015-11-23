@@ -15,6 +15,7 @@ public class Laser : Projectile
     {
 		this.GetComponent<AudioSource>().pitch = Random.Range(0.5f, 1.5f);
         rend = GetComponent<SpriteRenderer>();
+		InGrace = true;
     }
 
     // Update is called once per frame

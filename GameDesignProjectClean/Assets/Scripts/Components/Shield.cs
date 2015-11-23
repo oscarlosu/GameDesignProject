@@ -66,11 +66,15 @@ public class Shield : Module
 		// The shield starts deactivating when it collides with a projectile (only when it is active)
 		if(Active)
 		{
-			if(other.gameObject.GetComponent<Projectile>() != null && other.gameObject.GetComponent<Projectile>().SourceCore.GetInstanceID() != ShipCore.GetInstanceID())
+			// Projectile from a different ship or not in the grace period
+			if(other.gameObject.GetComponent<Projectile>() != null && 
+				(other.gameObject.GetComponent<Projectile>().SourceCore.GetInstanceID() != ShipCore.GetInstanceID() ||
+				!other.gameObject.GetComponent<Projectile>().InGrace))
 			{
 				elapsedTime = 0;
 				deactivating = true;
 			}
+			// Something with a rigidbody that isnt a projectile
 			else if(other.gameObject.GetComponent<Projectile>() == null && other.attachedRigidbody != null)
 			{
 				elapsedTime = 0;
@@ -84,6 +88,18 @@ public class Shield : Module
 				other.attachedRigidbody.velocity = Vector2.Dot (orthogonal, other.attachedRigidbody.velocity) * orthogonal;
 				other.attachedRigidbody.AddForce(RepulsionForce * dir);
 			}
+			else if(other.gameObject.GetComponent<Explosion>() != null || 
+			        other.gameObject.GetComponent<Implosion>() != null)
+			{
+				elapsedTime = 0;
+				deactivating = true;
+			}
+			/*else if(other.gameObject.GetComponent<Shield>() != null)
+			{
+				elapsedTime = 0;
+				deactivating = true;
+
+			}*/
 
 
 		}
