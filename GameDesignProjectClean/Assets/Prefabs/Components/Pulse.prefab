@@ -91,6 +91,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -159,21 +160,26 @@ MonoBehaviour:
   SourceCore: {fileID: 0}
   SourceStructure: {fileID: 0}
   Damage: 0
-  scaleFactor: 1
+  scaleFactor: 10
   duration: 1
   explosionAnim:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: .0500000007
-      inSlope: .949999988
-      outSlope: .949999988
-      tangentMode: 10
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+    - time: .0940559655
+      value: .50672555
+      inSlope: 1.39594078
+      outSlope: 1.39594078
+      tangentMode: 0
     - time: 1
       value: 1
-      inSlope: .949999988
-      outSlope: .949999988
-      tangentMode: 10
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
   RepulsionForce: 1000
@@ -189,6 +195,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: explosionAnim.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Speed
       value: 5
@@ -209,6 +219,70 @@ Prefab:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: f6a190de22f594411b83b60909174804, type: 3}
+    - target: {fileID: 0}
+      propertyPath: scaleFactor
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: duration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: explosionAnim.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: explosionAnim.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: explosionAnim.m_Curve.Array.data[0].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: explosionAnim.m_Curve.Array.data[1].value
+      value: .50672555
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: explosionAnim.m_Curve.Array.data[1].inSlope
+      value: 1.39594078
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: explosionAnim.m_Curve.Array.data[1].outSlope
+      value: 1.39594078
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: explosionAnim.m_Curve.Array.data[1].time
+      value: .0940559655
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: explosionAnim.m_Curve.Array.data[2].inSlope
+      value: .815670669
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: explosionAnim.m_Curve.Array.data[2].outSlope
+      value: .815670669
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: explosionAnim.m_Curve.Array.data[0].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: explosionAnim.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: explosionAnim.m_Curve.Array.data[2].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: explosionAnim.m_Curve.Array.data[2].value
+      value: .946562529
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: explosionAnim.m_Curve.Array.data[2].tangentMode
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 134662}

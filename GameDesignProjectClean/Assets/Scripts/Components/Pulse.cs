@@ -23,7 +23,7 @@ public class Pulse : Projectile
 		col = GetComponent<CircleCollider2D>();
         mat = pulseMats[Random.Range(0, pulseMats.Length)];
         GetComponent<MeshRenderer>().material = mat;
-        mat = GetComponent<MeshRenderer>().material;
+        //mat = GetComponent<MeshRenderer>().material;
         InGrace = true;
         StartCoroutine("DestroyPulse");
     }
