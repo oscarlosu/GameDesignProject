@@ -16,6 +16,7 @@ TagManager:
   - Debris
   - DefensiveModule
   - Defensive
+  - GameHandler
   layers:
   - Default
   - TransparentFX

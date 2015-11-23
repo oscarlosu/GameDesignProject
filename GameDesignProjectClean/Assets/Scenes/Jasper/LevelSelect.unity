@@ -85,6 +85,56 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &48005971
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
+      propertyPath: LevelSceneNames.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 465802, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465802, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465802, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465802, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465802, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465802, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465802, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 465802, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
+      propertyPath: LevelSelectPanel
+      value: 
+      objectReference: {fileID: 1566290909}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &243878714
 GameObject:
   m_ObjectHideFlags: 0
