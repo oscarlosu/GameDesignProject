@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 using GamepadInput;
 
@@ -14,6 +15,7 @@ public class BuilderHandler : MonoBehaviour
     public GameObject BuilderCanvas;
     public Image ImageLeft, ImageCenter, ImageRight;
     public Text ComponentNameText;
+    public GameObject InfoBox;
     public int GridSizeX, GridSizeY;
     public GameObject AvailablePosPrefab;
     public GameObject SelectedCellPrefab;
@@ -22,6 +24,8 @@ public class BuilderHandler : MonoBehaviour
     private GameObject selectedCell;
     private int selectedCellX, selectedCellY;
     private GameObject[,] grid;
+
+    private bool closeInfoBoxOnAnyKey = true;
 
     private bool inBuildMode;
     private int selectedComponent;
@@ -150,6 +154,16 @@ public class BuilderHandler : MonoBehaviour
     {
         if (inBuildMode)
         {
+            // If info box is open, wait for it to be closed, before other stuff can happen.
+            if (InfoBox.activeInHierarchy)
+            {
+                if (closeInfoBoxOnAnyKey && AnyButtonPressed())
+                {
+                    CloseInfoBox();
+                }
+                return;
+            }
+
             // Exit build mode to test the ship.
             if (GamePad.GetButtonDown(ButtonGoToPlayMode, ControllerIndex))
             {
@@ -171,7 +185,7 @@ public class BuilderHandler : MonoBehaviour
             var dPadInput = GamePad.GetAxis(GamePad.Axis.Dpad, ControllerIndex);
             var leftStickInput = GamePad.GetAxis(GamePad.Axis.LeftStick, ControllerIndex);
             var moveInput = dPadInput.magnitude > 0 ? dPadInput : leftStickInput;
-            if (moveInput.magnitude > 0)
+            if (moveInput.magnitude > 0.1)
             {
                 elapsedMoveTime += Time.deltaTime; // Add to the time elapsed since last move.
                 if (elapsedMoveTime >= MovePauseTime)
@@ -197,7 +211,7 @@ public class BuilderHandler : MonoBehaviour
                         selectedCell.transform.position = TranslateCellToPos(selectedCellX, selectedCellY);
                     }
                     elapsedMoveTime = 0; // Reset the timer after move.
-                                         // Center camera on selected cell.
+                    // Center camera on selected cell.
                     BuilderCamera.transform.position = new Vector3(selectedCell.transform.position.x, selectedCell.transform.position.y, BuilderCamera.transform.position.z);
                 }
                 UpdateSelectedCellObject();
@@ -219,12 +233,16 @@ public class BuilderHandler : MonoBehaviour
                     SetupShipComponent(component, selectedCellX, selectedCellY, parent, parentX, parentY);
                     grid[selectedCellX, selectedCellY] = component;
                     UpdateSelectedCellObject();
+                    ShipCore.GetComponent<Core>().Assemble();
+                    // Select module input.
+                    if (component.GetComponent<Module>() != null)
+                    {
+                        StartCoroutine(SelectComponentButton(component.GetComponent<Module>()));
+                    }
                 }
                 // If position is already taken and it's a module, change connection point.
                 else if (Get(selectedCellX, selectedCellY) != null && Get(selectedCellX, selectedCellY).tag == GlobalValues.ModuleTag)
                 {
-                    Debug.Log("Parent direction: " +
-                              Get(selectedCellX, selectedCellY).GetComponent<Module>().ParentDirection);
                     switch (Get(selectedCellX, selectedCellY).GetComponent<Module>().ParentDirection)
                     {
                         case Module.Direction.Up:
@@ -250,8 +268,7 @@ public class BuilderHandler : MonoBehaviour
                 var found = Get(selectedCellX, selectedCellY);
                 if (found != null && found.tag != GlobalValues.ShipTag)
                 {
-                    GameObject.Destroy(found);
-                    grid[selectedCellX, selectedCellY] = null;
+                    RemoveObject(selectedCellX, selectedCellY);
                     UpdateSelectedCellObject();
                 }
             }
@@ -263,6 +280,16 @@ public class BuilderHandler : MonoBehaviour
                 if (found != null && found.tag != GlobalValues.ShipTag)
                 {
                     RotateComponent(selectedCellX, selectedCellY);
+                }
+            }
+
+            // Change module input.
+            if (GamePad.GetButtonDown(GamePad.Button.X, ControllerIndex))
+            {
+                var found = Get(selectedCellX, selectedCellY);
+                if (found != null && found.GetComponent<Module>())
+                {
+                    StartCoroutine(SelectComponentButton(found.GetComponent<Module>()));
                 }
             }
         }
@@ -280,17 +307,127 @@ public class BuilderHandler : MonoBehaviour
         }
     }
 
+    private IEnumerator SelectComponentButton(Module m)
+    {
+        OpenInfoBox("Select module control",
+            "Click any button to select, which button you wish to use to control the module.", false);
+        yield return new WaitForSeconds(.3f);
+        GamePad.Button? button = null;
+        GamePad.Trigger? trigger = null;
+        while (button == null && trigger == null)
+        {
+            AnyButtonPressed(out button, out trigger);
+            yield return null;
+        }
+        if (button.HasValue)
+        {
+            m.InputType = Module.InputKeyType.Button;
+            m.ButtonKey = button.Value;
+        }
+        else if (trigger.HasValue)
+        {
+            m.InputType = Module.InputKeyType.Trigger;
+            m.TriggerKey = trigger.Value;
+        }
+        CloseInfoBox();
+    }
+
+    private void OpenInfoBox(string header, string body, bool closeOnAnyKey)
+    {
+        closeInfoBoxOnAnyKey = closeOnAnyKey;
+        InfoBox.transform.GetChild(0).GetComponent<Text>().text = header;
+        InfoBox.transform.GetChild(1).GetComponent<Text>().text = body;
+        InfoBox.SetActive(true);
+    }
+
+    private void CloseInfoBox()
+    {
+        InfoBox.SetActive(false);
+    }
+
+    private bool AnyButtonPressed()
+    {
+        GamePad.Button? button;
+        GamePad.Trigger? trigger;
+        return AnyButtonPressed(out button, out trigger);
+    }
+
+    private bool AnyButtonPressed(out GamePad.Button? button, out GamePad.Trigger? trigger)
+    {
+        // Trigger pressed threshold.
+        const float triggerThreshold = .5f;
+        // Defaults.
+        button = null;
+        trigger = null;
+        // Check for buttons.
+        if (GamePad.GetButtonDown(GamePad.Button.A, ControllerIndex))
+        {
+            button = GamePad.Button.A;
+            return true;
+        }
+        if (GamePad.GetButtonDown(GamePad.Button.B, ControllerIndex))
+        {
+            button = GamePad.Button.B;
+            return true;
+        }
+        if (GamePad.GetButtonDown(GamePad.Button.X, ControllerIndex))
+        {
+            button = GamePad.Button.X;
+            return true;
+        }
+        if (GamePad.GetButtonDown(GamePad.Button.Y, ControllerIndex))
+        {
+            button = GamePad.Button.Y;
+            return true;
+        }
+        if (GamePad.GetButtonDown(GamePad.Button.Back, ControllerIndex))
+        {
+            button = GamePad.Button.Back;
+            return true;
+        }
+        if (GamePad.GetButtonDown(GamePad.Button.Start, ControllerIndex))
+        {
+            button = GamePad.Button.Start;
+            return true;
+        }
+        if (GamePad.GetButtonDown(GamePad.Button.LeftShoulder, ControllerIndex))
+        {
+            button = GamePad.Button.LeftShoulder;
+            return true;
+        }
+        if (GamePad.GetButtonDown(GamePad.Button.RightShoulder, ControllerIndex))
+        {
+            button = GamePad.Button.RightShoulder;
+            return true;
+        }
+
+        // Check for triggers. // TODO Right now, if a trigger is held down before this method. It will think it was pressed.
+        if (GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, ControllerIndex) > triggerThreshold)
+        {
+            trigger = GamePad.Trigger.LeftTrigger;
+            return true;
+        }
+        if (GamePad.GetTrigger(GamePad.Trigger.RightTrigger, ControllerIndex) > triggerThreshold)
+        {
+            trigger = GamePad.Trigger.RightTrigger;
+            return true;
+        }
+
+        // No button pressed.
+        return false;
+    }
+
     private void RotateModuleToParent(int x, int y, Module.Direction direction)
     {
         var module = Get(x, y);
         while (true)
         {
-            Debug.Log("Attaching module to: " + direction);
             // If module not found, or rotation all the way around has been tried, return.
             if (module == null || direction == module.GetComponent<Module>().ParentDirection)
             {
                 return;
             }
+            // Try to find a new parent. If new parent direction is same as current, stop searching. No other parent is available.
             GameObject newParent;
             switch (direction)
             {
@@ -326,7 +463,6 @@ public class BuilderHandler : MonoBehaviour
                         return;
                     }
                     direction = Module.Direction.Left;
-                    Debug.Log("Try again with: " + direction);
                     continue;
                 case Module.Direction.Left:
                     newParent = Get(x - 1, y);
