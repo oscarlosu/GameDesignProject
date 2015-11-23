@@ -84,6 +84,10 @@ public class Shield : Module
 				other.attachedRigidbody.velocity = Vector2.Dot (orthogonal, other.attachedRigidbody.velocity) * orthogonal;
 				other.attachedRigidbody.AddForce(RepulsionForce * dir);
 			}
+			else
+			{
+
+			}
 
 
 		}

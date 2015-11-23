@@ -14,6 +14,7 @@ public class Mine : Projectile
     public GameObject ExplosionPrefab;
 
     private float elapsedTime;
+	public bool InGrace {get; private set;};
     private bool detected = false; // If any object has been detected in its vicinity.
     private float timeFromDetection;
 
@@ -24,12 +25,22 @@ public class Mine : Projectile
     void Start()
     {
         anim = GetComponent<Animator>();
+		InGrace = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        elapsedTime += Time.deltaTime;
+		// Update elapsed time until the mine is active
+		if(elapsedTime <= TimeTillActive)
+		{
+			elapsedTime += Time.deltaTime;
+		}
+		// Handle grace period
+		if(InGrace && elapsedTime > GracePeriod)
+		{
+			InGrace = false;
+		}        
 
         if (detected)
         {
@@ -81,6 +92,6 @@ public class Mine : Projectile
 	private bool ShouldExplode(Collider2D other)
 	{
 		return other.gameObject.GetComponent<Explosion>() != null || other.gameObject.GetComponent<Laser>() != null || 
-			(other.gameObject.GetComponent<Shield>() != null && (elapsedTime > GracePeriod || other.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID()));
+			(other.gameObject.GetComponent<Shield>() != null && (!InGrace || other.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID()));
 	}
 }

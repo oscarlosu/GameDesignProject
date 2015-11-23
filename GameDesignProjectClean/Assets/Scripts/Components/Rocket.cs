@@ -13,6 +13,7 @@ public class Rocket : Projectile
 
     private Rigidbody2D rb;
     private float elapsedTime;
+	public bool InGrace {get; private set;};
 
 
     // Use this for initialization
@@ -26,7 +27,19 @@ public class Rocket : Projectile
     // Update is called once per frame
     void Update()
     {
-        elapsedTime += Time.deltaTime;
+		// Update elapsed time until the mine is active
+		if(elapsedTime <= ThrusterDuration)
+		{
+			elapsedTime += Time.deltaTime;
+		}
+		// Handle grace period
+		if(InGrace)
+		{
+			if(elapsedTime > GracePeriod)
+			{
+				InGrace = false;
+			}
+		}   
         // Handle thruster
         if (elapsedTime <= ThrusterDuration)
         {
@@ -41,7 +54,7 @@ public class Rocket : Projectile
 	void OnCollisionEnter2D(Collision2D other)
 	{
 		// With something that is not the source ship or after the grace period
-		if (elapsedTime >= GracePeriod || other.gameObject.GetInstanceID() != SourceStructure.GetInstanceID())
+		if (!InGrace || other.gameObject.GetInstanceID() != SourceStructure.GetInstanceID())
 		{
 			Debug.Log("Rocket detected collision with " + other.gameObject.name);
 			Activate();
@@ -51,7 +64,7 @@ public class Rocket : Projectile
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		// Missiles only activate with shield or laser triggers
-		if ((other.gameObject.GetComponent<Shield>() != null && (elapsedTime > GracePeriod || other.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID()))
+		if ((other.gameObject.GetComponent<Shield>() != null && (!InGrace || other.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID()))
 		    || other.gameObject.GetComponent<Laser>() != null)
 		{
 			Debug.Log("Rocket trigger detected trigger with " + other.gameObject.name);

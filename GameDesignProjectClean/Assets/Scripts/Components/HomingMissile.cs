@@ -22,6 +22,8 @@ public class HomingMissile : Projectile
     private int newTargetCount; // How many times a new target has been found.
     private float timeSinceLastTarget;
 
+	public bool InGrace {get; private set;};
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
