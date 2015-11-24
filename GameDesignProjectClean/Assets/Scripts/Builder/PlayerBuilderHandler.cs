@@ -400,6 +400,7 @@ public class PlayerBuilderHandler : MonoBehaviour
         }
         else if (trigger.HasValue)
         {
+            Debug.Log("Trigger chosen: " + trigger.Value);
             m.InputType = Module.InputKeyType.Trigger;
             m.TriggerKey = trigger.Value;
         }
