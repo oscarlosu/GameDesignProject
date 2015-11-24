@@ -39,6 +39,7 @@ public class BuilderHandler : MonoBehaviour
 	public AudioClip CellMoveSound;
 	public AudioClip PlaceModuleSound;
 	public AudioClip NextModuleSound;
+	public AudioClip RotateModuleSound;
 
     // Use this for initialization
     void Start()
@@ -219,8 +220,7 @@ public class BuilderHandler : MonoBehaviour
                 elapsedMoveTime += Time.deltaTime; // Add to the time elapsed since last move.
                 if (elapsedMoveTime >= MovePauseTime)
                 {
-					GetComponent<AudioSource>().clip = CellMoveSound;
-					GetComponent<AudioSource>().Play();
+					AudioSource.PlayClipAtPoint(CellMoveSound, this.transform.position);
 
                     if (moveInput.x > 0 && IsInsideGrid(selectedCellX + 1, selectedCellY))
                     {
@@ -282,6 +282,7 @@ public class BuilderHandler : MonoBehaviour
                 // If position is already taken and it's a module, change connection point.
                 else if (Get(selectedCellX, selectedCellY) != null && Get(selectedCellX, selectedCellY).GetComponent<Module>() != null)
                 {
+					AudioSource.PlayClipAtPoint(RotateModuleSound, this.transform.position);
                     switch (Get(selectedCellX, selectedCellY).GetComponent<Module>().ParentDirection)
                     {
                         case Module.Direction.Up:
@@ -315,6 +316,7 @@ public class BuilderHandler : MonoBehaviour
             // Rotate component.
             if (GamePad.GetButtonDown(GamePad.Button.Y, ControllerIndex))
             {
+				AudioSource.PlayClipAtPoint(RotateModuleSound, this.transform.position);
                 var found = Get(selectedCellX, selectedCellY);
                 if (found != null && found.tag != GlobalValues.ShipTag)
                 {
