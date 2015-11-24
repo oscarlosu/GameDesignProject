@@ -13,9 +13,9 @@ public class Laser : Projectile
     
     void Awake()
     {
-		this.GetComponent<AudioSource>().pitch = Random.Range(0.5f, 1.5f);
         rend = GetComponent<SpriteRenderer>();
-		AudioSource.PlayClipAtPoint (this.GetComponent<AudioSource> ().clip, transform.position);
+		GetComponent<AudioSource>().pitch = Random.Range(0.5f, 1.5f);
+		GetComponent<AudioSource> ().Play ();
 		InGrace = true;
     }
 

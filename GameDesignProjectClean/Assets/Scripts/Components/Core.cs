@@ -43,7 +43,7 @@ public class Core : Structure
         {
             if(child.GetComponent<ShipComponent>() != null)
             {
-                Debug.Log("ShipComponend mass: " + child.GetComponent<ShipComponent>().Mass);
+                //Debug.Log("ShipComponend mass: " + child.GetComponent<ShipComponent>().Mass);
                 child.GetComponent<ShipComponent>().ShipCore = gameObject;
                 GetComponent<Rigidbody2D>().mass += child.GetComponent<ShipComponent>().Mass;                
             }
