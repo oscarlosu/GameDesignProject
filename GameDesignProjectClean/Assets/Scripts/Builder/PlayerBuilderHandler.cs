@@ -50,6 +50,7 @@ public class PlayerBuilderHandler : MonoBehaviour
         shipCore = GameObject.Instantiate(CorePrefab);
         shipCore.transform.parent = PlayerArea.transform;
         shipCore.transform.localPosition = new Vector3(0, 0);
+        shipCore.GetComponent<Core>().ControllerIndex = ControllerIndex;
         grid[GridSizeX / 2 - 1, GridSizeY / 2 - 1] = shipCore;
         grid[GridSizeX / 2, GridSizeY / 2 - 1] = shipCore;
         grid[GridSizeX / 2 - 1, GridSizeY / 2] = shipCore;
