@@ -17,6 +17,7 @@ TagManager:
   - DefensiveModule
   - Defensive
   - GameHandler
+  - PlayerArea
   layers:
   - Default
   - TransparentFX

@@ -5,6 +5,7 @@ using GamepadInput;
 
 public class PlayerBuilderHandler : MonoBehaviour
 {
+    public BuilderHandler BuilderHandler;
     public GameObject PlayerArea;
     public Vector2 StartingPosition;
     public GamePad.Index ControllerIndex;
@@ -33,6 +34,7 @@ public class PlayerBuilderHandler : MonoBehaviour
     private bool closeInfoBoxOnAnyKey = true;
 
     private bool inBuildMode;
+    private bool playerReady;
     private int selectedComponent;
     private GameObject cloneShip; // The ship used in play mode to test the build.
     private float elapsedMoveTime; // The time elapsed since last move (used to restrict how fast the player can move the selection).
@@ -120,6 +122,8 @@ public class PlayerBuilderHandler : MonoBehaviour
         RemovePanel.SetActive(false);
         // Create clone of ship that the players can test and play around with.
         cloneShip = GameObject.Instantiate(shipCore);
+        cloneShip.transform.parent = PlayerArea.transform;
+        cloneShip.transform.localPosition = new Vector3(0, 0);
         // Deactivate the original in order for it to stay intact, while the other player is testing.
         shipCore.SetActive(false);
     }
@@ -344,9 +348,30 @@ public class PlayerBuilderHandler : MonoBehaviour
         // If not in build mode, nothing from the builder should be active.
         else
         {
+            // Set player as ready, which means he/she has to wait for the rest.
+            if (!playerReady && GamePad.GetButtonDown(ButtonGoToPlayMode, ControllerIndex))
+            {
+                playerReady = true;
+                switch (ControllerIndex)
+                {
+                    case GamePad.Index.One:
+                        BuilderHandler.SetPlayerShip(0, shipCore);
+                        return;
+                    case GamePad.Index.Two:
+                        BuilderHandler.SetPlayerShip(1, shipCore);
+                        return;
+                    case GamePad.Index.Three:
+                        BuilderHandler.SetPlayerShip(2, shipCore);
+                        return;
+                    case GamePad.Index.Four:
+                        BuilderHandler.SetPlayerShip(3, shipCore);
+                        return;
+                }
+            }
+
             BuilderCamera.transform.position = new Vector3(cloneShip.transform.position.x, cloneShip.transform.position.y, BuilderCamera.transform.position.z);
             // Go back to build mode to build the ship.
-            if (GamePad.GetButtonDown(ButtonGoToBuildMode, ControllerIndex))
+            if (!playerReady && GamePad.GetButtonDown(ButtonGoToBuildMode, ControllerIndex))
             {
                 GoToBuildMode();
                 return;

@@ -83,7 +83,6 @@ public class GameHandler : MonoBehaviour
                 {
                     if (PlayerSelectHandler.PlayersJoined(out playersJoined))
                     {
-                        Debug.Log(playersJoined);
                         Application.LoadLevel("LevelSelect");
                         CurrentScene = Scene.LevelSelectScene;
                     }
@@ -114,12 +113,32 @@ public class GameHandler : MonoBehaviour
                         // They should also be disabled, so they don't hit anything upon entering the next level.
                         foreach (var ship in playerShips.Where(ship => ship != null))
                         {
-                            DontDestroyOnLoad(ship);
+                            //DontDestroyOnLoad(ship);
                             ship.SetActive(false);
                         }
 
                         // Load the selected level.
                         Application.LoadLevel(levelSelectedSceneName);
+
+                        // DEBUG. // TODO Change positions via a specific level handler later.
+                        if (playerShips[0] != null)
+                        {
+                            playerShips[0].transform.position = new Vector3(-10, 10);
+                            playerShips[0].SetActive(true);
+                        }
+                        if (playerShips[1] != null)
+                        {
+                            playerShips[1].transform.position = new Vector3(10, 10);
+                            playerShips[1].SetActive(true);
+                        }
+                        if (playerShips[2] != null)
+                        {
+                            playerShips[2].transform.position = new Vector3(-10, -10);
+                        }
+                        if (playerShips[3] != null)
+                        {
+                            playerShips[3].transform.position = new Vector3(10, -10);
+                        }
                     }
                     else
                     {
@@ -131,5 +150,10 @@ public class GameHandler : MonoBehaviour
                 // The winning condition should have been met.
                 return;
         }
+    }
+
+    public bool[] GetPlayersJoined()
+    {
+        return playersJoined;
     }
 }
