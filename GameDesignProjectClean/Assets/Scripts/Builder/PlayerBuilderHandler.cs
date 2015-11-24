@@ -331,8 +331,8 @@ public class PlayerBuilderHandler : MonoBehaviour
                 if (found != null && found.tag != GlobalValues.ShipTag)
                 {
                     RotateComponent(selectedCellX, selectedCellY);
+                    AudioSource.PlayClipAtPoint(RotateModuleSound, this.transform.position);
                 }
-				AudioSource.PlayClipAtPoint(RotateModuleSound, this.transform.position);
             }
 
             // Change module input.
