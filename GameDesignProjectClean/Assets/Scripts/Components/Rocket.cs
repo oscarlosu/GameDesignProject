@@ -70,7 +70,7 @@ public class Rocket : Projectile
 		// With something that is not the source ship or after the grace period
 		if (!InGrace || other.gameObject.GetInstanceID() != SourceStructure.GetInstanceID())
 		{
-			Debug.Log("Rocket detected collision with " + other.gameObject.name);
+			//Debug.Log("Rocket detected collision with " + other.gameObject.name);
 			Activate();
 		}
 	}
@@ -81,7 +81,7 @@ public class Rocket : Projectile
 		if ((other.gameObject.GetComponent<Shield>() != null && (!InGrace || other.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID()))
 		    || other.gameObject.GetComponent<Laser>() != null)
 		{
-			Debug.Log("Rocket trigger detected trigger with " + other.gameObject.name);
+			//Debug.Log("Rocket trigger detected trigger with " + other.gameObject.name);
 			Activate();
 		}
 	}

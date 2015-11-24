@@ -71,7 +71,7 @@ public class Structure : ShipComponent
 				{
 					// Trigger visual feedback and return true
 					TriggerAnimation("TriggerDamage");
-					//Debug.Log("Damage visual feedback not implemented.");
+					////Debug.Log("Damage visual feedback not implemented.");
 					return true;
 				}
 				else
@@ -81,7 +81,7 @@ public class Structure : ShipComponent
 				}
 			}
 			// This point should never be reached
-			Debug.LogWarning("Structure couldnt propagate the damage! This should never happen!");
+			//Debug.LogWarning("Structure couldnt propagate the damage! This should never happen!");
 			return true;
 		}
 		else if (isProtected && hasShieldAttached)
@@ -99,7 +99,7 @@ public class Structure : ShipComponent
 		}
 		else
 		{
-			Debug.Log ("Unknown propagation case encountered");
+			//Debug.Log ("Unknown propagation case encountered");
 			return false;
 		}
 		return false;
@@ -118,7 +118,7 @@ public class Structure : ShipComponent
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-		Debug.LogWarning("Ship collided with something");
+		//Debug.LogWarning("Ship collided with something");
         // Only "crash" if the force with which the objects hit each other is large enough.
         if (coll.relativeVelocity.magnitude > GlobalValues.MinCrashMagnitude)
         {
@@ -126,7 +126,7 @@ public class Structure : ShipComponent
             if (coll.rigidbody.mass >= ShipCore.GetComponent<Rigidbody2D>().mass)
             {
                 TakeDamage(GlobalValues.CrashDamage);
-                Debug.LogWarning("Ship " + gameObject.name + " collided with something with greater or equal mass.");
+                //Debug.LogWarning("Ship " + gameObject.name + " collided with something with greater or equal mass.");
             }
 
         }
@@ -134,12 +134,12 @@ public class Structure : ShipComponent
 
 /*	void OnTriggerStay2D(Collider2D col)
 	{
-		Debug.LogWarning("Ship collided with something");
+		//Debug.LogWarning("Ship collided with something");
 		// If the other object has a higher mass, lose one random module.
 		if (col.attachedRigidbody.mass >= ShipCore.GetComponent<Rigidbody2D>().mass)
 		{
 			TakeDamage(GlobalValues.CrashDamage);
-			Debug.LogWarning("Ship " + gameObject.name + " collided with something with greater or equal mass.");
+			//Debug.LogWarning("Ship " + gameObject.name + " collided with something with greater or equal mass.");
 		}
 	}*/
 

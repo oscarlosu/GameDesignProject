@@ -33,7 +33,7 @@ public class Explosion : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-		//Debug.Log ("Explosion detected OnTriggerEnter2D with " + other.gameObject.name);
+		////Debug.Log ("Explosion detected OnTriggerEnter2D with " + other.gameObject.name);
 		Structure str = other.gameObject.GetComponent<Structure>();
 		Asteroid ast = other.gameObject.GetComponent<Asteroid>();
         if (str != null)

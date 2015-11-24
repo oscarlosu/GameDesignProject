@@ -13,9 +13,9 @@ public class Laser : Projectile
     
     void Awake()
     {
-		this.GetComponent<AudioSource>().pitch = Random.Range(0.5f, 1.5f);
         rend = GetComponent<SpriteRenderer>();
-		AudioSource.PlayClipAtPoint (this.GetComponent<AudioSource> ().clip, transform.position);
+		GetComponent<AudioSource>().pitch = Random.Range(0.5f, 1.5f);
+		GetComponent<AudioSource> ().Play ();
 		InGrace = true;
     }
 
@@ -37,7 +37,7 @@ public class Laser : Projectile
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Laser OnTriggerEnter2D with " + other.gameObject.name);
+        //Debug.Log("Laser OnTriggerEnter2D with " + other.gameObject.name);
 		Structure str = other.gameObject.GetComponent<Structure>();
 		Asteroid ast = other.gameObject.GetComponent<Asteroid>();
         if (str != null && other.gameObject != SourceStructure)

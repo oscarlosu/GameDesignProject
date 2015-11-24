@@ -44,6 +44,7 @@ public class MineSpawner : Module
                     if (GamePad.GetButton(ButtonKey, ShipCore.GetComponent<Core>().ControllerIndex))
                     {
                         Activate();
+						GetComponent<AudioSource>().Play();
                     }
                     break;
                 case InputKeyType.Trigger:
@@ -51,6 +52,7 @@ public class MineSpawner : Module
                     if (value > 0.5) // Activation threshold.
                     {
                         Activate();
+						GetComponent<AudioSource>().Play();
                     }
                     break;
             }
