@@ -39,7 +39,7 @@ public class Pulse : Projectile
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		Debug.Log ("Pulse detected OnTriggerEnter2D with " + other.gameObject.name);
+		//////Debug.Log ("Pulse detected OnTriggerEnter2D with " + other.gameObject.name);
 		if(!other.isTrigger && other.attachedRigidbody != null && other.attachedRigidbody.gameObject.GetInstanceID() != SourceCore.GetInstanceID())
 		{
 			// Cancel velocity in the direction of the shield device and apply force to rigidbody
