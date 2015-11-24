@@ -51,7 +51,7 @@ MonoBehaviour:
   SpriteForward: {fileID: 21300000, guid: ebb39fafdaa16274fb2a84600cf33cbf, type: 3}
   SpriteLeft: {fileID: 21300000, guid: 9d37266f8aef5744b9edb6ea79e83e89, type: 3}
   SpriteRight: {fileID: 21300000, guid: f0adc05d70a51f64f82e50ea3b76e196, type: 3}
-  SpriteDireciton: 0
+  SpriteDirection: 0
   LaserPrefab: {fileID: 108826, guid: cfdb46d2623fd1647822b1423ccf8d20, type: 2}
   Cooldown: 1
   MinLaserBreadth: .200000003
@@ -82,9 +82,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: -98434433
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f0fd41aef85818241a0f865f6340c62d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ebb39fafdaa16274fb2a84600cf33cbf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -96,8 +96,16 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: f0fd41aef85818241a0f865f6340c62d,
+      objectReference: {fileID: 21300000, guid: ebb39fafdaa16274fb2a84600cf33cbf,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: c3ca0c6e8a72ad7498f74ae2018a8aaf, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_SortingLayerID
+      value: -98434433
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 139010}

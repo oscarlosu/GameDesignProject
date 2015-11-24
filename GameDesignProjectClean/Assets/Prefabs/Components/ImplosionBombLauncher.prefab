@@ -51,7 +51,7 @@ MonoBehaviour:
   SpriteForward: {fileID: 21300000, guid: 9e5386481c136f5458bc01b344de0dc3, type: 3}
   SpriteLeft: {fileID: 21300000, guid: cd664b2a031ab3b47b05b6677f5d4779, type: 3}
   SpriteRight: {fileID: 21300000, guid: 4a26bf35e7a318e4baf1a2082e2da616, type: 3}
-  SpriteDireciton: 0
+  SpriteDirection: 0
   RocketPrefab: {fileID: 108902, guid: 0807933e5ed136b41a5589dedc9d0fbb, type: 2}
   Cooldown: 5
   RocketLaunchSpeed: 3
@@ -78,9 +78,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: -98434433
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ff61557447e882449b35e3b0b666b333, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9e5386481c136f5458bc01b344de0dc3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -135,6 +135,15 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Module
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9e5386481c136f5458bc01b344de0dc3,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_SortingLayerID
+      value: -98434433
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

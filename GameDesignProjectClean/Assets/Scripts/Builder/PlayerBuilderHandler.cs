@@ -3,8 +3,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using GamepadInput;
 
-public class BuilderHandler : MonoBehaviour
+public class PlayerBuilderHandler : MonoBehaviour
 {
+    public GameObject PlayerArea;
+    public Vector2 StartingPosition;
     public GamePad.Index ControllerIndex;
     public GamePad.Button ButtonGoToPlayMode; // When pressed in build mode, go to play mode.
     public GamePad.Button ButtonGoToBuildMode; // When pressed in play mode, go to build mode.
@@ -20,7 +22,6 @@ public class BuilderHandler : MonoBehaviour
     public GameObject InfoBox;
     public GameObject RotatePanel, PlacePanel, RemovePanel, ParentPanel, InputPanel;
     public int GridSizeX, GridSizeY;
-    public GameObject AvailablePosPrefab;
     public GameObject SelectedCellPrefab;
     public GameObject[] AvailableComponents;
 
@@ -44,8 +45,13 @@ public class BuilderHandler : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        PlayerArea.transform.position = new Vector3(StartingPosition.x, StartingPosition.y,
+            PlayerArea.transform.position.z);
         grid = new GameObject[GridSizeX, GridSizeY];
         shipCore = GameObject.Instantiate(CorePrefab);
+        shipCore.transform.parent = PlayerArea.transform;
+        shipCore.transform.localPosition = new Vector3(0, 0);
+        shipCore.GetComponent<Core>().ControllerIndex = ControllerIndex;
         grid[GridSizeX / 2 - 1, GridSizeY / 2 - 1] = shipCore;
         grid[GridSizeX / 2, GridSizeY / 2 - 1] = shipCore;
         grid[GridSizeX / 2 - 1, GridSizeY / 2] = shipCore;
@@ -80,6 +86,7 @@ public class BuilderHandler : MonoBehaviour
         shipCore.SetActive(true);
         // Create the selected cell object and place it.
         selectedCell = GameObject.Instantiate(SelectedCellPrefab); // Create the object to move around the builder.
+        selectedCell.transform.parent = PlayerArea.transform;
         selectedCell.transform.position = TranslateCellToPos(selectedCellX, selectedCellY);
         // Update component selector UI.
         UpdateComponentSelectionUi();
@@ -659,12 +666,7 @@ public class BuilderHandler : MonoBehaviour
 
     public Vector3 TranslateCellToPos(int x, int y)
     {
-        return new Vector3(x - (GridSizeX / 2) + 0.5f, y - (GridSizeY / 2) - 0.5f + 1);
-    }
-
-    public Vector3 TranslatePosToCell(float x, float y)
-    {
-        return new Vector3(x + (GridSizeX / 2f) + 0f, y + (GridSizeY / 2f) + 0f);
+        return new Vector3(x - (GridSizeX / 2) + 0.5f + StartingPosition.x, y - (GridSizeY / 2) - 0.5f + 1 + StartingPosition.y);
     }
 
     public GameObject Get(int x, int y)
