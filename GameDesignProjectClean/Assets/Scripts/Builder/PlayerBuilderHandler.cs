@@ -41,6 +41,7 @@ public class PlayerBuilderHandler : MonoBehaviour
 	public AudioClip PlaceModuleSound;
 	public AudioClip NextModuleSound;
 	public AudioClip RotateModuleSound;
+	public AudioClip RemoveModuleSounds;
 
     // Use this for initialization
     void Start()
@@ -207,15 +208,13 @@ public class PlayerBuilderHandler : MonoBehaviour
             // Select component.
             if (GamePad.GetButtonDown(GamePad.Button.LeftShoulder, ControllerIndex))
             {
-				GetComponent<AudioSource>().clip = NextModuleSound;
-				GetComponent<AudioSource>().Play();
                 SelectPreviousComponent();
+				AudioSource.PlayClipAtPoint(NextModuleSound, transform.position);
             }
             if (GamePad.GetButtonDown(GamePad.Button.RightShoulder, ControllerIndex))
             {
-				GetComponent<AudioSource>().clip = NextModuleSound;
-				GetComponent<AudioSource>().Play();
                 SelectNextComponent();
+				AudioSource.PlayClipAtPoint(NextModuleSound, transform.position);
             }
 
             // Cell selection movement.
@@ -227,8 +226,6 @@ public class PlayerBuilderHandler : MonoBehaviour
                 elapsedMoveTime += Time.deltaTime; // Add to the time elapsed since last move.
                 if (elapsedMoveTime >= MovePauseTime)
                 {
-					AudioSource.PlayClipAtPoint(CellMoveSound, this.transform.position);
-
                     if (moveInput.x > 0 && IsInsideGrid(selectedCellX + 1, selectedCellY))
                     {
                         selectedCellX += 1;
@@ -252,6 +249,8 @@ public class PlayerBuilderHandler : MonoBehaviour
                     elapsedMoveTime = 0; // Reset the timer after move.
                     // Center camera on selected cell.
                     BuilderCamera.transform.position = new Vector3(selectedCell.transform.position.x, selectedCell.transform.position.y, BuilderCamera.transform.position.z);
+
+					AudioSource.PlayClipAtPoint(CellMoveSound, this.transform.position);
                 }
                 UpdateBuilderUi();
             }
@@ -289,7 +288,6 @@ public class PlayerBuilderHandler : MonoBehaviour
                 // If position is already taken and it's a module, change connection point.
                 else if (Get(selectedCellX, selectedCellY) != null && Get(selectedCellX, selectedCellY).GetComponent<Module>() != null)
                 {
-					AudioSource.PlayClipAtPoint(RotateModuleSound, this.transform.position);
                     switch (Get(selectedCellX, selectedCellY).GetComponent<Module>().ParentDirection)
                     {
                         case Module.Direction.Up:
@@ -305,6 +303,7 @@ public class PlayerBuilderHandler : MonoBehaviour
                             RotateModuleToParent(selectedCellX, selectedCellY, Module.Direction.Up);
                             break;
                     }
+					AudioSource.PlayClipAtPoint(RotateModuleSound, this.transform.position);
                     
                 }
             }
@@ -317,18 +316,19 @@ public class PlayerBuilderHandler : MonoBehaviour
                 {
                     RemoveObject(selectedCellX, selectedCellY);
                     UpdateBuilderUi();
+					AudioSource.PlayClipAtPoint(RemoveModuleSounds, transform.position);
                 }
             }
 
             // Rotate component.
             if (GamePad.GetButtonDown(GamePad.Button.Y, ControllerIndex))
             {
-				AudioSource.PlayClipAtPoint(RotateModuleSound, this.transform.position);
                 var found = Get(selectedCellX, selectedCellY);
                 if (found != null && found.tag != GlobalValues.ShipTag)
                 {
                     RotateComponent(selectedCellX, selectedCellY);
                 }
+				AudioSource.PlayClipAtPoint(RotateModuleSound, this.transform.position);
             }
 
             // Change module input.

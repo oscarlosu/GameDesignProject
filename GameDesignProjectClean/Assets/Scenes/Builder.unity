@@ -256,14 +256,14 @@ Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 216893577}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
 --- !u!92 &216893580
 Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 216893577}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
 --- !u!20 &216893581
 Camera:
@@ -1091,7 +1091,7 @@ Transform:
   - {fileID: 1210284593}
   - {fileID: 1005407382}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!1 &845317679 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 198550, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
@@ -1620,7 +1620,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!4 &1123949869 stripped
 Transform:
   m_PrefabParentObject: {fileID: 482654, guid: 787f576714bc35540a684f062d7010cf, type: 2}
@@ -2048,7 +2048,7 @@ Transform:
   - {fileID: 1123949869}
   - {fileID: 216893582}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!1 &1848863177
 GameObject:
   m_ObjectHideFlags: 0
@@ -2122,7 +2122,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!1 &1867196141 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 144626, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}

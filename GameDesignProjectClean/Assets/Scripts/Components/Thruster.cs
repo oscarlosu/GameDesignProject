@@ -497,6 +497,7 @@ public class Thruster : Module
 		
 		if (!this.GetComponent<AudioSource> ().isPlaying) {
 			this.GetComponent<AudioSource> ().Play ();
+			this.GetComponent<AudioSource>().volume = 1;
 		} else {
             this.GetComponent<AudioSource>().volume = 1;
             this.GetComponent<AudioSource>().pitch = Mathf.MoveTowards(this.GetComponent<AudioSource>().pitch,2f,Time.deltaTime/Duration);
