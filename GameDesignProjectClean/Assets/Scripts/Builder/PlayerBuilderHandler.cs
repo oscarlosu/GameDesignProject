@@ -44,6 +44,7 @@ public class PlayerBuilderHandler : MonoBehaviour
 	public AudioClip NextModuleSound;
 	public AudioClip RotateModuleSound;
 	public AudioClip RemoveModuleSounds;
+	public AudioClip AssignKeySound;
 
     // Use this for initialization
     void Start()
@@ -213,12 +214,14 @@ public class PlayerBuilderHandler : MonoBehaviour
             if (GamePad.GetButtonDown(GamePad.Button.LeftShoulder, ControllerIndex))
             {
                 SelectPreviousComponent();
-				AudioSource.PlayClipAtPoint(NextModuleSound, transform.position);
+				GetComponent<AudioSource>().clip = NextModuleSound;
+				GetComponent<AudioSource>().Play();
             }
             if (GamePad.GetButtonDown(GamePad.Button.RightShoulder, ControllerIndex))
             {
                 SelectNextComponent();
-				AudioSource.PlayClipAtPoint(NextModuleSound, transform.position);
+				GetComponent<AudioSource>().clip = NextModuleSound;
+				GetComponent<AudioSource>().Play();
             }
 
             // Cell selection movement.
@@ -254,7 +257,8 @@ public class PlayerBuilderHandler : MonoBehaviour
                     // Center camera on selected cell.
                     BuilderCamera.transform.position = new Vector3(selectedCell.transform.position.x, selectedCell.transform.position.y, BuilderCamera.transform.position.z);
 
-					AudioSource.PlayClipAtPoint(CellMoveSound, this.transform.position);
+					GetComponent<AudioSource>().clip = CellMoveSound;
+					GetComponent<AudioSource>().Play();
                 }
                 UpdateBuilderUi();
             }
@@ -307,7 +311,8 @@ public class PlayerBuilderHandler : MonoBehaviour
                             RotateModuleToParent(selectedCellX, selectedCellY, Module.Direction.Up);
                             break;
                     }
-					AudioSource.PlayClipAtPoint(RotateModuleSound, this.transform.position);
+					GetComponent<AudioSource>().clip = RotateModuleSound;
+					GetComponent<AudioSource>().Play();
                     
                 }
             }
@@ -320,7 +325,9 @@ public class PlayerBuilderHandler : MonoBehaviour
                 {
                     RemoveObject(selectedCellX, selectedCellY);
                     UpdateBuilderUi();
-					AudioSource.PlayClipAtPoint(RemoveModuleSounds, transform.position);
+
+					GetComponent<AudioSource>().clip = RemoveModuleSounds;
+					GetComponent<AudioSource>().Play();
                 }
             }
 
@@ -331,8 +338,10 @@ public class PlayerBuilderHandler : MonoBehaviour
                 if (found != null && found.tag != GlobalValues.ShipTag)
                 {
                     RotateComponent(selectedCellX, selectedCellY);
-                    AudioSource.PlayClipAtPoint(RotateModuleSound, this.transform.position);
                 }
+
+				GetComponent<AudioSource>().clip = RotateModuleSound;
+				GetComponent<AudioSource>().Play();
             }
 
             // Change module input.
@@ -342,6 +351,9 @@ public class PlayerBuilderHandler : MonoBehaviour
                 if (found != null && found.GetComponent<Module>())
                 {
                     StartCoroutine(SelectComponentButton(found.GetComponent<Module>()));
+
+					GetComponent<AudioSource>().clip = AssignKeySound;
+					GetComponent<AudioSource>().Play();
                 }
             }
         }
@@ -400,7 +412,6 @@ public class PlayerBuilderHandler : MonoBehaviour
         }
         else if (trigger.HasValue)
         {
-            Debug.Log("Trigger chosen: " + trigger.Value);
             m.InputType = Module.InputKeyType.Trigger;
             m.TriggerKey = trigger.Value;
         }
