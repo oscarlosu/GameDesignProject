@@ -204,6 +204,10 @@ Prefab:
       propertyPath: m_Name
       value: PlayerBuilderHandler
       objectReference: {fileID: 0}
+    - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
+      propertyPath: BuilderHandler
+      value: 
+      objectReference: {fileID: 1779329489}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 787f576714bc35540a684f062d7010cf, type: 2}
   m_IsPrefabParent: 0
@@ -523,11 +527,11 @@ GameObject:
   - 4: {fileID: 543230845}
   m_Layer: 0
   m_Name: PlayerThreeArea
-  m_TagString: Untagged
+  m_TagString: PlayerArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &543230845
 Transform:
   m_ObjectHideFlags: 0
@@ -826,6 +830,10 @@ Prefab:
       propertyPath: m_Name
       value: PlayerBuilderHandler
       objectReference: {fileID: 0}
+    - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
+      propertyPath: BuilderHandler
+      value: 
+      objectReference: {fileID: 1779329489}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 787f576714bc35540a684f062d7010cf, type: 2}
   m_IsPrefabParent: 0
@@ -1045,6 +1053,10 @@ Prefab:
       propertyPath: ControllerIndex
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
+      propertyPath: BuilderHandler
+      value: 
+      objectReference: {fileID: 1779329489}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 787f576714bc35540a684f062d7010cf, type: 2}
   m_IsPrefabParent: 0
@@ -1072,11 +1084,11 @@ GameObject:
   - 4: {fileID: 835840641}
   m_Layer: 0
   m_Name: PlayerTwoArea
-  m_TagString: Untagged
+  m_TagString: PlayerArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &835840641
 Transform:
   m_ObjectHideFlags: 0
@@ -1225,6 +1237,10 @@ Prefab:
       propertyPath: ControllerIndex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
+      propertyPath: BuilderHandler
+      value: 
+      objectReference: {fileID: 1779329489}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 787f576714bc35540a684f062d7010cf, type: 2}
   m_IsPrefabParent: 0
@@ -1814,7 +1830,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1367158893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1979,11 +1995,11 @@ GameObject:
   - 4: {fileID: 1516278938}
   m_Layer: 0
   m_Name: PlayerFourArea
-  m_TagString: Untagged
+  m_TagString: PlayerArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1516278938
 Transform:
   m_ObjectHideFlags: 0
@@ -2303,6 +2319,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37563a94293a8dc4b90ba9e96964cf75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerAreas:
+  - {fileID: 1821072349}
+  - {fileID: 835840640}
+  - {fileID: 543230844}
+  - {fileID: 1516278937}
 --- !u!4 &1779329490
 Transform:
   m_ObjectHideFlags: 0
@@ -2335,11 +2356,11 @@ GameObject:
   - 4: {fileID: 1821072350}
   m_Layer: 0
   m_Name: PlayerOneArea
-  m_TagString: Untagged
+  m_TagString: PlayerArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1821072350
 Transform:
   m_ObjectHideFlags: 0
