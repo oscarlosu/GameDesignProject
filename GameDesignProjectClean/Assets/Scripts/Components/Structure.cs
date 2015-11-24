@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 
 public class Structure : ShipComponent
@@ -7,6 +8,8 @@ public class Structure : ShipComponent
     public int MaxHp = 1;
     public int hp;
     public Animator Anim;
+
+    private List<Shield> nearbyShields;
 
     public void Start()
     {
@@ -71,7 +74,6 @@ public class Structure : ShipComponent
 				{
 					// Trigger visual feedback and return true
 					TriggerAnimation("TriggerDamage");
-					////Debug.Log("Damage visual feedback not implemented.");
 					return true;
 				}
 				else
@@ -81,7 +83,6 @@ public class Structure : ShipComponent
 				}
 			}
 			// This point should never be reached
-			//Debug.LogWarning("Structure couldnt propagate the damage! This should never happen!");
 			return true;
 		}
 		else if (isProtected && hasShieldAttached)
@@ -99,7 +100,6 @@ public class Structure : ShipComponent
 		}
 		else
 		{
-			//Debug.Log ("Unknown propagation case encountered");
 			return false;
 		}
 		return false;
@@ -188,24 +188,35 @@ public class Structure : ShipComponent
 	public bool IsProtected(out bool hasShieldAttached)
 	{
 		hasShieldAttached = false;
-		// Find structures with shield modules
-		Shield[] shields = (Shield[])FindObjectsOfType(typeof(Shield));
 		// Find active shields in this ship near this structure
-		for(int i = 0; i < shields.Length; ++i)
-		{
-			if(shields[i].ShipCore.GetInstanceID() == ShipCore.GetInstanceID() && 
-			   shields[i].Active && Vector3.Distance(transform.position, shields[i].transform.position) < shields[i].Radius)
-			{
-				// If the shield is attached to this structure, save it in the attachedShield values
-				if(shields[i].transform.parent.GetInstanceID() == transform.GetInstanceID())
-				{
-					hasShieldAttached = true;
-				}
-				return true;
-			}
-		}
+	    foreach (var shield in nearbyShields)
+	    {
+            if (shield.ShipCore.GetInstanceID() == ShipCore.GetInstanceID() &&
+               shield.Active && Vector3.Distance(transform.position, shield.transform.position) < shield.Radius)
+            {
+                // If the shield is attached to this structure, save it in the attachedShield values
+                if (shield.transform.parent.GetInstanceID() == transform.GetInstanceID())
+                {
+                    hasShieldAttached = true;
+                }
+                return true;
+            }
+        }
 		return false;
 	}
+
+    public void FindNearbyShipShields()
+    {
+        // Find all shield modules in the scene.
+        Shield[] shields = (Shield[])FindObjectsOfType(typeof(Shield));
+        // Find active shields in this ship near this structure.
+        nearbyShields = shields.Where(t => t.ShipCore.GetInstanceID() == ShipCore.GetInstanceID() && Vector3.Distance(transform.position, t.transform.position) < t.Radius).ToList();
+    }
+
+    private void OnEnable()
+    {
+        FindNearbyShipShields();
+    }
 
 }
 
