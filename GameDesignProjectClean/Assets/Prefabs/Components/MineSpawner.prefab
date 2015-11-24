@@ -51,7 +51,7 @@ MonoBehaviour:
   SpriteForward: {fileID: 0}
   SpriteLeft: {fileID: 0}
   SpriteRight: {fileID: 0}
-  SpriteDireciton: 0
+  SpriteDirection: 0
   MinePrefab: {fileID: 155838, guid: a749b9803894116428f767a7635d7b5a, type: 2}
   SpawnOffset: .200000003
   Cooldown: 2
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: -98434433
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d4937d6d633812b489e6d241958a4b8d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -105,6 +105,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: d4937d6d633812b489e6d241958a4b8d,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_SortingLayerID
+      value: -98434433
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 195576}

@@ -183,7 +183,7 @@ MonoBehaviour:
   SpriteForward: {fileID: 21300000, guid: 3e72cb4a2afbd7c499c289cc488915cc, type: 3}
   SpriteLeft: {fileID: 21300000, guid: 81ce7b1e79106dc44a725d4b9f7c773c, type: 3}
   SpriteRight: {fileID: 21300000, guid: 2f22d96cce9ec9a4d9f552ba4300a26a, type: 3}
-  SpriteDireciton: 0
+  SpriteDirection: 0
   ThrustPower: 8
   DotMargin: .00999999978
   CrossMargin: .00999999978
@@ -2367,9 +2367,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: -98434433
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 3e72cb4a2afbd7c499c289cc488915cc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -2393,7 +2393,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 70ad43e50e8c87e4eb36505bda7d86b6,
+      objectReference: {fileID: 21300000, guid: 3e72cb4a2afbd7c499c289cc488915cc,
         type: 3}
     - target: {fileID: 0}
       propertyPath: m_audioClip
@@ -2424,6 +2424,10 @@ Prefab:
       value: 
       objectReference: {fileID: 24355610, guid: 1009fae8e168e4f4aadd5822f83f11a6,
         type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_SortingLayerID
+      value: -98434433
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 153796}

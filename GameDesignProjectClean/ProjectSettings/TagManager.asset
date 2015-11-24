@@ -57,6 +57,15 @@ TagManager:
   - name: Environment
     uniqueID: 1669530157
     locked: 0
+  - name: Structures
+    uniqueID: 2044543451
+    locked: 0
+  - name: Modules
+    uniqueID: 4196532863
+    locked: 0
+  - name: Projectiles
+    uniqueID: 3433627987
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
