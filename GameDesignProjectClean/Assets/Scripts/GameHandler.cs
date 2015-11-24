@@ -134,10 +134,12 @@ public class GameHandler : MonoBehaviour
                         if (playerShips[2] != null)
                         {
                             playerShips[2].transform.position = new Vector3(-10, -10);
+                            playerShips[2].SetActive(true);
                         }
                         if (playerShips[3] != null)
                         {
                             playerShips[3].transform.position = new Vector3(10, -10);
+                            playerShips[3].SetActive(true);
                         }
                     }
                     else
