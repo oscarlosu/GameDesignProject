@@ -27,8 +27,6 @@ public class HomingMissile : Projectile
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        this.GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
-        this.GetComponent<AudioSource>().volume = Random.Range(0.9f, 1.1f);
 		InGrace = true;
         childParticles = gameObject.GetComponentsInChildren<ParticleSystem>();
 
