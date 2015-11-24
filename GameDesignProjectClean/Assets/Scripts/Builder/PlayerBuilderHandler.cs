@@ -119,6 +119,8 @@ public class PlayerBuilderHandler : MonoBehaviour
         RemovePanel.SetActive(false);
         // Create clone of ship that the players can test and play around with.
         cloneShip = GameObject.Instantiate(shipCore);
+        cloneShip.transform.parent = PlayerArea.transform;
+        cloneShip.transform.localPosition = new Vector3(0, 0);
         // Deactivate the original in order for it to stay intact, while the other player is testing.
         shipCore.SetActive(false);
     }
