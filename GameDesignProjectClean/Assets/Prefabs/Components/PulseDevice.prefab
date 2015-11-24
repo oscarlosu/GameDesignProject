@@ -51,7 +51,7 @@ MonoBehaviour:
   SpriteForward: {fileID: 0}
   SpriteLeft: {fileID: 0}
   SpriteRight: {fileID: 0}
-  SpriteDireciton: 0
+  SpriteDirection: 0
   PulsePrefab: {fileID: 134662, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
   Cooldown: 5
 --- !u!212 &21287972
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: -98434433
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 887a30b5a3142e947bcf3d96c2585540, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -111,6 +111,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Module
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_SortingLayerID
+      value: -98434433
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -19,7 +19,7 @@ public class Module : ShipComponent
 
     public bool CanSpriteRotate;
     public Sprite SpriteForward, SpriteLeft, SpriteRight;
-    public ModuleDirection SpriteDireciton;
+    public ModuleDirection SpriteDirection;
     public Direction FacingDirection { get; set; }
     public Direction ParentDirection { get; set; }
 
@@ -75,15 +75,15 @@ public class Module : ShipComponent
                     switch (direction)
                     {
                         case Direction.Down:
-                            SpriteDireciton = ModuleDirection.Forward;
+                            SpriteDirection = ModuleDirection.Forward;
                             transform.localRotation = Quaternion.Euler(0, transform.localRotation.y, 180);
                             break;                                        
                         case Direction.Right:                             
-                            SpriteDireciton = ModuleDirection.Left;       
+                            SpriteDirection = ModuleDirection.Left;       
                             transform.localRotation = Quaternion.Euler(0, transform.localRotation.y, 270);
                             break;                                        
                         case Direction.Left:                              
-                            SpriteDireciton = ModuleDirection.Right;      
+                            SpriteDirection = ModuleDirection.Right;      
                             transform.localRotation = Quaternion.Euler(0, transform.localRotation.y, 90);
                             break;
                     }
@@ -92,15 +92,15 @@ public class Module : ShipComponent
                     switch (direction)
                     {
                         case Direction.Up:
-                            SpriteDireciton = ModuleDirection.Forward;
+                            SpriteDirection = ModuleDirection.Forward;
                             transform.localRotation = Quaternion.Euler(0, transform.localRotation.y, 0);
                             break;
                         case Direction.Right:
-                            SpriteDireciton = ModuleDirection.Right;
+                            SpriteDirection = ModuleDirection.Right;
                             transform.localRotation = Quaternion.Euler(0, transform.localRotation.y, 270);
                             break;
                         case Direction.Left:
-                            SpriteDireciton = ModuleDirection.Left;
+                            SpriteDirection = ModuleDirection.Left;
                             transform.localRotation = Quaternion.Euler(0, transform.localRotation.y, 90);
                             break;
                     }
@@ -109,15 +109,15 @@ public class Module : ShipComponent
                     switch (direction)
                     {
                         case Direction.Down:
-                            SpriteDireciton = ModuleDirection.Right;
+                            SpriteDirection = ModuleDirection.Right;
                             transform.localRotation = Quaternion.Euler(0, transform.localRotation.y, 180);
                             break;
                         case Direction.Right:
-                            SpriteDireciton = ModuleDirection.Forward;
+                            SpriteDirection = ModuleDirection.Forward;
                             transform.localRotation = Quaternion.Euler(0, transform.localRotation.y, 270);
                             break;
                         case Direction.Up:
-                            SpriteDireciton = ModuleDirection.Left;
+                            SpriteDirection = ModuleDirection.Left;
                             transform.localRotation = Quaternion.Euler(0, transform.localRotation.y, 0);
                             break;
                     }
@@ -126,15 +126,15 @@ public class Module : ShipComponent
                     switch (direction)
                     {
                         case Direction.Down:
-                            SpriteDireciton = ModuleDirection.Left;
+                            SpriteDirection = ModuleDirection.Left;
                             transform.localRotation = Quaternion.Euler(0, transform.localRotation.y, 180);
                             break;
                         case Direction.Left:
-                            SpriteDireciton = ModuleDirection.Forward;
+                            SpriteDirection = ModuleDirection.Forward;
                             transform.localRotation = Quaternion.Euler(0, transform.localRotation.y, 90);
                             break;
                         case Direction.Up:
-                            SpriteDireciton = ModuleDirection.Right;
+                            SpriteDirection = ModuleDirection.Right;
                             transform.localRotation = Quaternion.Euler(0, transform.localRotation.y, 0);
                             break;
                     }
@@ -151,7 +151,7 @@ public class Module : ShipComponent
         // If rotation is possible, rotate sprite if necessary.
         if (CanSpriteRotate)
         {
-            switch (SpriteDireciton)
+            switch (SpriteDirection)
             {
                 case ModuleDirection.Forward:
                     spriteRenderer.sprite = SpriteForward;
