@@ -53,7 +53,7 @@ public class Mine : Projectile
 	// If we want mines to explode as soon as they collide with anything with a non-trigger collider, we just need to uncomment this function
 	private void OnCollisionEnter2D(Collision2D coll)
 	{
-		Debug.Log ("Mine detected collision with " + coll.gameObject.name);
+		//Debug.Log ("Mine detected collision with " + coll.gameObject.name);
 		// Rockets and missiles will be activated and will their explosion will make the mine explode in an OnTriggerEnter2D call
 	}
 

@@ -16,7 +16,6 @@ public class LaserGun : Module
     private bool ready;
 
     private bool triggerDown;
-	//private Animator anim;
 
     // Use this for initialization
     new void Start()
@@ -24,38 +23,11 @@ public class LaserGun : Module
         base.Start();
         ready = true;
         elapsedTime = 0;
-		//anim = GetComponent<Animator>();
-		// Set flag for animator depending on the facing direction of the module
-		/*switch(SpriteDirection)
-		{
-		case ModuleDirection.Forward:
-			anim.SetInteger("Direction", 0);
-			break;
-		case ModuleDirection.Left:
-			anim.SetInteger("Direction", -1);
-			break;
-		case ModuleDirection.Right:
-			anim.SetInteger("Direction", 1);
-			break;
-		}*/
     }
 
     // Update is called once per frame
     void Update()
     {
-		// Set flag for animator depending on the facing direction of the module
-		/*switch(SpriteDirection)
-		{
-		case ModuleDirection.Forward:
-			anim.SetInteger("Direction", 0);
-			break;
-		case ModuleDirection.Left:
-			anim.SetInteger("Direction", -1);
-			break;
-		case ModuleDirection.Right:
-			anim.SetInteger("Direction", 1);
-			break;
-		}*/
         // If in build mode, don't do anything.
         if (ShipCore.GetComponent<Core>().InBuildMode)
         {
@@ -71,7 +43,6 @@ public class LaserGun : Module
                     if (GamePad.GetButtonDown(ButtonKey, ShipCore.GetComponent<Core>().ControllerIndex))
                     {
                         elapsedTime = 0;
-						//anim.SetBool("Charging", true);
                     }
                     else if (GamePad.GetButton(ButtonKey, ShipCore.GetComponent<Core>().ControllerIndex))
                     {
@@ -80,7 +51,6 @@ public class LaserGun : Module
                     else if (GamePad.GetButtonUp(ButtonKey, ShipCore.GetComponent<Core>().ControllerIndex))
                     {
                         elapsedTime += Time.deltaTime;
-						//anim.SetBool("Charging", false);
                         Activate();
                     }
                     break;
@@ -90,7 +60,6 @@ public class LaserGun : Module
                     {
                         elapsedTime = 0;
                         triggerDown = true;
-						//anim.SetBool("Charging", true);
                     }
                     else if (value >= 0.5 && triggerDown)
                     {
@@ -98,7 +67,6 @@ public class LaserGun : Module
                     }
                     else if (value < 0.5 && triggerDown)
                     {
-						//anim.SetBool("Charging", false);
                         Activate();
                         triggerDown = false;
                     }
