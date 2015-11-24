@@ -335,6 +335,7 @@ public class BuilderHandler : MonoBehaviour
         // If not in build mode, nothing from the builder should be active.
         else
         {
+            BuilderCamera.transform.position = new Vector3(cloneShip.transform.position.x, cloneShip.transform.position.y, BuilderCamera.transform.position.z);
             // Go back to build mode to build the ship.
             if (GamePad.GetButtonDown(ButtonGoToBuildMode, ControllerIndex))
             {
