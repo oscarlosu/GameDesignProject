@@ -24,7 +24,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 139010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.75699711, y: -2.17453337, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -53,13 +53,13 @@ MonoBehaviour:
   SpriteRight: {fileID: 21300000, guid: f0adc05d70a51f64f82e50ea3b76e196, type: 3}
   SpriteDirection: 0
   LaserPrefab: {fileID: 108826, guid: cfdb46d2623fd1647822b1423ccf8d20, type: 2}
-  Cooldown: 1
+  Cooldown: 0
   MinLaserBreadth: .200000003
   MaxLaserBreadth: 3
   MinLaserLength: .5
   MaxLaserLength: 4
   MinChargeTime: .200000003
-  MaxChargeTime: 4
+  MaxChargeTime: 3
 --- !u!212 &21274370
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -105,6 +105,22 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_SortingLayerID
       value: -98434433
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Cooldown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MaxChargeTime
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
