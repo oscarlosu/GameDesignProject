@@ -110,7 +110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4165426537e57046b8e67e56e0dd25c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ControllerIndex: 0
+  PlayerArea: {fileID: 0}
+  StartingPosition: {x: 200, y: -200}
+  ControllerIndex: 4
   ButtonGoToPlayMode: 9
   ButtonGoToBuildMode: 8
   MovePauseTime: .100000001
@@ -131,7 +133,6 @@ MonoBehaviour:
   InputPanel: {fileID: 0}
   GridSizeX: 20
   GridSizeY: 20
-  AvailablePosPrefab: {fileID: 151368, guid: fc280ededd0abc747beb64b7264929cb, type: 2}
   SelectedCellPrefab: {fileID: 197206, guid: 12e65f12972ddc3429da60f54552f9ac, type: 2}
   AvailableComponents:
   - {fileID: 153268, guid: 543bc4c95ab883843b907f74c5007db3, type: 2}

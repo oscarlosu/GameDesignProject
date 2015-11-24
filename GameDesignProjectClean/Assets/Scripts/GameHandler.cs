@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using GamepadInput;
 
 public class GameHandler : MonoBehaviour
@@ -9,12 +10,14 @@ public class GameHandler : MonoBehaviour
     public GamePad.Button BackButton;
 
     // Scene handlers.
-    public LevelHandler LevelHandler;
     public PlayerSelectHandler PlayerSelectHandler;
+    public LevelHandler LevelHandler;
+    public BuilderHandler BuilderHandler;
 
     // Game setup settings.
     private bool[] playersJoined;
     private string levelSelectedSceneName;
+    private GameObject[] playerShips;
 
     public enum Scene
     {
@@ -33,18 +36,18 @@ public class GameHandler : MonoBehaviour
         }
     }
 
-	// Use this for initialization
-	void Start ()
-	{
+    // Use this for initialization
+    void Start()
+    {
         DontDestroyOnLoad(this.gameObject); // Don't destroy this object, since it handles the game.
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-	    GotoPrevScene(); // Check if going back.
-	    GotoNextScene(); // Check if going forward.
-	}
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        GotoPrevScene(); // Check if going back.
+        GotoNextScene(); // Check if going forward.
+    }
 
     public void GotoPrevScene()
     {
@@ -86,25 +89,43 @@ public class GameHandler : MonoBehaviour
                     }
                     else
                     {
-                        Debug.LogError("At least two players are needed.");
+                        Debug.LogError("At least two players are needed...");
                     }
                 }
                 return;
             case Scene.LevelSelectScene:
                 // Level should be selected before progressing to the next scene.
-                if (GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.Any))
+                if (LevelHandler != null && GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.Any))
                 {
-                    if (LevelHandler != null)
-                    {
-                        // Save the selected scene name.
-                        levelSelectedSceneName = LevelHandler.GetSelectedLevelSceneName();
-                        Application.LoadLevel("Builder");
-                        CurrentScene = Scene.BuilderScene;
-                    }
+                    // Save the selected scene name.
+                    levelSelectedSceneName = LevelHandler.GetSelectedLevelSceneName();
+                    Application.LoadLevel("Builder");
+                    CurrentScene = Scene.BuilderScene;
                 }
                 return;
             case Scene.BuilderScene:
                 // All players should have declared themselves ready.
+                if (BuilderHandler != null && GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.Any))
+                {
+                    // If all players have declared themselves ready.
+                    if (BuilderHandler.PlayersReady(out playerShips))
+                    {
+                        // All the ships build need to become persistant, so they can move to the level.
+                        // They should also be disabled, so they don't hit anything upon entering the next level.
+                        foreach (var ship in playerShips.Where(ship => ship != null))
+                        {
+                            DontDestroyOnLoad(ship);
+                            ship.SetActive(false);
+                        }
+
+                        // Load the selected level.
+                        Application.LoadLevel(levelSelectedSceneName);
+                    }
+                    else
+                    {
+                        Debug.LogError("Not all players are ready yet...");
+                    }
+                }
                 return;
             case Scene.GameScene:
                 // The winning condition should have been met.
