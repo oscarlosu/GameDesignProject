@@ -148,6 +148,8 @@ MonoBehaviour:
   CellMoveSound: {fileID: 8300000, guid: 16048635d0634492191dc79a634b05d3, type: 3}
   PlaceModuleSound: {fileID: 8300000, guid: 8381844ad593145f4b8bdf9a885c2e35, type: 3}
   NextModuleSound: {fileID: 8300000, guid: 89f00afaa84d846b58b40a89cbd7c0d7, type: 3}
+  RotateModuleSound: {fileID: 8300000, guid: e3cd130036eeb4e24b829b8f4a3b31ff, type: 3}
+  RemoveModuleSounds: {fileID: 8300000, guid: a0923ebbe97dc4cfab94794aa8e0e40b, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -171,6 +173,14 @@ Prefab:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RemoveModuleSounds
+      value: 
+      objectReference: {fileID: 8300000, guid: a0923ebbe97dc4cfab94794aa8e0e40b, type: 3}
+    - target: {fileID: 0}
+      propertyPath: RotateModuleSound
+      value: 
+      objectReference: {fileID: 8300000, guid: e3cd130036eeb4e24b829b8f4a3b31ff, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 137746}
