@@ -22,7 +22,7 @@ public class Core : Structure
         base.Start();
         // Add core and structure mass to rigidbody
         ShipCore = this.gameObject;
-        Assemble();
+        //Assemble();
         DefaultAngularDrag = GetComponent<Rigidbody2D>().angularDrag;
     }
 
@@ -43,9 +43,13 @@ public class Core : Structure
         {
             if(child.GetComponent<ShipComponent>() != null)
             {
-                //Debug.Log("ShipComponend mass: " + child.GetComponent<ShipComponent>().Mass);
                 child.GetComponent<ShipComponent>().ShipCore = gameObject;
-                GetComponent<Rigidbody2D>().mass += child.GetComponent<ShipComponent>().Mass;                
+                GetComponent<Rigidbody2D>().mass += child.GetComponent<ShipComponent>().Mass;         
+                // If this component is a structure, find all shields attached.
+                if (child.GetComponent<Structure>() != null)
+                {
+                    child.GetComponent<Structure>().FindNearbyShipShields();
+                }       
             }
         }            
     }

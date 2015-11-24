@@ -86,7 +86,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 152432}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5b16ce33ca4da449a4d3669cf849a1c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f45b25b26bd52543b7d519d0d7b5cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ComponentName: Core
@@ -157,6 +157,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_SortingLayerID
       value: 2044543451
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
