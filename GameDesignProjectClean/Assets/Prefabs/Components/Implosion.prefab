@@ -91,6 +91,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -156,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4373c014e5168c43b38bf59ad311b80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleFactor: 1
+  scaleFactor: 10
   duration: 1
   explosionAnim:
     serializedVersion: 2
@@ -212,6 +213,10 @@ Prefab:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: bbc0427e427164728a115977077d701a, type: 3}
+    - target: {fileID: 0}
+      propertyPath: scaleFactor
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 119910}

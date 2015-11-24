@@ -45,6 +45,7 @@ public class Shield : Module
 			{
 				deactivating = false;
 				Active = false;
+				col.enabled = false;
 				anim.SetBool("Active", false);
 				elapsedTime = 0;
 			}
@@ -55,6 +56,7 @@ public class Shield : Module
 			if(elapsedTime > Cooldown)
 			{
 				Active = true;
+				col.enabled = true;
 				anim.SetBool("Active", true);
 				elapsedTime = 0;
 			}
@@ -63,22 +65,19 @@ public class Shield : Module
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		// The shield starts deactivating when it collides with a projectile (only when it is active)
-		if(Active)
+		// Projectile from a different ship or not in the grace period
+		if(other.gameObject.GetComponent<Projectile>() != null && 
+			(other.gameObject.GetComponent<Projectile>().SourceCore.GetInstanceID() != ShipCore.GetInstanceID() ||
+			!other.gameObject.GetComponent<Projectile>().InGrace))
 		{
-			// Projectile from a different ship or not in the grace period
-			if(other.gameObject.GetComponent<Projectile>() != null && 
-				(other.gameObject.GetComponent<Projectile>().SourceCore.GetInstanceID() != ShipCore.GetInstanceID() ||
-				!other.gameObject.GetComponent<Projectile>().InGrace))
+			DisableShield();
+		}
+		// Something with a rigidbody that isnt a projectile
+		else if(other.gameObject.GetComponent<Projectile>() == null && other.attachedRigidbody != null)
+		{
+			DisableShield();
+			if(Active)
 			{
-				elapsedTime = 0;
-				deactivating = true;
-			}
-			// Something with a rigidbody that isnt a projectile
-			else if(other.gameObject.GetComponent<Projectile>() == null && other.attachedRigidbody != null)
-			{
-				elapsedTime = 0;
-				deactivating = true;
 				// Cancel velocity in the direction of the shield device and apply force to rigidbody
 				Vector2 dir = other.attachedRigidbody.transform.position - transform.position;
 				dir.Normalize();
@@ -88,22 +87,29 @@ public class Shield : Module
 				other.attachedRigidbody.velocity = Vector2.Dot (orthogonal, other.attachedRigidbody.velocity) * orthogonal;
 				other.attachedRigidbody.AddForce(RepulsionForce * dir);
 			}
-			else if(other.gameObject.GetComponent<Explosion>() != null || 
-			        other.gameObject.GetComponent<Implosion>() != null)
-			{
-				elapsedTime = 0;
-				deactivating = true;
-			}
-			/*else if(other.gameObject.GetComponent<Shield>() != null)
-			{
-				elapsedTime = 0;
-				deactivating = true;
-
-			}*/
-
 
 		}
+		else if(other.gameObject.GetComponent<Explosion>() != null || 
+		        other.gameObject.GetComponent<Implosion>() != null)
+		{
+			// Only reset the timer if the shield isnt already deactivating
+			DisableShield();
+		}
+	}
 
+	public void DisableShield()
+	{
+		// If its active and not deactivating, deactivate and reset timer
+		if(Active && !deactivating)
+		{
+			elapsedTime = 0;
+			deactivating = true;
+		}
+		// If its inactive reset timer
+		else if(!Active)
+		{
+			elapsedTime = 0;
+		}
 	}
 
 
