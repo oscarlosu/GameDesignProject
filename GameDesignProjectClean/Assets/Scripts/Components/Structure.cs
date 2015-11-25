@@ -47,25 +47,11 @@ public class Structure : ShipComponent
     {
         bool hasShieldAttached;
         bool isProtected = IsProtected(out hasShieldAttached);
-
-        // If the structure is protected by a shield, disable the shield.
-        if (isProtected)
-        {
-            if (currentModules.Count > 0 && hasShieldAttached)
-            {
-                // Find the shield and disable it.
-                foreach (Shield s in currentModules.Select(m => m.gameObject.GetComponent<Shield>()).Where(s => s != null))
-                {
-                    s.DisableShield();
-                    break;
-                }
-            }
-        }
-        // If the structure is not protected by a shield.
-        else
+        
+        if (!isProtected)
         {
             // If the structure has shields attached (which aren't active), disable one of them.
-            if (currentModules.Count > 0 && hasShieldAttached)
+            if (hasShieldAttached)
             {
                 // Find the shield and disable it.
                 foreach (Shield s in currentModules.Select(m => m.gameObject.GetComponent<Shield>()).Where(s => s != null))
@@ -153,11 +139,10 @@ public class Structure : ShipComponent
             {
                 // If there are no child modules or structures, destroy this structure
                 var parent = transform.parent; // Find parent.
-                if (parent.GetComponent<Structure>() != null) // If parent is structure, remove this from parent's list of structures.
+                if (parent != null && parent.GetComponent<Structure>() != null) // If parent is structure, remove this from parent's list of structures.
                 {
                     parent.GetComponent<Structure>().RemoveFromStructureList(this);
                 }
-                Debug.Log("Destroying structure!");
                 Destroy(gameObject);
                 return;
             }
@@ -194,13 +179,18 @@ public class Structure : ShipComponent
 	{
 		hasShieldAttached = false;
 		// Find active shields in this ship near this structure
-	    foreach (var shield in nearbyShields)
+        for (var i = nearbyShields.Count-1; i >= 0; i--)
 	    {
-            if (shield.ShipCore.GetInstanceID() == ShipCore.GetInstanceID() &&
-               shield.Active && Vector3.Distance(transform.position, shield.transform.position) < shield.Radius)
+	        if (nearbyShields[i] == null)
+	        {
+	            nearbyShields.RemoveAt(i);
+                continue;
+	        }
+            if (nearbyShields[i].ShipCore.GetInstanceID() == ShipCore.GetInstanceID() &&
+               nearbyShields[i].Active && Vector3.Distance(transform.position, nearbyShields[i].transform.position) < nearbyShields[i].Radius)
             {
                 // If the shield is attached to this structure, save it in the attachedShield values
-                if (shield.transform.parent.GetInstanceID() == transform.GetInstanceID())
+                if (nearbyShields[i].transform.parent.GetInstanceID() == transform.GetInstanceID())
                 {
                     hasShieldAttached = true;
                 }
