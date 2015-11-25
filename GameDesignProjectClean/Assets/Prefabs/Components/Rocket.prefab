@@ -36,7 +36,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &161308
 GameObject:
   m_ObjectHideFlags: 1
@@ -136,6 +136,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 1
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -204,6 +205,8 @@ MonoBehaviour:
   SourceCore: {fileID: 0}
   SourceStructure: {fileID: 0}
   Damage: 1
+  DisableDistance: 30
+  MaxLifespan: 60
   ThrustPower: 5
   ThrusterDuration: 2
   GracePeriod: 1
@@ -2470,6 +2473,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_SortingLayerID
       value: -861339309
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: DisableDistance
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MaxLifespan
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

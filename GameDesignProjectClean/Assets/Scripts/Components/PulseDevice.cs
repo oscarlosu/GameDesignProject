@@ -12,7 +12,7 @@ public class PulseDevice : Module
 
 
 	// Use this for initialization
-	void Start ()
+	new void Start ()
 	{
 		base.Start ();
 		elapsedTime = 0;
@@ -68,7 +68,8 @@ public class PulseDevice : Module
 	void Activate()
 	{
 		// Create pulse
-		GameObject pulse = (GameObject)Instantiate (PulsePrefab, transform.position, Quaternion.identity);
+		GameObject pulse = pool.RequestPoolObject(ObjectPool.ObjectType.Pulse, transform.position, Quaternion.identity);
+		//GameObject pulse = (GameObject)Instantiate (PulsePrefab, transform.position, Quaternion.identity);
 		// Set common projectile variables.
 		var projectile = pulse.GetComponent<Projectile>();
 		if (projectile != null)

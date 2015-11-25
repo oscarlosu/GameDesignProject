@@ -74,11 +74,12 @@ public class MineSpawner : Module
     public void Activate()
     {
         ready = false;
-        GameObject rocket = (GameObject)Instantiate(MinePrefab, transform.position + transform.up * SpawnOffset, transform.rotation);
-        rocket.transform.parent = null;
+		GameObject mine = pool.RequestPoolObject(ObjectPool.ObjectType.Mine, transform.position + transform.up * SpawnOffset, transform.rotation);
+        //GameObject mine = (GameObject)Instantiate(MinePrefab, transform.position + transform.up * SpawnOffset, transform.rotation);
+        //mine.transform.parent = null;
 
         // Set common projectile variables.
-        var projectile = rocket.GetComponent<Projectile>();
+        var projectile = mine.GetComponent<Projectile>();
         if (projectile != null)
         {
             projectile.SourceCore = ShipCore;

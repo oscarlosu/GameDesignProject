@@ -93,7 +93,8 @@ public class LaserGun : Module
         ready = false;
         //Debug.Log("Activated!");
         // Instantiate laser
-        GameObject laser = (GameObject)Instantiate(LaserPrefab, transform.position, transform.rotation);
+		GameObject laser = pool.RequestPoolObject(ObjectPool.ObjectType.Laser, transform.position, transform.rotation);
+        //GameObject laser = (GameObject)Instantiate(LaserPrefab, transform.position, transform.rotation);
         //laser.transform.parent = transform;
         // Calculate breadth and length of laser and scale
         Vector2 scale = calculateLaserScale();

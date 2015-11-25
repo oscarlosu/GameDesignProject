@@ -50,18 +50,28 @@ public class ObjectPool : MonoBehaviour
 
 	}
 
-	public GameObject RequestPoolObject(ObjectType type)
+	public GameObject RequestPoolObject(ObjectType type, Vector3 position, Quaternion rotation)
 	{
 		if(objectPools[type].Count > 0)
 		{
+			// Get object of the specified kind from the pool
 			GameObject obj = objectPools[type].Pop();
+			// Set the specified position and rotation
+			obj.transform.position = position;
+			obj.transform.rotation = rotation;
+			// Enable the object
 			obj.SetActive(true);
 			return obj;
 		}
 		else if (objectCount < HardSizeLimit)
 		{
+			// Create new object of the specified type and set it as a child of the pool game object
 			GameObject obj = Instantiate (ObjectPrefabs[(int)type]);
 			obj.transform.parent = transform;
+			// Set the specified position and rotation
+			obj.transform.position = position;
+			obj.transform.rotation = rotation;
+			// Update object count
 			++objectCount;
 			return obj;
 		}
@@ -87,5 +97,7 @@ public class ObjectPool : MonoBehaviour
 			status += pair.Key.ToString() + " pool has " + pair.Value.Count + " objects\n";
 		}
 		Debug.LogFormat(status);
+		Debug.Log ("Size: " + objectCount);
+
 	}
 }

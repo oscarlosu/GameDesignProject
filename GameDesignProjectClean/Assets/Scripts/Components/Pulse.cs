@@ -14,21 +14,25 @@ public class Pulse : Projectile
 	public float Radius;
 	public float Speed;
 
-	private CircleCollider2D col;
+	//private CircleCollider2D col;
     public Material[] pulseMats;
 
     private float counter = 0.0f;
     private Material mat;
     // Use this for initialization
-    void Start ()
+    void Awake ()
 	{
-		col = GetComponent<CircleCollider2D>();
+		//col = GetComponent<CircleCollider2D>();
         mat = pulseMats[Random.Range(0, pulseMats.Length)];
         GetComponent<MeshRenderer>().material = mat;
-        //mat = GetComponent<MeshRenderer>().material;
-        InGrace = true;
-        StartCoroutine("DestroyPulse");
+        //mat = GetComponent<MeshRenderer>().material;        
     }
+
+	void OnEnable()
+	{
+		InGrace = true;
+		StartCoroutine("DestroyPulse");
+	}
 	
 	// Update is called once per frame
 	void Update ()
@@ -59,6 +63,7 @@ public class Pulse : Projectile
 	IEnumerator DestroyPulse ()
 	{
         yield return new WaitForSeconds(duration);
-		GameObject.Destroy (gameObject);
+		pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.Pulse);
+		//GameObject.Destroy (gameObject);
 	}
 }

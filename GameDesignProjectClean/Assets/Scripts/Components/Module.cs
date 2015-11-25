@@ -24,10 +24,12 @@ public class Module : ShipComponent
     public Direction ParentDirection { get; set; }
 
     private SpriteRenderer spriteRenderer;
+	protected ObjectPool pool;
 
     protected void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+		pool = FindObjectOfType<ObjectPool>();
     }
 
     protected void Start()

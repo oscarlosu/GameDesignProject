@@ -80,8 +80,9 @@ public class ImplosionBombLaucher : Module
 		else if(ready)
 		{
 			ready = false;
-			LaunchedBomb = (GameObject)Instantiate(RocketPrefab, transform.position + RocketLaunchPosOffset * transform.up, transform.rotation);
-			LaunchedBomb.transform.parent = null;
+			LaunchedBomb = pool.RequestPoolObject(ObjectPool.ObjectType.ImplosionBomb, transform.position + RocketLaunchPosOffset * transform.up, transform.rotation);
+			//LaunchedBomb = (GameObject)Instantiate(RocketPrefab, transform.position + RocketLaunchPosOffset * transform.up, transform.rotation);
+			//LaunchedBomb.transform.parent = null;
 			LaunchedBomb.GetComponent<Rigidbody2D>().velocity = ShipCore.GetComponent<Rigidbody2D>().velocity + (Vector2)(transform.up * RocketLaunchSpeed);
 			
 			// Set common projectile variables.
