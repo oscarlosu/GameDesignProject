@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3753e2b5f7bd8b44591a7ccb1ca8587a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxSize: 20
+  MaxSize: 30
   MinSize: 10
   InsideMargin: 5
   OutsideMargin: 0
@@ -297,6 +297,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: PushInTorque
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MaxSize
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

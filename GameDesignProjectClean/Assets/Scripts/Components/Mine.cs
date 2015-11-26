@@ -14,7 +14,7 @@ public class Mine : Projectile
     public GameObject ExplosionPrefab;
 
     private float elapsedTime;
-    private bool detected = false; // If any object has been detected in its vicinity.
+    private bool detected; // If any object has been detected in its vicinity.
     private float timeFromDetection;
 
     private Animator anim;
@@ -24,17 +24,21 @@ public class Mine : Projectile
     void Start()
     {
         anim = GetComponent<Animator>();
-		InGrace = true;
+		InvokeRepeating("GarbageCollect", 5, 5);
     }
+
+	void OnEnable()
+	{
+		InGrace = true;
+		detected = false;
+		elapsedTime = 0;
+	}
 
     // Update is called once per frame
     void Update()
     {
 		// Update elapsed time until the mine is active
-		if(elapsedTime <= TimeTillActive)
-		{
-			elapsedTime += Time.deltaTime;
-		}
+		elapsedTime += Time.deltaTime;
 		// Handle grace period
 		if(InGrace && elapsedTime > GracePeriod)
 		{
@@ -76,10 +80,12 @@ public class Mine : Projectile
     {
         // Create the explosion, when the rocket is destroyed. The explosion should be the one doing the damage.
         // When destroyed, create an explosion, which damages objects around it.
-        var explosion = GameObject.Instantiate(ExplosionPrefab);
-        explosion.transform.position = transform.position;
+		GameObject explosion = pool.RequestPoolObject(ObjectPool.ObjectType.Explosion, transform.position, Quaternion.identity);
+		//var explosion = GameObject.Instantiate(ExplosionPrefab);
+        //explosion.transform.position = transform.position;
         explosion.GetComponent<Explosion>().Damage = Damage;
-        GameObject.Destroy(gameObject);
+		pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.Mine);
+		//GameObject.Destroy(gameObject);
     }
 
 	private bool ShouldTrigger(Collider2D other)
@@ -92,5 +98,20 @@ public class Mine : Projectile
 	{
 		return other.gameObject.GetComponent<Explosion>() != null || other.gameObject.GetComponent<Laser>() != null || 
 			(other.gameObject.GetComponent<Shield>() != null && (!InGrace || other.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID()));
+	}
+
+	void GarbageCollect()
+	{
+		// Return to object pool if too far from the camera position
+		if(Vector3.Distance (cam.transform.position, transform.position) > DisableDistance ||
+		   elapsedTime > MaxLifespan)
+		{
+			pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.Mine);
+		}
+	}
+
+	void OnDisable()
+	{
+		CancelInvoke();
 	}
 }

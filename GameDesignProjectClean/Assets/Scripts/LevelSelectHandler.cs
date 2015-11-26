@@ -3,7 +3,7 @@ using System.Collections;
 using GamepadInput;
 using UnityEngine.UI;
 
-public class LevelHandler : MonoBehaviour
+public class LevelSelectHandler : MonoBehaviour
 {
 
     public GameObject LevelSelectPanel;
@@ -18,8 +18,8 @@ public class LevelHandler : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        // Set this as the GameHandler's LevelHandler.
-        GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().LevelHandler = this;
+        // Set this as the GameHandler's LevelSelectHandler.
+        GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().LevelSelectHandler = this;
         // Set colour of default selected level.
         LevelSelectPanel.transform.GetChild(selectedLevel).GetComponent<Image>().color = SelectedLevelColour;
     }

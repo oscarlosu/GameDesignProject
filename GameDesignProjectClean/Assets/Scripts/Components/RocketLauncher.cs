@@ -18,9 +18,14 @@ public class RocketLauncher : Module
     new void Start()
     {
         base.Start();
-        ready = true;
-        elapsedTime = 0;
     }
+
+	void OnEnable()
+	{
+		base.OnEnable();
+		elapsedTime = 0;
+		ready = true;
+	}
 
     // Update is called once per frame
     void Update()
@@ -76,9 +81,44 @@ public class RocketLauncher : Module
     public void Activate()
     {
         ready = false;
-        GameObject rocket = (GameObject)Instantiate(RocketPrefab, transform.position + RocketLaunchPosOffset * transform.up, transform.rotation);
-        rocket.transform.parent = null;
-        rocket.GetComponent<Rigidbody2D>().velocity = ShipCore.GetComponent<Rigidbody2D>().velocity + (Vector2)(transform.up * RocketLaunchSpeed);
+		if(RocketPrefab.GetComponent<Rocket>() != null)
+		{
+			GameObject rocket = pool.RequestPoolObject(ObjectPool.ObjectType.Rocket, transform.position + RocketLaunchPosOffset * transform.up, transform.rotation);
+			rocket.GetComponent<Rigidbody2D>().velocity = ShipCore.GetComponent<Rigidbody2D>().velocity + (Vector2)(transform.up * RocketLaunchSpeed);
+			
+			// Set common projectile variables.
+			var projectile = rocket.GetComponent<Projectile>();
+			if (projectile != null)
+			{
+				projectile.SourceCore = ShipCore;
+				projectile.SourceStructure = transform.parent.gameObject;
+			}
+
+		}
+		else if(RocketPrefab.GetComponent<HomingMissile>() != null)
+		{
+			GameObject rocket = pool.RequestPoolObject(ObjectPool.ObjectType.Missile, transform.position + RocketLaunchPosOffset * transform.up, transform.rotation);
+			rocket.GetComponent<Rigidbody2D>().velocity = ShipCore.GetComponent<Rigidbody2D>().velocity + (Vector2)(transform.up * RocketLaunchSpeed);
+			
+			// Set common projectile variables.
+			var projectile = rocket.GetComponent<Projectile>();
+			if (projectile != null)
+			{
+				projectile.SourceCore = ShipCore;
+				projectile.SourceStructure = transform.parent.gameObject;
+			}
+		}
+		else
+		{
+			throw new System.NotImplementedException(RocketPrefab.name + " is pooling has not been implemented.");
+		}
+
+
+
+		// OLD
+		//GameObject rocket = (GameObject)Instantiate(RocketPrefab, transform.position + RocketLaunchPosOffset * transform.up, transform.rotation);
+        //rocket.transform.parent = null;
+        /*rocket.GetComponent<Rigidbody2D>().velocity = ShipCore.GetComponent<Rigidbody2D>().velocity + (Vector2)(transform.up * RocketLaunchSpeed);
 
         // Set common projectile variables.
         var projectile = rocket.GetComponent<Projectile>();
@@ -86,7 +126,7 @@ public class RocketLauncher : Module
         {
             projectile.SourceCore = ShipCore;
             projectile.SourceStructure = transform.parent.gameObject;
-        }
+        }*/
     }
 }
 

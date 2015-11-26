@@ -14,29 +14,35 @@ public class Pulse : Projectile
 	public float Radius;
 	public float Speed;
 
-	private CircleCollider2D col;
+	//private CircleCollider2D col;
     public Material[] pulseMats;
 
-    private float counter = 0.0f;
+    private float elapsedTime;
     private Material mat;
     // Use this for initialization
-    void Start ()
+    void Awake ()
 	{
-		col = GetComponent<CircleCollider2D>();
+		base.Awake ();
+		//col = GetComponent<CircleCollider2D>();
         mat = pulseMats[Random.Range(0, pulseMats.Length)];
         GetComponent<MeshRenderer>().material = mat;
-        //mat = GetComponent<MeshRenderer>().material;
-        InGrace = true;
-        StartCoroutine("DestroyPulse");
+        //mat = GetComponent<MeshRenderer>().material;        
     }
+
+	void OnEnable()
+	{
+		InGrace = true;
+		elapsedTime = 0;
+		StartCoroutine("DestroyPulse");
+	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-        mat.color  = new Color(mat.color.r, mat.color.g, mat.color.b, 1 - explosionAnim.Evaluate(counter));
-        float newScale = explosionAnim.Evaluate(counter) * scaleFactor;
+        mat.color  = new Color(mat.color.r, mat.color.g, mat.color.b, 1 - explosionAnim.Evaluate(elapsedTime));
+        float newScale = explosionAnim.Evaluate(elapsedTime) * scaleFactor;
         transform.localScale = Vector3.one * newScale;
-        counter += Time.deltaTime / duration;
+        elapsedTime += Time.deltaTime / duration;
     }
 
 	void OnTriggerEnter2D(Collider2D other)
@@ -59,6 +65,7 @@ public class Pulse : Projectile
 	IEnumerator DestroyPulse ()
 	{
         yield return new WaitForSeconds(duration);
-		GameObject.Destroy (gameObject);
+		pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.Pulse);
+		//GameObject.Destroy (gameObject);
 	}
 }

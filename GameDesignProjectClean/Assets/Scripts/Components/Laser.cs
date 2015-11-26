@@ -11,13 +11,19 @@ public class Laser : Projectile
     private SpriteRenderer rend;
     private float elapsedTime;
     
-    void Awake()
+    new void Awake()
     {
+		base.Awake();
         rend = GetComponent<SpriteRenderer>();
 		GetComponent<AudioSource>().pitch = Random.Range(0.5f, 1.5f);
 		GetComponent<AudioSource> ().Play ();
-		InGrace = true;
     }
+
+	void OnEnable()
+	{
+		elapsedTime = 0;
+		InGrace = true;
+	}
 
     // Update is called once per frame
     void Update()
@@ -31,7 +37,8 @@ public class Laser : Projectile
         if(elapsedTime > FadeDuration)
         {
             // Destroy laser
-            GameObject.Destroy(this.gameObject);
+			pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.Laser);
+			//GameObject.Destroy(this.gameObject);
         }
     }
 
