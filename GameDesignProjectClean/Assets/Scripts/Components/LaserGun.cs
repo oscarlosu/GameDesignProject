@@ -52,11 +52,13 @@ public class LaserGun : Module
                     else if (GamePad.GetButton(ButtonKey, ShipCore.GetComponent<Core>().ControllerIndex))
                     {
                         elapsedTime += Time.deltaTime;
+						GetComponent<AudioSource>().Play();
                     }
                     else if (GamePad.GetButtonUp(ButtonKey, ShipCore.GetComponent<Core>().ControllerIndex))
                     {
                         elapsedTime += Time.deltaTime;
                         Activate();
+						GetComponent<AudioSource>().Stop();
                     }
                     break;
                 case InputKeyType.Trigger:
@@ -69,11 +71,13 @@ public class LaserGun : Module
                     else if (value >= 0.5 && triggerDown)
                     {
                         elapsedTime += Time.deltaTime;
+						GetComponent<AudioSource>().Play();
                     }
                     else if (value < 0.5 && triggerDown)
                     {
                         Activate();
                         triggerDown = false;
+						GetComponent<AudioSource>().Stop();
                     }
                     break;
             }
