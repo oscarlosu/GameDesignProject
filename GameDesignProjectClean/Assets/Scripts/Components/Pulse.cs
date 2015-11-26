@@ -15,16 +15,18 @@ public class Pulse : Projectile
 	public float Speed;
 
 	private CircleCollider2D col;
-    public Material[] pulseMats;
+    public Sprite[] pulseMats;
+    private SpriteRenderer sr;
 
     private float counter = 0.0f;
-    private Material mat;
+    private Sprite mat;
     // Use this for initialization
     void Start ()
 	{
 		col = GetComponent<CircleCollider2D>();
+        sr = GetComponent<SpriteRenderer>();
         mat = pulseMats[Random.Range(0, pulseMats.Length)];
-        GetComponent<MeshRenderer>().material = mat;
+        sr.sprite = mat;
         //mat = GetComponent<MeshRenderer>().material;
         InGrace = true;
         StartCoroutine("DestroyPulse");
@@ -33,7 +35,7 @@ public class Pulse : Projectile
 	// Update is called once per frame
 	void Update ()
 	{
-        mat.color  = new Color(mat.color.r, mat.color.g, mat.color.b, 1 - explosionAnim.Evaluate(counter));
+        sr.color  = new Color(1,1,1, 1.1f - explosionAnim.Evaluate(counter));
         float newScale = explosionAnim.Evaluate(counter) * scaleFactor;
         transform.localScale = Vector3.one * newScale;
         counter += Time.deltaTime / duration;
