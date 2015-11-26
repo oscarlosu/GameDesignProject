@@ -29,13 +29,20 @@ public class Module : ShipComponent
     protected void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-		pool = FindObjectOfType<ObjectPool>();
     }
 
     protected void Start()
     {
         UpdateSprite();
     }
+
+	protected void OnEnable()
+	{
+
+		pool = GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetComponent<ObjectPool>();
+		//Debug.Log ("Module says : " + GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetInstanceID());
+
+	}
 
     protected void OnDestroy()
     {

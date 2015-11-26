@@ -47,6 +47,7 @@ public class ObjectPool : MonoBehaviour
 		Debug.Log ("Pool initialization required: " + watch.ElapsedMilliseconds + " ms");
 		Debug.Log ("ObjectCount: " + objectCount);*/
 		InvokeRepeating("ReportStatus", 0, 10);
+		//Debug.Log ("Pool says: " + gameObject.GetInstanceID());
 
 	}
 

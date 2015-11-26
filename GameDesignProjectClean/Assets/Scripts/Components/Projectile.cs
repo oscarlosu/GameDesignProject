@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour {
 
 	protected void Awake()
 	{
-		pool = FindObjectOfType<ObjectPool>();
+		pool = GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetComponent<ObjectPool>();
 		cam = Camera.main;
 	}
 }

@@ -19,7 +19,7 @@ public class Explosion : MonoBehaviour
 
     void Awake()
     {
-		pool = FindObjectOfType<ObjectPool>();
+		pool = GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetComponent<ObjectPool>();
         GetComponent<AudioSource>().pitch = Random.Range(0.5f, 1.5f);
         Material mat = explosionMats[Random.Range(0, explosionMats.Length)];
         GetComponent<MeshRenderer>().material = mat;

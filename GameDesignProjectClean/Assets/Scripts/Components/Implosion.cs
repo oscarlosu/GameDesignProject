@@ -17,7 +17,7 @@ public class Implosion : MonoBehaviour
 	private ObjectPool pool;
 	void Awake ()
 	{
-		pool = FindObjectOfType<ObjectPool>();
+		pool = GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetComponent<ObjectPool>();
         //GetComponent<AudioSource> ().pitch = Random.Range (0.5f, 1.5f);
         Material mat = implosionMats[Random.Range(0, implosionMats.Length)];
         GetComponent<MeshRenderer>().material = mat;

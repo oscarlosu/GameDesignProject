@@ -36,7 +36,7 @@ public class HomingMissile : Projectile
             if (!childParticles[i].isPlaying)
                 childParticles[i].Play();
         }
-		pool = FindObjectOfType<ObjectPool>();
+		pool = GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetComponent<ObjectPool>();
     }
 
 	void Start()
