@@ -20,7 +20,7 @@ public class Pulse : Projectile
     private float elapsedTime;
     private Material mat;
     // Use this for initialization
-    void Awake ()
+	new void Awake ()
 	{
 		base.Awake ();
 		//col = GetComponent<CircleCollider2D>();

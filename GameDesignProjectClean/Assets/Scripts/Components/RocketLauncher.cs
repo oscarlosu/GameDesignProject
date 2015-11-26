@@ -20,7 +20,7 @@ public class RocketLauncher : Module
         base.Start();
     }
 
-	void OnEnable()
+	new void OnEnable()
 	{
 		base.OnEnable();
 		elapsedTime = 0;
