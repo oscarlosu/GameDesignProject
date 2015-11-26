@@ -65,6 +65,7 @@ AudioMixerGroupController:
   m_Pitch: 6e75746b34d8c45d5b1496836e555e9e
   m_Effects:
   - {fileID: 24472110}
+  - {fileID: 24459944}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -89,6 +90,7 @@ AudioMixerGroupController:
   m_Pitch: 717b8b7c7bb984278bf87a82601cd6c6
   m_Effects:
   - {fileID: 24469462}
+  - {fileID: 24462578}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -376,6 +378,46 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &24459944
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: 073b3504858734baeb3e4b5a619ecd37
+  m_EffectName: Send
+  m_MixLevel: de3b17ab4f149417faac7ebc3ff4a453
+  m_Parameters: []
+  m_SendTarget: {fileID: 24462578}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &24462578
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: e83a94fa15052482ea887410b69bc93e
+  m_EffectName: Duck Volume
+  m_MixLevel: bc08df64c42bd46418ecd045ae170331
+  m_Parameters:
+  - m_ParameterName: Threshold
+    m_GUID: 774cb7c117cb34ff1959e5995d60eb23
+  - m_ParameterName: Ratio
+    m_GUID: 78d5e16a68d3b475f994bf58dc40e953
+  - m_ParameterName: Attack Time
+    m_GUID: 3b502544bb6824307a2ea532e3bde731
+  - m_ParameterName: Release Time
+    m_GUID: f2a1f702c837d4a74aea6fd9ffaaf9bc
+  - m_ParameterName: Make-up Gain
+    m_GUID: d6edcccf7d6254bada4fdb5740d51056
+  - m_ParameterName: Knee
+    m_GUID: d742ff80185c44aca9274620f7ca5c51
+  - m_ParameterName: Sidechain Mix
+    m_GUID: 8ba8143ed0fd049e1966fa6db492aed2
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &24469462
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -411,5 +453,10 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 55dd146675a548e458c35a4b3329696c
   m_FloatValues:
+    774cb7c117cb34ff1959e5995d60eb23: -35
+    a75df407f58d4459ea710af50fc0d721: -1.51912165
+    3610fbd7f312d4138a728a2538d1d83d: -8.84178352
     f11fa658fbd2ed74ca7a20ec6b559125: .23288241
+    e8a04439057c24661ac13c5044cd0650: -9.83328629
+    3a8d8e89a532c477a8901bbc69e6fc0c: -10.8677759
   m_TransitionOverrides: {}
