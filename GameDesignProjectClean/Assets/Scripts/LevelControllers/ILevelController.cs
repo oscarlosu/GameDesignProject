@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public interface ILevelController
+public interface ILevelHandler
 {
 
     void StartLevel(GameObject[] playerShips);

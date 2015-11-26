@@ -13,7 +13,7 @@ public class GameHandler : MonoBehaviour
     public PlayerSelectHandler PlayerSelectHandler;
     public LevelSelectHandler LevelSelectHandler;
     public BuilderHandler BuilderHandler;
-    public ILevelController LevelController;
+    public ILevelHandler LevelHandler;
 
     // Game setup settings.
     private bool[] playersJoined;

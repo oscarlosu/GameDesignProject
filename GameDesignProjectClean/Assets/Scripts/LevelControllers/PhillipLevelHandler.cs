@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PhillipLevelController : MonoBehaviour, ILevelController {
+public partial class PhillipLevelHandler : MonoBehaviour, ILevelHandler {
 
 	// Use this for initialization
 	void Start () {
         var gameHandler = GameObject.FindGameObjectWithTag("GameHandler");
         if (gameHandler != null)
         {
-            gameHandler.GetComponent<GameHandler>().LevelController = this;
+            gameHandler.GetComponent<GameHandler>().LevelHandler = this;
             StartLevel(gameHandler.GetComponent<GameHandler>().GetPlayerShips());
         }
     }
