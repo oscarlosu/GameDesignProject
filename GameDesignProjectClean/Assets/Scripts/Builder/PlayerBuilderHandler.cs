@@ -99,8 +99,9 @@ public class PlayerBuilderHandler : MonoBehaviour
         // Activate component selector UI.
         ComponentSelectorPanel.SetActive(true);
         ComponentNamePanel.SetActive(true);
-		// Deactivate "testmode" text
+		// Deactivate "testmode" and "ready" text
 		TestModeText.SetActive (false);
+        ReadyText.SetActive(false);
         // Update selected cell object.
         UpdateBuilderUi();
         // Center camera on selected cell.
@@ -390,8 +391,9 @@ public class PlayerBuilderHandler : MonoBehaviour
 
             BuilderCamera.transform.position = new Vector3(cloneShip.transform.position.x, cloneShip.transform.position.y, BuilderCamera.transform.position.z);
             // Go back to build mode to build the ship.
-            if (!playerReady && GamePad.GetButtonDown(ButtonGoToBuildMode, ControllerIndex))
+            if (GamePad.GetButtonDown(ButtonGoToBuildMode, ControllerIndex))
             {
+                playerReady = false;
                 GoToBuildMode();
                 return;
             }
