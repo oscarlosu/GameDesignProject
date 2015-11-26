@@ -139,7 +139,7 @@ MonoBehaviour:
   ThrustPower: 5
   ThrusterDuration: 2
   GracePeriod: 1
-  ImplosionPrefab: {fileID: 119910, guid: 1862a4af25c5b1b4f95708b30637f967, type: 2}
+  ImplosionPrefab: {fileID: 119910, guid: 08653db33e7bf04439bbb571dc26628f, type: 2}
 --- !u!198 &19849958
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -2354,7 +2354,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: ImplosionPrefab
       value: 
-      objectReference: {fileID: 119910, guid: 1862a4af25c5b1b4f95708b30637f967, type: 2}
+      objectReference: {fileID: 119910, guid: 08653db33e7bf04439bbb571dc26628f, type: 2}
     - target: {fileID: 0}
       propertyPath: m_Offset.x
       value: 0

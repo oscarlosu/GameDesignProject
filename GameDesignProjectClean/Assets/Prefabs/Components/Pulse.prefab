@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &450548
 Transform:
   m_ObjectHideFlags: 1
@@ -43,7 +43,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: .400000006
+  m_Radius: 2
 --- !u!82 &8255214
 AudioSource:
   m_ObjectHideFlags: 1
@@ -55,7 +55,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24350876, guid: 1009fae8e168e4f4aadd5822f83f11a6,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: f6a190de22f594411b83b60909174804, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -129,10 +129,10 @@ MonoBehaviour:
   SourceCore: {fileID: 0}
   SourceStructure: {fileID: 0}
   Damage: 0
-  DisableDistance: 30
-  MaxLifespan: 60
-  scaleFactor: 10
-  duration: 1
+  DisableDistance: 0
+  MaxLifespan: 0
+  scaleFactor: 4
+  duration: .600000024
   explosionAnim:
     serializedVersion: 2
     m_Curve:
@@ -143,13 +143,13 @@ MonoBehaviour:
       tangentMode: 0
     - time: .0940559655
       value: .50672555
-      inSlope: 1.39594078
-      outSlope: 1.39594078
+      inSlope: .592027962
+      outSlope: .592027962
       tangentMode: 0
     - time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: .674510717
+      outSlope: .674510717
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -157,8 +157,8 @@ MonoBehaviour:
   TorqueMagnitude: 5
   Radius: 5
   Speed: 5
-  pulseMats:
-  - {fileID: 21300000, guid: d2fbb2c8631611e4089e6044bdc48647, type: 3}
+  pulseSprites:
+  - {fileID: 21300000, guid: 31a5114a7a72f8c41af1a18005f4b28e, type: 3}
 --- !u!212 &21214922
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -181,7 +181,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: -861339309
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -192,6 +192,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: pulseSprites.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: explosionAnim.m_Curve.Array.size
       value: 3
@@ -218,11 +222,11 @@ Prefab:
       objectReference: {fileID: 8300000, guid: f6a190de22f594411b83b60909174804, type: 3}
     - target: {fileID: 0}
       propertyPath: scaleFactor
-      value: 10
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: duration
-      value: 1
+      value: .600000024
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: explosionAnim.m_Curve.Array.data[0].value
@@ -238,27 +242,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: explosionAnim.m_Curve.Array.data[1].value
-      value: .50672555
+      value: .519225538
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: explosionAnim.m_Curve.Array.data[1].inSlope
-      value: 1.39594078
+      value: .592027962
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: explosionAnim.m_Curve.Array.data[1].outSlope
-      value: 1.39594078
+      value: .592027962
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: explosionAnim.m_Curve.Array.data[1].time
-      value: .0940559655
+      value: .1027769
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: explosionAnim.m_Curve.Array.data[2].inSlope
-      value: .815670669
+      value: .674510717
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: explosionAnim.m_Curve.Array.data[2].outSlope
-      value: .815670669
+      value: .674510717
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: explosionAnim.m_Curve.Array.data[0].tangentMode
@@ -281,21 +285,17 @@ Prefab:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
-      propertyPath: OutputAudioMixerGroup
+      propertyPath: pulseSprites.Array.data[0]
       value: 
-      objectReference: {fileID: 24350876, guid: 1009fae8e168e4f4aadd5822f83f11a6,
-        type: 2}
+      objectReference: {fileID: 21300000, guid: 31a5114a7a72f8c41af1a18005f4b28e,
+        type: 3}
     - target: {fileID: 0}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_Radius
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
-      propertyPath: DisableDistance
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: MaxLifespan
-      value: 60
+      propertyPath: m_SortingLayerID
+      value: -861339309
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
