@@ -20,14 +20,25 @@ public class LaserGun : Module
     // Use this for initialization
     new void Start()
     {
-        base.Start();
-        ready = true;
-        elapsedTime = 0;
+		base.Start();        
     }
+
+	new void OnEnable()
+	{
+		base.OnEnable();
+		elapsedTime = 0;
+		ready = true;
+	}
 
     // Update is called once per frame
     void Update()
     {
+		if (GamePad.GetButtonDown(ButtonKey, ShipCore.GetComponent<Core>().ControllerIndex))
+		{
+			GetComponent<AudioSource>().Play();
+		} else if (GamePad.GetButtonUp(ButtonKey, ShipCore.GetComponent<Core>().ControllerIndex)){
+			GetComponent<AudioSource>().Stop();
+		}
         // If in build mode, don't do anything.
         if (ShipCore.GetComponent<Core>().InBuildMode)
         {
@@ -64,11 +75,13 @@ public class LaserGun : Module
                     else if (value >= 0.5 && triggerDown)
                     {
                         elapsedTime += Time.deltaTime;
+						GetComponent<AudioSource>().Play();
                     }
                     else if (value < 0.5 && triggerDown)
                     {
                         Activate();
                         triggerDown = false;
+						GetComponent<AudioSource>().Stop();
                     }
                     break;
             }
@@ -93,7 +106,8 @@ public class LaserGun : Module
         ready = false;
         //Debug.Log("Activated!");
         // Instantiate laser
-        GameObject laser = (GameObject)Instantiate(LaserPrefab, transform.position, transform.rotation);
+		GameObject laser = pool.RequestPoolObject(ObjectPool.ObjectType.Laser, transform.position, transform.rotation);
+        //GameObject laser = (GameObject)Instantiate(LaserPrefab, transform.position, transform.rotation);
         //laser.transform.parent = transform;
         // Calculate breadth and length of laser and scale
         Vector2 scale = calculateLaserScale();

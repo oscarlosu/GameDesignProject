@@ -14,13 +14,12 @@ public class ImplosionBomb : Projectile
 
 
     // Use this for initialization
-    void Awake ()
+	new void Awake ()
 	{
+		base.Awake();
 		rb = GetComponent<Rigidbody2D> ();
 		/*this.GetComponent<AudioSource> ().pitch = Random.Range (0.9f, 1.1f);
 		this.GetComponent<AudioSource> ().volume = Random.Range (0.9f, 1.1f);*/
-		InGrace = true;
-
         childParticles = gameObject.GetComponentsInChildren<ParticleSystem>();
 
         for (int i = 0; i < childParticles.Length; i++)
@@ -29,15 +28,23 @@ public class ImplosionBomb : Projectile
                 childParticles[i].Play();
         }
     }
+
+	void Start()
+	{
+		InvokeRepeating("GarbageCollect", 5, 5);
+	}
+
+	void OnEnable()
+	{
+		elapsedTime = 0;
+		InGrace = true;
+	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
 		// Update elapsed time until the mine is active
-		if(elapsedTime <= ThrusterDuration)
-		{
-			elapsedTime += Time.deltaTime;
-		}
+		elapsedTime += Time.deltaTime;
 		// Handle grace period
 		if(InGrace)
 		{
@@ -66,7 +73,7 @@ public class ImplosionBomb : Projectile
 	{
 		// With something that is not the source ship or after the grace period
 		if (!InGrace || other.gameObject.GetInstanceID () != SourceStructure.GetInstanceID ()) {
-			Debug.Log ("Implosion bomb detected collision with " + other.gameObject.name);
+			//Debug.Log ("Implosion bomb detected collision with " + other.gameObject.name);
 			Activate ();
 		}
 	}
@@ -76,16 +83,30 @@ public class ImplosionBomb : Projectile
 		// Missiles only activate with shield or laser triggers
 		if ((other.gameObject.GetComponent<Shield> () != null && (!InGrace || other.gameObject.GetComponent<Shield> ().ShipCore.GetInstanceID () != SourceCore.GetInstanceID ()))
 			|| other.gameObject.GetComponent<Laser> () != null) {
-			Debug.Log ("Implosion bomb trigger detected trigger with " + other.gameObject.name);
+			//Debug.Log ("Implosion bomb trigger detected trigger with " + other.gameObject.name);
 			Activate ();
 		}
 	}
 	
 	public void Activate ()
 	{
-		// Create the explosion, when the rocket is destroyed. The explosion should be the one doing the damage.
-		// When destroyed, create an explosion, which damages objects around it.
-		var implosion = (GameObject)GameObject.Instantiate (ImplosionPrefab, transform.position, Quaternion.identity);
-		GameObject.Destroy (gameObject);
+		// When destroyed, create an implosion
+		pool.RequestPoolObject(ObjectPool.ObjectType.Implosion, transform.position, Quaternion.identity);
+		pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.ImplosionBomb);
+	}
+
+	void GarbageCollect()
+	{
+		// Return to object pool if too far from the camera position
+		if(Vector3.Distance (cam.transform.position, transform.position) > DisableDistance ||
+		   elapsedTime > MaxLifespan)
+		{
+			pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.ImplosionBomb);
+		}
+	}
+
+	void OnDisable()
+	{
+		CancelInvoke();
 	}
 }

@@ -14,7 +14,7 @@ public class BuilderHandler : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        // Set this as the GameHandler's LevelHandler.
+        // Set this as the GameHandler's LevelSelectHandler.
         var gameHandler = GameObject.FindGameObjectWithTag("GameHandler");
         if (gameHandler != null)
         {

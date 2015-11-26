@@ -24,10 +24,10 @@ public class HomingMissile : Projectile
 
     private ParticleSystem[] childParticles;
 
-    void Awake()
+    new void Awake()
     {
+		base.Awake();
         rb = GetComponent<Rigidbody2D>();
-		InGrace = true;
         childParticles = gameObject.GetComponentsInChildren<ParticleSystem>();
 
         for (int i = 0; i < childParticles.Length; i++)
@@ -35,23 +35,34 @@ public class HomingMissile : Projectile
             if (!childParticles[i].isPlaying)
                 childParticles[i].Play();
         }
+		pool = GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetComponent<ObjectPool>();
     }
+
+	void Start()
+	{
+		InvokeRepeating("GarbageCollect", 5, 5);
+	}
+
+	void OnEnable()
+	{
+		elapsedTime = 0;
+		InGrace = true;
+	}
 
     // Update is called once per frame
     void Update()
     {
 		// Update elapsed time until the mine is active
-		if(elapsedTime <= ThrusterDuration)
-		{
-			elapsedTime += Time.deltaTime;
-		}
-        else
+		elapsedTime += Time.deltaTime;
+		if(elapsedTime > ThrusterDuration)
         {
             for (int i = 0; i < childParticles.Length; i++)
             {
                 if (childParticles[i].isPlaying)
                     childParticles[i].Stop();
             }
+			if (GetComponent<AudioSource>().isPlaying) 
+				GetComponent<AudioSource>().Stop();
         }
 		// Handle grace period
 		if(InGrace)
@@ -140,9 +151,26 @@ public class HomingMissile : Projectile
     void Activate()
     {
         // When destroyed, create an explosion, which damages objects around it.
-        var explosion = GameObject.Instantiate(ExplosionPrefab);
-        explosion.transform.position = transform.position;
+		GameObject explosion = pool.RequestPoolObject(ObjectPool.ObjectType.Explosion, transform.position, Quaternion.identity);
+        //Explosion explosion = GameObject.Instantiate(ExplosionPrefab);
+        //explosion.transform.position = transform.position;
         explosion.GetComponent<Explosion>().Damage = Damage;
-        GameObject.Destroy(gameObject);
+		pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.Missile);
+		//GameObject.Destroy(gameObject);
     }
+
+	void GarbageCollect()
+	{
+		// Return to object pool if too far from the camera position
+		if(Vector3.Distance (cam.transform.position, transform.position) > DisableDistance ||
+		   elapsedTime > MaxLifespan)
+		{
+			pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.Missile);
+		}
+	}
+
+	void OnDisable()
+	{
+		CancelInvoke();
+	}
 }

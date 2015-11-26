@@ -17,7 +17,7 @@ public class Shield : Module
 	private float elapsedTime;
 
 	// Use this for initialization
-	void Start ()
+	new void Start ()
 	{
 		base.Start ();
 		col = GetComponent<CircleCollider2D>();
@@ -59,6 +59,7 @@ public class Shield : Module
 				col.enabled = true;
 				anim.SetBool("Active", true);
 				elapsedTime = 0;
+				GetComponent<AudioSource>().Play();
 			}
 		}
 	}

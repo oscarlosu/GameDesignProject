@@ -14,6 +14,8 @@ public class GlobalValues
 	public static string AsteroidTag = "Asteroid";
 	public static string DebrisTag = "Debris";
 
+	public static string ObjectPoolTag = "ObjectPool";
+
     //public static int StructureMass = 1;
     public static int CoreMass = 4;
     public static float MinCrashMagnitude = 3;
