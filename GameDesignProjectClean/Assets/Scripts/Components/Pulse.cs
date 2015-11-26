@@ -14,18 +14,25 @@ public class Pulse : Projectile
 	public float Radius;
 	public float Speed;
 
+	private CircleCollider2D col;
+    public Sprite[] pulseMats;
+    private SpriteRenderer sr;
+
+    private float counter = 0.0f;
+    private Sprite mat;
 	//private CircleCollider2D col;
-    public Material[] pulseMats;
 
     private float elapsedTime;
-    private Material mat;
     // Use this for initialization
-    void Awake ()
+	new void Awake ()
 	{
+		col = GetComponent<CircleCollider2D>();
+        sr = GetComponent<SpriteRenderer>();
+        mat = pulseMats[Random.Range(0, pulseMats.Length)];
+        sr.sprite = mat;
+        //mat = GetComponent<MeshRenderer>().material;
 		base.Awake ();
 		//col = GetComponent<CircleCollider2D>();
-        mat = pulseMats[Random.Range(0, pulseMats.Length)];
-        GetComponent<MeshRenderer>().material = mat;
         //mat = GetComponent<MeshRenderer>().material;        
     }
 
@@ -39,7 +46,7 @@ public class Pulse : Projectile
 	// Update is called once per frame
 	void Update ()
 	{
-        mat.color  = new Color(mat.color.r, mat.color.g, mat.color.b, 1 - explosionAnim.Evaluate(elapsedTime));
+        sr.color  = new Color(1,1,1, 1.1f - explosionAnim.Evaluate(elapsedTime));
         float newScale = explosionAnim.Evaluate(elapsedTime) * scaleFactor;
         transform.localScale = Vector3.one * newScale;
         elapsedTime += Time.deltaTime / duration;

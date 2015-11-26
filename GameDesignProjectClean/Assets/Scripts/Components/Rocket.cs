@@ -18,7 +18,7 @@ public class Rocket : Projectile
 
 
     // Use this for initialization
-	void Awake()
+	new void Awake()
     {
 		base.Awake();
         rb = GetComponent<Rigidbody2D>();

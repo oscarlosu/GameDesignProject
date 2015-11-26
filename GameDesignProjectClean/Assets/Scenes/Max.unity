@@ -145,7 +145,7 @@ Camera:
   far clip plane: 30
   field of view: 60
   orthographic: 1
-  orthographic size: 25
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -171,6 +171,120 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!1001 &1693707676
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 11449672, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: explosionAnim.m_Curve.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 450548, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450548, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450548, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450548, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450548, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450548, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450548, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 450548, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449672, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: scaleFactor
+      value: .899999976
+      objectReference: {fileID: 0}
+    - target: {fileID: 5854294, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: m_Radius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449672, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: explosionAnim.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449672, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: explosionAnim.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449672, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: explosionAnim.m_Curve.Array.data[0].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449672, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: explosionAnim.m_Curve.Array.data[1].time
+      value: .150000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449672, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: explosionAnim.m_Curve.Array.data[1].value
+      value: .50672555
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449672, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: explosionAnim.m_Curve.Array.data[1].inSlope
+      value: 1.39594078
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449672, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: explosionAnim.m_Curve.Array.data[1].outSlope
+      value: 1.39594078
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449672, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: explosionAnim.m_Curve.Array.data[2].time
+      value: .899999976
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449672, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: explosionAnim.m_Curve.Array.data[2].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449672, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: explosionAnim.m_Curve.Array.data[2].inSlope
+      value: .0432133675
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449672, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: explosionAnim.m_Curve.Array.data[2].outSlope
+      value: .0432133675
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449672, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: explosionAnim.m_Curve.Array.data[3].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449672, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: explosionAnim.m_Curve.Array.data[3].value
+      value: 1.10000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449672, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: explosionAnim.m_Curve.Array.data[3].inSlope
+      value: 2.32115602
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449672, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+      propertyPath: explosionAnim.m_Curve.Array.data[3].outSlope
+      value: 2.32115602
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: fb709e5cca67fbd44ba8365df6ac7154, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1973905772
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,7 +334,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1973905772}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 6.57999992, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -280,7 +394,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2092246755}
   m_LocalRotation: {x: .408217937, y: -.234569728, z: .109381676, w: .875426054}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 6.57999992, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

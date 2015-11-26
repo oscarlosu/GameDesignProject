@@ -7,12 +7,13 @@ public class Explosion : MonoBehaviour
 {
     public float scaleFactor = 1.0f;
     public float duration = 1.0f;
-    public AnimationCurve explosionAnim = new AnimationCurve(new Keyframe(0, 0.05f), new Keyframe(0.5f, 1), new Keyframe(1, 0.05f));
+    public AnimationCurve explosionAnim = new AnimationCurve(new Keyframe(0, 0.05f), new Keyframe(0.5f,0.5f), new Keyframe(1, 1));
     [Space(10)]
     public int Damage;
     public float PushForce;
 
-    public Material[] explosionMats;
+    public Sprite[] explosionMats;
+    private SpriteRenderer sr;
 
     private float elapsedTime;
 	private ObjectPool pool;
@@ -21,9 +22,9 @@ public class Explosion : MonoBehaviour
     {
 		pool = GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetComponent<ObjectPool>();
         GetComponent<AudioSource>().pitch = Random.Range(0.5f, 1.5f);
-        Material mat = explosionMats[Random.Range(0, explosionMats.Length)];
-        GetComponent<MeshRenderer>().material = mat;
-        
+        Sprite mat = explosionMats[Random.Range(0, explosionMats.Length)];
+        sr = GetComponent<SpriteRenderer>();
+        sr.sprite = mat;
     }
 
 	void OnEnable()
@@ -36,6 +37,7 @@ public class Explosion : MonoBehaviour
     {
         float newScale = explosionAnim.Evaluate(elapsedTime) * scaleFactor;
         transform.localScale = Vector3.one * newScale;
+        sr.color = new Color(1, 1, 1, 1 - explosionAnim.Evaluate(elapsedTime));
         elapsedTime += Time.deltaTime/duration;
     }
 

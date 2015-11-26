@@ -20,7 +20,7 @@ public class RocketLauncher : Module
         base.Start();
     }
 
-	void OnEnable()
+	new void OnEnable()
 	{
 		base.OnEnable();
 		elapsedTime = 0;
@@ -51,7 +51,6 @@ public class RocketLauncher : Module
                     if (GamePad.GetButtonDown(ButtonKey, ShipCore.GetComponent<Core>().ControllerIndex))
                     {
                         Activate();
-						GetComponent<AudioSource>().Play();
                     }
                     break;
                 case InputKeyType.Trigger:
@@ -59,7 +58,6 @@ public class RocketLauncher : Module
                     if (value > 0.5) // Activation threshold.
                     {
                         Activate();
-						GetComponent<AudioSource>().Play();
                     }
 					break;
             }

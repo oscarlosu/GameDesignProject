@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 499512}
   - 212: {fileID: 21228320}
-  - 82: {fileID: 8249944}
   m_Layer: 0
   m_Name: EnergyField
   m_TagString: Untagged
@@ -29,6 +28,7 @@ GameObject:
   - 95: {fileID: 9584438}
   - 114: {fileID: 11478482}
   - 58: {fileID: 5887814}
+  - 82: {fileID: 8226802}
   m_Layer: 0
   m_Name: Shield
   m_TagString: Module
@@ -74,18 +74,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: .0299999993}
   serializedVersion: 2
   m_Radius: 3.32999992
---- !u!82 &8249944
+--- !u!82 &8226802
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 122068}
+  m_GameObject: {fileID: 142234}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24340158, guid: 1009fae8e168e4f4aadd5822f83f11a6,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 9c86d3102082667449531f21a605ed60, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -279,6 +279,10 @@ Prefab:
       value: 
       objectReference: {fileID: 24340158, guid: 1009fae8e168e4f4aadd5822f83f11a6,
         type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 142234}

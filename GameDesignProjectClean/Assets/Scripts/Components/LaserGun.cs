@@ -23,7 +23,7 @@ public class LaserGun : Module
 		base.Start();        
     }
 
-	void OnEnable()
+	new void OnEnable()
 	{
 		base.OnEnable();
 		elapsedTime = 0;
@@ -33,6 +33,12 @@ public class LaserGun : Module
     // Update is called once per frame
     void Update()
     {
+		if (GamePad.GetButtonDown(ButtonKey, ShipCore.GetComponent<Core>().ControllerIndex))
+		{
+			GetComponent<AudioSource>().Play();
+		} else if (GamePad.GetButtonUp(ButtonKey, ShipCore.GetComponent<Core>().ControllerIndex)){
+			GetComponent<AudioSource>().Stop();
+		}
         // If in build mode, don't do anything.
         if (ShipCore.GetComponent<Core>().InBuildMode)
         {
@@ -52,13 +58,11 @@ public class LaserGun : Module
                     else if (GamePad.GetButton(ButtonKey, ShipCore.GetComponent<Core>().ControllerIndex))
                     {
                         elapsedTime += Time.deltaTime;
-						GetComponent<AudioSource>().Play();
                     }
                     else if (GamePad.GetButtonUp(ButtonKey, ShipCore.GetComponent<Core>().ControllerIndex))
                     {
                         elapsedTime += Time.deltaTime;
                         Activate();
-						GetComponent<AudioSource>().Stop();
                     }
                     break;
                 case InputKeyType.Trigger:
