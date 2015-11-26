@@ -691,7 +691,7 @@ public class PlayerBuilderHandler : MonoBehaviour
             {
                 if (grid[x, y].transform.childCount > 0)
                 {
-                    grid[x, y].GetComponent<Structure>().TriggerAnimation("TriggerDamage");
+                    StartCoroutine(grid[x, y].GetComponent<Structure>().DisplayCannotRemove());
                     return;
                 }
             }

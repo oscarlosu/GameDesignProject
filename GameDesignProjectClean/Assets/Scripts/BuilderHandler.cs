@@ -23,6 +23,10 @@ public class BuilderHandler : MonoBehaviour
             playersJoined = gameHandler.GetComponent<GameHandler>().GetPlayersJoined();
             ActivatePlayerAreas(playersJoined);
         }
+        else
+        {
+            ActivatePlayerAreas(new [] {true, true, true, true});
+        }
     }
 
     // Update is called once per frame
