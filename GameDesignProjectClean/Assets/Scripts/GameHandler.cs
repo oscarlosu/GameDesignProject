@@ -11,7 +11,7 @@ public class GameHandler : MonoBehaviour
 
     // Scene handlers.
     public PlayerSelectHandler PlayerSelectHandler;
-    public LevelHandler LevelHandler;
+    public LevelSelectHandler LevelSelectHandler;
     public BuilderHandler BuilderHandler;
     public ILevelController LevelController;
 
@@ -95,10 +95,10 @@ public class GameHandler : MonoBehaviour
                 return;
             case Scene.LevelSelectScene:
                 // Level should be selected before progressing to the next scene.
-                if (LevelHandler != null && GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.Any))
+                if (LevelSelectHandler != null && GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.Any))
                 {
                     // Save the selected scene name.
-                    levelSelectedSceneName = LevelHandler.GetSelectedLevelSceneName();
+                    levelSelectedSceneName = LevelSelectHandler.GetSelectedLevelSceneName();
                     Application.LoadLevel("Builder");
                     CurrentScene = Scene.BuilderScene;
                 }
