@@ -193,6 +193,7 @@ AudioMixerGroupController:
   m_Pitch: 68b6c4a85ad21446ba8663fea029f789
   m_Effects:
   - {fileID: 24422196}
+  - {fileID: 24473016}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -444,6 +445,23 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &24473016
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: 7ccf44a14baf2ee44a141057e2410010
+  m_EffectName: Lowpass
+  m_MixLevel: 33a8e28d262d4264bbb7a84c242a1351
+  m_Parameters:
+  - m_ParameterName: Cutoff freq
+    m_GUID: c79ed9016b78f6d489b2b6fc2d537254
+  - m_ParameterName: Resonance
+    m_GUID: 2c27ffef6f0761b4ca25df0077a3b73a
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!245 &24500003
 AudioMixerSnapshotController:
   m_ObjectHideFlags: 0
@@ -453,10 +471,21 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 55dd146675a548e458c35a4b3329696c
   m_FloatValues:
-    774cb7c117cb34ff1959e5995d60eb23: -35
-    a75df407f58d4459ea710af50fc0d721: -1.51912165
-    3610fbd7f312d4138a728a2538d1d83d: -8.84178352
-    f11fa658fbd2ed74ca7a20ec6b559125: .23288241
+    d742ff80185c44aca9274620f7ca5c51: 38.7000008
+    c79ed9016b78f6d489b2b6fc2d537254: 1199
+    774cb7c117cb34ff1959e5995d60eb23: -54
+    f2a1f702c837d4a74aea6fd9ffaaf9bc: .100000001
+    7a6bad53d9be442219c1670734a50a05: -9.83328629
+    77b2d263ba89046b9885034b2dc59e4f: -31.1298981
+    3b502544bb6824307a2ea532e3bde731: .196999997
+    a75df407f58d4459ea710af50fc0d721: -19.2556553
+    3610fbd7f312d4138a728a2538d1d83d: -22.7140408
+    ecc190f76bb0f44aebd0a9508a5e8473: -6.13370705
+    f11fa658fbd2ed74ca7a20ec6b559125: 20
     e8a04439057c24661ac13c5044cd0650: -9.83328629
     3a8d8e89a532c477a8901bbc69e6fc0c: -10.8677759
+    78d5e16a68d3b475f994bf58dc40e953: 4.29999876
+    de3b17ab4f149417faac7ebc3ff4a453: 0
+    7902847eeb30a4bf5accf1bc8160e402: -13.0627613
+    d6edcccf7d6254bada4fdb5740d51056: 0
   m_TransitionOverrides: {}

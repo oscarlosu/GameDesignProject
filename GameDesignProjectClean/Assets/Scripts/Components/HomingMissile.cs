@@ -61,6 +61,8 @@ public class HomingMissile : Projectile
                 if (childParticles[i].isPlaying)
                     childParticles[i].Stop();
             }
+			if (GetComponent<AudioSource>().isPlaying) 
+				GetComponent<AudioSource>().Stop();
         }
 		// Handle grace period
 		if(InGrace)

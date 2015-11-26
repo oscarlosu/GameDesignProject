@@ -59,6 +59,7 @@ public class Shield : Module
 				col.enabled = true;
 				anim.SetBool("Active", true);
 				elapsedTime = 0;
+				GetComponent<AudioSource>().Play();
 			}
 		}
 	}
