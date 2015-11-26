@@ -4,36 +4,40 @@ using System.Collections.Generic;
 
 public class Implosion : MonoBehaviour
 {
-    public float scaleFactor = 1.0f;
-    public float duration = 1.0f;
+    public float scaleFactor;
+    public float duration;
     public AnimationCurve explosionAnim = new AnimationCurve(new Keyframe(0, 0.05f), new Keyframe(0.95f, 1), new Keyframe(1, 0.05f));
     [Space(10)]
     public float PullForce;
 	//public AnimationCurve ForceMassSccalingCurve = new AnimationCurve(new Keyframe(0, 0.05f), new Keyframe(1, 1));
     public Material[] implosionMats;
 
-    private float counter = 0.0f;
-	private bool triggered = false;
+    private float elapsedTime;
+	private bool triggered;
+	private ObjectPool pool;
 	void Awake ()
 	{
+		pool = GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetComponent<ObjectPool>();
         //GetComponent<AudioSource> ().pitch = Random.Range (0.5f, 1.5f);
         Material mat = implosionMats[Random.Range(0, implosionMats.Length)];
         GetComponent<MeshRenderer>().material = mat;
-        StartCoroutine("DestroyImplosion");
+        
     }
 
-	void Start()
+	void OnEnable()
 	{
-
+		triggered = false;
+		elapsedTime = 0;
+		StartCoroutine("DestroyImplosion");
 	}
 
     void Update()
     {
-        float newScale = explosionAnim.Evaluate(counter) * scaleFactor;
+        float newScale = explosionAnim.Evaluate(elapsedTime) * scaleFactor;
         transform.localScale = Vector3.one * newScale;
-        counter += Time.deltaTime / duration;
+        elapsedTime += Time.deltaTime / duration;
 		// Trigger implosion effect when the maximum size is reached
-		if(counter >= explosionAnim.keys[1].time && !triggered)
+		if(elapsedTime >= explosionAnim.keys[1].time && !triggered)
 		{
 			Pull ();
 			triggered = true;
@@ -84,6 +88,7 @@ public class Implosion : MonoBehaviour
 	IEnumerator DestroyImplosion ()
 	{
         yield return new WaitForSeconds(duration);
-		GameObject.Destroy (gameObject);
+		pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.Implosion);
+		//GameObject.Destroy (gameObject);
 	}
 }

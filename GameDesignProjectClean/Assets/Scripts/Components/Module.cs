@@ -24,6 +24,7 @@ public class Module : ShipComponent
     public Direction ParentDirection { get; set; }
 
     private SpriteRenderer spriteRenderer;
+	protected ObjectPool pool;
 
     protected void Awake()
     {
@@ -34,6 +35,12 @@ public class Module : ShipComponent
     {
         UpdateSprite();
     }
+
+	protected void OnEnable()
+	{
+		pool = GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetComponent<ObjectPool>();
+		//Debug.Log ("Module says : " + GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetInstanceID());
+	}
 
     protected void OnDestroy()
     {

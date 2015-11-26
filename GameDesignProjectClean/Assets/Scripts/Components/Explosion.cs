@@ -14,21 +14,29 @@ public class Explosion : MonoBehaviour
 
     public Material[] explosionMats;
 
-    private float counter = 0.0f;
+    private float elapsedTime;
+	private ObjectPool pool;
 
     void Awake()
     {
+		pool = GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetComponent<ObjectPool>();
         GetComponent<AudioSource>().pitch = Random.Range(0.5f, 1.5f);
         Material mat = explosionMats[Random.Range(0, explosionMats.Length)];
         GetComponent<MeshRenderer>().material = mat;
-        StartCoroutine("DestroyExplosion");
+        
     }
+
+	void OnEnable()
+	{
+		elapsedTime = 0;
+		StartCoroutine("DestroyExplosion");
+	}
 
     void Update()
     {
-        float newScale = explosionAnim.Evaluate(counter) * scaleFactor;
+        float newScale = explosionAnim.Evaluate(elapsedTime) * scaleFactor;
         transform.localScale = Vector3.one * newScale;
-        counter += Time.deltaTime/duration;
+        elapsedTime += Time.deltaTime/duration;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -68,6 +76,7 @@ public class Explosion : MonoBehaviour
     IEnumerator DestroyExplosion()
     {
         yield return new WaitForSeconds(duration);
-        GameObject.Destroy(gameObject);
+		pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.Explosion);
+        //GameObject.Destroy(gameObject);
     }
 }

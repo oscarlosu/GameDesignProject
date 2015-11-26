@@ -18,12 +18,13 @@ public class Rocket : Projectile
 
 
     // Use this for initialization
-    void Awake()
+	void Awake()
     {
+		base.Awake();
         rb = GetComponent<Rigidbody2D>();
         this.GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
         this.GetComponent<AudioSource>().volume = Random.Range(0.9f, 1.1f);
-		InGrace = true;
+
         childParticles = gameObject.GetComponentsInChildren<ParticleSystem>();
 
         for (int i = 0; i < childParticles.Length; i++)
@@ -33,14 +34,22 @@ public class Rocket : Projectile
         }
     }
 
+	void Start()
+	{
+		InvokeRepeating("GarbageCollect", 5, 5);
+	}
+
+	void OnEnable()
+	{
+		elapsedTime = 0;
+		InGrace = true;
+	}
+
     // Update is called once per frame
     void Update()
     {
 		// Update elapsed time until the mine is active
-		if(elapsedTime <= ThrusterDuration)
-		{
-			elapsedTime += Time.deltaTime;
-		}
+		elapsedTime += Time.deltaTime;
 		// Handle grace period
 		if(InGrace)
 		{
@@ -63,6 +72,7 @@ public class Rocket : Projectile
                     childParticles[i].Stop();
             }
         }
+
     }
 
 	void OnCollisionEnter2D(Collision2D other)
@@ -90,9 +100,26 @@ public class Rocket : Projectile
 	{
 		// Create the explosion, when the rocket is destroyed. The explosion should be the one doing the damage.
 		// When destroyed, create an explosion, which damages objects around it.
-		var explosion = GameObject.Instantiate(ExplosionPrefab);
-		explosion.transform.position = transform.position;
+		GameObject explosion = pool.RequestPoolObject(ObjectPool.ObjectType.Explosion, transform.position, Quaternion.identity);
+		//var explosion = GameObject.Instantiate(ExplosionPrefab);
+		//explosion.transform.position = transform.position;
 		explosion.GetComponent<Explosion>().Damage = Damage;
-		GameObject.Destroy(gameObject);
+		pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.Rocket);
+		//GameObject.Destroy(gameObject);
+	}
+
+	void GarbageCollect()
+	{
+		// Return to object pool if too far from the camera position
+		if(Vector3.Distance (cam.transform.position, transform.position) > DisableDistance ||
+		   elapsedTime > MaxLifespan)
+		{
+			pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.Rocket);
+		}
+	}
+
+	void OnDisable()
+	{
+		CancelInvoke();
 	}
 }
