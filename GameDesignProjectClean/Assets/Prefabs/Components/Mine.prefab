@@ -184,7 +184,7 @@ MonoBehaviour:
   DetectionToExplosionTime: 1
   GracePeriod: 1
   MineCollider: {fileID: 5836638}
-  ExplosionPrefab: {fileID: 123384, guid: 14d6b3a3b065ca2418069880043eb2f0, type: 2}
+  ExplosionPrefab: {fileID: 156326, guid: 7da4b492e2d0ce44caceb70210788b33, type: 2}
 --- !u!212 &21237674
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -257,7 +257,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: ExplosionPrefab
       value: 
-      objectReference: {fileID: 123384, guid: 14d6b3a3b065ca2418069880043eb2f0, type: 2}
+      objectReference: {fileID: 156326, guid: 7da4b492e2d0ce44caceb70210788b33, type: 2}
     - target: {fileID: 0}
       propertyPath: DetectionToExplosionTime
       value: 1

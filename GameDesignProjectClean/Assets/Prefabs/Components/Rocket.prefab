@@ -211,7 +211,7 @@ MonoBehaviour:
   ThrustPower: 5
   ThrusterDuration: 2
   GracePeriod: 1
-  ExplosionPrefab: {fileID: 123384, guid: 14d6b3a3b065ca2418069880043eb2f0, type: 2}
+  ExplosionPrefab: {fileID: 156326, guid: 7da4b492e2d0ce44caceb70210788b33, type: 2}
 --- !u!198 &19851210
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -2442,7 +2442,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: ExplosionPrefab
       value: 
-      objectReference: {fileID: 123384, guid: 14d6b3a3b065ca2418069880043eb2f0, type: 2}
+      objectReference: {fileID: 156326, guid: 7da4b492e2d0ce44caceb70210788b33, type: 2}
     - target: {fileID: 0}
       propertyPath: m_audioClip
       value: 
