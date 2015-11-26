@@ -136,6 +136,10 @@ Prefab:
       propertyPath: LevelSceneNames.Array.data[0]
       value: Phillip
       objectReference: {fileID: 0}
+    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
+      propertyPath: LevelSceneNames.Array.data[1]
+      value: Moon
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
   m_IsPrefabParent: 0
