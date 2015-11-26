@@ -77,7 +77,7 @@ public class ImplosionBombLaucher : Module
 	
 	public void Activate()
 	{
-		if(LaunchedBomb != null)
+		if(LaunchedBomb != null && LaunchedBomb.activeSelf)
 		{
 			// Detonate bomb
 			LaunchedBomb.GetComponent<ImplosionBomb>().Activate ();

@@ -38,10 +38,8 @@ public class Module : ShipComponent
 
 	protected void OnEnable()
 	{
-
 		pool = GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetComponent<ObjectPool>();
 		//Debug.Log ("Module says : " + GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetInstanceID());
-
 	}
 
     protected void OnDestroy()
