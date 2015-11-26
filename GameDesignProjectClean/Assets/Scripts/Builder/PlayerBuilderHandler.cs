@@ -369,6 +369,7 @@ public class PlayerBuilderHandler : MonoBehaviour
             // Set player as ready, which means he/she has to wait for the rest.
             if (!playerReady && GamePad.GetButtonDown(ButtonGoToPlayMode, ControllerIndex))
             {
+                ReadyText.SetActive(true);
                 playerReady = true;
                 switch (ControllerIndex)
                 {
@@ -385,7 +386,6 @@ public class PlayerBuilderHandler : MonoBehaviour
                         BuilderHandler.SetPlayerShip(3, shipCore);
                         return;
                 }
-				ReadyText.SetActive(true);
             }
 
             BuilderCamera.transform.position = new Vector3(cloneShip.transform.position.x, cloneShip.transform.position.y, BuilderCamera.transform.position.z);
