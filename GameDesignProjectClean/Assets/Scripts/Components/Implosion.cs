@@ -10,17 +10,21 @@ public class Implosion : MonoBehaviour
     [Space(10)]
     public float PullForce;
 	//public AnimationCurve ForceMassSccalingCurve = new AnimationCurve(new Keyframe(0, 0.05f), new Keyframe(1, 1));
-    public Material[] implosionMats;
+    public Sprite[] implosionSprites;
 
     private float elapsedTime;
 	private bool triggered;
 	private ObjectPool pool;
+
+	private AudioSource audio;
+
 	void Awake ()
 	{
 		pool = GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetComponent<ObjectPool>();
         //GetComponent<AudioSource> ().pitch = Random.Range (0.5f, 1.5f);
-        Material mat = implosionMats[Random.Range(0, implosionMats.Length)];
-        GetComponent<MeshRenderer>().material = mat;
+        Sprite sprite = implosionSprites[Random.Range(0, implosionSprites.Length)];
+		GetComponent<SpriteRenderer>().sprite = sprite;
+		audio = GetComponent<AudioSource>();
         
     }
 
@@ -29,6 +33,7 @@ public class Implosion : MonoBehaviour
 		triggered = false;
 		elapsedTime = 0;
 		StartCoroutine("DestroyImplosion");
+		audio.Play();
 	}
 
     void Update()
@@ -92,3 +97,4 @@ public class Implosion : MonoBehaviour
 		//GameObject.Destroy (gameObject);
 	}
 }
+

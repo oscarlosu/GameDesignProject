@@ -12,32 +12,36 @@ public class Explosion : MonoBehaviour
     public int Damage;
     public float PushForce;
 
-    public Sprite[] explosionMats;
+    public Sprite[] explosionSprites;
     private SpriteRenderer sr;
 
     private float elapsedTime;
 	private ObjectPool pool;
 
+	private AudioSource audio;
+
     void Awake()
     {
 		pool = GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetComponent<ObjectPool>();
         GetComponent<AudioSource>().pitch = Random.Range(0.5f, 1.5f);
-        Sprite mat = explosionMats[Random.Range(0, explosionMats.Length)];
+        Sprite sprite = explosionSprites[Random.Range(0, explosionSprites.Length)];
         sr = GetComponent<SpriteRenderer>();
-        sr.sprite = mat;
+        sr.sprite = sprite;
+		audio = GetComponent<AudioSource>();
     }
 
 	void OnEnable()
 	{
 		elapsedTime = 0;
 		StartCoroutine("DestroyExplosion");
+		audio.Play();
 	}
 
     void Update()
     {
         float newScale = explosionAnim.Evaluate(elapsedTime) * scaleFactor;
         transform.localScale = Vector3.one * newScale;
-        sr.color = new Color(1, 1, 1, 1 - explosionAnim.Evaluate(elapsedTime));
+        sr.color = new Color(1, 1, 1, 1 - elapsedTime);
         elapsedTime += Time.deltaTime/duration;
     }
 

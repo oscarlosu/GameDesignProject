@@ -25,6 +25,8 @@ public class PlayerBuilderHandler : MonoBehaviour
     public int GridSizeX, GridSizeY;
     public GameObject SelectedCellPrefab;
     public GameObject[] AvailableComponents;
+	public GameObject TestModeText;
+	public GameObject ReadyText;
 
     private GameObject shipCore;
     private GameObject selectedCell;
@@ -97,6 +99,8 @@ public class PlayerBuilderHandler : MonoBehaviour
         // Activate component selector UI.
         ComponentSelectorPanel.SetActive(true);
         ComponentNamePanel.SetActive(true);
+		// Deactivate "testmode" text
+		TestModeText.SetActive (false);
         // Update selected cell object.
         UpdateBuilderUi();
         // Center camera on selected cell.
@@ -121,6 +125,8 @@ public class PlayerBuilderHandler : MonoBehaviour
         ParentPanel.SetActive(false);
         InputPanel.SetActive(false);
         RemovePanel.SetActive(false);
+		// Enable "testmode" text
+		TestModeText.SetActive (true);
         // Create clone of ship that the players can test and play around with.
         cloneShip = GameObject.Instantiate(shipCore);
         cloneShip.transform.parent = PlayerArea.transform;
@@ -379,6 +385,7 @@ public class PlayerBuilderHandler : MonoBehaviour
                         BuilderHandler.SetPlayerShip(3, shipCore);
                         return;
                 }
+				ReadyText.SetActive(true);
             }
 
             BuilderCamera.transform.position = new Vector3(cloneShip.transform.position.x, cloneShip.transform.position.y, BuilderCamera.transform.position.z);
