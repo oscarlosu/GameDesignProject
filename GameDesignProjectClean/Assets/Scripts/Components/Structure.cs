@@ -8,16 +8,13 @@ public class Structure : ShipComponent
     public int MaxHp;
     public int hp;
     public Animator Anim;
-
-    [SerializeField]
-    private int originalMaxHp;
+    
     private List<Shield> nearbyShields;
     private List<Module> currentModules = new List<Module>();
     private List<Structure> currentStructures = new List<Structure>();
 
     public void Start()
     {
-        originalMaxHp = MaxHp;
         // Get all the child modules and structures
         currentModules.Clear();
         currentStructures.Clear();

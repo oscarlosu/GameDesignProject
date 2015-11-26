@@ -13,6 +13,7 @@ public class GameHandler : MonoBehaviour
     public PlayerSelectHandler PlayerSelectHandler;
     public LevelHandler LevelHandler;
     public BuilderHandler BuilderHandler;
+    public ILevelController LevelController;
 
     // Game setup settings.
     private bool[] playersJoined;
@@ -103,49 +104,20 @@ public class GameHandler : MonoBehaviour
                 }
                 return;
             case Scene.BuilderScene:
-                // All players should have declared themselves ready.
-                if (BuilderHandler != null && GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.Any))
+                // If all players have declared themselves ready.
+                if (BuilderHandler != null && BuilderHandler.PlayersReady(out playerShips))
                 {
-                    // If all players have declared themselves ready.
-                    if (BuilderHandler.PlayersReady(out playerShips))
+                    // All the ships build need to become persistant, so they can move to the level.
+                    // They should also be disabled, so they don't hit anything upon entering the next level.
+                    foreach (var ship in playerShips.Where(ship => ship != null))
                     {
-                        // All the ships build need to become persistant, so they can move to the level.
-                        // They should also be disabled, so they don't hit anything upon entering the next level.
-                        foreach (var ship in playerShips.Where(ship => ship != null))
-                        {
-                            //DontDestroyOnLoad(ship);
-                            ship.SetActive(false);
-                        }
-
-                        // Load the selected level.
-                        Application.LoadLevel(levelSelectedSceneName);
-
-                        // DEBUG. // TODO Change positions via a specific level handler later.
-                        if (playerShips[0] != null)
-                        {
-                            playerShips[0].transform.position = new Vector3(-10, 10);
-                            playerShips[0].SetActive(true);
-                        }
-                        if (playerShips[1] != null)
-                        {
-                            playerShips[1].transform.position = new Vector3(10, 10);
-                            playerShips[1].SetActive(true);
-                        }
-                        if (playerShips[2] != null)
-                        {
-                            playerShips[2].transform.position = new Vector3(-10, -10);
-                            playerShips[2].SetActive(true);
-                        }
-                        if (playerShips[3] != null)
-                        {
-                            playerShips[3].transform.position = new Vector3(10, -10);
-                            playerShips[3].SetActive(true);
-                        }
+                        //DontDestroyOnLoad(ship);
+                        ship.SetActive(false);
                     }
-                    else
-                    {
-                        Debug.LogError("Not all players are ready yet...");
-                    }
+
+                    // Load the selected level.
+                    Application.LoadLevel(levelSelectedSceneName);
+                    CurrentScene = Scene.GameScene;
                 }
                 return;
             case Scene.GameScene:
@@ -157,5 +129,10 @@ public class GameHandler : MonoBehaviour
     public bool[] GetPlayersJoined()
     {
         return playersJoined;
+    }
+
+    public GameObject[] GetPlayerShips()
+    {
+        return playerShips;
     }
 }
