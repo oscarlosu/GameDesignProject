@@ -7,7 +7,7 @@ public class MoonLevelController : MonoBehaviour, ILevelHandler
     public float speed = 0.0f;
 	// Use this for initialization
 	void Start () {
-        moonRotator.eulerAngles = new Vector3(0, 0, Random.Range(30, 330));
+        moonRotator.eulerAngles = new Vector3(0, 0, Random.Range(90, 125));
         var gameHandler = GameObject.FindGameObjectWithTag("GameHandler");
         if (gameHandler != null)
         {
