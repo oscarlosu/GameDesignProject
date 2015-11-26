@@ -20,10 +20,15 @@ public class LaserGun : Module
     // Use this for initialization
     new void Start()
     {
-        base.Start();
-        ready = true;
-        elapsedTime = 0;
+		base.Start();        
     }
+
+	void OnEnable()
+	{
+		base.OnEnable();
+		elapsedTime = 0;
+		ready = true;
+	}
 
     // Update is called once per frame
     void Update()

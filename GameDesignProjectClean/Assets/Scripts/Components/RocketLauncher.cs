@@ -18,9 +18,14 @@ public class RocketLauncher : Module
     new void Start()
     {
         base.Start();
-        ready = true;
-        elapsedTime = 0;
     }
+
+	void OnEnable()
+	{
+		base.OnEnable();
+		elapsedTime = 0;
+		ready = true;
+	}
 
     // Update is called once per frame
     void Update()

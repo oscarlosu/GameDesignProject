@@ -15,6 +15,11 @@ public class PulseDevice : Module
 	new void Start ()
 	{
 		base.Start ();
+	}
+
+	void OnEnable()
+	{
+		base.OnEnable();
 		elapsedTime = 0;
 		ready = true;
 	}

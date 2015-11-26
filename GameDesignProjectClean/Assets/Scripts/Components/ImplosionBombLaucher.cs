@@ -20,8 +20,14 @@ public class ImplosionBombLaucher : Module
 	new void Start()
 	{
 		base.Start();
-		ready = true;
+	}
+
+	void OnEnable()
+	{
+		base.OnEnable ();
 		elapsedTime = 0;
+		ready = true;
+		LaunchedBomb = null;
 	}
 	
 	// Update is called once per frame

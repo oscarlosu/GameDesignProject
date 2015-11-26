@@ -20,8 +20,6 @@ public class ImplosionBomb : Projectile
 		rb = GetComponent<Rigidbody2D> ();
 		/*this.GetComponent<AudioSource> ().pitch = Random.Range (0.9f, 1.1f);
 		this.GetComponent<AudioSource> ().volume = Random.Range (0.9f, 1.1f);*/
-		InGrace = true;
-
         childParticles = gameObject.GetComponentsInChildren<ParticleSystem>();
 
         for (int i = 0; i < childParticles.Length; i++)
@@ -34,6 +32,12 @@ public class ImplosionBomb : Projectile
 	void Start()
 	{
 		InvokeRepeating("GarbageCollect", 5, 5);
+	}
+
+	void OnEnable()
+	{
+		elapsedTime = 0;
+		InGrace = true;
 	}
 	
 	// Update is called once per frame

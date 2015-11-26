@@ -17,11 +17,12 @@ public class Pulse : Projectile
 	//private CircleCollider2D col;
     public Material[] pulseMats;
 
-    private float counter = 0.0f;
+    private float elapsedTime;
     private Material mat;
     // Use this for initialization
     void Awake ()
 	{
+		base.Awake ();
 		//col = GetComponent<CircleCollider2D>();
         mat = pulseMats[Random.Range(0, pulseMats.Length)];
         GetComponent<MeshRenderer>().material = mat;
@@ -31,16 +32,17 @@ public class Pulse : Projectile
 	void OnEnable()
 	{
 		InGrace = true;
+		elapsedTime = 0;
 		StartCoroutine("DestroyPulse");
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-        mat.color  = new Color(mat.color.r, mat.color.g, mat.color.b, 1 - explosionAnim.Evaluate(counter));
-        float newScale = explosionAnim.Evaluate(counter) * scaleFactor;
+        mat.color  = new Color(mat.color.r, mat.color.g, mat.color.b, 1 - explosionAnim.Evaluate(elapsedTime));
+        float newScale = explosionAnim.Evaluate(elapsedTime) * scaleFactor;
         transform.localScale = Vector3.one * newScale;
-        counter += Time.deltaTime / duration;
+        elapsedTime += Time.deltaTime / duration;
     }
 
 	void OnTriggerEnter2D(Collider2D other)

@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &450548
 Transform:
   m_ObjectHideFlags: 1
@@ -161,6 +161,8 @@ MonoBehaviour:
   SourceCore: {fileID: 0}
   SourceStructure: {fileID: 0}
   Damage: 0
+  DisableDistance: 30
+  MaxLifespan: 60
   scaleFactor: 10
   duration: 1
   explosionAnim:
@@ -183,8 +185,8 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-  RepulsionForce: 1000
-  TorqueMagnitude: 50
+  RepulsionForce: 500
+  TorqueMagnitude: 5
   Radius: 5
   Speed: 5
   pulseMats:
@@ -206,11 +208,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: RepulsionForce
-      value: 1000
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: TorqueMagnitude
-      value: 50
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
@@ -289,6 +291,18 @@ Prefab:
       value: 
       objectReference: {fileID: 24350876, guid: 1009fae8e168e4f4aadd5822f83f11a6,
         type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: DisableDistance
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MaxLifespan
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 134662}

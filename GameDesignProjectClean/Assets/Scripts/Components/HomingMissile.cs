@@ -28,7 +28,6 @@ public class HomingMissile : Projectile
     {
 		base.Awake();
         rb = GetComponent<Rigidbody2D>();
-		InGrace = true;
         childParticles = gameObject.GetComponentsInChildren<ParticleSystem>();
 
         for (int i = 0; i < childParticles.Length; i++)
@@ -46,6 +45,7 @@ public class HomingMissile : Projectile
 
 	void OnEnable()
 	{
+		elapsedTime = 0;
 		InGrace = true;
 	}
 

@@ -41,6 +41,7 @@ public class Rocket : Projectile
 
 	void OnEnable()
 	{
+		elapsedTime = 0;
 		InGrace = true;
 	}
 

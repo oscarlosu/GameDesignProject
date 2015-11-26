@@ -31,6 +31,7 @@ public class Mine : Projectile
 	{
 		InGrace = true;
 		detected = false;
+		elapsedTime = 0;
 	}
 
     // Update is called once per frame

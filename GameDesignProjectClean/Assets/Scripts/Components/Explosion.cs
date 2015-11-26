@@ -14,7 +14,7 @@ public class Explosion : MonoBehaviour
 
     public Material[] explosionMats;
 
-    private float counter = 0.0f;
+    private float elapsedTime;
 	private ObjectPool pool;
 
     void Awake()
@@ -28,14 +28,15 @@ public class Explosion : MonoBehaviour
 
 	void OnEnable()
 	{
+		elapsedTime = 0;
 		StartCoroutine("DestroyExplosion");
 	}
 
     void Update()
     {
-        float newScale = explosionAnim.Evaluate(counter) * scaleFactor;
+        float newScale = explosionAnim.Evaluate(elapsedTime) * scaleFactor;
         transform.localScale = Vector3.one * newScale;
-        counter += Time.deltaTime/duration;
+        elapsedTime += Time.deltaTime/duration;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

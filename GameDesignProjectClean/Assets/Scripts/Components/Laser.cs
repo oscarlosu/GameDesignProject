@@ -17,8 +17,13 @@ public class Laser : Projectile
         rend = GetComponent<SpriteRenderer>();
 		GetComponent<AudioSource>().pitch = Random.Range(0.5f, 1.5f);
 		GetComponent<AudioSource> ().Play ();
-		InGrace = true;
     }
+
+	void OnEnable()
+	{
+		elapsedTime = 0;
+		InGrace = true;
+	}
 
     // Update is called once per frame
     void Update()
