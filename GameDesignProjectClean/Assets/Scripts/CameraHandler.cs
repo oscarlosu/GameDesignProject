@@ -138,23 +138,24 @@ public class CameraHandler : MonoBehaviour
 
     private void ThrowShip(GameObject ship)
     {
+		Rigidbody2D rb = ship.GetComponent<Rigidbody2D>();
         // Set velocity of ship to zero
-        ship.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        ship.GetComponent<Rigidbody2D>().angularVelocity = 0;
+		rb.velocity = Vector2.zero;
+		rb.angularVelocity = 0;
         // Add force towards the center of the viewport
 		Vector2 direction = cam.transform.position - ship.transform.position;
         direction.Normalize();
-        ship.GetComponent<Rigidbody2D>().AddForce(direction * PushInForce);
+		rb.AddForce(direction * PushInForce * rb.mass);
         // Add torque
         // Positive rotation (counterclockwise)
         if (Random.value >= 0.5f)
         {
-            ship.GetComponent<Rigidbody2D>().AddTorque(Random.Range(0.5f, 1) * PushInTorque, ForceMode2D.Impulse);
+			rb.AddTorque(Random.Range(0.5f, 1) * PushInTorque * rb.mass, ForceMode2D.Impulse);
         }
         // Negative rotation (clockwise)
         else
         {
-            ship.GetComponent<Rigidbody2D>().AddTorque(-Random.Range(0.5f, 1) * PushInTorque, ForceMode2D.Impulse);
+			rb.AddTorque(-Random.Range(0.5f, 1) * PushInTorque * rb.mass, ForceMode2D.Impulse);
         }
 		// Disable ship's thrusters for DisableTime seconds
 		Thruster[] thrusters = ship.GetComponentsInChildren<Thruster>();

@@ -22,4 +22,6 @@ public class GlobalValues
     public static int MissileDamage = 1;
     public static int LaserDamage = 1;
 	public static float EffectiveZeroMass = 0.1f;
+
+	public static int MaximumMass = 1000;
 }

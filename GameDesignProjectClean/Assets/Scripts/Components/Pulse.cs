@@ -9,6 +9,8 @@ public class Pulse : Projectile
     [Space(10)]
     public float RepulsionForce;
 	public float TorqueMagnitude;
+	//public AnimationCurve ForceMassScaleCurve = new AnimationCurve(new Keyframe(0, 0.05f), new Keyframe(1, 1));
+
 	public float Radius;
 	public float Speed;
 
@@ -49,8 +51,8 @@ public class Pulse : Projectile
 			Vector2 orthogonal = new Vector2(- dir.y, dir.x);
 			// Project velocity on orthogonal direction
 			other.attachedRigidbody.velocity = Vector2.Dot (orthogonal, other.attachedRigidbody.velocity) * orthogonal;
-			other.attachedRigidbody.AddForce(RepulsionForce * dir);
-			other.attachedRigidbody.AddTorque(TorqueMagnitude * (Random.Range(0, 1) == 0 ? -1 : 1));
+			other.attachedRigidbody.AddForce(RepulsionForce * other.attachedRigidbody.mass * dir);
+			other.attachedRigidbody.AddTorque(TorqueMagnitude * other.attachedRigidbody.mass * (Random.Range(0, 1) == 0 ? -1 : 1));
 		}
 	}
 

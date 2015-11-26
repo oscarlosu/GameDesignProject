@@ -1182,9 +1182,9 @@ MonoBehaviour:
   PlayerThreePanel: {fileID: 1537462962}
   PlayerFourPanel: {fileID: 461547905}
   PlayerOneSprite: {fileID: 21300000, guid: 27f2ebbf4bdf548dc940dbf9df167494, type: 3}
-  PlayerTwoSprite: {fileID: 21300000, guid: 27f2ebbf4bdf548dc940dbf9df167494, type: 3}
-  PlayerThreeSprite: {fileID: 21300000, guid: 27f2ebbf4bdf548dc940dbf9df167494, type: 3}
-  PlayerFourSprite: {fileID: 21300000, guid: 27f2ebbf4bdf548dc940dbf9df167494, type: 3}
+  PlayerTwoSprite: {fileID: 21300000, guid: 9360013128464404eb7aa09753782434, type: 3}
+  PlayerThreeSprite: {fileID: 21300000, guid: 2aa135fea1418f248b7eacb0b2cc60b5, type: 3}
+  PlayerFourSprite: {fileID: 21300000, guid: 90b118958ca31c64b932ca1f88e07e3b, type: 3}
 --- !u!4 &1241021891
 Transform:
   m_ObjectHideFlags: 0

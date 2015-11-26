@@ -1,108 +1,70 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 
 public class Structure : ShipComponent
 {
-    public int MaxHp = 1;
+    public int MaxHp;
     public int hp;
     public Animator Anim;
+    
+    private List<Shield> nearbyShields;
+    private List<Module> currentModules = new List<Module>();
+    private List<Structure> currentStructures = new List<Structure>();
 
     public void Start()
     {
-		for(int index = 0; index < transform.childCount; ++index)
-		{
-			GameObject child = transform.GetChild(index).gameObject;
-			if (child.GetComponent<Armor>() != null)
-			{
-				IncreaseMaxHp(child.GetComponent<Armor>().ExtraHp);
-			}
-		}
-		hp = MaxHp;
-    }
-
-    public bool TakeDamage(int dmg)
-    {
         // Get all the child modules and structures
-        List<Module> modules = new List<Module>();
-        List<Structure> structures = new List<Structure>();
-        for(int index = 0; index < transform.childCount; ++index)
+        currentModules.Clear();
+        currentStructures.Clear();
+        for (var index = 0; index < transform.childCount; ++index)
         {
             GameObject child = transform.GetChild(index).gameObject;
             if (child.GetComponent<Module>() != null)
             {
-                modules.Add(child.GetComponent<Module>());
+                currentModules.Add(child.GetComponent<Module>());
+
+                // Increase maxHP for each armor.
+                if (child.GetComponent<Armor>() != null)
+                {
+                    IncreaseMaxHp(child.GetComponent<Armor>().ExtraHp);
+                }
             }
-            else if(child.GetComponent<Structure>() != null)
+            else if (child.GetComponent<Structure>() != null)
             {
-                structures.Add(child.GetComponent<Structure>());
+                currentStructures.Add(child.GetComponent<Structure>());
             }
         }
-        // If the structure has child modules or has no children, lose module, else propagate damage to a random child struture
-		bool hasShieldAttached;
-		bool isProtected = IsProtected(out hasShieldAttached);
-		if(!isProtected && (modules.Count > 0 || structures.Count == 0))
-		{
-			hp -= dmg;
-			TriggerAnimation("TriggerDamage");
-			LoseModule(modules);
-			// If it isnt protected and has shields attached to it, disable one of them (actually only resets the cooldown timer)
-			if(!isProtected && hasShieldAttached)
-			{
-				foreach(Module m in modules)
-				{
-					Shield s = m.gameObject.GetComponent<Shield>();
-					if(s != null)
-					{
-						s.DisableShield();
-						return true;
-					}
-				}
-			}
-		}
-		else if((!isProtected || !hasShieldAttached) && structures.Count > 0)
-		{
-			// Find a child structure that either has child modules or has no children, or has descendants with child modules or no children
-			for(int index = 0; index < structures.Count; ++index)
-			{
-				// We choose which structure to try first at random
-				int rnd = Random.Range(0, structures.Count);
-				if(structures[rnd].TakeDamage(dmg))
-				{
-					// Trigger visual feedback and return true
-					TriggerAnimation("TriggerDamage");
-					////Debug.Log("Damage visual feedback not implemented.");
-					return true;
-				}
-				else
-				{
-					// If the child structure couldnt take the damage, remove it from the list and try the next structure
-					structures.RemoveAt(rnd);
-				}
-			}
-			// This point should never be reached
-			//Debug.LogWarning("Structure couldnt propagate the damage! This should never happen!");
-			return true;
-		}
-		else if (isProtected && hasShieldAttached)
-		{
-			// Pick a shield attached to this structure and disable it
-			foreach(Module m in modules)
-			{
-				Shield s = m.gameObject.GetComponent<Shield>();
-				if(s != null)
-				{
-					s.DisableShield();
-					return true;
-				}
-			}
-		}
-		else
-		{
-			//Debug.Log ("Unknown propagation case encountered");
-			return false;
-		}
-		return false;
+        // Set the HP to the possibly new maxHP.
+		hp = MaxHp;
+    }
+
+    public void TakeDamage(int dmg)
+    {
+        bool hasShieldAttached;
+        bool isProtected = IsProtected(out hasShieldAttached);
+        
+        if (!isProtected)
+        {
+            // If the structure has shields attached (which aren't active), disable one of them.
+            if (hasShieldAttached)
+            {
+                // Find the shield and disable it.
+                foreach (Shield s in currentModules.Select(m => m.gameObject.GetComponent<Shield>()).Where(s => s != null))
+                {
+                    s.DisableShield();
+                    break;
+                }
+            }
+            // Lose HP, because ship was damaged.
+            hp -= dmg;
+            // Trigger damage animation.
+            TriggerAnimation("TriggerDamage");
+            // If the structure has any modules, lose a module.
+            LoseComponentOrSelf();
+        }
+
     }
 
     
@@ -143,40 +105,65 @@ public class Structure : ShipComponent
 		}
 	}*/
 
-    private void LoseModule(List<Module> modules)
+    private void LoseComponentOrSelf()
     {
         // As long as the hp is lower or equal than zero lose module or structure.
         while(hp <= 0)
         {
-            // If any child modules left on the structure, lose one
-            if (modules.Count > 0)
+            // If the structure has at least one module, lose one.
+            if (currentModules.Count > 0)
             {
-                // Defensive modules are removed first
-                foreach (Module m in modules)
+                if (RemoveDefensiveModule())
                 {
-                    if (m.gameObject.GetComponent<Armor>() != null)
-                    {
-                        modules.Remove(m);
-						IncreaseMaxHp(- m.GetComponent<Armor>().ExtraHp);
-                        Destroy(m.gameObject);
-                        return;
-                    }
+                    // Reset Hp, but apply excess damage.
+                    hp = MaxHp - Mathf.Abs(hp);
+                    continue;
                 }
-                // If there are no defensive modules, lose a random module            
-                int rnd = Random.Range(0, modules.Count);
-                GameObject module = modules[rnd].gameObject;
-                Destroy(module);
-                // Reset Hp, but apply excess damage
+                // If there are no defensive modules, lose a random module.    
+                RemoveRandomModule();
+                // Reset Hp, but apply excess damage.
                 hp = MaxHp - Mathf.Abs(hp);
+            }
+            // If no more modules are left, but it has child structures, damage one of those.
+            else if (currentStructures.Count > 0)
+            {
+                var rnd = Random.Range(0, currentStructures.Count); // Find random index.
+                var structure = currentStructures[rnd]; // Get structure at random index.
+                structure.TakeDamage(Mathf.Abs(hp)); // Damage the next structure with the leftover damage.
+                return;
             }
             else
             {
-                // If there are no child modules, destroy this structure
+                // If there are no child modules or structures, destroy this structure
+                var parent = transform.parent; // Find parent.
+                if (parent != null && parent.GetComponent<Structure>() != null) // If parent is structure, remove this from parent's list of structures.
+                {
+                    parent.GetComponent<Structure>().RemoveFromStructureList(this);
+                }
                 Destroy(gameObject);
                 return;
             }
         }
-        
+    }
+
+    private bool RemoveDefensiveModule()
+    {
+        foreach (Module m in currentModules.Where(m => m.gameObject.GetComponent<Armor>() != null))
+        {
+            currentModules.Remove(m);
+            IncreaseMaxHp(-m.GetComponent<Armor>().ExtraHp);
+            Destroy(m.gameObject);
+            return true;
+        }
+        return false;
+    }
+
+    private void RemoveRandomModule()
+    {
+        var rnd = Random.Range(0, currentModules.Count); // Find random index.
+        var module = currentModules[rnd]; // Get module at random index.
+        currentModules.Remove(module); // Remove module from module list.
+        Destroy(module.gameObject); // Destroy the game object.
     }
 
 	public void IncreaseMaxHp(int inc)
@@ -188,24 +175,69 @@ public class Structure : ShipComponent
 	public bool IsProtected(out bool hasShieldAttached)
 	{
 		hasShieldAttached = false;
-		// Find structures with shield modules
-		Shield[] shields = (Shield[])FindObjectsOfType(typeof(Shield));
 		// Find active shields in this ship near this structure
-		for(int i = 0; i < shields.Length; ++i)
-		{
-			if(shields[i].ShipCore.GetInstanceID() == ShipCore.GetInstanceID() && 
-			   shields[i].Active && Vector3.Distance(transform.position, shields[i].transform.position) < shields[i].Radius)
-			{
-				// If the shield is attached to this structure, save it in the attachedShield values
-				if(shields[i].transform.parent.GetInstanceID() == transform.GetInstanceID())
-				{
-					hasShieldAttached = true;
-				}
-				return true;
-			}
-		}
+        for (var i = nearbyShields.Count-1; i >= 0; i--)
+	    {
+	        if (nearbyShields[i] == null)
+	        {
+	            nearbyShields.RemoveAt(i);
+                continue;
+	        }
+            if (nearbyShields[i].ShipCore.GetInstanceID() == ShipCore.GetInstanceID() &&
+               nearbyShields[i].Active && Vector3.Distance(transform.position, nearbyShields[i].transform.position) < nearbyShields[i].Radius)
+            {
+                // If the shield is attached to this structure, save it in the attachedShield values
+                if (nearbyShields[i].transform.parent.GetInstanceID() == transform.GetInstanceID())
+                {
+                    hasShieldAttached = true;
+                }
+                return true;
+            }
+        }
 		return false;
 	}
+
+    public void FindNearbyShipShields()
+    {
+        // Find all shield modules in the scene.
+        Shield[] shields = (Shield[])FindObjectsOfType(typeof(Shield));
+        // Find active shields in this ship near this structure.
+        nearbyShields = shields.Where(t => t.ShipCore.GetInstanceID() == ShipCore.GetInstanceID() && Vector3.Distance(transform.position, t.transform.position) < t.Radius).ToList();
+    }
+
+    public void RemoveFromStructureList(Structure s)
+    {
+        currentStructures.Remove(s);
+    }
+
+    private void OnEnable()
+    {
+        FindNearbyShipShields();
+
+        // Rework lists of modules and structures.
+        //MaxHp = originalMaxHp; // Reset maxHP before adding it up again.
+        // Get all the child modules and structures
+        currentModules.Clear();
+        currentStructures.Clear();
+        for (var index = 0; index < transform.childCount; ++index)
+        {
+            GameObject child = transform.GetChild(index).gameObject;
+            if (child.GetComponent<Module>() != null)
+            {
+                currentModules.Add(child.GetComponent<Module>());
+
+                // Increase maxHP for each armor.
+                if (child.GetComponent<Armor>() != null)
+                {
+                    IncreaseMaxHp(child.GetComponent<Armor>().ExtraHp);
+                }
+            }
+            else if (child.GetComponent<Structure>() != null)
+            {
+                currentStructures.Add(child.GetComponent<Structure>());
+            }
+        }
+    }
 
 }
 
