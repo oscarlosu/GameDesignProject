@@ -245,6 +245,8 @@ public class Structure : ShipComponent
         else
         {
             TriggerAnimation("TriggerCannotRemoveLast");
+            yield return new WaitForSeconds(1f);
+            TriggerAnimation("TriggerCannotRemoveLast");
         }
     }
 
