@@ -124,10 +124,17 @@ public class Structure : ShipComponent
             {
                 // If there are no child modules or structures, destroy this structure
                 var parent = transform.parent; // Find parent.
-                if (parent != null && parent.GetComponent<Structure>() != null) // If parent is structure, remove this from parent's list of structures.
+                if (parent != null && parent.GetComponent<Structure>() != null)
+                    // If parent is structure, remove this from parent's list of structures.
                 {
                     parent.GetComponent<Structure>().RemoveFromStructureList(this);
                 }
+                else
+                {
+                    var core = ShipCore.GetComponent<Core>();
+                    GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().PlayerLost(core.ControllerIndex);
+                }
+                
                 Destroy(gameObject);
                 return;
             }
@@ -225,7 +232,6 @@ public class Structure : ShipComponent
                 currentStructures.Add(child.GetComponent<Structure>());
             }
         }
-        ShipCore.GetComponent<Core>().NbOfModules += currentModules.Count;
     }
 
     public IEnumerator DisplayCannotRemove()

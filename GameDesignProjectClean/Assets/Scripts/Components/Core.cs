@@ -38,6 +38,8 @@ public class Core : Structure
 
     public void Assemble()
     {
+        // Reset the number of modules before counting.
+        NbOfModules = 0;
         // Set initial mass to core mass.
         GetComponent<Rigidbody2D>().mass = Mass;
         // Retrieve all children
@@ -54,6 +56,10 @@ public class Core : Structure
                 {
                     child.GetComponent<Structure>().FindNearbyShipShields();
                 }
+            }
+            if (child.GetComponent<Module>() != null)
+            {
+                NbOfModules++;
             }
         }            
     }

@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using UnityEngine;
 using GamepadInput;
+using Debug = UnityEngine.Debug;
 
 public class GameHandler : MonoBehaviour
 {
@@ -19,6 +22,7 @@ public class GameHandler : MonoBehaviour
     private bool[] playersJoined;
     private string levelSelectedSceneName;
     private GameObject[] playerShips;
+    private bool[] playersLost;
 
     public enum Scene
     {
@@ -41,6 +45,7 @@ public class GameHandler : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(this.gameObject); // Don't destroy this object, since it handles the game.
+        playersLost = new[] {false, false, false, false};
     }
 
     // Update is called once per frame
@@ -134,5 +139,24 @@ public class GameHandler : MonoBehaviour
     public GameObject[] GetPlayerShips()
     {
         return playerShips;
+    }
+
+    public void PlayerLost(GamePad.Index controllerIndex)
+    {
+        switch (controllerIndex)
+        {
+            case GamePad.Index.One:
+                playersLost[0] = true;
+                break;
+            case GamePad.Index.Two:
+                playersLost[1] = true;
+                break;
+            case GamePad.Index.Three:
+                playersLost[2] = true;
+                break;
+            case GamePad.Index.Four:
+                playersLost[3] = true;
+                break;
+        }
     }
 }
