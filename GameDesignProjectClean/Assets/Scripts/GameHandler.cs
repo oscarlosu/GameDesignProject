@@ -11,6 +11,7 @@ public class GameHandler : MonoBehaviour
 
     public Scene CurrentScene;
     public GamePad.Button BackButton;
+    public GameObject WinScreenPrefab;
 
     // Scene handlers.
     public PlayerSelectHandler PlayerSelectHandler;
@@ -22,7 +23,11 @@ public class GameHandler : MonoBehaviour
     private bool[] playersJoined;
     private string levelSelectedSceneName;
     private GameObject[] playerShips;
-    private bool[] playersLost;
+    private int playersLost = 0;
+    private int[] playerLostPositions;
+
+    // Other settings.
+    private bool GameOver;
 
     public enum Scene
     {
@@ -45,7 +50,7 @@ public class GameHandler : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(this.gameObject); // Don't destroy this object, since it handles the game.
-        playersLost = new[] {false, false, false, false};
+        playerLostPositions = new[] { 0, 0, 0, 0 };
     }
 
     // Update is called once per frame
@@ -127,6 +132,17 @@ public class GameHandler : MonoBehaviour
                 return;
             case Scene.GameScene:
                 // The winning condition should have been met.
+                if (GameOver && GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.Any))
+                {
+                    // Destroy all the ships.
+                    foreach (var ship in playerShips)
+                    {
+                        GameObject.Destroy(ship);
+                    }
+                    // Restart the game.
+                    Application.LoadLevel("PlayerSelect");
+                    CurrentScene = Scene.PlayerSelectScene;
+                }
                 return;
         }
     }
@@ -143,20 +159,36 @@ public class GameHandler : MonoBehaviour
 
     public void PlayerLost(GamePad.Index controllerIndex)
     {
+        var totalPlayersJoined = playersJoined.Count(t => t);
+        // Save that the player lost.
         switch (controllerIndex)
         {
             case GamePad.Index.One:
-                playersLost[0] = true;
+                playerLostPositions[0] = (totalPlayersJoined - 1) - playersLost++;
                 break;
             case GamePad.Index.Two:
-                playersLost[1] = true;
+                playerLostPositions[1] = (totalPlayersJoined - 1) - playersLost++;
                 break;
             case GamePad.Index.Three:
-                playersLost[2] = true;
+                playerLostPositions[2] = (totalPlayersJoined - 1) - playersLost++;
                 break;
             case GamePad.Index.Four:
-                playersLost[3] = true;
+                playerLostPositions[3] = (totalPlayersJoined - 1) - playersLost++;
                 break;
         }
+
+
+        // If only one player is left, the game is over.
+        if (playersLost == totalPlayersJoined - 1)
+        {
+            DisplayWinScreen();
+        }
+    }
+
+    public void DisplayWinScreen()
+    {
+        WinScreen winScreen = Instantiate(WinScreenPrefab).GetComponent<WinScreen>();
+        winScreen.SetupWinScreen(playersJoined, playerLostPositions);
+        GameOver = true;
     }
 }

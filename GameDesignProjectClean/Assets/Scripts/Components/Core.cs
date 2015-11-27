@@ -26,6 +26,7 @@ public class Core : Structure
 
     private void OnEnable()
     {
+        base.OnEnable();
         ShipCore = this.gameObject;
         DefaultAngularDrag = GetComponent<Rigidbody2D>().angularDrag;
     }

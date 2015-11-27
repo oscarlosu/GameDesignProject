@@ -205,7 +205,7 @@ public class Structure : ShipComponent
         currentStructures.Remove(s);
     }
 
-    private void OnEnable()
+    protected void OnEnable()
     {
         FindNearbyShipShields();
 
