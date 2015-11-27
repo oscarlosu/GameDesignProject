@@ -47,6 +47,7 @@ public class Laser : Projectile
         //Debug.Log("Laser OnTriggerEnter2D with " + other.gameObject.name);
 		Structure str = other.gameObject.GetComponent<Structure>();
 		Asteroid ast = other.gameObject.GetComponent<Asteroid>();
+		Debris deb = other.gameObject.GetComponent<Debris>();
         if (str != null && other.gameObject != SourceStructure)
         {            
             // Make ship lose hp
@@ -57,5 +58,9 @@ public class Laser : Projectile
 			// Make asteroid break into pieces
             ast.Breakdown();            
         }
+		else if(deb != null)
+		{
+			deb.Breakdown ();
+		}
     }
 }

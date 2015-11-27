@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -329,7 +329,7 @@ public class EnvironmentGenerator : MonoBehaviour
 					GameObject asteroid = Instantiate(AsteroidPrefab);
 					// Make it a child of this sector
 					asteroid.transform.parent = sector.transform;
-					asteroid.GetComponent<Asteroid>().Create(asteroidPos, AsteroidRadiusMax);
+					//asteroid.GetComponent<Asteroid>().Initialize(asteroidPos, AsteroidRadiusMax);
 				}
 			}
 		}
@@ -346,7 +346,7 @@ public class EnvironmentGenerator : MonoBehaviour
 				GameObject asteroid = Instantiate(AsteroidPrefab);
 				// Make it a child of this sector
 				asteroid.transform.parent = sector.transform;
-				asteroid.GetComponent<Asteroid>().Create(asteroidPos, AsteroidRadiusMax);
+				//asteroid.GetComponent<Asteroid>().Initialize(asteroidPos, AsteroidRadiusMax);
 			}
 		}
 	}
