@@ -16,6 +16,9 @@ public class AsteriodLevelController : MonoBehaviour {
     public int maxMediumAsteroids = 0;
     public int maxLargeAsteroids = 0;
 
+	public int playfieldSizeX;
+	public int playfieldSizeY;
+
     // Use this for initialization
     void Start () {
 	}
