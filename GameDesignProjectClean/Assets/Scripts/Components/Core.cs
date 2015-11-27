@@ -22,12 +22,10 @@ public class Core : Structure
     public new void Start()
     {
         base.Start();
-        
     }
 
     private void OnEnable()
     {
-        // Add core and structure mass to rigidbody
         ShipCore = this.gameObject;
         DefaultAngularDrag = GetComponent<Rigidbody2D>().angularDrag;
     }
