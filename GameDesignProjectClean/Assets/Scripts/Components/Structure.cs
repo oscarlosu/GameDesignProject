@@ -225,6 +225,7 @@ public class Structure : ShipComponent
                 currentStructures.Add(child.GetComponent<Structure>());
             }
         }
+        ShipCore.GetComponent<Core>().NbOfModules += currentModules.Count;
     }
 
     public IEnumerator DisplayCannotRemove()
