@@ -50,6 +50,7 @@ public class Explosion : MonoBehaviour
 		////Debug.Log ("Explosion detected OnTriggerEnter2D with " + other.gameObject.name);
 		Structure str = other.gameObject.GetComponent<Structure>();
 		Asteroid ast = other.gameObject.GetComponent<Asteroid>();
+		Debris deb = other.gameObject.GetComponent<Debris>();
         if (str != null)
         {
             // Make ship take damage.            
@@ -67,6 +68,10 @@ public class Explosion : MonoBehaviour
 			dir.Normalize();
 			ast.GetComponent<Rigidbody2D>().AddForceAtPosition(dir * PushForce, transform.position);
         }
+		else if(deb != null)
+		{
+			deb.Breakdown ();
+		}
 		// Only affects rigidbodies with a mass 
 		/*else if (other.GetComponent<Rigidbody2D>() != null && 
 		         other.GetComponent<Collider2D>() != null && !other.GetComponent<Collider2D>().isTrigger/*other.GetComponent<Rigidbody2D>().mass > GlobalValues.EffectiveZeroMass)
