@@ -39,7 +39,6 @@ public class Module : ShipComponent
 	protected void OnEnable()
 	{
 		pool = GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetComponent<ObjectPool>();
-		//Debug.Log ("Module says : " + GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetInstanceID());
 	}
 
     protected void OnDestroy()
@@ -47,6 +46,7 @@ public class Module : ShipComponent
         if (ShipCore != null)
         {
             ShipCore.GetComponent<Rigidbody2D>().mass -= Mass;
+            ShipCore.GetComponent<Core>().NbOfModules--;
         }
     }
 
