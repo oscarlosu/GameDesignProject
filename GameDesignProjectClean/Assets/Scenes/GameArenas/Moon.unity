@@ -144,11 +144,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 418984, guid: 870fd8cca2e424c4286df07a370a28f8, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -80
       objectReference: {fileID: 0}
     - target: {fileID: 418984, guid: 870fd8cca2e424c4286df07a370a28f8, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -80
       objectReference: {fileID: 0}
     - target: {fileID: 418984, guid: 870fd8cca2e424c4286df07a370a28f8, type: 2}
       propertyPath: m_LocalPosition.z
@@ -172,7 +172,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 418984, guid: 870fd8cca2e424c4286df07a370a28f8, type: 2}
       propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 467556, guid: 870fd8cca2e424c4286df07a370a28f8, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 467556, guid: 870fd8cca2e424c4286df07a370a28f8, type: 2}
+      propertyPath: m_LocalRotation.w
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 411528, guid: 870fd8cca2e424c4286df07a370a28f8, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 870fd8cca2e424c4286df07a370a28f8, type: 2}
@@ -231,6 +243,7 @@ GameObject:
   - 92: {fileID: 1566299310}
   - 124: {fileID: 1566299309}
   - 81: {fileID: 1566299308}
+  - 114: {fileID: 1566299313}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -300,9 +313,43 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1566299307}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -100, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 664743426}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
+--- !u!114 &1566299313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1566299307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fb77003383381f4b9082c2e920708f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinSize: 10
+  InsideMargin: 5
+  OutsideMargin: 0
+  PushInForce: 100
+  PushInTorque: 5
+  ThrusterDisableTime: 0
+  camBufferX: 30
+  camBufferY: 30
+  CameraScaleGraph:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 15
+      inSlope: .699999988
+      outSlope: .699999988
+      tangentMode: 10
+    - time: 50
+      value: 50
+      inSlope: .699999988
+      outSlope: .699999988
+      tangentMode: 10
+    m_PreInfinity: 2
+    m_PostInfinity: 2

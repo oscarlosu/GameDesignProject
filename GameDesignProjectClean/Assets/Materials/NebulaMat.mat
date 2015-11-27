@@ -111,7 +111,7 @@ Material:
           name: _NebulaClouds1
         second:
           m_Texture: {fileID: 2800000, guid: faf68c6dfbb1522428bfe4b225e9e8e2, type: 3}
-          m_Scale: {x: .00999999978, y: .00999999978}
+          m_Scale: {x: .00499999989, y: .00499999989}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -192,7 +192,7 @@ Material:
       data:
         first:
           name: _TransparencyModifier
-        second: .200000003
+        second: .5
       data:
         first:
           name: _Nebula1XOffsetModifier
