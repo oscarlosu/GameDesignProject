@@ -11,8 +11,10 @@ public class Core : Structure
     public float AngularDragHigh; // The drag set, when the ship is pointing in the right direction (if the control scheme is direction based).
     public float DefaultAngularDrag { get; private set; } // Getter for the rigid body's default/initial angular drag.
     public float MaxSpinBeforeAngularDrag; // How many degrees per second the ship should at least spin, before applying high angular drag.
-
+    public int NbOfModules = 0;
     public bool InBuildMode;
+
+    
 
     // Public methods
 
@@ -20,9 +22,11 @@ public class Core : Structure
     public new void Start()
     {
         base.Start();
-        // Add core and structure mass to rigidbody
+    }
+
+    private void OnEnable()
+    {
         ShipCore = this.gameObject;
-        //Assemble();
         DefaultAngularDrag = GetComponent<Rigidbody2D>().angularDrag;
     }
 
@@ -49,7 +53,7 @@ public class Core : Structure
                 if (child.GetComponent<Structure>() != null)
                 {
                     child.GetComponent<Structure>().FindNearbyShipShields();
-                }       
+                }
             }
         }            
     }
