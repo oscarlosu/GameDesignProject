@@ -99,8 +99,9 @@ public class PlayerBuilderHandler : MonoBehaviour
         // Activate component selector UI.
         ComponentSelectorPanel.SetActive(true);
         ComponentNamePanel.SetActive(true);
-		// Deactivate "testmode" text
+		// Deactivate "testmode" and "ready" text
 		TestModeText.SetActive (false);
+        ReadyText.SetActive(false);
         // Update selected cell object.
         UpdateBuilderUi();
         // Center camera on selected cell.
@@ -369,6 +370,7 @@ public class PlayerBuilderHandler : MonoBehaviour
             // Set player as ready, which means he/she has to wait for the rest.
             if (!playerReady && GamePad.GetButtonDown(ButtonGoToPlayMode, ControllerIndex))
             {
+                ReadyText.SetActive(true);
                 playerReady = true;
                 switch (ControllerIndex)
                 {
@@ -385,13 +387,13 @@ public class PlayerBuilderHandler : MonoBehaviour
                         BuilderHandler.SetPlayerShip(3, shipCore);
                         return;
                 }
-				ReadyText.SetActive(true);
             }
 
             BuilderCamera.transform.position = new Vector3(cloneShip.transform.position.x, cloneShip.transform.position.y, BuilderCamera.transform.position.z);
             // Go back to build mode to build the ship.
-            if (!playerReady && GamePad.GetButtonDown(ButtonGoToBuildMode, ControllerIndex))
+            if (GamePad.GetButtonDown(ButtonGoToBuildMode, ControllerIndex))
             {
+                playerReady = false;
                 GoToBuildMode();
                 return;
             }
@@ -698,7 +700,7 @@ public class PlayerBuilderHandler : MonoBehaviour
             {
                 if (grid[x, y].transform.childCount > 0)
                 {
-                    grid[x, y].GetComponent<Structure>().TriggerAnimation("TriggerDamage");
+                    StartCoroutine(grid[x, y].GetComponent<Structure>().DisplayCannotRemove());
                     return;
                 }
             }

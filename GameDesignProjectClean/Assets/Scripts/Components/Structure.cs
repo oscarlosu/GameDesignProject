@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -8,7 +9,7 @@ public class Structure : ShipComponent
     public int MaxHp;
     public int hp;
     public Animator Anim;
-    
+
     private List<Shield> nearbyShields;
     private List<Module> currentModules = new List<Module>();
     private List<Structure> currentStructures = new List<Structure>();
@@ -37,14 +38,14 @@ public class Structure : ShipComponent
             }
         }
         // Set the HP to the possibly new maxHP.
-		hp = MaxHp;
+        hp = MaxHp;
     }
 
     public void TakeDamage(int dmg)
     {
         bool hasShieldAttached;
         bool isProtected = IsProtected(out hasShieldAttached);
-        
+
         if (!isProtected)
         {
             // If the structure has shields attached (which aren't active), disable one of them.
@@ -67,7 +68,7 @@ public class Structure : ShipComponent
 
     }
 
-    
+
     /// <summary>
     /// Runs an animation of this object, if exists.
     /// </summary>
@@ -80,7 +81,6 @@ public class Structure : ShipComponent
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-		//Debug.LogWarning("Ship collided with something");
         // Only "crash" if the force with which the objects hit each other is large enough.
         if (coll.relativeVelocity.magnitude > GlobalValues.MinCrashMagnitude)
         {
@@ -88,27 +88,15 @@ public class Structure : ShipComponent
             if (coll.rigidbody.mass >= ShipCore.GetComponent<Rigidbody2D>().mass)
             {
                 TakeDamage(GlobalValues.CrashDamage);
-                //Debug.LogWarning("Ship " + gameObject.name + " collided with something with greater or equal mass.");
             }
 
         }
     }
 
-/*	void OnTriggerStay2D(Collider2D col)
-	{
-		//Debug.LogWarning("Ship collided with something");
-		// If the other object has a higher mass, lose one random module.
-		if (col.attachedRigidbody.mass >= ShipCore.GetComponent<Rigidbody2D>().mass)
-		{
-			TakeDamage(GlobalValues.CrashDamage);
-			//Debug.LogWarning("Ship " + gameObject.name + " collided with something with greater or equal mass.");
-		}
-	}*/
-
     private void LoseComponentOrSelf()
     {
         // As long as the hp is lower or equal than zero lose module or structure.
-        while(hp <= 0)
+        while (hp <= 0)
         {
             // If the structure has at least one module, lose one.
             if (currentModules.Count > 0)
@@ -166,23 +154,23 @@ public class Structure : ShipComponent
         Destroy(module.gameObject); // Destroy the game object.
     }
 
-	public void IncreaseMaxHp(int inc)
-	{
-		MaxHp += inc;
-		hp = MaxHp;
-	}
+    public void IncreaseMaxHp(int inc)
+    {
+        MaxHp += inc;
+        hp = MaxHp;
+    }
 
-	public bool IsProtected(out bool hasShieldAttached)
-	{
-		hasShieldAttached = false;
-		// Find active shields in this ship near this structure
-        for (var i = nearbyShields.Count-1; i >= 0; i--)
-	    {
-	        if (nearbyShields[i] == null)
-	        {
-	            nearbyShields.RemoveAt(i);
+    public bool IsProtected(out bool hasShieldAttached)
+    {
+        hasShieldAttached = false;
+        // Find active shields in this ship near this structure
+        for (var i = nearbyShields.Count - 1; i >= 0; i--)
+        {
+            if (nearbyShields[i] == null)
+            {
+                nearbyShields.RemoveAt(i);
                 continue;
-	        }
+            }
             if (nearbyShields[i].ShipCore.GetInstanceID() == ShipCore.GetInstanceID() &&
                nearbyShields[i].Active && Vector3.Distance(transform.position, nearbyShields[i].transform.position) < nearbyShields[i].Radius)
             {
@@ -194,8 +182,8 @@ public class Structure : ShipComponent
                 return true;
             }
         }
-		return false;
-	}
+        return false;
+    }
 
     public void FindNearbyShipShields()
     {
@@ -236,6 +224,29 @@ public class Structure : ShipComponent
             {
                 currentStructures.Add(child.GetComponent<Structure>());
             }
+        }
+    }
+
+    public IEnumerator DisplayCannotRemove()
+    {
+        if (transform.childCount > 0)
+        {
+            TriggerAnimation("TriggerCannotRemove");
+            yield return new WaitForSeconds(0.08f);
+            for (var index = 0; index < transform.childCount; ++index)
+            {
+                GameObject child = transform.GetChild(index).gameObject;
+                if (child.GetComponent<Structure>() != null)
+                {
+                    StartCoroutine(child.GetComponent<Structure>().DisplayCannotRemove());
+                }
+            }
+        }
+        else
+        {
+            TriggerAnimation("TriggerCannotRemoveLast");
+            yield return new WaitForSeconds(1f);
+            TriggerAnimation("TriggerCannotRemoveLast");
         }
     }
 

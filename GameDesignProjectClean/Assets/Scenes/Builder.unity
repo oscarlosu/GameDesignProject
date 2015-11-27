@@ -498,6 +498,14 @@ Prefab:
       propertyPath: m_Name
       value: BuilderCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 160434, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 183032, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
   m_IsPrefabParent: 0
@@ -739,6 +747,14 @@ Prefab:
     - target: {fileID: 22495510, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
       propertyPath: m_AnchorMax.x
       value: .661077559
+      objectReference: {fileID: 0}
+    - target: {fileID: 160434, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 183032, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
@@ -1474,6 +1490,14 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1005407383}
+    - target: {fileID: 183032, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 160434, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
   m_IsPrefabParent: 0
@@ -2314,7 +2338,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1821072350
 Transform:
   m_ObjectHideFlags: 0
