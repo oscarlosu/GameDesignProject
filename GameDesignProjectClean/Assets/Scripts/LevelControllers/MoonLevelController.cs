@@ -57,13 +57,12 @@ public class MoonLevelController : MonoBehaviour, ILevelHandler
         {
             moon = false;
             moonRotator.eulerAngles = new Vector3(0, 0, 300);
-            StartCoroutine("MoonReset");
+            StartCoroutine(MoonReset());
         }
     }
 
     IEnumerator MoonReset()
     {
-        print("hellow");
         yield return new WaitForSeconds(moonResetTime);
         moon = true;
     }
