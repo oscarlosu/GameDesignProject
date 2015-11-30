@@ -204,6 +204,10 @@ Prefab:
       propertyPath: offsetFromPath
       value: 2.36999989
       objectReference: {fileID: 0}
+    - target: {fileID: 11413798, guid: 95c493f34cbb4c6468c11c050f5661c2, type: 2}
+      propertyPath: MaxAngularVelocity
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 95c493f34cbb4c6468c11c050f5661c2, type: 2}
   m_IsPrefabParent: 0
