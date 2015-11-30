@@ -447,8 +447,7 @@ public class PlayerBuilderHandler : MonoBehaviour
         ComponentNamePanel.SetActive(false);
         // Setup the info box.
         closeInfoBoxOnAnyKey = closeOnAnyKey;
-        InfoBox.transform.GetChild(0).GetComponent<Text>().text = header;
-        InfoBox.transform.GetChild(1).GetComponent<Text>().text = body;
+        InfoBox.transform.GetChild(0).GetComponent<Text>().text = body;
         InfoBox.SetActive(true);
     }
 

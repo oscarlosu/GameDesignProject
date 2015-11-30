@@ -5612,12 +5612,56 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 465066, guid: 2bd73002d8e33414b90dc6c810ab68b0, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11423420, guid: 2bd73002d8e33414b90dc6c810ab68b0, type: 2}
       propertyPath: Path
       value: 
       objectReference: {fileID: 242177536}
+    - target: {fileID: 11423420, guid: 2bd73002d8e33414b90dc6c810ab68b0, type: 2}
+      propertyPath: PushInForce
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423420, guid: 2bd73002d8e33414b90dc6c810ab68b0, type: 2}
+      propertyPath: PushInTorque
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423420, guid: 2bd73002d8e33414b90dc6c810ab68b0, type: 2}
+      propertyPath: CameraScaleGraph.m_Curve.Array.data[0].value
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423420, guid: 2bd73002d8e33414b90dc6c810ab68b0, type: 2}
+      propertyPath: CameraScaleGraph.m_Curve.Array.data[0].inSlope
+      value: .769230783
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423420, guid: 2bd73002d8e33414b90dc6c810ab68b0, type: 2}
+      propertyPath: CameraScaleGraph.m_Curve.Array.data[0].outSlope
+      value: .769230783
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423420, guid: 2bd73002d8e33414b90dc6c810ab68b0, type: 2}
+      propertyPath: CameraScaleGraph.m_Curve.Array.data[0].tangentMode
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423420, guid: 2bd73002d8e33414b90dc6c810ab68b0, type: 2}
+      propertyPath: CameraScaleGraph.m_Curve.Array.data[1].time
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423420, guid: 2bd73002d8e33414b90dc6c810ab68b0, type: 2}
+      propertyPath: CameraScaleGraph.m_Curve.Array.data[1].value
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423420, guid: 2bd73002d8e33414b90dc6c810ab68b0, type: 2}
+      propertyPath: CameraScaleGraph.m_Curve.Array.data[1].inSlope
+      value: .769230783
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423420, guid: 2bd73002d8e33414b90dc6c810ab68b0, type: 2}
+      propertyPath: CameraScaleGraph.m_Curve.Array.data[1].outSlope
+      value: .769230783
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423420, guid: 2bd73002d8e33414b90dc6c810ab68b0, type: 2}
+      propertyPath: CameraScaleGraph.m_Curve.Array.data[1].tangentMode
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2bd73002d8e33414b90dc6c810ab68b0, type: 2}
   m_IsPrefabParent: 0
