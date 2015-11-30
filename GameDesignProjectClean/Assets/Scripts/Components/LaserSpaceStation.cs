@@ -53,7 +53,7 @@ public class LaserSpaceStation : MonoBehaviour
         if (str != null)
         {            
             // Make ship lose hp
-            str.TakeDamage(Damage);            
+            str.TakeDamage(Damage, null);
         }
         else if (ast != null)
         {

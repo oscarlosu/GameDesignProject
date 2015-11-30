@@ -12,6 +12,7 @@ public class Core : Structure
     public float DefaultAngularDrag { get; private set; } // Getter for the rigid body's default/initial angular drag.
     public float MaxSpinBeforeAngularDrag; // How many degrees per second the ship should at least spin, before applying high angular drag.
     public int NbOfModules = 0;
+    public int ModulesDestroyed = 0;
     public bool InBuildMode;
 
     
@@ -29,6 +30,13 @@ public class Core : Structure
         base.OnEnable();
         ShipCore = this.gameObject;
         DefaultAngularDrag = GetComponent<Rigidbody2D>().angularDrag;
+
+        // Update the game handler with the number of modules on the ship.
+        var gameHandler = GameObject.FindGameObjectWithTag("GameHandler");
+        if (gameHandler != null)
+        {
+            gameHandler.GetComponent<GameHandler>().NumberOfModules(ControllerIndex, NbOfModules);
+        }
     }
 
     // Update is called once per frame

@@ -11,6 +11,7 @@ public class Explosion : MonoBehaviour
     [Space(10)]
     public int Damage;
     public float PushForce;
+    public GameObject SourceCore;
 
     public Sprite[] explosionSprites;
     private SpriteRenderer sr;
@@ -54,7 +55,7 @@ public class Explosion : MonoBehaviour
         if (str != null)
         {
             // Make ship take damage.            
-            str.TakeDamage(Damage);
+            str.TakeDamage(Damage, SourceCore.GetComponent<Core>());
 			// Calculate push force direction
 			Vector3 dir = other.transform.position - transform.position;
 			dir.Normalize();

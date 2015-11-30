@@ -41,7 +41,7 @@ public class Structure : ShipComponent
         hp = MaxHp;
     }
 
-    public void TakeDamage(int dmg)
+    public void TakeDamage(int dmg, Core originator)
     {
         bool hasShieldAttached;
         bool isProtected = IsProtected(out hasShieldAttached);
@@ -63,7 +63,7 @@ public class Structure : ShipComponent
             // Trigger damage animation.
             TriggerAnimation("TriggerDamage");
             // If the structure has any modules, lose a module.
-            LoseComponentOrSelf();
+            LoseComponentOrSelf(originator);
         }
 
     }
@@ -87,13 +87,18 @@ public class Structure : ShipComponent
             // If the other object has a higher mass, lose one random module.
             if (coll.rigidbody.mass >= ShipCore.GetComponent<Rigidbody2D>().mass)
             {
-                TakeDamage(GlobalValues.CrashDamage);
+                Core core = null;
+                if (coll.gameObject.GetComponent<Structure>() != null)
+                {
+                    core = coll.gameObject.GetComponent<Structure>().ShipCore.GetComponent<Core>();
+                }
+                TakeDamage(GlobalValues.CrashDamage, core);
             }
 
         }
     }
 
-    private void LoseComponentOrSelf()
+    private void LoseComponentOrSelf(Core originator)
     {
         // As long as the hp is lower or equal than zero lose module or structure.
         while (hp <= 0)
@@ -101,6 +106,7 @@ public class Structure : ShipComponent
             // If the structure has at least one module, lose one.
             if (currentModules.Count > 0)
             {
+                originator.ModulesDestroyed++; // Add a point to the ship that destroyed this module.
                 if (RemoveDefensiveModule())
                 {
                     // Reset Hp, but apply excess damage.
@@ -117,7 +123,7 @@ public class Structure : ShipComponent
             {
                 var rnd = Random.Range(0, currentStructures.Count); // Find random index.
                 var structure = currentStructures[rnd]; // Get structure at random index.
-                structure.TakeDamage(Mathf.Abs(hp)); // Damage the next structure with the leftover damage.
+                structure.TakeDamage(Mathf.Abs(hp), originator); // Damage the next structure with the leftover damage.
                 return;
             }
             else
@@ -125,16 +131,16 @@ public class Structure : ShipComponent
                 // If there are no child modules or structures, destroy this structure
                 var parent = transform.parent; // Find parent.
                 if (parent != null && parent.GetComponent<Structure>() != null)
-                    // If parent is structure, remove this from parent's list of structures.
+                // If parent is structure, remove this from parent's list of structures.
                 {
                     parent.GetComponent<Structure>().RemoveFromStructureList(this);
                 }
                 else
                 {
                     var core = ShipCore.GetComponent<Core>();
-                    GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().PlayerLost(core.ControllerIndex);
+                    GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().PlayerLost(core.ControllerIndex, core.NbOfModules, core.ModulesDestroyed);
                 }
-                
+
                 Destroy(gameObject);
                 return;
             }
