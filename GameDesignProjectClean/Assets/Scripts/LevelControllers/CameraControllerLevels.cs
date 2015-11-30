@@ -17,7 +17,7 @@ public class CameraControllerLevels : MonoBehaviour {
     public float camBufferX = 0.0f;
     public float camBufferY = 0.0f;
 
-    public AnimationCurve CameraScaleGraph = new AnimationCurve() { keys = new Keyframe[] { new Keyframe(0, 0), new Keyframe(200, 200) } };
+    public AnimationCurve CameraScaleGraph = new AnimationCurve() { keys = new Keyframe[] { new Keyframe(0, 15), new Keyframe(50, 50) } };
 
     private List<GameObject> ships = new List<GameObject>();
     private Camera cam;

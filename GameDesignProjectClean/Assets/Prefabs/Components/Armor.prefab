@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 495076}
   - 212: {fileID: 21272118}
   - 114: {fileID: 11455930}
-  - 61: {fileID: 6139392}
   m_Layer: 0
   m_Name: Armor
   m_TagString: Defensive
@@ -30,19 +29,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!61 &6139392
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 195576}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: -.0218105316, y: -.0681045055}
-  serializedVersion: 2
-  m_Size: {x: 1.12142527, y: 1.13374865}
 --- !u!114 &11455930
 MonoBehaviour:
   m_ObjectHideFlags: 1

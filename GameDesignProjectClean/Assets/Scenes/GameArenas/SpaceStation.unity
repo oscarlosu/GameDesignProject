@@ -96,6 +96,7 @@ GameObject:
   - 212: {fileID: 52317326}
   - 61: {fileID: 52317325}
   - 114: {fileID: 52317328}
+  - 50: {fileID: 52317329}
   m_Layer: 0
   m_Name: sprLaserGunForwardSpaceStation
   m_TagString: Untagged
@@ -140,7 +141,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1669530157
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7dc2c578935ff8b42b284816eac44895, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9c87d534d98d6cf4699f11cf6b30d961, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &52317327
 Transform:
@@ -166,6 +167,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMe: 0
+  laserbeam: {fileID: 108826, guid: 1840350fd8e2ec3468cabd7f95dd5b64, type: 2}
+--- !u!50 &52317329
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 52317324}
+  m_Mass: 99999
+  m_LinearDrag: 99999
+  m_AngularDrag: 99999
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &157141667
 GameObject:
   m_ObjectHideFlags: 0
@@ -1344,6 +1362,7 @@ GameObject:
   - 212: {fileID: 308730422}
   - 61: {fileID: 308730421}
   - 114: {fileID: 308730423}
+  - 50: {fileID: 308730424}
   m_Layer: 0
   m_Name: sprLaserGunForwardSpaceStation (1)
   m_TagString: Untagged
@@ -1400,7 +1419,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1669530157
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7dc2c578935ff8b42b284816eac44895, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9c87d534d98d6cf4699f11cf6b30d961, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &308730423
 MonoBehaviour:
@@ -1414,6 +1433,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMe: 0
+  laserbeam: {fileID: 108826, guid: 1840350fd8e2ec3468cabd7f95dd5b64, type: 2}
+--- !u!50 &308730424
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 308730419}
+  m_Mass: 99999
+  m_LinearDrag: 99999
+  m_AngularDrag: 99999
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &396253416
 GameObject:
   m_ObjectHideFlags: 0
@@ -2538,6 +2574,7 @@ GameObject:
   - 212: {fileID: 645126743}
   - 61: {fileID: 645126742}
   - 114: {fileID: 645126744}
+  - 50: {fileID: 645126745}
   m_Layer: 0
   m_Name: sprLaserGunForwardSpaceStation (7)
   m_TagString: Untagged
@@ -2594,7 +2631,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1669530157
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7dc2c578935ff8b42b284816eac44895, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9c87d534d98d6cf4699f11cf6b30d961, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &645126744
 MonoBehaviour:
@@ -2608,6 +2645,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMe: 1
+  laserbeam: {fileID: 108826, guid: 1840350fd8e2ec3468cabd7f95dd5b64, type: 2}
+--- !u!50 &645126745
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 645126740}
+  m_Mass: 99999
+  m_LinearDrag: 99999
+  m_AngularDrag: 99999
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &680188592
 GameObject:
   m_ObjectHideFlags: 0
@@ -2618,6 +2672,7 @@ GameObject:
   - 4: {fileID: 680188594}
   - 212: {fileID: 680188593}
   - 58: {fileID: 680188595}
+  - 50: {fileID: 680188596}
   m_Layer: 0
   m_Name: sprStation1
   m_TagString: Untagged
@@ -2686,6 +2741,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 26
+--- !u!50 &680188596
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 680188592}
+  m_Mass: 99999
+  m_LinearDrag: 99999
+  m_AngularDrag: 99999
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &695033298
 GameObject:
   m_ObjectHideFlags: 0
@@ -2697,6 +2768,7 @@ GameObject:
   - 212: {fileID: 695033301}
   - 61: {fileID: 695033300}
   - 114: {fileID: 695033302}
+  - 50: {fileID: 695033303}
   m_Layer: 0
   m_Name: sprLaserGunForwardSpaceStation (4)
   m_TagString: Untagged
@@ -2753,7 +2825,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1669530157
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7dc2c578935ff8b42b284816eac44895, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9c87d534d98d6cf4699f11cf6b30d961, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &695033302
 MonoBehaviour:
@@ -2767,6 +2839,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMe: 1
+  laserbeam: {fileID: 108826, guid: 1840350fd8e2ec3468cabd7f95dd5b64, type: 2}
+--- !u!50 &695033303
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 695033298}
+  m_Mass: 99999
+  m_LinearDrag: 99999
+  m_AngularDrag: 99999
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &712971089
 GameObject:
   m_ObjectHideFlags: 0
@@ -2778,6 +2867,7 @@ GameObject:
   - 212: {fileID: 712971092}
   - 61: {fileID: 712971091}
   - 114: {fileID: 712971093}
+  - 50: {fileID: 712971094}
   m_Layer: 0
   m_Name: sprLaserGunForwardSpaceStation (5)
   m_TagString: Untagged
@@ -2834,7 +2924,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1669530157
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7dc2c578935ff8b42b284816eac44895, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9c87d534d98d6cf4699f11cf6b30d961, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &712971093
 MonoBehaviour:
@@ -2848,6 +2938,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMe: 1
+  laserbeam: {fileID: 108826, guid: 1840350fd8e2ec3468cabd7f95dd5b64, type: 2}
+--- !u!50 &712971094
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 712971089}
+  m_Mass: 99999
+  m_LinearDrag: 99999
+  m_AngularDrag: 99999
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &855469938
 GameObject:
   m_ObjectHideFlags: 0
@@ -6239,13 +6346,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10f585e3d461b6f4c9f643e7002ab7e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserSizeStation: {x: 7.5, y: 25}
+  laserSizeStation: {x: 10, y: 75}
   ssParts:
   - {fileID: 1006767053}
   - {fileID: 680188594}
   - {fileID: 1950884948}
   - {fileID: 157141668}
   - {fileID: 1585023434}
+  laserDuration: 3
   Charge1: {fileID: 855469939}
   Charge2: {fileID: 1747157288}
   rotModifier: .100000001
@@ -7524,15 +7632,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 200
-      value: 200
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      value: 15
+      inSlope: .699999988
+      outSlope: .699999988
+      tangentMode: 10
+    - time: 50
+      value: 50
+      inSlope: .699999988
+      outSlope: .699999988
+      tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
 --- !u!1 &1585023433
@@ -8713,6 +8821,7 @@ GameObject:
   - 212: {fileID: 1676509425}
   - 61: {fileID: 1676509424}
   - 114: {fileID: 1676509426}
+  - 50: {fileID: 1676509427}
   m_Layer: 0
   m_Name: sprLaserGunForwardSpaceStation (2)
   m_TagString: Untagged
@@ -8769,7 +8878,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1669530157
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7dc2c578935ff8b42b284816eac44895, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9c87d534d98d6cf4699f11cf6b30d961, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1676509426
 MonoBehaviour:
@@ -8783,6 +8892,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMe: 0
+  laserbeam: {fileID: 108826, guid: 1840350fd8e2ec3468cabd7f95dd5b64, type: 2}
+--- !u!50 &1676509427
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1676509422}
+  m_Mass: 99999
+  m_LinearDrag: 99999
+  m_AngularDrag: 99999
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &1688780215
 GameObject:
   m_ObjectHideFlags: 0
@@ -9907,6 +10033,7 @@ GameObject:
   - 212: {fileID: 1717194539}
   - 61: {fileID: 1717194538}
   - 114: {fileID: 1717194540}
+  - 50: {fileID: 1717194541}
   m_Layer: 0
   m_Name: sprLaserGunForwardSpaceStation (6)
   m_TagString: Untagged
@@ -9963,7 +10090,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1669530157
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7dc2c578935ff8b42b284816eac44895, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9c87d534d98d6cf4699f11cf6b30d961, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1717194540
 MonoBehaviour:
@@ -9977,6 +10104,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMe: 1
+  laserbeam: {fileID: 108826, guid: 1840350fd8e2ec3468cabd7f95dd5b64, type: 2}
+--- !u!50 &1717194541
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1717194536}
+  m_Mass: 99999
+  m_LinearDrag: 99999
+  m_AngularDrag: 99999
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &1747157287
 GameObject:
   m_ObjectHideFlags: 0
@@ -11110,6 +11254,7 @@ GameObject:
   - 212: {fileID: 1774147588}
   - 61: {fileID: 1774147587}
   - 114: {fileID: 1774147589}
+  - 50: {fileID: 1774147590}
   m_Layer: 0
   m_Name: sprLaserGunForwardSpaceStation (3)
   m_TagString: Untagged
@@ -11166,7 +11311,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1669530157
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7dc2c578935ff8b42b284816eac44895, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9c87d534d98d6cf4699f11cf6b30d961, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1774147589
 MonoBehaviour:
@@ -11180,6 +11325,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMe: 0
+  laserbeam: {fileID: 108826, guid: 1840350fd8e2ec3468cabd7f95dd5b64, type: 2}
+--- !u!50 &1774147590
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1774147585}
+  m_Mass: 99999
+  m_LinearDrag: 99999
+  m_AngularDrag: 99999
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &1950884947
 GameObject:
   m_ObjectHideFlags: 0

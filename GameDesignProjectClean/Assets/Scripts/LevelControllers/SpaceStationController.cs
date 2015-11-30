@@ -5,6 +5,7 @@ public class SpaceStationController : MonoBehaviour, ILevelHandler
 {
     public Vector2 laserSizeStation;
     public Transform[] ssParts;
+    public float laserDuration = 0.0f;
 
     public Transform Charge1;
     public Transform Charge2;
@@ -17,6 +18,7 @@ public class SpaceStationController : MonoBehaviour, ILevelHandler
     private float waitTime = 0.0f;
     private float count = 0.0f;
     private bool charge1 = false;
+    private bool rotating = true;
 
 
     public void StartLevel(GameObject[] playerShips)
@@ -49,7 +51,14 @@ public class SpaceStationController : MonoBehaviour, ILevelHandler
 
     // Use this for initialization
     void Start () {
-        waitTime = Random.Range(15, 25);
+        var gameHandler = GameObject.FindGameObjectWithTag("GameHandler");
+        if (gameHandler != null)
+        {
+            gameHandler.GetComponent<GameHandler>().LevelHandler = this;
+            StartLevel(gameHandler.GetComponent<GameHandler>().GetPlayerShips());
+        }
+
+        waitTime = Random.Range(10, 20);
         charge1Systems = Charge1.GetComponentsInChildren<ParticleSystem>();
         charge2Systems = Charge2.GetComponentsInChildren<ParticleSystem>();
         for(int i = 0; i < charge1Systems.Length; i++)
@@ -61,17 +70,20 @@ public class SpaceStationController : MonoBehaviour, ILevelHandler
 	
 	// Update is called once per frame
 	void Update () {
-        rotModifier = Mathf.Abs(rotModifier);
-        for(int i = 0; i < ssParts.Length; i++)
+        if (rotating)
         {
-            int j = 6 - i;
-            ssParts[i].Rotate(new Vector3(0, 0, Mathf.Sin(Time.realtimeSinceStartup * (j * rotModifier))));
-            rotModifier = -rotModifier;
+            rotModifier = Mathf.Abs(rotModifier);
+            for (int i = 0; i < ssParts.Length; i++)
+            {
+                int j = 6 - i;
+                ssParts[i].Rotate(new Vector3(0, 0, Mathf.Sin(Time.realtimeSinceStartup * (j * rotModifier))));
+                rotModifier = -rotModifier;
+            }
         }
 
         if (count >= waitTime)
         {
-            waitTime = Random.Range(15, 25) + chargeTime;
+            waitTime = Random.Range(10, 20) + chargeTime;
             count = 0.0f;
             StartCoroutine(FireLaser());
         }
@@ -79,7 +91,7 @@ public class SpaceStationController : MonoBehaviour, ILevelHandler
 	}
 
     IEnumerator FireLaser()
-    {  
+    {
         if(charge1)
         {
             for (int i = 0; i < charge1Systems.Length; i++)
@@ -97,13 +109,18 @@ public class SpaceStationController : MonoBehaviour, ILevelHandler
             charge1 = true;
         }
 
-        yield return new WaitForSeconds(chargeTime);
-        
+        yield return new WaitForSeconds(chargeTime * 0.5f);
+        rotating = false;
+        yield return new WaitForSeconds(chargeTime * 0.5f);
+
         for (int i = 0; i < charge1Systems.Length; i++)
         {
             charge1Systems[i].Stop();
             charge2Systems[i].Stop();
         }
         BroadcastMessage("FireLaserGun", laserSizeStation);
+
+        yield return new WaitForSeconds(laserDuration);
+        rotating = true;
     }
 }
