@@ -44,14 +44,13 @@ public class Laser : Projectile
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        //Debug.Log("Laser OnTriggerEnter2D with " + other.gameObject.name);
 		Structure str = other.gameObject.GetComponent<Structure>();
 		Asteroid ast = other.gameObject.GetComponent<Asteroid>();
 		Debris deb = other.gameObject.GetComponent<Debris>();
         if (str != null && other.gameObject != SourceStructure)
         {            
             // Make ship lose hp
-            str.TakeDamage(Damage);            
+            str.TakeDamage(Damage, SourceCore.GetComponent<Core>());            
         }
         else if (ast != null)
         {

@@ -89,7 +89,7 @@ public class Rocket : Projectile
 	{
 		// Missiles only activate with shield or laser triggers
 		if ((other.gameObject.GetComponent<Shield>() != null && (!InGrace || other.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID()))
-		    || other.gameObject.GetComponent<Laser>() != null)
+		    || other.gameObject.GetComponent<Laser>() != null || other.gameObject.GetComponent<LaserSpaceStation>() != null)
 		{
 			//Debug.Log("Rocket trigger detected trigger with " + other.gameObject.name);
 			Activate();
@@ -104,6 +104,7 @@ public class Rocket : Projectile
 		//var explosion = GameObject.Instantiate(ExplosionPrefab);
 		//explosion.transform.position = transform.position;
 		explosion.GetComponent<Explosion>().Damage = Damage;
+	    explosion.GetComponent<Explosion>().SourceCore = SourceCore;
 		pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.Rocket);
 		//GameObject.Destroy(gameObject);
 	}

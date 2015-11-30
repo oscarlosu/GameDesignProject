@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 using GamepadInput;
 using Debug = UnityEngine.Debug;
@@ -25,6 +23,9 @@ public class GameHandler : MonoBehaviour
     private GameObject[] playerShips;
     private int playersLost = 0;
     private int[] playerLostPositions;
+    private int[] originalNbOfModules = new int[4];
+    private int[] modulesLeft = new int[4];
+    private int[] modulesDestroyed = new int[4];
 
     // Other settings.
     private bool GameOver;
@@ -157,7 +158,7 @@ public class GameHandler : MonoBehaviour
         return playerShips;
     }
 
-    public void PlayerLost(GamePad.Index controllerIndex)
+    public void PlayerLost(GamePad.Index controllerIndex, int modulesLeft, int modulesDestroyed)
     {
         var totalPlayersJoined = playersJoined.Count(t => t);
         // Save that the player lost.
@@ -165,15 +166,23 @@ public class GameHandler : MonoBehaviour
         {
             case GamePad.Index.One:
                 playerLostPositions[0] = (totalPlayersJoined - 1) - playersLost++;
+                this.modulesLeft[0] = modulesLeft;
+                this.modulesDestroyed[0] = modulesDestroyed;
                 break;
             case GamePad.Index.Two:
                 playerLostPositions[1] = (totalPlayersJoined - 1) - playersLost++;
+                this.modulesLeft[1] = modulesLeft;
+                this.modulesDestroyed[1] = modulesDestroyed;
                 break;
             case GamePad.Index.Three:
                 playerLostPositions[2] = (totalPlayersJoined - 1) - playersLost++;
+                this.modulesLeft[2] = modulesLeft;
+                this.modulesDestroyed[2] = modulesDestroyed;
                 break;
             case GamePad.Index.Four:
                 playerLostPositions[3] = (totalPlayersJoined - 1) - playersLost++;
+                this.modulesLeft[3] = modulesLeft;
+                this.modulesDestroyed[3] = modulesDestroyed;
                 break;
         }
 
@@ -188,7 +197,26 @@ public class GameHandler : MonoBehaviour
     public void DisplayWinScreen()
     {
         WinScreen winScreen = Instantiate(WinScreenPrefab).GetComponent<WinScreen>();
-        winScreen.SetupWinScreen(playersJoined, playerLostPositions);
+        winScreen.SetupWinScreen(playersJoined, playerLostPositions, originalNbOfModules, modulesLeft, modulesDestroyed);
         GameOver = true;
+    }
+
+    public void NumberOfModules(GamePad.Index controllerIndex, int nbOfModules)
+    {
+        switch (controllerIndex)
+        {
+            case GamePad.Index.One:
+                originalNbOfModules[0] = nbOfModules;
+                break;               
+            case GamePad.Index.Two:  
+                originalNbOfModules[1] = nbOfModules;
+                break;               
+            case GamePad.Index.Three:
+                originalNbOfModules[2] = nbOfModules;
+                break;               
+            case GamePad.Index.Four: 
+                originalNbOfModules[3] = nbOfModules;
+                break;
+        }
     }
 }
