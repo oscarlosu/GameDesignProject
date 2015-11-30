@@ -15,3 +15,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Phillip.unity
   - enabled: 1
     path: Assets/Scenes/GameArenas/Moon.unity
+  - enabled: 1
+    path: Assets/Scenes/GameArenas/SpaceStation.unity

@@ -49,7 +49,14 @@ public class SpaceStationController : MonoBehaviour, ILevelHandler
 
     // Use this for initialization
     void Start () {
-        waitTime = Random.Range(15, 25);
+        var gameHandler = GameObject.FindGameObjectWithTag("GameHandler");
+        if (gameHandler != null)
+        {
+            gameHandler.GetComponent<GameHandler>().LevelHandler = this;
+            StartLevel(gameHandler.GetComponent<GameHandler>().GetPlayerShips());
+        }
+
+        waitTime = Random.Range(10, 20);
         charge1Systems = Charge1.GetComponentsInChildren<ParticleSystem>();
         charge2Systems = Charge2.GetComponentsInChildren<ParticleSystem>();
         for(int i = 0; i < charge1Systems.Length; i++)
@@ -71,7 +78,7 @@ public class SpaceStationController : MonoBehaviour, ILevelHandler
 
         if (count >= waitTime)
         {
-            waitTime = Random.Range(15, 25) + chargeTime;
+            waitTime = Random.Range(10, 20) + chargeTime;
             count = 0.0f;
             StartCoroutine(FireLaser());
         }
