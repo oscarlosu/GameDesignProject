@@ -106,7 +106,7 @@ public class Structure : ShipComponent
             // If the structure has at least one module, lose one.
             if (currentModules.Count > 0)
             {
-                if (originator != null)
+                if (originator != null && originator.GetInstanceID() != ShipCore.GetInstanceID())
                 {
                     originator.ModulesDestroyed++; // Add a point to the ship that destroyed this module.
                 }
@@ -141,7 +141,8 @@ public class Structure : ShipComponent
                 else
                 {
                     var core = ShipCore.GetComponent<Core>();
-                    GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().PlayerLost(core.ControllerIndex, core.NbOfModules, core.ModulesDestroyed);
+                    core.DestroyShip();
+                    return;
                 }
 
                 Destroy(gameObject);
