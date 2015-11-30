@@ -10,9 +10,13 @@ public class PathFollower : MonoBehaviour
 	private float posInPath;
 	[SerializeField]
 	private float offsetFromPath;
-	private bool active;
+	private bool followingPath;
 	private float speed;
 	public float PathLength {get; set;}
+
+	public float MaxAngularVelocity;
+
+	private Rigidbody2D rb;
 
 	public void SetPosInPath(float newPos)
 	{
@@ -52,12 +56,17 @@ public class PathFollower : MonoBehaviour
 	{
 		speed = LvlController.Speed;
 		PathLength = LvlController.GetPathLength();
-		active = false;
+		followingPath = true;
+		rb = GetComponent<Rigidbody2D>();
+		// Set angular velocity to zero
+		rb.angularDrag = 0;
+		//  Add random torque and reduce angular drag to zero
+		rb.angularVelocity = (Random.Range (0, 2) == 0 ? -1 : 1) * Random.Range (0, MaxAngularVelocity);
 	}
 
 	void Update ()
 	{
-		if (!active)
+		if (followingPath)
 		{
 			// If the object gets too close to the end of the path, teleport it back to the start
 			if (Mathf.Abs (posInPath - PathLength) < LvlController.AsteroidRespawnDist)
@@ -75,12 +84,22 @@ public class PathFollower : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		active = true;
+		followingPath = false;
+		// Set velocity according to the position in the path
+		float t = posInPath / PathLength;
+		rb.velocity = LvlController.Path.GetDirection(t) * speed;
+		// Reset angular drag
+		rb.angularDrag = GlobalValues.DefaultAngularDrag;
 	}
 
 	void OnCollisionEnter2D(Collision2D coll)
 	{
-		active = true;
+		followingPath = false;
+		// Set velocity according to the position in the path
+		float t = posInPath / PathLength;
+		rb.velocity = LvlController.Path.GetDirection(t) * speed;
+		// Reset angular drag
+		rb.angularDrag = GlobalValues.DefaultAngularDrag;
 	}
 }
 	
@@ -100,6 +119,8 @@ public class PathFollowerEditor : Editor
 			asteroid.LvlController = FindObjectOfType<AsteriodLevelController>();
 		}
 		asteroid.LvlController = (AsteriodLevelController)EditorGUILayout.ObjectField("LvlController", asteroid.LvlController, typeof(AsteriodLevelController));
+
+		asteroid.MaxAngularVelocity = EditorGUILayout.FloatField("MaxAngularVelocity", asteroid.MaxAngularVelocity);
 		if(asteroid.LvlController != null)
 		{
 			// Update path length

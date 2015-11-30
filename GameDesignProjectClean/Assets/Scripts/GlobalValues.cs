@@ -26,4 +26,6 @@ public class GlobalValues
 	public static float EffectiveZeroMass = 0.1f;
 
 	public static int MaximumMass = 1000;
+
+	public static float DefaultAngularDrag = 0.05f;
 }

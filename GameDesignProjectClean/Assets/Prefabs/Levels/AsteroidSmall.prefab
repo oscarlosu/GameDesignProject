@@ -116,6 +116,7 @@ MonoBehaviour:
   LvlController: {fileID: 0}
   posInPath: 0
   offsetFromPath: 0
+  MaxAngularVelocity: 25
 --- !u!212 &21250812
 SpriteRenderer:
   m_ObjectHideFlags: 1
