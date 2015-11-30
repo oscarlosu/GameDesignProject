@@ -97,10 +97,14 @@ MonoBehaviour:
   hp: 0
   Anim: {fileID: 9536642}
   ControllerIndex: 0
+  SelfdestructButton: 8
   ShipControlMode: 0
   AngularDragHigh: 5
   MaxSpinBeforeAngularDrag: 30
+  NbOfModules: 0
+  ModulesDestroyed: 0
   InBuildMode: 0
+  SelfdestructParticlePrefab: {fileID: 0}
 --- !u!212 &21220594
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -161,6 +165,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: SelfdestructButton
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
