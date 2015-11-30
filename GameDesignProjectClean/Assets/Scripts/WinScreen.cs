@@ -28,7 +28,7 @@ public class WinScreen : MonoBehaviour
     public void SetupWinScreen(bool[] playersJoined, int[] playerPositions, int[] originalNbOfModules, int[] modulesLeft, int[] modulesDestroyed)
     {
         // Calculate points.
-        int nbPlayersJoined = playersJoined.Where(p => p).Count();
+        int nbPlayersJoined = playersJoined.Count(t => t);
         int[] points = new int[4];
         points[0] = playersJoined[0] ? modulesLeft[0] + modulesDestroyed[0] : -1;
         points[1] = playersJoined[1] ? modulesLeft[1] + modulesDestroyed[1] : -1;
@@ -38,7 +38,7 @@ public class WinScreen : MonoBehaviour
         // Calculate positions.
         int[] pointPos = new int[4];
         int currentPos = 0;
-        while (true)
+        for (int p = 0; p < nbPlayersJoined; p++)
         {
             int largest = -1;
             int largestIndex = 0;
@@ -53,15 +53,12 @@ public class WinScreen : MonoBehaviour
             
             pointPos[largestIndex] = currentPos++;
             points[largestIndex] = -1;
-            if (currentPos >= nbPlayersJoined - 1)
-            {
-                break;
-            }
         }
 
         for (int i = 0; i < playersJoined.Length; i++)
         {
-            Debug.Log("Player " + (i + 1) + " joined: " + playersJoined[i] + " pos: " + pointPos[i] + " points: " + points[i] + "\n");
+
+            Debug.Log("Player " + (i + 1) + " rank: " + pointPos[i] + " modules left: " + modulesLeft[i] + " modules destroyed: " + modulesDestroyed[i]);
             if (!playersJoined[i]) continue;
 
             switch (pointPos[i])

@@ -101,4 +101,9 @@ public class ObjectPool : MonoBehaviour
 		Debug.Log ("Size: " + objectCount);
 
 	}
+
+    private void OnDestroy()
+    {
+        CancelInvoke();
+    }
 }

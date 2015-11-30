@@ -141,7 +141,9 @@ public class Structure : ShipComponent
                 else
                 {
                     var core = ShipCore.GetComponent<Core>();
-                    GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().PlayerLost(core.ControllerIndex, core.NbOfModules, core.ModulesDestroyed);
+                    GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().PlayerLost(core.ControllerIndex);
+                    gameObject.SetActive(false);
+                    return;
                 }
 
                 Destroy(gameObject);
