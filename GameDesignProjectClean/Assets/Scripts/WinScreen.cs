@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,6 +28,7 @@ public class WinScreen : MonoBehaviour
     public void SetupWinScreen(bool[] playersJoined, int[] playerPositions, int[] originalNbOfModules, int[] modulesLeft, int[] modulesDestroyed)
     {
         // Calculate points.
+        int nbPlayersJoined = playersJoined.Where(p => p).Count();
         int[] points = new int[4];
         points[0] = playersJoined[0] ? modulesLeft[0] + modulesDestroyed[0] : -1;
         points[1] = playersJoined[1] ? modulesLeft[1] + modulesDestroyed[1] : -1;
@@ -48,12 +50,13 @@ public class WinScreen : MonoBehaviour
                     largestIndex = i;
                 }
             }
-            if (largest == -1)
+            
+            pointPos[largestIndex] = currentPos++;
+            points[largestIndex] = -1;
+            if (currentPos >= nbPlayersJoined - 1)
             {
                 break;
             }
-            pointPos[largestIndex] = currentPos++;
-            points[largestIndex] = -1;
         }
 
         for (int i = 0; i < playersJoined.Length; i++)
