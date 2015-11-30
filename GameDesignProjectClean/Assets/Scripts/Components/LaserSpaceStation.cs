@@ -56,7 +56,7 @@ public class LaserSpaceStation : MonoBehaviour
         else if (ast != null)
         {
 			// Make asteroid break into pieces
-            ast.Breakdown();            
+            ast.Breakdown(null);            
         }
 		else if(deb != null)
 		{
