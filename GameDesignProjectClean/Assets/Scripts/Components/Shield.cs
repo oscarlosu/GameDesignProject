@@ -16,9 +16,12 @@ public class Shield : Module
 	private bool deactivating;
 	private float elapsedTime;
 
+	private AudioSource audio;
+
 	// Use this for initialization
 	new void Start ()
-	{
+	{	
+		audio = GetComponent<AudioSource> ();
 		base.Start ();
 		col = GetComponent<CircleCollider2D>();
 		col.radius = Radius;
@@ -59,7 +62,7 @@ public class Shield : Module
 				col.enabled = true;
 				anim.SetBool("Active", true);
 				elapsedTime = 0;
-				GetComponent<AudioSource>().Play();
+				audio.Play();
 			}
 		}
 	}

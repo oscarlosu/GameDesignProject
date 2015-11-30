@@ -18,9 +18,7 @@ public class Asteroid : MonoBehaviour
     public float MediumMinWeight, MediumMaxWeight;
 	public float LargeMinWeight, LargeMaxWeight;
 
-		
-	public int SplitMinNum, SplitMaxNum;
-    public float MinBreakdownForce, MaxBreakdownForce;
+    public float BreakdownVelocity;
 
     public float DisableTime;
 
@@ -60,7 +58,7 @@ public class Asteroid : MonoBehaviour
     public void Initialize(AsteroidSize size)
     {
         int index;
-        switch (Size)
+        switch (size)
         {
 		case AsteroidSize.Small:
 			index = Random.Range(0, SmallSprites.Length);
@@ -86,41 +84,31 @@ public class Asteroid : MonoBehaviour
         }
     }
 
-    public void Breakdown()
-    {
+    public void Breakdown(Collision2D coll)
+	{
         // Reduce size
-        Size = (AsteroidSize)((int)Size - 1);
-		switch(Size)
+		if(Size == AsteroidSize.Small)
 		{
-		case AsteroidSize.Large:
-			Size = AsteroidSize.Medium;
-			break;
-		case AsteroidSize.Medium:
-			Size = AsteroidSize.Small;
-			break;
-		case AsteroidSize.Small:
 			gameObject.SetActive(false);
 			Destroy(gameObject);
 			return;
-		default:
-			throw new System.Exception("Invalid asteroid size");
-			break;
 		}
-		// Split
-        int num = Random.Range(SplitMinNum, SplitMaxNum);
-        for(int i = 0; i < num; ++i)
+		Size = Size - 1;
+		Initialize(Size);
+        // Make asteroid move in the opposite direction of the collision
+        Vector2 dir = Vector2.zero;
+        if(coll != null)
         {
-			GameObject go = (GameObject)Instantiate(AsteroidPrefab, transform.position, Quaternion.identity);
-			go.transform.parent = transform.parent;
-			go.GetComponent<Asteroid>().Initialize(Size);
-            // Disable collider
-            go.GetComponent<CircleCollider2D>().enabled = false;
-            // Generate random force
-            Vector2 forceDir = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
-            forceDir.Normalize();
-            float breakdownForce = Random.Range(MinBreakdownForce, MaxBreakdownForce);
-            go.GetComponent<Rigidbody2D>().AddForce(forceDir * breakdownForce);
+            dir = transform.position;
+            dir -= coll.contacts[0].point;
+            dir.Normalize();
         }
+        else
+        {
+            dir = new Vector2(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
+            dir.Normalize();
+        }
+        GetComponent<Rigidbody2D>().velocity = dir * BreakdownVelocity;
     }
 
     void OnCollisionEnter2D(Collision2D coll)
@@ -129,20 +117,14 @@ public class Asteroid : MonoBehaviour
         if (coll.relativeVelocity.magnitude > GlobalValues.MinCrashMagnitude)
         {
             // If the other object has a higher mass, break down.
-            if (coll.gameObject.GetComponent<Rigidbody2D>().mass > GetComponent<Rigidbody2D>().mass)
+            Rigidbody2D rb = coll.gameObject.GetComponent<Rigidbody2D>();
+            float otherMass = rb.mass;
+			float mass = GetComponent<Rigidbody2D>().mass;
+            if (otherMass > mass)
             {
-                Breakdown();
+                Breakdown(coll);
+
             }
         }
     }
-
-	/*void OnTriggerStay2D(Collider2D col)
-	{
-		// If the other object has a higher mass, break down.
-		if (col.gameObject.GetComponent<Rigidbody2D>().mass > GetComponent<Rigidbody2D>().mass)
-		{
-			Debug.Log(this.gameObject + " destroyed!");
-			Breakdown();
-		}
-	}*/
 }
