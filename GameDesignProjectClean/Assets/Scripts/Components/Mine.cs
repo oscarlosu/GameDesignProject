@@ -84,7 +84,8 @@ public class Mine : Projectile
 		//var explosion = GameObject.Instantiate(ExplosionPrefab);
         //explosion.transform.position = transform.position;
         explosion.GetComponent<Explosion>().Damage = Damage;
-		pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.Mine);
+        explosion.GetComponent<Explosion>().SourceCore = SourceCore;
+        pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.Mine);
 		//GameObject.Destroy(gameObject);
     }
 
@@ -97,7 +98,7 @@ public class Mine : Projectile
 	private bool ShouldExplode(Collider2D other)
 	{
 		return other.gameObject.GetComponent<Explosion>() != null || other.gameObject.GetComponent<Laser>() != null || 
-			(other.gameObject.GetComponent<Shield>() != null && (!InGrace || other.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID()));
+			(other.gameObject.GetComponent<Shield>() != null || other.gameObject.GetComponent<LaserSpaceStation>() != null && (!InGrace || other.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID()));
 	}
 
 	void GarbageCollect()

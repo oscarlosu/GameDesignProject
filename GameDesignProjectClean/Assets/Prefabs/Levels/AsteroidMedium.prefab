@@ -75,6 +75,7 @@ MonoBehaviour:
   LvlController: {fileID: 0}
   posInPath: 0
   offsetFromPath: 0
+  MaxAngularVelocity: 25
 --- !u!114 &11484922
 MonoBehaviour:
   m_ObjectHideFlags: 1

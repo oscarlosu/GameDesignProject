@@ -141,7 +141,7 @@ public class HomingMissile : Projectile
 	{
 		// Missiles only activate with shield or laser triggers
 		if ((other.gameObject.GetComponent<Shield>() != null && (!InGrace  || other.gameObject.GetComponent<Shield>().ShipCore.GetInstanceID() != SourceCore.GetInstanceID()))
-		    || other.gameObject.GetComponent<Laser>() != null)
+		    || other.gameObject.GetComponent<Laser>() != null || other.gameObject.GetComponent<LaserSpaceStation>() != null)
 		{
             //Debug.Log("Homing missile trigger detected trigger with " + other.gameObject.name);
             Activate();
@@ -155,7 +155,8 @@ public class HomingMissile : Projectile
         //Explosion explosion = GameObject.Instantiate(ExplosionPrefab);
         //explosion.transform.position = transform.position;
         explosion.GetComponent<Explosion>().Damage = Damage;
-		pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.Missile);
+        explosion.GetComponent<Explosion>().SourceCore = SourceCore;
+        pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.Missile);
 		//GameObject.Destroy(gameObject);
     }
 
