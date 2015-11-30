@@ -54,7 +54,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24382294, guid: 1009fae8e168e4f4aadd5822f83f11a6,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 8144678594c1c42ef91e03e71430610b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b1c5b528d1b3846bf9c746a59a877d4a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a15c682071de7cb4da2c2a1d1c47ed15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EffectDuration: .100000001
-  FadeDuration: .200000003
+  EffectDuration: 2.25
+  FadeDuration: .75
   Damage: 1
 --- !u!212 &21266900
 SpriteRenderer:
@@ -176,11 +176,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: EffectDuration
-      value: .100000001
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: FadeDuration
-      value: .200000003
+      value: .75
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Sprite
@@ -190,7 +190,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 8144678594c1c42ef91e03e71430610b, type: 3}
+      objectReference: {fileID: 8300000, guid: b1c5b528d1b3846bf9c746a59a877d4a, type: 3}
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Projectile
