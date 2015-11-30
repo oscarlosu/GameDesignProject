@@ -46,6 +46,7 @@ public class Core : Structure
     {
         if (GamePad.GetButtonDown(SelfdestructButton, ControllerIndex) && !InBuildMode)
         {
+            Debug.Log("Self destruct!");
             DestroyShip();
         }
     }
@@ -53,7 +54,7 @@ public class Core : Structure
     public void DestroyShip()
     {
         GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().PlayerLost(ControllerIndex);
-        GameObject.Instantiate(SelfdestructParticlePrefab).transform.parent = null;
+        GameObject.Instantiate(SelfdestructParticlePrefab).transform.position = transform.position;
         gameObject.SetActive(false);
     }
 
