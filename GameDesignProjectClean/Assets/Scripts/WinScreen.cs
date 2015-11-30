@@ -58,7 +58,7 @@ public class WinScreen : MonoBehaviour
 
         for (int i = 0; i < playersJoined.Length; i++)
         {
-            Debug.Log("Player " + (i + 1) + " joined: " + playersJoined[i] + " pos: " + pointPos[i] + "\n");
+            Debug.Log("Player " + (i + 1) + " joined: " + playersJoined[i] + " pos: " + pointPos[i] + " points: " + points[i] + "\n");
             if (!playersJoined[i]) continue;
 
             switch (pointPos[i])
