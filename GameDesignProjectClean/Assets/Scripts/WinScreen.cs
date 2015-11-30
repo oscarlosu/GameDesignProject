@@ -27,10 +27,10 @@ public class WinScreen : MonoBehaviour
     {
         // Calculate points.
         int[] points = new int[4];
-        points[0] = modulesLeft[0] + modulesDestroyed[0];
-        points[1] = modulesLeft[1] + modulesDestroyed[1];
-        points[2] = modulesLeft[2] + modulesDestroyed[2];
-        points[3] = modulesLeft[3] + modulesDestroyed[3];
+        points[0] = playersJoined[0] ? modulesLeft[0] + modulesDestroyed[0] : -1;
+        points[1] = playersJoined[1] ? modulesLeft[1] + modulesDestroyed[1] : -1;
+        points[2] = playersJoined[2] ? modulesLeft[2] + modulesDestroyed[2] : -1;
+        points[3] = playersJoined[3] ? modulesLeft[3] + modulesDestroyed[3] : -1;
 
         // Calculate positions.
         int[] pointPos = new int[4];

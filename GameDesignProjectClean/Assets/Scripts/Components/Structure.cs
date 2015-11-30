@@ -106,7 +106,10 @@ public class Structure : ShipComponent
             // If the structure has at least one module, lose one.
             if (currentModules.Count > 0)
             {
-                originator.ModulesDestroyed++; // Add a point to the ship that destroyed this module.
+                if (originator != null)
+                {
+                    originator.ModulesDestroyed++; // Add a point to the ship that destroyed this module.
+                }
                 if (RemoveDefensiveModule())
                 {
                     // Reset Hp, but apply excess damage.
