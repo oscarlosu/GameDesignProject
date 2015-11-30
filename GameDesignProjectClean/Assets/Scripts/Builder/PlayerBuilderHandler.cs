@@ -29,6 +29,7 @@ public class PlayerBuilderHandler : MonoBehaviour
     public GameObject[] AvailableComponents;
 	public GameObject TestModeText;
 	public GameObject ReadyText;
+	public GameObject GoToTestMode;
 
     private GameObject shipCore;
     private GameObject selectedCell;
@@ -103,6 +104,7 @@ public class PlayerBuilderHandler : MonoBehaviour
         // Activate component selector UI.
         ComponentSelectorPanel.SetActive(true);
         ComponentNamePanel.SetActive(true);
+		GoToTestMode.SetActive (true);
 		// Deactivate "testmode" and "ready" text
 		TestModeText.SetActive (false);
         ReadyText.SetActive(false);
@@ -130,6 +132,7 @@ public class PlayerBuilderHandler : MonoBehaviour
         ParentPanel.SetActive(false);
         InputPanel.SetActive(false);
         RemovePanel.SetActive(false);
+		GoToTestMode.SetActive (false);
 		// Enable "testmode" text
 		TestModeText.SetActive (true);
         // Create clone of ship that the players can test and play around with.
