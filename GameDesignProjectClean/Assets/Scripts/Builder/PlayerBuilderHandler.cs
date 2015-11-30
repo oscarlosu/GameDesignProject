@@ -15,6 +15,8 @@ public class PlayerBuilderHandler : MonoBehaviour
     public Camera BuilderCamera;
 
     public GameObject CorePrefab;
+    public Sprite CoreSprite;
+    public GameObject SelfdestructParticlePrefab;
     public GameObject BuilderCanvas;
     public GameObject ComponentSelectorPanel;
     public Image ImageLeft, ImageCenter, ImageRight;
@@ -58,6 +60,8 @@ public class PlayerBuilderHandler : MonoBehaviour
         shipCore.transform.parent = PlayerArea.transform;
         shipCore.transform.localPosition = new Vector3(0, 0);
         shipCore.GetComponent<Core>().ControllerIndex = ControllerIndex;
+        shipCore.GetComponent<SpriteRenderer>().sprite = CoreSprite;
+        shipCore.GetComponent<Core>().SelfdestructParticlePrefab = SelfdestructParticlePrefab;
         grid[GridSizeX / 2 - 1, GridSizeY / 2 - 1] = shipCore;
         grid[GridSizeX / 2, GridSizeY / 2 - 1] = shipCore;
         grid[GridSizeX / 2 - 1, GridSizeY / 2] = shipCore;

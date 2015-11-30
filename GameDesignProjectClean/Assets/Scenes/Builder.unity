@@ -216,6 +216,15 @@ Prefab:
       propertyPath: ReadyText
       value: 
       objectReference: {fileID: 253052107}
+    - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
+      propertyPath: CoreSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6f91185d3543dc6448411b2b118b33de,
+        type: 3}
+    - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
+      propertyPath: SelfdestructParticlePrefab
+      value: 
+      objectReference: {fileID: 116360, guid: c7051628db089bd459c5dda3403df3d9, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 787f576714bc35540a684f062d7010cf, type: 2}
   m_IsPrefabParent: 0
@@ -902,6 +911,15 @@ Prefab:
       propertyPath: ReadyText
       value: 
       objectReference: {fileID: 652935450}
+    - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
+      propertyPath: CoreSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b4cb0ffe139bba54d843e5c46b31dfa9,
+        type: 3}
+    - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
+      propertyPath: SelfdestructParticlePrefab
+      value: 
+      objectReference: {fileID: 192126, guid: 7d85c192541fc10489de6e3d51cb62e0, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 787f576714bc35540a684f062d7010cf, type: 2}
   m_IsPrefabParent: 0
@@ -1133,6 +1151,15 @@ Prefab:
       propertyPath: ReadyText
       value: 
       objectReference: {fileID: 1041076944}
+    - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
+      propertyPath: CoreSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2ba215978aef8dc4db4cdb8dcc4237cd,
+        type: 3}
+    - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
+      propertyPath: SelfdestructParticlePrefab
+      value: 
+      objectReference: {fileID: 152988, guid: c3628870e41200e4a9485d239198b2b4, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 787f576714bc35540a684f062d7010cf, type: 2}
   m_IsPrefabParent: 0
@@ -1325,6 +1352,15 @@ Prefab:
       propertyPath: ReadyText
       value: 
       objectReference: {fileID: 1541537403}
+    - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
+      propertyPath: CoreSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9aa6c9a1a054fe34e8508cf3be13f4c1,
+        type: 3}
+    - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
+      propertyPath: SelfdestructParticlePrefab
+      value: 
+      objectReference: {fileID: 180204, guid: c40bd231e912c994d9392e72a9bb0f69, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 787f576714bc35540a684f062d7010cf, type: 2}
   m_IsPrefabParent: 0
