@@ -54,6 +54,7 @@ public class PathFollower : MonoBehaviour
 
 	void Awake()
 	{
+		LvlController = FindObjectOfType<AsteriodLevelController>();
 		speed = LvlController.Speed;
 		PathLength = LvlController.GetPathLength();
 		followingPath = true;

@@ -96,10 +96,7 @@ MonoBehaviour:
   MediumMaxWeight: 15
   LargeMinWeight: 15
   LargeMaxWeight: 20
-  SplitMinNum: 2
-  SplitMaxNum: 4
-  MinBreakdownForce: 10
-  MaxBreakdownForce: 50
+  BreakdownVelocity: 10
   DisableTime: .5
   AsteroidPrefab: {fileID: 122610}
 --- !u!114 &11479926
@@ -174,6 +171,26 @@ Prefab:
       propertyPath: AsteroidPrefab
       value: 
       objectReference: {fileID: 122610}
+    - target: {fileID: 0}
+      propertyPath: MinBreakdownForce
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MaxBreakdownForce
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: DisableTime
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: SplitMaxNum
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BreakdownVelocity
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 122610}

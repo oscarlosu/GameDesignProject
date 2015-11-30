@@ -158,7 +158,7 @@ public class GameHandler : MonoBehaviour
         return playerShips;
     }
 
-    public void PlayerLost(GamePad.Index controllerIndex, int modulesLeft, int modulesDestroyed)
+    public void PlayerLost(GamePad.Index controllerIndex)
     {
         var totalPlayersJoined = playersJoined.Count(t => t);
         // Save that the player lost.
@@ -166,30 +166,28 @@ public class GameHandler : MonoBehaviour
         {
             case GamePad.Index.One:
                 playerLostPositions[0] = (totalPlayersJoined - 1) - playersLost++;
-                this.modulesLeft[0] = modulesLeft;
-                this.modulesDestroyed[0] = modulesDestroyed;
                 break;
             case GamePad.Index.Two:
                 playerLostPositions[1] = (totalPlayersJoined - 1) - playersLost++;
-                this.modulesLeft[1] = modulesLeft;
-                this.modulesDestroyed[1] = modulesDestroyed;
                 break;
             case GamePad.Index.Three:
                 playerLostPositions[2] = (totalPlayersJoined - 1) - playersLost++;
-                this.modulesLeft[2] = modulesLeft;
-                this.modulesDestroyed[2] = modulesDestroyed;
                 break;
             case GamePad.Index.Four:
                 playerLostPositions[3] = (totalPlayersJoined - 1) - playersLost++;
-                this.modulesLeft[3] = modulesLeft;
-                this.modulesDestroyed[3] = modulesDestroyed;
                 break;
         }
-
 
         // If only one player is left, the game is over.
         if (playersLost == totalPlayersJoined - 1)
         {
+            for (int i = 0; i < playersJoined.Length; i++)
+            {
+                if (!playersJoined[i])
+                    continue;
+                modulesLeft[i] = playerShips[i].GetComponent<Core>().NbOfModules;
+                modulesDestroyed[i] = playerShips[i].GetComponent<Core>().ModulesDestroyed;
+            }
             DisplayWinScreen();
         }
     }

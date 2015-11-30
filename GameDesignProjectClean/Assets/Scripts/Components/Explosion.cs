@@ -63,7 +63,7 @@ public class Explosion : MonoBehaviour
         }
         else if (ast != null)
         {
-            other.gameObject.GetComponent<Asteroid>().Breakdown();
+            other.gameObject.GetComponent<Asteroid>().Breakdown(null);
 			// Calculate push force direction
 			Vector3 dir = other.transform.position - transform.position;
 			dir.Normalize();
