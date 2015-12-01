@@ -6,8 +6,8 @@ using UnityEditor;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Core : Structure
 {
-    public GamepadInput.GamePad.Index ControllerIndex;
-    public GamepadInput.GamePad.Button SelfdestructButton;
+    public GamePad.Index ControllerIndex;
+    public GamePad.Button SelfdestructButton;
 
     public ControlMode ShipControlMode;
     public float AngularDragHigh; // The drag set, when the ship is pointing in the right direction (if the control scheme is direction based).
@@ -46,6 +46,7 @@ public class Core : Structure
     {
         if (GamePad.GetButtonDown(SelfdestructButton, ControllerIndex) && !InBuildMode)
         {
+            Debug.Log("Self destruct!");
             DestroyShip();
         }
     }
@@ -53,7 +54,7 @@ public class Core : Structure
     public void DestroyShip()
     {
         GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().PlayerLost(ControllerIndex);
-        GameObject.Instantiate(SelfdestructParticlePrefab);
+        GameObject.Instantiate(SelfdestructParticlePrefab).transform.position = transform.position;
         gameObject.SetActive(false);
     }
 

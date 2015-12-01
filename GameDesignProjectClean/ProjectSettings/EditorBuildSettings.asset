@@ -16,7 +16,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameArenas/Blackhole.unity
   - enabled: 1
-    path: Assets/Scenes/GameArenas/Asteriods.unity
+    path: Assets/Scenes/GameArenas/Asteroids.unity
   - enabled: 1
     path: Assets/Scenes/GameArenas/Moon.unity
   - enabled: 1

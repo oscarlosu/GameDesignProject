@@ -10,6 +10,7 @@ public class GameHandler : MonoBehaviour
     public Scene CurrentScene;
     public GamePad.Button BackButton;
     public GameObject WinScreenPrefab;
+    public float SecondsToWinScreen;
 
     // Scene handlers.
     public PlayerSelectHandler PlayerSelectHandler;
@@ -188,7 +189,7 @@ public class GameHandler : MonoBehaviour
                 modulesLeft[i] = playerShips[i].GetComponent<Core>().NbOfModules;
                 modulesDestroyed[i] = playerShips[i].GetComponent<Core>().ModulesDestroyed;
             }
-            DisplayWinScreen();
+            Invoke("DisplayWinScreen", SecondsToWinScreen);
         }
     }
 
