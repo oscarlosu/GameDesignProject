@@ -30,6 +30,7 @@ public class PlayerBuilderHandler : MonoBehaviour
 	public GameObject TestModeText;
 	public GameObject ReadyText;
 	public GameObject GoToTestMode;
+    public Vector2 SpawnPosMultiplier;
 
     private GameObject shipCore;
     private GameObject selectedCell;
@@ -138,7 +139,7 @@ public class PlayerBuilderHandler : MonoBehaviour
         // Create clone of ship that the players can test and play around with.
         cloneShip = GameObject.Instantiate(shipCore);
         cloneShip.transform.parent = PlayerArea.transform;
-        cloneShip.transform.localPosition = new Vector3(0, 0);
+        cloneShip.transform.position = new Vector3(-StartingPosition.x * SpawnPosMultiplier.x, -StartingPosition.y * SpawnPosMultiplier.y);
         // Deactivate the original in order for it to stay intact, while the other player is testing.
         shipCore.SetActive(false);
     }
