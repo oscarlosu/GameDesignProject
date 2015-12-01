@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public partial class PhillipLevelHandler : MonoBehaviour, ILevelHandler {
+public partial class EmptyLevelHandler : MonoBehaviour, ILevelHandler {
 
 	// Use this for initialization
 	void Start () {
