@@ -42,7 +42,7 @@ MonoBehaviour:
   CurrentScene: 0
   BackButton: 8
   WinScreenPrefab: {fileID: 193374, guid: 568fc1e908369454d810c24fddb9d5eb, type: 2}
-  SecondsToWinScreen: 2
+  SecondsToWinScreen: 3.5
   PlayerSelectHandler: {fileID: 0}
   LevelSelectHandler: {fileID: 0}
   BuilderHandler: {fileID: 0}
@@ -71,7 +71,7 @@ Prefab:
       objectReference: {fileID: 193374, guid: 568fc1e908369454d810c24fddb9d5eb, type: 2}
     - target: {fileID: 0}
       propertyPath: SecondsToWinScreen
-      value: 2
+      value: 3.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
