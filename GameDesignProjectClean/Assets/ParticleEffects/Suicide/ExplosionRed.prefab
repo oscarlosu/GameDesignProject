@@ -44,6 +44,7 @@ GameObject:
   - 4: {fileID: 438790}
   - 198: {fileID: 19888142}
   - 199: {fileID: 19965758}
+  - 114: {fileID: 11447902}
   m_Layer: 0
   m_Name: ExplosionRed
   m_TagString: Untagged
@@ -119,6 +120,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 438790}
   m_RootOrder: 2
+--- !u!114 &11447902
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 180204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50e970c571aa63b4a9f7679a41fd6efe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seconds: 5
 --- !u!198 &19842148
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -131,7 +144,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   moveWithTransform: 1
   InitialModule:
     enabled: 1
@@ -1164,7 +1177,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   moveWithTransform: 1
   InitialModule:
     enabled: 1
@@ -2207,7 +2220,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   moveWithTransform: 1
   InitialModule:
     enabled: 1
@@ -3260,7 +3273,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   moveWithTransform: 1
   InitialModule:
     enabled: 1
@@ -4455,6 +4468,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_SortingLayerID
       value: -861339309
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: playOnAwake
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
