@@ -125,14 +125,14 @@ Material:
           name: _TextureMG
         second:
           m_Texture: {fileID: 2800000, guid: e64bcc94bc0442241b10995ef2167488, type: 3}
-          m_Scale: {x: .0199999996, y: .0199999996}
+          m_Scale: {x: .00999999978, y: .00999999978}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _TextureBG
         second:
           m_Texture: {fileID: 2800000, guid: 5535889ab92c8424483d2b48f923bc84, type: 3}
-          m_Scale: {x: .0199999996, y: .0199999996}
+          m_Scale: {x: .00999999978, y: .00999999978}
           m_Offset: {x: 0, y: 0}
       data:
         first:

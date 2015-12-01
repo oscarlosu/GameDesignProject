@@ -6346,7 +6346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10f585e3d461b6f4c9f643e7002ab7e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserSizeStation: {x: 10, y: 75}
+  laserSizeStation: {x: 3, y: 10}
   ssParts:
   - {fileID: 1006767053}
   - {fileID: 680188594}

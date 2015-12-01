@@ -12,6 +12,7 @@ GameObject:
   - 212: {fileID: 21266900}
   - 114: {fileID: 11427700}
   - 82: {fileID: 8214800}
+  - 95: {fileID: 9517692}
   m_Layer: 0
   m_Name: LaserSpaceStation
   m_TagString: Projectile
@@ -41,9 +42,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: .0185966492, y: 1.29466295}
+  m_Offset: {x: 0, y: 4.75}
   serializedVersion: 2
-  m_Size: {x: .256055504, y: 2.45547104}
+  m_Size: {x: .349999994, y: 9.5}
 --- !u!82 &8214800
 AudioSource:
   m_ObjectHideFlags: 1
@@ -115,6 +116,23 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!95 &9517692
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 108826}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 08333c1dfdb567349bebddcd22804b2a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11427700
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -153,8 +171,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -861339309
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2c5279a74261cc24f8b803ad92ad2c0b, type: 3}
-  m_Color: {r: 0, g: .337931395, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 87dc85d277f374a469e1440195e6b6ac, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
