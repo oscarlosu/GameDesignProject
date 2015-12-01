@@ -142,6 +142,7 @@ public class GameHandler : MonoBehaviour
                         GameObject.Destroy(ship);
                     }
                     // Restart the game.
+                    GameOver = false;
                     Application.LoadLevel("PlayerSelect");
                     CurrentScene = Scene.PlayerSelectScene;
                 }
