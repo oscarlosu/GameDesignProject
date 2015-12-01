@@ -73,6 +73,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 468422}
   - 114: {fileID: 11499416}
+  - 58: {fileID: 5824658}
   m_Layer: 0
   m_Name: BlackHoleController
   m_TagString: Untagged
@@ -173,6 +174,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 468422}
   m_RootOrder: 0
+--- !u!58 &5824658
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165944}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 7
 --- !u!114 &11499416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -227,6 +241,11 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 0
     m_PostInfinity: 0
+  PullRadius: 100
+  ForceTowardsCenter: 12.3000002
+  ForceTangent: 2
+  PushRadius: 5
+  PushForce: 20
 --- !u!212 &21205352
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -301,7 +320,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1555114439
+  m_SortingLayerID: -1818878923
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 66dd8d2feae59634bbcfb17ad3adb98f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
