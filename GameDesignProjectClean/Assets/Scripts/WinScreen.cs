@@ -68,22 +68,22 @@ public class WinScreen : MonoBehaviour
             {
                 case 3:
                     FourthImage.sprite = CharacterLostSprites[i];
-                    FourthScore.text = "Score\n" + points[i];
+                    FourthScore.text = "Score " + points[i];
                     FourthImage.gameObject.SetActive(true);
                     break;
                 case 2:
                     ThirdImage.sprite = CharacterLostSprites[i];
-                    ThirdScore.text = "Score\n" + points[i];
+                    ThirdScore.text = "Score " + points[i];
                     ThirdImage.gameObject.SetActive(true);
                     break;
                 case 1:
                     SecondImage.sprite = CharacterLostSprites[i];
-                    SecondScore.text = "Score\n" + points[i];
+                    SecondScore.text = "Score " + points[i];
                     SecondImage.gameObject.SetActive(true);
                     break;
                 case 0:
                     FirstImage.sprite = CharacterWonSprites[i];
-                    FirstScore.text = "Score\n" + points[i];
+                    FirstScore.text = "Score " + points[i];
                     FirstImage.gameObject.SetActive(true);
                     WinText.text = "Player " + (i + 1) + " wins!";
                     break;
