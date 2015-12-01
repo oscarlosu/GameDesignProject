@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using GamepadInput;
@@ -31,6 +32,7 @@ public class PlayerBuilderHandler : MonoBehaviour
 	public GameObject ReadyText;
 	public GameObject GoToTestMode;
     public Vector2 SpawnPosMultiplier;
+    public float TextFlashTime;
 
     private GameObject shipCore;
     private GameObject selectedCell;
@@ -44,6 +46,8 @@ public class PlayerBuilderHandler : MonoBehaviour
     private int selectedComponent;
     private GameObject cloneShip; // The ship used in play mode to test the build.
     private float elapsedMoveTime; // The time elapsed since last move (used to restrict how fast the player can move the selection).
+
+    private bool fadeIn;
 
 	public AudioClip CellMoveSound;
 	public AudioClip PlaceModuleSound;
@@ -77,6 +81,13 @@ public class PlayerBuilderHandler : MonoBehaviour
         elapsedMoveTime = MovePauseTime;
 
         GoToBuildMode();
+
+        InvokeRepeating("ToggleFadeIn", 0, TextFlashTime);
+    }
+
+    private void ToggleFadeIn()
+    {
+        fadeIn = !fadeIn;
     }
 
     private void GoToBuildMode()
@@ -404,6 +415,19 @@ public class PlayerBuilderHandler : MonoBehaviour
                 playerReady = false;
                 GoToBuildMode();
                 return;
+            }
+
+            if (ReadyText.activeSelf)
+            {
+                if (fadeIn)
+                {
+                    ReadyText.GetComponent<Text>().CrossFadeAlpha(1, TextFlashTime/2, false);
+                }
+                else
+                {
+                    ReadyText.GetComponent<Text>().CrossFadeAlpha(0, TextFlashTime/2, false);
+                }
+                
             }
 
             // The builder UI should be hidden and maybe a small icon and text should explain what to do, to go back to build mode.
