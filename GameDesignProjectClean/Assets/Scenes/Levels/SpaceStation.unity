@@ -477,7 +477,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4291834937
+        rgba: 4294938416
       minMaxState: 0
     startSize:
       scalar: 1
@@ -1689,7 +1689,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4291834937
+        rgba: 4294938416
       minMaxState: 0
     startSize:
       scalar: 1
@@ -4316,7 +4316,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4291834937
+        rgba: 4294938416
       minMaxState: 0
     startSize:
       scalar: 1
@@ -5429,7 +5429,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4291834937
+        rgba: 4294938416
       minMaxState: 0
     startSize:
       scalar: 1
@@ -6597,7 +6597,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4291834937
+        rgba: 4294938416
       minMaxState: 0
     startSize:
       scalar: 1
@@ -7936,7 +7936,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4291834937
+        rgba: 4294938416
       minMaxState: 0
     startSize:
       scalar: 1
@@ -9148,7 +9148,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4291834937
+        rgba: 4294938416
       minMaxState: 0
     startSize:
       scalar: 1
@@ -11677,7 +11677,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4291834937
+        rgba: 4294938416
       minMaxState: 0
     startSize:
       scalar: 1
