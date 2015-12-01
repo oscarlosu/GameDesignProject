@@ -58,19 +58,19 @@ public class BlackHoleController : MonoBehaviour, ILevelHandler
         if (playerShips[1] != null)
         {
             playerShips[1].transform.position = new Vector3(45, 45);
-            playerShips[0].transform.eulerAngles = new Vector3(0, 0, 315);
+            playerShips[1].transform.eulerAngles = new Vector3(0, 0, 315);
             playerShips[1].SetActive(true);
         }
         if (playerShips[2] != null)
         {
             playerShips[2].transform.position = new Vector3(-45, -45);
-            playerShips[0].transform.eulerAngles = new Vector3(0, 0, 135);
+            playerShips[2].transform.eulerAngles = new Vector3(0, 0, 135);
             playerShips[2].SetActive(true);
         }
         if (playerShips[3] != null)
         {
             playerShips[3].transform.position = new Vector3(45, -45);
-            playerShips[0].transform.eulerAngles = new Vector3(0, 0, 225);
+            playerShips[3].transform.eulerAngles = new Vector3(0, 0, 225);
             playerShips[3].SetActive(true);
         }
     }

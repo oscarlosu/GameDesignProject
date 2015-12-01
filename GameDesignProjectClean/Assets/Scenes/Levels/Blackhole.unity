@@ -124,6 +124,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11499416, guid: 783a4067ed67cdb449c6b96fb5fed0bd, type: 2}
+      propertyPath: ForceTowardsCenter
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 11499416, guid: 783a4067ed67cdb449c6b96fb5fed0bd, type: 2}
+      propertyPath: ForceTangent
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 783a4067ed67cdb449c6b96fb5fed0bd, type: 2}
   m_IsPrefabParent: 0

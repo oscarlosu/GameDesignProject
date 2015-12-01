@@ -142,9 +142,9 @@ public class GameHandler : MonoBehaviour
                         GameObject.Destroy(ship);
                     }
                     // Restart the game.
-                    GameOver = false;
+                    //GameOver = false;
+                    Destroy(gameObject);
                     Application.LoadLevel("PlayerSelect");
-                    CurrentScene = Scene.PlayerSelectScene;
                 }
                 return;
         }
@@ -205,6 +205,7 @@ public class GameHandler : MonoBehaviour
 
     public void DisplayWinScreen()
     {
+        Debug.Log("Open win screen!");
         WinScreen winScreen = Instantiate(WinScreenPrefab).GetComponent<WinScreen>();
         winScreen.SetupWinScreen(playersJoined, playerLostPositions, originalNbOfModules, modulesLeft, modulesDestroyed);
         GameOver = true;
