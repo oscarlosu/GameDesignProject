@@ -892,7 +892,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11428910, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
       propertyPath: m_Color.b
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11428910, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
       propertyPath: m_Color.r
@@ -904,7 +904,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11428910, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
       propertyPath: m_Color.g
-      value: .519999981
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
@@ -1039,12 +1039,12 @@ Prefab:
     - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
       propertyPath: CoreSprite
       value: 
-      objectReference: {fileID: 21300000, guid: b4cb0ffe139bba54d843e5c46b31dfa9,
+      objectReference: {fileID: 21300000, guid: 9aa6c9a1a054fe34e8508cf3be13f4c1,
         type: 3}
     - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
       propertyPath: SelfdestructParticlePrefab
       value: 
-      objectReference: {fileID: 192126, guid: 7d85c192541fc10489de6e3d51cb62e0, type: 2}
+      objectReference: {fileID: 180204, guid: c40bd231e912c994d9392e72a9bb0f69, type: 2}
     - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
       propertyPath: GoToTestMode
       value: 
@@ -1284,12 +1284,12 @@ Prefab:
     - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
       propertyPath: CoreSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 2ba215978aef8dc4db4cdb8dcc4237cd,
+      objectReference: {fileID: 21300000, guid: b4cb0ffe139bba54d843e5c46b31dfa9,
         type: 3}
     - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
       propertyPath: SelfdestructParticlePrefab
       value: 
-      objectReference: {fileID: 152988, guid: c3628870e41200e4a9485d239198b2b4, type: 2}
+      objectReference: {fileID: 192126, guid: 7d85c192541fc10489de6e3d51cb62e0, type: 2}
     - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
       propertyPath: GoToTestMode
       value: 
@@ -1551,12 +1551,12 @@ Prefab:
     - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
       propertyPath: CoreSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 9aa6c9a1a054fe34e8508cf3be13f4c1,
+      objectReference: {fileID: 21300000, guid: 2ba215978aef8dc4db4cdb8dcc4237cd,
         type: 3}
     - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
       propertyPath: SelfdestructParticlePrefab
       value: 
-      objectReference: {fileID: 180204, guid: c40bd231e912c994d9392e72a9bb0f69, type: 2}
+      objectReference: {fileID: 152988, guid: c3628870e41200e4a9485d239198b2b4, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 787f576714bc35540a684f062d7010cf, type: 2}
   m_IsPrefabParent: 0
@@ -1797,6 +1797,18 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1005407383}
+    - target: {fileID: 11428910, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11428910, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
+      propertyPath: m_Color.g
+      value: .483999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 11428910, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
   m_IsPrefabParent: 0
@@ -2553,7 +2565,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11428910, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
       propertyPath: m_Color.r
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11428910, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
       propertyPath: m_Color.g
@@ -2561,7 +2573,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11428910, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
