@@ -302,7 +302,7 @@ public class PlayerBuilderHandler : MonoBehaviour
 					}
 
                     // Select module input.
-                    if (component.GetComponent<Module>() != null)
+                    if (component.GetComponent<Module>() != null && ModuleHasInput(component.GetComponent<Module>()))
                     {
                         StartCoroutine(SelectComponentButton(component.GetComponent<Module>()));
                     }
@@ -362,7 +362,7 @@ public class PlayerBuilderHandler : MonoBehaviour
             if (GamePad.GetButtonDown(GamePad.Button.X, ControllerIndex))
             {
                 var found = Get(selectedCellX, selectedCellY);
-                if (found != null && found.GetComponent<Module>())
+                if (found != null && found.GetComponent<Module>() && ModuleHasInput(found.GetComponent<Module>()))
                 {
                     StartCoroutine(SelectComponentButton(found.GetComponent<Module>()));
 
@@ -407,6 +407,11 @@ public class PlayerBuilderHandler : MonoBehaviour
 
             // The builder UI should be hidden and maybe a small icon and text should explain what to do, to go back to build mode.
         }
+    }
+
+    private static bool ModuleHasInput(Module module)
+    {
+        return module.GetComponent<Armor>() == null && module.GetComponent<Shield>() == null;
     }
 
     private IEnumerator SelectComponentButton(Module m)
@@ -616,7 +621,10 @@ public class PlayerBuilderHandler : MonoBehaviour
             {
                 RotatePanel.SetActive(true);
                 ParentPanel.SetActive(true);
-                InputPanel.SetActive(true);
+                if (ModuleHasInput(obj.GetComponent<Module>()))
+                {
+                    InputPanel.SetActive(true);
+                }
                 RemovePanel.SetActive(true);
             }
             else if (obj.tag != GlobalValues.ShipTag)
