@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ComponentName: Structure
-  BuilderSprite: {fileID: 21300000, guid: 9cd57da41998ef7438d4681403a7e270, type: 3}
+  BuilderSprite: {fileID: 21300000, guid: e097256d9e328634b868b62219594364, type: 3}
   ShipCore: {fileID: 0}
   Mass: 1
   MaxHp: 2
