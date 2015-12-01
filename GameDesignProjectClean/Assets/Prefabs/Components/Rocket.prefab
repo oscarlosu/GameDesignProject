@@ -205,7 +205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SourceCore: {fileID: 0}
   SourceStructure: {fileID: 0}
-  Damage: 1
+  Damage: 2
   DisableDistance: 30
   MaxLifespan: 60
   ThrustPower: 5
@@ -2437,7 +2437,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Damage
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: ExplosionPrefab

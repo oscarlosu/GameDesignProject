@@ -11,6 +11,7 @@ public class WinScreen : MonoBehaviour
 
     // Sprite and text objects.
     public Image FirstImage, SecondImage, ThirdImage, FourthImage;
+    public Text FirstScore, SecondScore, ThirdScore, FourthScore;
     public Text WinText;
 
     // Use this for initialization
@@ -36,6 +37,8 @@ public class WinScreen : MonoBehaviour
         points[3] = playersJoined[3] ? modulesLeft[3] + modulesDestroyed[3] : -1;
 
         // Calculate positions.
+        int[] pointsForPos = new int[4];
+        points.CopyTo(pointsForPos,0);
         int[] pointPos = new int[4];
         int currentPos = 0;
         for (int p = 0; p < nbPlayersJoined; p++)
@@ -44,15 +47,15 @@ public class WinScreen : MonoBehaviour
             int largestIndex = 0;
             for (int i = 0; i < pointPos.Length; i++)
             {
-                if (points[i] > largest)
+                if (pointsForPos[i] > largest)
                 {
-                    largest = points[i];
+                    largest = pointsForPos[i];
                     largestIndex = i;
                 }
             }
             
             pointPos[largestIndex] = currentPos++;
-            points[largestIndex] = -1;
+            pointsForPos[largestIndex] = -1;
         }
 
         for (int i = 0; i < playersJoined.Length; i++)
@@ -65,18 +68,22 @@ public class WinScreen : MonoBehaviour
             {
                 case 3:
                     FourthImage.sprite = CharacterLostSprites[i];
+                    FourthScore.text = "Score\n" + points[i];
                     FourthImage.gameObject.SetActive(true);
                     break;
                 case 2:
                     ThirdImage.sprite = CharacterLostSprites[i];
+                    ThirdScore.text = "Score\n" + points[i];
                     ThirdImage.gameObject.SetActive(true);
                     break;
                 case 1:
                     SecondImage.sprite = CharacterLostSprites[i];
+                    SecondScore.text = "Score\n" + points[i];
                     SecondImage.gameObject.SetActive(true);
                     break;
                 case 0:
                     FirstImage.sprite = CharacterWonSprites[i];
+                    FirstScore.text = "Score\n" + points[i];
                     FirstImage.gameObject.SetActive(true);
                     WinText.text = "Player " + (i + 1) + " wins!";
                     break;

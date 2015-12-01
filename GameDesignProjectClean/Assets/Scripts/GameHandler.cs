@@ -179,6 +179,8 @@ public class GameHandler : MonoBehaviour
                 break;
         }
 
+        Debug.Log("Total players: " + totalPlayersJoined + " players lost: " + playersLost);
+
         // If only one player is left, the game is over.
         if (playersLost == totalPlayersJoined - 1)
         {

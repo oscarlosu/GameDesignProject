@@ -17,6 +17,7 @@ public class Core : Structure
     public int NbOfModules = 0;
     public int ModulesDestroyed = 0;
     public bool InBuildMode;
+    public float dragTime = 0.0f;
 
     public GameObject SelfdestructParticlePrefab;
 
@@ -56,22 +57,15 @@ public class Core : Structure
             DestroyShip();
         }
 
-        if (rb.angularVelocity < 0 && rb.angularVelocity > oldAngularVelocity)
-            StartCoroutine(SharpTurn());
-        if(rb.angularVelocity > 0 && rb.angularVelocity < oldAngularVelocity)
-            StartCoroutine(SharpTurn());
-        oldAngularVelocity = rb.angularVelocity;
-    }
 
-    IEnumerator SharpTurn()
-    {
-        float count = 0.0f;
-        while (count < 0.1f)
-        {
-            rb.angularVelocity = 0;
-            count += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
+        if (rb.angularVelocity < 0 && rb.angularVelocity >= oldAngularVelocity)
+            rb.angularDrag += Time.deltaTime * 3;
+        else if(rb.angularVelocity > 0 && rb.angularVelocity <= oldAngularVelocity)
+            rb.angularDrag += Time.deltaTime * 3;
+        else
+            rb.angularDrag = DefaultAngularDrag;
+
+        oldAngularVelocity = rb.angularVelocity;
     }
 
     public void DestroyShip()
