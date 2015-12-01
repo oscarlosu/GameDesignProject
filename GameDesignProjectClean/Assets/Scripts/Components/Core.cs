@@ -14,15 +14,17 @@ public class Core : Structure
     public float AngularDragHigh; // The drag set, when the ship is pointing in the right direction (if the control scheme is direction based).
     public float DefaultAngularDrag { get; private set; } // Getter for the rigid body's default/initial angular drag.
     public float MaxSpinBeforeAngularDrag; // How many degrees per second the ship should at least spin, before applying high angular drag.
+    public float DisableAfterTime;
     public int NbOfModules = 0;
     public int ModulesDestroyed = 0;
     public bool InBuildMode;
-    public float dragTime = 0.0f;
+    public float DragTime = 0.0f;
 
     public GameObject SelfdestructParticlePrefab;
 
     private Rigidbody2D rb;
     private float oldAngularVelocity = 0.0f;
+    private bool isDestroying = false;
 
     // Public methods
 
@@ -70,10 +72,21 @@ public class Core : Structure
 
     public void DestroyShip()
     {
-        GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().PlayerLost(ControllerIndex);
-        GameObject.Instantiate(SelfdestructParticlePrefab).transform.position = transform.position;
-        gameObject.SetActive(false);
+        if (!isDestroying)
+        {
+            rb.angularVelocity = 1000;
+            rb.velocity = Vector2.zero;
+            GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().PlayerLost(ControllerIndex);
+            GameObject.Instantiate(SelfdestructParticlePrefab).transform.position = transform.position;
+            Invoke("DisableShip", DisableAfterTime);
+            isDestroying = true;
+        }
     }
+
+    private void DisableShip()
+    {
+        gameObject.SetActive(false);
+    } 
 
     public void Assemble()
     {

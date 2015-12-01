@@ -611,15 +611,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterWonSprites:
-  - {fileID: 21300000, guid: 27f2ebbf4bdf548dc940dbf9df167494, type: 3}
   - {fileID: 21300000, guid: 9360013128464404eb7aa09753782434, type: 3}
-  - {fileID: 21300000, guid: 2aa135fea1418f248b7eacb0b2cc60b5, type: 3}
   - {fileID: 21300000, guid: 90b118958ca31c64b932ca1f88e07e3b, type: 3}
+  - {fileID: 21300000, guid: 2aa135fea1418f248b7eacb0b2cc60b5, type: 3}
+  - {fileID: 21300000, guid: 27f2ebbf4bdf548dc940dbf9df167494, type: 3}
   CharacterLostSprites:
-  - {fileID: 21300000, guid: 64f3c1760166f415d8e93e8633b9098f, type: 3}
   - {fileID: 21300000, guid: 108d93f0b9cd3474d98e58686c406dfb, type: 3}
-  - {fileID: 21300000, guid: 6e033abc7dd064cdbab6dbb94e5828d7, type: 3}
   - {fileID: 21300000, guid: d3e28f294cebb47d4bf70d414d28ac9e, type: 3}
+  - {fileID: 21300000, guid: 6e033abc7dd064cdbab6dbb94e5828d7, type: 3}
+  - {fileID: 21300000, guid: 64f3c1760166f415d8e93e8633b9098f, type: 3}
   FirstImage: {fileID: 11491690}
   SecondImage: {fileID: 11494292}
   ThirdImage: {fileID: 11418550}

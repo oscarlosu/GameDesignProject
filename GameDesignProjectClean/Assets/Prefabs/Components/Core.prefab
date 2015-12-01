@@ -101,10 +101,11 @@ MonoBehaviour:
   ShipControlMode: 0
   AngularDragHigh: 5
   MaxSpinBeforeAngularDrag: 30
+  DisableAfterTime: 1
   NbOfModules: 0
   ModulesDestroyed: 0
   InBuildMode: 0
-  dragTime: .200000003
+  DragTime: 0
   SelfdestructParticlePrefab: {fileID: 0}
 --- !u!212 &21220594
 SpriteRenderer:
@@ -174,6 +175,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: dragTime
       value: .200000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: DisableAfterTime
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
