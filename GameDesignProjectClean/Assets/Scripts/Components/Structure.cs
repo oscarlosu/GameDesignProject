@@ -127,7 +127,7 @@ public class Structure : ShipComponent
                 var rnd = Random.Range(0, currentStructures.Count); // Find random index.
                 var structure = currentStructures[rnd]; // Get structure at random index.
                 structure.TakeDamage(Mathf.Abs(hp), originator); // Damage the next structure with the leftover damage.
-                return;
+                return; // Return without adding new HP to the structure. This means it's next hit will be fatal (again).
             }
             else
             {
