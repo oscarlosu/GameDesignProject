@@ -43,7 +43,7 @@ MonoBehaviour:
   ComponentName: Pulse Device
   BuilderSprite: {fileID: 21300000, guid: 887a30b5a3142e947bcf3d96c2585540, type: 3}
   ShipCore: {fileID: 0}
-  Mass: 1
+  Mass: 3
   InputType: 0
   ButtonKey: 0
   TriggerKey: 0
@@ -98,7 +98,7 @@ Prefab:
         type: 3}
     - target: {fileID: 0}
       propertyPath: Mass
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: PulsePrefab

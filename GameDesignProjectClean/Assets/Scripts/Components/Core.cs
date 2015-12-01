@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using GamepadInput;
 using UnityEditor;
@@ -19,6 +20,9 @@ public class Core : Structure
 
     public GameObject SelfdestructParticlePrefab;
 
+    private Rigidbody2D rb;
+    private float oldAngularVelocity = 0.0f;
+
     // Public methods
 
     // Use this for initialization
@@ -31,7 +35,9 @@ public class Core : Structure
     {
         base.OnEnable();
         ShipCore = this.gameObject;
-        DefaultAngularDrag = GetComponent<Rigidbody2D>().angularDrag;
+        rb = GetComponent<Rigidbody2D>();
+        DefaultAngularDrag = rb.angularDrag;
+        
 
         // Update the game handler with the number of modules on the ship.
         var gameHandler = GameObject.FindGameObjectWithTag("GameHandler");
@@ -48,6 +54,23 @@ public class Core : Structure
         {
             Debug.Log("Self destruct!");
             DestroyShip();
+        }
+
+        if (rb.angularVelocity < 0 && rb.angularVelocity > oldAngularVelocity)
+            StartCoroutine(SharpTurn());
+        if(rb.angularVelocity > 0 && rb.angularVelocity < oldAngularVelocity)
+            StartCoroutine(SharpTurn());
+        oldAngularVelocity = rb.angularVelocity;
+    }
+
+    IEnumerator SharpTurn()
+    {
+        float count = 0.0f;
+        while (count < 0.1f)
+        {
+            rb.angularVelocity = 0;
+            count += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
         }
     }
 

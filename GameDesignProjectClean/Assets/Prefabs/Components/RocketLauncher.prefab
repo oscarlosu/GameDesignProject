@@ -43,7 +43,7 @@ MonoBehaviour:
   ComponentName: Rocket
   BuilderSprite: {fileID: 21300000, guid: 84837f32f0d5bd140bc68e613d4bcbfc, type: 3}
   ShipCore: {fileID: 0}
-  Mass: 1
+  Mass: 2
   InputType: 0
   ButtonKey: 0
   TriggerKey: 0
@@ -121,6 +121,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_PlayOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Mass
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

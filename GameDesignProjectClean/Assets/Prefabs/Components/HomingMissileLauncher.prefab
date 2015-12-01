@@ -115,7 +115,7 @@ MonoBehaviour:
   ComponentName: Homing missile
   BuilderSprite: {fileID: 21300000, guid: ce7521aeccd67124bae914a6d2080b7e, type: 3}
   ShipCore: {fileID: 0}
-  Mass: 1
+  Mass: 2
   InputType: 0
   ButtonKey: 0
   TriggerKey: 0
@@ -203,6 +203,10 @@ Prefab:
       value: 
       objectReference: {fileID: 24330932, guid: 1009fae8e168e4f4aadd5822f83f11a6,
         type: 2}
+    - target: {fileID: 0}
+      propertyPath: Mass
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 195576}
