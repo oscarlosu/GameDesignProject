@@ -7,29 +7,42 @@ public class LevelSelectHandler : MonoBehaviour
 {
 
     public GameObject LevelSelectPanel;
+    public Text LevelNameText, LevelDescriptionText;
+    public Image LevelImage;
+    public Sprite[] LevelImages;
+    public string[] LevelNames;
+    [TextArea(3, 10)]
+    public string[] LevelDescriptions;
     public int NumberOfLevels;
     public string[] LevelSceneNames; // The name of the scene file (as would be used in the Application.Load method (no extension)).
     public Color SelectedLevelColour;
     public float MovePauseTime;
 
+    private float elapsedTime;
     private float elapsedMoveTime; // The time elapsed since last move (used to restrict how fast the player can move the selection).
     private int selectedLevel = 0;
 
     // Use this for initialization
     void Start()
     {
-        // Set this as the GameHandler's LevelSelectHandler.
-        GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().LevelSelectHandler = this;
-        // Set colour of default selected level.
-        LevelSelectPanel.transform.GetChild(selectedLevel).GetComponent<Image>().color = SelectedLevelColour;
+        var gameHandler = GameObject.FindGameObjectWithTag("GameHandler");
+        if (gameHandler != null)
+        {
+            // Set this as the GameHandler's LevelSelectHandler.
+            GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().LevelSelectHandler = this;
+            // Set colour of default selected level.
+            LevelSelectPanel.transform.GetChild(selectedLevel).GetComponent<Image>().color = SelectedLevelColour;
+        }
+        UpdateSelectedLevel();
     }
 
     // Update is called once per frame
     void Update()
     {
+        elapsedTime += Time.deltaTime;
 
         var leftStickValue = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.Any);
-        if (leftStickValue.magnitude > 0.1)
+        if (leftStickValue.magnitude > 0.3)
         {
             elapsedMoveTime += Time.deltaTime; // Add to the time elapsed since last move.
             if (elapsedMoveTime >= MovePauseTime)
@@ -68,7 +81,7 @@ public class LevelSelectHandler : MonoBehaviour
         {
             selectedLevel = NumberOfLevels - 1;
         }
-        LevelSelectPanel.transform.GetChild(selectedLevel).GetComponent<Image>().color = SelectedLevelColour;
+        UpdateSelectedLevel();
     }
 
     private void NextLevel()
@@ -82,6 +95,18 @@ public class LevelSelectHandler : MonoBehaviour
         {
             selectedLevel = 0;
         }
+        UpdateSelectedLevel();
+    }
+
+    private void UpdateSelectedLevel()
+    {
+        // Set selected level colour.
         LevelSelectPanel.transform.GetChild(selectedLevel).GetComponent<Image>().color = SelectedLevelColour;
+        // Change level image.
+        LevelImage.sprite = LevelImages[selectedLevel];
+        // Change level title.
+        LevelNameText.text = LevelNames[selectedLevel];
+        // Change level description.
+        LevelDescriptionText.text = LevelDescriptions[selectedLevel];
     }
 }
