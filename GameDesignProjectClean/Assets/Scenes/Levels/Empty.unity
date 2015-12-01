@@ -85,48 +85,6 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &148491395
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 433996, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 433996, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 433996, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -10
-      objectReference: {fileID: 0}
-    - target: {fileID: 433996, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 433996, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 433996, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 433996, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 433996, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1158362450
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,6 +198,86 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!1001 &1550488924
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 433996, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 433996, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 433996, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 433996, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 433996, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 433996, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 433996, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 433996, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11489764, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &1550488925 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 165400, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
+  m_PrefabInternal: {fileID: 1550488924}
+--- !u!114 &1550488926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1550488925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a30b18257a104f74d98ac7a0c285f02a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxSize: 30
+  MinSize: 10
+  InsideMargin: 5
+  OutsideMargin: 0
+  PushInForce: 100
+  PushInTorque: 5
+  ThrusterDisableTime: .5
+  CameraScaleGraph:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 20
+      value: 20
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1001 &1930331304
 Prefab:
   m_ObjectHideFlags: 0
