@@ -23,7 +23,8 @@ public class Laser : Projectile
 	{
 		elapsedTime = 0;
 		InGrace = true;
-	}
+        GetComponent<BoxCollider2D>().enabled = true;
+    }
 
     // Update is called once per frame
     void Update()
