@@ -25,7 +25,7 @@ public class GameHandler : MonoBehaviour
     private int playersLost = 0;
     private int[] playerLostPositions;
     private int[] originalNbOfModules = new int[4];
-    private int[] modulesLeft = new int[4];
+    private int[] modulesLeft = new int[] { 0, 0, 0, 0 };
     private int[] modulesDestroyed = new int[4];
 
     // Other settings.
@@ -167,17 +167,23 @@ public class GameHandler : MonoBehaviour
         {
             case GamePad.Index.One:
                 playerLostPositions[0] = (totalPlayersJoined - 1) - playersLost++;
+                modulesLeft[0] = playerShips[0].GetComponent<Core>().NbOfModules;
                 break;
             case GamePad.Index.Two:
                 playerLostPositions[1] = (totalPlayersJoined - 1) - playersLost++;
+                modulesLeft[1] = playerShips[1].GetComponent<Core>().NbOfModules;
                 break;
             case GamePad.Index.Three:
                 playerLostPositions[2] = (totalPlayersJoined - 1) - playersLost++;
+                modulesLeft[2] = playerShips[2].GetComponent<Core>().NbOfModules;
                 break;
             case GamePad.Index.Four:
                 playerLostPositions[3] = (totalPlayersJoined - 1) - playersLost++;
+                modulesLeft[3] = playerShips[3].GetComponent<Core>().NbOfModules;
                 break;
         }
+
+        Debug.Log("Total players: " + totalPlayersJoined + " players lost: " + playersLost);
 
         // If only one player is left, the game is over.
         if (playersLost == totalPlayersJoined - 1)
@@ -186,7 +192,10 @@ public class GameHandler : MonoBehaviour
             {
                 if (!playersJoined[i])
                     continue;
-                modulesLeft[i] = playerShips[i].GetComponent<Core>().NbOfModules;
+                if (modulesLeft[i] == 0)
+                {
+                    modulesLeft[i] = playerShips[i].GetComponent<Core>().NbOfModules;
+                }
                 modulesDestroyed[i] = playerShips[i].GetComponent<Core>().ModulesDestroyed;
             }
             Invoke("DisplayWinScreen", SecondsToWinScreen);
@@ -206,14 +215,14 @@ public class GameHandler : MonoBehaviour
         {
             case GamePad.Index.One:
                 originalNbOfModules[0] = nbOfModules;
-                break;               
-            case GamePad.Index.Two:  
+                break;
+            case GamePad.Index.Two:
                 originalNbOfModules[1] = nbOfModules;
-                break;               
+                break;
             case GamePad.Index.Three:
                 originalNbOfModules[2] = nbOfModules;
-                break;               
-            case GamePad.Index.Four: 
+                break;
+            case GamePad.Index.Four:
                 originalNbOfModules[3] = nbOfModules;
                 break;
         }

@@ -11,7 +11,7 @@ GameObject:
   - 222: {fileID: 22250962}
   - 114: {fileID: 11402468}
   m_Layer: 5
-  m_Name: Score (1)
+  m_Name: ScoreSecond
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &120626
 GameObject:
   m_ObjectHideFlags: 1
@@ -67,7 +67,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &139894
 GameObject:
   m_ObjectHideFlags: 1
@@ -96,7 +96,7 @@ GameObject:
   - 222: {fileID: 22221974}
   - 114: {fileID: 11496166}
   m_Layer: 5
-  m_Name: Score (3)
+  m_Name: ScoreFourth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,7 +130,7 @@ GameObject:
   - 222: {fileID: 22292432}
   - 114: {fileID: 11400170}
   m_Layer: 5
-  m_Name: Score
+  m_Name: ScoreFirst
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,7 +147,7 @@ GameObject:
   - 222: {fileID: 22222166}
   - 114: {fileID: 11410066}
   m_Layer: 5
-  m_Name: Score (2)
+  m_Name: ScoreThird
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,7 +169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &168178
 GameObject:
   m_ObjectHideFlags: 1
@@ -186,7 +186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &174952
 GameObject:
   m_ObjectHideFlags: 1
@@ -522,19 +522,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterWonSprites:
-  - {fileID: 21300000, guid: 27f2ebbf4bdf548dc940dbf9df167494, type: 3}
   - {fileID: 21300000, guid: 9360013128464404eb7aa09753782434, type: 3}
-  - {fileID: 21300000, guid: 2aa135fea1418f248b7eacb0b2cc60b5, type: 3}
   - {fileID: 21300000, guid: 90b118958ca31c64b932ca1f88e07e3b, type: 3}
+  - {fileID: 21300000, guid: 2aa135fea1418f248b7eacb0b2cc60b5, type: 3}
+  - {fileID: 21300000, guid: 27f2ebbf4bdf548dc940dbf9df167494, type: 3}
   CharacterLostSprites:
-  - {fileID: 21300000, guid: 64f3c1760166f415d8e93e8633b9098f, type: 3}
   - {fileID: 21300000, guid: 108d93f0b9cd3474d98e58686c406dfb, type: 3}
-  - {fileID: 21300000, guid: 6e033abc7dd064cdbab6dbb94e5828d7, type: 3}
   - {fileID: 21300000, guid: d3e28f294cebb47d4bf70d414d28ac9e, type: 3}
+  - {fileID: 21300000, guid: 6e033abc7dd064cdbab6dbb94e5828d7, type: 3}
+  - {fileID: 21300000, guid: 64f3c1760166f415d8e93e8633b9098f, type: 3}
   FirstImage: {fileID: 11491690}
   SecondImage: {fileID: 11494292}
   ThirdImage: {fileID: 11418550}
   FourthImage: {fileID: 11483798}
+  FirstScore: {fileID: 11400170}
+  SecondScore: {fileID: 11402468}
+  ThirdScore: {fileID: 11410066}
+  FourthScore: {fileID: 11496166}
   WinText: {fileID: 11496836}
 --- !u!114 &11442716
 MonoBehaviour:
@@ -1026,8 +1030,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -49, y: -130}
-  m_SizeDelta: {x: 78, y: 52}
+  m_AnchoredPosition: {x: -59.2999992, y: -123.599998}
+  m_SizeDelta: {x: 98.5999985, y: 64.6999969}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22476656
 RectTransform:

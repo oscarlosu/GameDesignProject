@@ -81,20 +81,23 @@ public class Structure : ShipComponent
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        // Only "crash" if the force with which the objects hit each other is large enough.
-        if (coll.relativeVelocity.magnitude > GlobalValues.MinCrashMagnitude)
+        if (coll.gameObject.GetComponent<Rigidbody2D>() != null)
         {
-            // If the other object has a higher mass, lose one random module.
-            if (coll.rigidbody.mass >= ShipCore.GetComponent<Rigidbody2D>().mass)
+            // Only "crash" if the force with which the objects hit each other is large enough.
+            if (coll.relativeVelocity.magnitude > GlobalValues.MinCrashMagnitude)
             {
-                Core core = null;
-                if (coll.gameObject.GetComponent<Structure>() != null)
+                // If the other object has a higher mass, lose one random module.
+                if (coll.rigidbody.mass >= ShipCore.GetComponent<Rigidbody2D>().mass)
                 {
-                    core = coll.gameObject.GetComponent<Structure>().ShipCore.GetComponent<Core>();
+                    Core core = null;
+                    if (coll.gameObject.GetComponent<Structure>() != null)
+                    {
+                        core = coll.gameObject.GetComponent<Structure>().ShipCore.GetComponent<Core>();
+                    }
+                    TakeDamage(GlobalValues.CrashDamage, core);
                 }
-                TakeDamage(GlobalValues.CrashDamage, core);
-            }
 
+            }
         }
     }
 

@@ -41,7 +41,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ComponentName: Pulse Device
-  BuilderSprite: {fileID: 21300000, guid: 887a30b5a3142e947bcf3d96c2585540, type: 3}
+  BuilderSprite: {fileID: 21300000, guid: a351c33bf9ca544528513c2d428b137a, type: 3}
   ShipCore: {fileID: 0}
   Mass: 3
   InputType: 0
