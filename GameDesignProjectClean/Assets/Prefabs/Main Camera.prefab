@@ -46,7 +46,6 @@ GameObject:
   - 124: {fileID: 12453758}
   - 81: {fileID: 8112474}
   - 114: {fileID: 11489764}
-  - 114: {fileID: 11464686}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -232,40 +231,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 165400}
   m_Enabled: 1
---- !u!114 &11464686
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 165400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fb77003383381f4b9082c2e920708f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MinSize: 0
-  InsideMargin: 0
-  OutsideMargin: 0
-  PushInForce: 0
-  PushInTorque: 0
-  ThrusterDisableTime: 0
-  camBufferX: 0
-  camBufferY: 0
-  CameraScaleGraph:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 15
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 50
-      value: 50
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
 --- !u!114 &11486820
 MonoBehaviour:
   m_ObjectHideFlags: 1

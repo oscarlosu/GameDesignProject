@@ -184,7 +184,7 @@ MonoBehaviour:
   SpriteLeft: {fileID: 21300000, guid: 81ce7b1e79106dc44a725d4b9f7c773c, type: 3}
   SpriteRight: {fileID: 21300000, guid: 2f22d96cce9ec9a4d9f552ba4300a26a, type: 3}
   SpriteDirection: 0
-  ThrustPower: 8
+  ThrustPower: 20
   DotMargin: .00999999978
   CrossMargin: .00999999978
 --- !u!198 &19888714
@@ -2427,6 +2427,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_SortingLayerID
       value: -98434433
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ThrustPower
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
