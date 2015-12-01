@@ -43,7 +43,7 @@ MonoBehaviour:
   ComponentName: Armor
   BuilderSprite: {fileID: 21300000, guid: 2206ea89ca6aa0541b5caace84f6c417, type: 3}
   ShipCore: {fileID: 0}
-  Mass: 2
+  Mass: 5
   InputType: 0
   ButtonKey: 0
   TriggerKey: 0
@@ -110,6 +110,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_SortingLayerID
       value: -98434433
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Mass
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
