@@ -126,7 +126,7 @@ MonoBehaviour:
   SpriteDirection: 0
   RocketPrefab: {fileID: 155838, guid: 946fed33d74bef54b9e9812c23af333e, type: 2}
   Cooldown: 4
-  RocketLaunchSpeed: 4
+  RocketLaunchSpeed: 12
   RocketLaunchPosOffset: 1
 --- !u!212 &21272118
 SpriteRenderer:
@@ -206,6 +206,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: Mass
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RocketLaunchSpeed
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

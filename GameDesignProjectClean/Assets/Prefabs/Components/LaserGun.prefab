@@ -115,7 +115,7 @@ MonoBehaviour:
   ComponentName: Laser Gun
   BuilderSprite: {fileID: 21300000, guid: ebb39fafdaa16274fb2a84600cf33cbf, type: 3}
   ShipCore: {fileID: 0}
-  Mass: 3
+  Mass: 2
   InputType: 0
   ButtonKey: 1
   TriggerKey: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
   SpriteRight: {fileID: 21300000, guid: f0adc05d70a51f64f82e50ea3b76e196, type: 3}
   SpriteDirection: 0
   LaserPrefab: {fileID: 108826, guid: cfdb46d2623fd1647822b1423ccf8d20, type: 2}
-  Cooldown: 0
+  Cooldown: .25
   MinLaserBreadth: .200000003
   MaxLaserBreadth: 3
   MinLaserLength: .5
@@ -188,7 +188,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Cooldown
-      value: 0
+      value: .25
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MaxChargeTime
@@ -209,7 +209,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Mass
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MaxLaserLength

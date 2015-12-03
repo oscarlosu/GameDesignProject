@@ -209,7 +209,7 @@ MonoBehaviour:
   DisableDistance: 30
   MaxLifespan: 60
   ThrustPower: 5
-  ThrusterDuration: 2
+  ThrusterDuration: 5
   GracePeriod: 1
   ExplosionPrefab: {fileID: 156326, guid: 7da4b492e2d0ce44caceb70210788b33, type: 2}
 --- !u!198 &19851210
@@ -2409,7 +2409,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: ThrusterDuration
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: GracePeriod

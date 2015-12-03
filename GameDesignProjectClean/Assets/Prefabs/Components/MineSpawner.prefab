@@ -127,6 +127,7 @@ MonoBehaviour:
   MinePrefab: {fileID: 155838, guid: a749b9803894116428f767a7635d7b5a, type: 2}
   SpawnOffset: .200000003
   Cooldown: 2
+  spawnForce: 20
 --- !u!212 &21272118
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -197,6 +198,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: Mass
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: SpawnOffset
+      value: .200000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawnForce
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
