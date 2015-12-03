@@ -2,7 +2,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class Structure : ShipComponent
 {
@@ -271,7 +273,7 @@ public class Structure : ShipComponent
     }
 
 }
-
+#if UNITY_EDITOR
 /****************
 * Editor tools.
 ****************/
@@ -306,3 +308,4 @@ public class StructureEditor : ShipComponentEditor
         }
     }
 }
+#endif

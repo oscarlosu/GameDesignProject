@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class Module : ShipComponent
@@ -186,6 +188,7 @@ public class Module : ShipComponent
     }
 
 }
+#if UNITY_EDITOR
 
 /****************
 * Editor tools.
@@ -245,3 +248,5 @@ public class ModuleEditor : ShipComponentEditor
         }
     }
 }
+
+#endif

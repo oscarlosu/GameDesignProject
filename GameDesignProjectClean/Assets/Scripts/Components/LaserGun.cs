@@ -1,8 +1,9 @@
 ﻿using System;
 using UnityEngine;
 using GamepadInput;
+#if UNITY_EDITOR
 using UnityEditor;
-
+#endif
 public class LaserGun : Module
 {
     public GameObject LaserPrefab;
@@ -129,6 +130,7 @@ public class LaserGun : Module
     }
 }
 
+#if UNITY_EDITOR
 /****************
 * Editor tools.
 ****************/
@@ -162,3 +164,4 @@ public class LaserGunEditor : ModuleEditor
         }
     }
 }
+#endif

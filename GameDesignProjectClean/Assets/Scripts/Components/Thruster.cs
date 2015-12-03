@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using GamepadInput;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(AudioSource))]
@@ -519,6 +521,7 @@ public class Thruster : Module
 	}
 }
 
+#if UNITY_EDITOR
 
 /****************
 * Editor tools.
@@ -556,3 +559,4 @@ public class ThrusterEditor : ModuleEditor
         }
     }
 }
+#endif
