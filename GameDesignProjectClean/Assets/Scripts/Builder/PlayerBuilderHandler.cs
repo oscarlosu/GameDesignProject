@@ -391,19 +391,20 @@ public class PlayerBuilderHandler : MonoBehaviour
             {
                 ReadyText.SetActive(true);
                 playerReady = true;
+                var shipReady = Instantiate(shipCore);
                 switch (ControllerIndex)
                 {
                     case GamePad.Index.One:
-                        BuilderHandler.SetPlayerShip(0, shipCore);
+                        BuilderHandler.SetPlayerShip(0, shipReady);
                         return;
                     case GamePad.Index.Two:
-                        BuilderHandler.SetPlayerShip(1, shipCore);
+                        BuilderHandler.SetPlayerShip(1, shipReady);
                         return;
                     case GamePad.Index.Three:
-                        BuilderHandler.SetPlayerShip(2, shipCore);
+                        BuilderHandler.SetPlayerShip(2, shipReady);
                         return;
                     case GamePad.Index.Four:
-                        BuilderHandler.SetPlayerShip(3, shipCore);
+                        BuilderHandler.SetPlayerShip(3, shipReady);
                         return;
                 }
             }
@@ -413,7 +414,7 @@ public class PlayerBuilderHandler : MonoBehaviour
             if (GamePad.GetButtonDown(ButtonGoToBuildMode, ControllerIndex))
             {
                 playerReady = false;
-                /*switch (ControllerIndex)
+                switch (ControllerIndex)
                 {
                     case GamePad.Index.One:
                         BuilderHandler.SetPlayerNotReady(0);
@@ -427,7 +428,7 @@ public class PlayerBuilderHandler : MonoBehaviour
                     case GamePad.Index.Four:
                         BuilderHandler.SetPlayerNotReady(3);
                         return;
-                }*/
+                }
                 GoToBuildMode();
                 return;
             }
