@@ -7,6 +7,7 @@ public class CameraControllerLevels : MonoBehaviour {
     // Zoom to fit params
     public float MinSize;
     public float InsideMargin;
+    public float camDelay;
 
     public float OutsideMargin;
 
@@ -22,6 +23,7 @@ public class CameraControllerLevels : MonoBehaviour {
     private List<GameObject> ships = new List<GameObject>();
     private Camera cam;
     private int currentShips = 0;
+    float count;
 
 
     // Use this for initialization
@@ -41,6 +43,7 @@ public class CameraControllerLevels : MonoBehaviour {
         // Only zoom to fit if the camera size is below the maximum size
         CenterAndZoomToFit();
         KeepShipsInsideViewport();
+        count += Time.deltaTime;
     }
 
     private void CenterAndZoomToFit()
@@ -48,7 +51,11 @@ public class CameraControllerLevels : MonoBehaviour {
         // Update the orthographic size of the camera
         float maxAxisDistance = GetMaxAxisDistanceToCamera() + InsideMargin;
         cam.orthographicSize = CameraScaleGraph.Evaluate(maxAxisDistance);
-        Vector3 targetCenter = CameraTargetPosition();
+        Vector3 targetCenter;
+        if (count > camDelay)
+             targetCenter = CameraTargetPosition();
+        else
+            targetCenter = Vector3.zero;
         
         targetCenter.z = cam.transform.position.z;
         cam.transform.position = Vector3.Lerp(cam.transform.position, targetCenter, Time.deltaTime);

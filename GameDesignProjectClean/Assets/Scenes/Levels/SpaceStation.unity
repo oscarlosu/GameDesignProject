@@ -6346,7 +6346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10f585e3d461b6f4c9f643e7002ab7e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserSizeStation: {x: 3, y: 10}
+  laserSizeStation: {x: 4, y: 10}
   ssParts:
   - {fileID: 1006767053}
   - {fileID: 680188594}
@@ -7622,12 +7622,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MinSize: 10
   InsideMargin: 5
+  camDelay: 0
   OutsideMargin: 0
-  PushInForce: 100
+  PushInForce: 200
   PushInTorque: 5
   ThrusterDisableTime: 0
-  camBufferX: 45
-  camBufferY: 45
+  camBufferX: 15
+  camBufferY: 15
   CameraScaleGraph:
     serializedVersion: 2
     m_Curve:
