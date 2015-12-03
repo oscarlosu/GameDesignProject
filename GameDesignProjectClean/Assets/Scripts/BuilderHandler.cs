@@ -71,7 +71,10 @@ public class BuilderHandler : MonoBehaviour
 
     public void SetPlayerNotReady(int playerIndex)
     {
-        Destroy(ships[playerIndex]);
-        ships[playerIndex] = null;
+        if (ships[playerIndex] != null)
+        {
+            Destroy(ships[playerIndex]);
+            ships[playerIndex] = null;
+        }
     }
 }

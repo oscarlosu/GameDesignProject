@@ -25,6 +25,7 @@ public class Core : Structure
     private Rigidbody2D rb;
     private float oldAngularVelocity = 0.0f;
     private bool isDestroying = false;
+    private bool inBuilder;
 
     // Public methods
 
@@ -37,6 +38,7 @@ public class Core : Structure
     private void OnEnable()
     {
         base.OnEnable();
+        inBuilder = Application.loadedLevelName == "Builder";
         ShipCore = this.gameObject;
         rb = GetComponent<Rigidbody2D>();
         DefaultAngularDrag = rb.angularDrag;
@@ -53,7 +55,7 @@ public class Core : Structure
     // Update is called once per frame
     public void Update()
     {
-        if (GamePad.GetButtonDown(SelfdestructButton, ControllerIndex) && !InBuildMode)
+        if (!inBuilder && GamePad.GetButtonDown(SelfdestructButton, ControllerIndex))
         {
             Debug.Log("Self destruct!");
             DestroyShip();
