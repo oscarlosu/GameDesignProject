@@ -2389,7 +2389,7 @@ GameObject:
   - 92: {fileID: 1107217904}
   - 81: {fileID: 1107217903}
   m_Layer: 0
-  m_Name: Camera
+  m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2849,7 +2849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .211764708, g: .400000006, b: .498039216, a: 1}
+  m_Color: {r: .211764708, g: .400000006, b: .498039216, a: .862745106}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2882,8 +2882,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1490094146}
   m_RootOrder: 0
-  m_AnchorMin: {x: .0582158901, y: .0925339535}
-  m_AnchorMax: {x: .939861059, y: .929487228}
+  m_AnchorMin: {x: .0591774285, y: .0926344767}
+  m_AnchorMax: {x: .940822601, y: .907365501}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
@@ -2980,7 +2980,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1490094146
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3044,8 +3044,8 @@ Canvas:
   m_GameObject: {fileID: 1490094145}
   m_Enabled: 1
   serializedVersion: 2
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 1107217906}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -3487,6 +3487,7 @@ MonoBehaviour:
   - {fileID: 835840640}
   - {fileID: 543230844}
   - {fileID: 1516278937}
+  OverlayCanvas: {fileID: 1490094145}
 --- !u!4 &1779329490
 Transform:
   m_ObjectHideFlags: 0
