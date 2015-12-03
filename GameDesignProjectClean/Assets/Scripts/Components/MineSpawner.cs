@@ -9,6 +9,7 @@ public class MineSpawner : Module
 
     public float SpawnOffset;
     public float Cooldown;
+    public float spawnForce;
 
     private float elapsedTime;
     private bool ready;
@@ -82,6 +83,8 @@ public class MineSpawner : Module
 		GameObject mine = pool.RequestPoolObject(ObjectPool.ObjectType.Mine, transform.position + transform.up * SpawnOffset, transform.rotation);
         //GameObject mine = (GameObject)Instantiate(MinePrefab, transform.position + transform.up * SpawnOffset, transform.rotation);
         //mine.transform.parent = null;
+
+        mine.GetComponent<Rigidbody2D>().AddForce(mine.transform.up * spawnForce);
 
         // Set common projectile variables.
         var projectile = mine.GetComponent<Projectile>();

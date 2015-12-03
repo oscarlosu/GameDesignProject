@@ -86,10 +86,12 @@ public class HomingMissile : Projectile
             else
             {
                 // Handle turning.
-                Vector3 moveDirection = Target.transform.position - transform.position;
+                Vector3 moveDirection = (Target.transform.position + (Target.transform.up * (Target.GetComponent<Rigidbody2D>().velocity.magnitude * 0.3f))) - transform.position;
                 float angle = Mathf.Atan2(moveDirection.y, moveDirection.x)*Mathf.Rad2Deg - 90;
                 var rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotation, TurnSpeed);
+
+                //Debug.DrawRay(transform.position, (Target.transform.position + (Target.transform.up * (Target.GetComponent<Rigidbody2D>().velocity.magnitude * 0.3f))) - transform.position);
             }
             // If there is still fuel in this basterd, select new target, when the new target timer runs out.
             if (timeSinceLastTarget > NewTargetTimer)
@@ -123,6 +125,7 @@ public class HomingMissile : Projectile
                 distance = curDistance;
             }
         }
+
         Target = closest;
 
     }
@@ -174,4 +177,10 @@ public class HomingMissile : Projectile
 	{
 		CancelInvoke();
 	}
+
+    void OnDrawGizmos()
+    {
+        //if (Target != null)
+            //Gizmos.DrawCube((Target.transform.position + (Target.transform.up * (Target.GetComponent<Rigidbody2D>().velocity.magnitude * 0.3f))), Vector3.one);
+    }
 }

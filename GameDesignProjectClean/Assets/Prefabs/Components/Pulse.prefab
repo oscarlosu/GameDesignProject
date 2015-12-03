@@ -153,7 +153,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-  RepulsionForce: 200
+  RepulsionForce: 150
   TorqueMagnitude: 10
   Radius: 5
   Speed: 5
@@ -206,7 +206,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: RepulsionForce
-      value: 200
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: TorqueMagnitude

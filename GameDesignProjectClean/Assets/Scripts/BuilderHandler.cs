@@ -68,4 +68,9 @@ public class BuilderHandler : MonoBehaviour
         ships[playerIndex] = ship;
         Debug.Log("Player: " + (playerIndex + 1) + " finished: " + ship);
     }
+
+    public void SetPlayerNotReady(int playerIndex)
+    {
+        ships[playerIndex] = null;
+    }
 }

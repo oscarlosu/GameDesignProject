@@ -413,6 +413,21 @@ public class PlayerBuilderHandler : MonoBehaviour
             if (GamePad.GetButtonDown(ButtonGoToBuildMode, ControllerIndex))
             {
                 playerReady = false;
+                /*switch (ControllerIndex)
+                {
+                    case GamePad.Index.One:
+                        BuilderHandler.SetPlayerNotReady(0);
+                        return;
+                    case GamePad.Index.Two:
+                        BuilderHandler.SetPlayerNotReady(1);
+                        return;
+                    case GamePad.Index.Three:
+                        BuilderHandler.SetPlayerNotReady(2);
+                        return;
+                    case GamePad.Index.Four:
+                        BuilderHandler.SetPlayerNotReady(3);
+                        return;
+                }*/
                 GoToBuildMode();
                 return;
             }
