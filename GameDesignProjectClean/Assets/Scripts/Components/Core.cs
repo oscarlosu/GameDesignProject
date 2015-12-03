@@ -59,7 +59,7 @@ public class Core : Structure
         if (!inBuilder && GamePad.GetButtonDown(SelfdestructButton, ControllerIndex))
         {
             Debug.Log("Self destruct!");
-            DestroyShip();
+            DestroyShip(true);
         }
 
 
@@ -73,13 +73,13 @@ public class Core : Structure
         oldAngularVelocity = rb.angularVelocity;
     }
 
-    public void DestroyShip()
+    public void DestroyShip(bool selfDestruct = false)
     {
         if (!isDestroying)
         {
             rb.angularVelocity = 1000;
             rb.velocity = Vector2.zero;
-            GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().PlayerLost(ControllerIndex);
+            GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().PlayerLost(ControllerIndex, selfDestruct);
             GameObject.Instantiate(SelfdestructParticlePrefab).transform.position = transform.position;
             Invoke("DisableShip", DisableAfterTime);
             isDestroying = true;

@@ -26,15 +26,15 @@ public class WinScreen : MonoBehaviour
 
     }
 
-    public void SetupWinScreen(bool[] playersJoined, int[] playerPositions, int[] originalNbOfModules, int[] modulesLeft, int[] modulesDestroyed)
+    public void SetupWinScreen(bool[] playersJoined, int[] playerPositions, int[] originalNbOfModules, int[] modulesLeft, int[] modulesDestroyed, bool[] selfDestruct)
     {
         // Calculate points.
         int nbPlayersJoined = playersJoined.Count(t => t);
         int[] points = new int[4];
-        points[0] = playersJoined[0] ? modulesLeft[0] + modulesDestroyed[0] : -1;
-        points[1] = playersJoined[1] ? modulesLeft[1] + modulesDestroyed[1] : -1;
-        points[2] = playersJoined[2] ? modulesLeft[2] + modulesDestroyed[2] : -1;
-        points[3] = playersJoined[3] ? modulesLeft[3] + modulesDestroyed[3] : -1;
+        points[0] = playersJoined[0] ? (selfDestruct[0] && modulesLeft[0] == originalNbOfModules[0] ? 0 : modulesLeft[0]) + modulesDestroyed[0] : -1;
+        points[1] = playersJoined[1] ? (selfDestruct[1] && modulesLeft[1] == originalNbOfModules[1] ? 0 : modulesLeft[1]) + modulesDestroyed[1] : -1;
+        points[2] = playersJoined[2] ? (selfDestruct[2] && modulesLeft[2] == originalNbOfModules[2] ? 0 : modulesLeft[2]) + modulesDestroyed[2] : -1;
+        points[3] = playersJoined[3] ? (selfDestruct[3] && modulesLeft[3] == originalNbOfModules[3] ? 0 : modulesLeft[3]) + modulesDestroyed[3] : -1;
 
         // Calculate positions.
         int[] pointsForPos = new int[4];
@@ -61,7 +61,7 @@ public class WinScreen : MonoBehaviour
         for (int i = 0; i < playersJoined.Length; i++)
         {
 
-            Debug.Log("Player " + (i + 1) + " rank: " + pointPos[i] + " modules left: " + modulesLeft[i] + " modules destroyed: " + modulesDestroyed[i]);
+            Debug.Log("Player " + (i + 1) + " rank: " + pointPos[i] + "\nself destruct: " + selfDestruct[i] + "\nmodules left: " + modulesLeft[i] + "\nmodules destroyed: " + modulesDestroyed[i]);
             if (!playersJoined[i]) continue;
 
             switch (pointPos[i])
