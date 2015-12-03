@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using GamepadInput;
+#if UNITY_EDITOR
 using UnityEditor;
-
+#endif
 [RequireComponent(typeof(Rigidbody2D))]
 public class Core : Structure
 {
@@ -25,6 +26,7 @@ public class Core : Structure
     private Rigidbody2D rb;
     private float oldAngularVelocity = 0.0f;
     private bool isDestroying = false;
+    private bool inBuilder;
 
     // Public methods
 
@@ -37,6 +39,7 @@ public class Core : Structure
     private void OnEnable()
     {
         base.OnEnable();
+        inBuilder = Application.loadedLevelName == "Builder";
         ShipCore = this.gameObject;
         rb = GetComponent<Rigidbody2D>();
         DefaultAngularDrag = rb.angularDrag;
@@ -53,10 +56,10 @@ public class Core : Structure
     // Update is called once per frame
     public void Update()
     {
-        if (GamePad.GetButtonDown(SelfdestructButton, ControllerIndex) && !InBuildMode)
+        if (!inBuilder && GamePad.GetButtonDown(SelfdestructButton, ControllerIndex))
         {
             Debug.Log("Self destruct!");
-            DestroyShip();
+            DestroyShip(true);
         }
 
 
@@ -70,13 +73,13 @@ public class Core : Structure
         oldAngularVelocity = rb.angularVelocity;
     }
 
-    public void DestroyShip()
+    public void DestroyShip(bool selfDestruct = false)
     {
         if (!isDestroying)
         {
             rb.angularVelocity = 1000;
             rb.velocity = Vector2.zero;
-            GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().PlayerLost(ControllerIndex);
+            GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().PlayerLost(ControllerIndex, selfDestruct);
             GameObject.Instantiate(SelfdestructParticlePrefab).transform.position = transform.position;
             Invoke("DisableShip", DisableAfterTime);
             isDestroying = true;
@@ -139,7 +142,7 @@ public class Core : Structure
         RotationControlMode, DirectionControlMode
     }
 }
-
+#if UNITY_EDITOR
 
 /****************
 * Editor tools.
@@ -186,3 +189,4 @@ public class CoreEditor : StructureEditor
         }
     }
 }
+#endif

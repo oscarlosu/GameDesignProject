@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using GamepadInput;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class RocketLauncher : Module
 {
@@ -127,7 +129,7 @@ public class RocketLauncher : Module
         }*/
     }
 }
-
+#if UNITY_EDITOR
 /****************
 * Editor tools.
 ****************/
@@ -158,3 +160,4 @@ public class RocketLauncherEditor : ModuleEditor
         }
     }
 }
+#endif

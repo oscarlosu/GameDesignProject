@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using GamepadInput;
+#if UNITY_EDITOR
 using UnityEditor;
-
+#endif
 public class ImplosionBombLaucher : Module
 {
 	public GameObject RocketPrefab;
@@ -102,6 +103,7 @@ public class ImplosionBombLaucher : Module
 	}
 }
 
+#if UNITY_EDITOR
 /****************
 * Editor tools.
 ****************/
@@ -132,3 +134,4 @@ public class ImplosionBombLaucherEditor : ModuleEditor
 		}
 	}
 }
+#endif

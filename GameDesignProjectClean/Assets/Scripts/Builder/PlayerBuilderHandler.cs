@@ -413,21 +413,22 @@ public class PlayerBuilderHandler : MonoBehaviour
             // Go back to build mode to build the ship.
             if (GamePad.GetButtonDown(ButtonGoToBuildMode, ControllerIndex))
             {
+                ReadyText.SetActive(false);
                 playerReady = false;
                 switch (ControllerIndex)
                 {
                     case GamePad.Index.One:
                         BuilderHandler.SetPlayerNotReady(0);
-                        return;
+                        break;
                     case GamePad.Index.Two:
                         BuilderHandler.SetPlayerNotReady(1);
-                        return;
+                        break;
                     case GamePad.Index.Three:
                         BuilderHandler.SetPlayerNotReady(2);
-                        return;
+                        break;
                     case GamePad.Index.Four:
                         BuilderHandler.SetPlayerNotReady(3);
-                        return;
+                        break;
                 }
                 GoToBuildMode();
                 return;

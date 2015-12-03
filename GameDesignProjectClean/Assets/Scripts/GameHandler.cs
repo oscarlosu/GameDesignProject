@@ -27,6 +27,7 @@ public class GameHandler : MonoBehaviour
     private int[] originalNbOfModules = new int[4];
     private int[] modulesLeft = new int[] { 0, 0, 0, 0 };
     private int[] modulesDestroyed = new int[4];
+    private bool[] selfDestruct = new bool[4];
 
     // Other settings.
     private bool GameOver;
@@ -160,7 +161,7 @@ public class GameHandler : MonoBehaviour
         return playerShips;
     }
 
-    public void PlayerLost(GamePad.Index controllerIndex)
+    public void PlayerLost(GamePad.Index controllerIndex, bool didSelfDestruct)
     {
         var totalPlayersJoined = playersJoined.Count(t => t);
         // Save that the player lost.
@@ -169,22 +170,24 @@ public class GameHandler : MonoBehaviour
             case GamePad.Index.One:
                 playerLostPositions[0] = (totalPlayersJoined - 1) - playersLost++;
                 modulesLeft[0] = playerShips[0].GetComponent<Core>().NbOfModules;
+                selfDestruct[0] = didSelfDestruct;
                 break;
             case GamePad.Index.Two:
                 playerLostPositions[1] = (totalPlayersJoined - 1) - playersLost++;
                 modulesLeft[1] = playerShips[1].GetComponent<Core>().NbOfModules;
+                selfDestruct[1] = didSelfDestruct;
                 break;
             case GamePad.Index.Three:
                 playerLostPositions[2] = (totalPlayersJoined - 1) - playersLost++;
                 modulesLeft[2] = playerShips[2].GetComponent<Core>().NbOfModules;
+                selfDestruct[2] = didSelfDestruct;
                 break;
             case GamePad.Index.Four:
                 playerLostPositions[3] = (totalPlayersJoined - 1) - playersLost++;
                 modulesLeft[3] = playerShips[3].GetComponent<Core>().NbOfModules;
+                selfDestruct[3] = didSelfDestruct;
                 break;
         }
-
-        Debug.Log("Total players: " + totalPlayersJoined + " players lost: " + playersLost);
 
         // If only one player is left, the game is over.
         if (playersLost == totalPlayersJoined - 1)
@@ -207,7 +210,7 @@ public class GameHandler : MonoBehaviour
     {
         Debug.Log("Open win screen!");
         WinScreen winScreen = Instantiate(WinScreenPrefab).GetComponent<WinScreen>();
-        winScreen.SetupWinScreen(playersJoined, playerLostPositions, originalNbOfModules, modulesLeft, modulesDestroyed);
+        winScreen.SetupWinScreen(playersJoined, playerLostPositions, originalNbOfModules, modulesLeft, modulesDestroyed, selfDestruct);
         GameOver = true;
     }
 

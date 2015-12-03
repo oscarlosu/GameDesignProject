@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using GamepadInput;
+#if UNITY_EDITOR
 using UnityEditor;
-
+#endif
 public class MineSpawner : Module
 {
     public GameObject MinePrefab;
@@ -96,6 +97,7 @@ public class MineSpawner : Module
     }
 }
 
+#if UNITY_EDITOR
 /****************
 * Editor tools.
 ****************/
@@ -125,3 +127,4 @@ public class MineSpawnerEditor : ModuleEditor
         }
     }
 }
+#endif

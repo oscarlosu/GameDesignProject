@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using GamepadInput;
+#if UNITY_EDITOR
 using UnityEditor;
-
+#endif
 public class Armor : Module
 {
 	public int ExtraHp;
@@ -30,7 +31,7 @@ public class Armor : Module
 		transform.parent.GetComponent<Structure>().IncreaseMaxHp(ExtraHp);
     }
 }
-
+#if UNITY_EDITOR
 /****************
 * Editor tools.
 ****************/
@@ -40,3 +41,4 @@ public class ArmorEditor : ModuleEditor
 {
 
 }
+#endif
