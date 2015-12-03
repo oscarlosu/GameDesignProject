@@ -39,8 +39,10 @@ public class LevelSelectHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Animated image.
         elapsedTime += Time.deltaTime;
 
+        // Movements.
         var leftStickValue = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.Any);
         if (leftStickValue.magnitude > 0.3)
         {
