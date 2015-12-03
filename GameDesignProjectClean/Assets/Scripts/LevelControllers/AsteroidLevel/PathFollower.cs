@@ -1,4 +1,6 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 using System.Collections;
 
@@ -103,8 +105,8 @@ public class PathFollower : MonoBehaviour
 		rb.angularDrag = GlobalValues.DefaultAngularDrag;
 	}
 }
-	
 
+#if UNITY_EDITOR
 /****************
 * Editor tools.
 ****************/
@@ -145,3 +147,4 @@ public class PathFollowerEditor : Editor
 		DrawCustomInspector();
 	}
 }
+#endif

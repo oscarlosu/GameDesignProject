@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class ShipComponent : MonoBehaviour
 {
@@ -15,7 +17,7 @@ public class ShipComponent : MonoBehaviour
 /****************
 * Editor tools.
 ****************/
-
+#if UNITY_EDITOR
 [CustomEditor(typeof(ShipComponent), true)]
 public class ShipComponentEditor : Editor
 {
@@ -56,3 +58,4 @@ public class ShipComponentEditor : Editor
         }
     }
 }
+#endif

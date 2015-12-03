@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using GamepadInput;
+#if UNITY_EDITOR
 using UnityEditor;
-
+#endif
 [RequireComponent(typeof(Rigidbody2D))]
 public class Core : Structure
 {
@@ -141,7 +142,7 @@ public class Core : Structure
         RotationControlMode, DirectionControlMode
     }
 }
-
+#if UNITY_EDITOR
 
 /****************
 * Editor tools.
@@ -188,3 +189,4 @@ public class CoreEditor : StructureEditor
         }
     }
 }
+#endif
