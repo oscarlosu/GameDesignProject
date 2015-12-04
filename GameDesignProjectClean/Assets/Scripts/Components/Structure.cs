@@ -97,6 +97,7 @@ public class Structure : ShipComponent
                         core = coll.gameObject.GetComponent<Structure>().ShipCore.GetComponent<Core>();
                     }
                     TakeDamage(GlobalValues.CrashDamage, core);
+					GetComponent<AudioSource>().Play();
                 }
 
             }

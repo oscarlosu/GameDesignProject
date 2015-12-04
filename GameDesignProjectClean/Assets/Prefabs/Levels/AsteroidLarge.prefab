@@ -69,7 +69,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 181876}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b4bcd29018700445949e4b2193272cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 568a989bfbb581f4c8710f8de0fc1baf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Size: 2
@@ -90,14 +90,14 @@ MonoBehaviour:
   SmallColRadius: .400000006
   MediumColRadius: 1
   LargeColRadius: 1.79533398
-  SmallMinWeight: 5
-  SmallMaxWeight: 10
+  SmallMinWeight: 1
+  SmallMaxWeight: 5
   MediumMinWeight: 10
   MediumMaxWeight: 15
-  LargeMinWeight: 15
-  LargeMaxWeight: 20
-  BreakdownVelocity: 10
-  DisableTime: .5
+  LargeMinWeight: 20
+  LargeMaxWeight: 25
+  BreakdownVelocity: 5
+  DisableTime: 0
   AsteroidPrefab: {fileID: 122610, guid: d54b5b607f973a44aa625b91dcc653c9, type: 2}
 --- !u!114 &11413798
 MonoBehaviour:
@@ -148,6 +148,18 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: SmallSprites.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: LargeSprites.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MediumSprites.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: aa55068373308a041af11f65928f1ee1,
@@ -174,7 +186,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: DisableTime
-      value: .5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: SplitMaxNum
@@ -186,8 +198,57 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: BreakdownVelocity
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: LargeColRadius
+      value: 1.79533398
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MediumColRadius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: SmallColRadius
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: SmallMinWeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: SmallMaxWeight
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MediumMinWeight
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MediumMaxWeight
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: LargeMinWeight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: LargeMaxWeight
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: AsteroidPrefab
+      value: 
+      objectReference: {fileID: 122610, guid: d54b5b607f973a44aa625b91dcc653c9, type: 2}
+    - target: {fileID: 0}
+      propertyPath: Size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MediumSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 3748487061c47ab479b1b9bb17d9bd6f,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 181876}
