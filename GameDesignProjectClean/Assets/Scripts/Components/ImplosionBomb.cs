@@ -29,16 +29,12 @@ public class ImplosionBomb : Projectile
         }
     }
 
-	void Start()
-	{
-		InvokeRepeating("GarbageCollect", 5, 5);
-	}
-
 	void OnEnable()
 	{
 		elapsedTime = 0;
 		InGrace = true;
-	}
+        InvokeRepeating("GarbageCollect", 5, 5);
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -97,11 +93,9 @@ public class ImplosionBomb : Projectile
 
 	void GarbageCollect()
 	{
-		// Return to object pool if too far from the camera position
-		if(Vector3.Distance (cam.transform.position, transform.position) > DisableDistance ||
-		   elapsedTime > MaxLifespan)
+		if(elapsedTime > MaxLifespan)
 		{
-			pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.ImplosionBomb);
+            Activate();
 		}
 	}
 

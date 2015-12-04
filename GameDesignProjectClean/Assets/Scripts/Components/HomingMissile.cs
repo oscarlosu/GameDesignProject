@@ -38,16 +38,12 @@ public class HomingMissile : Projectile
 		pool = GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetComponent<ObjectPool>();
     }
 
-	void Start()
-	{
-		InvokeRepeating("GarbageCollect", 5, 5);
-	}
-
 	void OnEnable()
 	{
 		elapsedTime = 0;
 		InGrace = true;
-	}
+        InvokeRepeating("GarbageCollect", 5, 5);
+    }
 
     // Update is called once per frame
     void Update()
@@ -160,16 +156,13 @@ public class HomingMissile : Projectile
         explosion.GetComponent<Explosion>().Damage = Damage;
         explosion.GetComponent<Explosion>().SourceCore = SourceCore;
         pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.Missile);
-		//GameObject.Destroy(gameObject);
     }
 
 	void GarbageCollect()
 	{
-		// Return to object pool if too far from the camera position
-		if(Vector3.Distance (cam.transform.position, transform.position) > DisableDistance ||
-		   elapsedTime > MaxLifespan)
+		if(elapsedTime > MaxLifespan)
 		{
-			pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.Missile);
+            Activate();
 		}
 	}
 

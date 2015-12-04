@@ -206,8 +206,7 @@ MonoBehaviour:
   SourceCore: {fileID: 0}
   SourceStructure: {fileID: 0}
   Damage: 1
-  DisableDistance: 30
-  MaxLifespan: 60
+  MaxLifespan: 20
   ThrustPower: 5
   ThrusterDuration: 5
   GracePeriod: 1
@@ -2490,7 +2489,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MaxLifespan
-      value: 60
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

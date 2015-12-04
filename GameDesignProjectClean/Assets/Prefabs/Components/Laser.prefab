@@ -129,8 +129,7 @@ MonoBehaviour:
   SourceCore: {fileID: 0}
   SourceStructure: {fileID: 0}
   Damage: 1
-  DisableDistance: 30
-  MaxLifespan: 60
+  MaxLifespan: 20
   EffectDuration: .100000001
   FadeDuration: .200000003
 --- !u!212 &21266900
@@ -238,7 +237,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MaxLifespan
-      value: 60
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
