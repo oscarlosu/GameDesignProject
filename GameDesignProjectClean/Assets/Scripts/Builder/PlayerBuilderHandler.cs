@@ -32,6 +32,7 @@ public class PlayerBuilderHandler : MonoBehaviour
 	public GameObject ReadyText;
 	public GameObject GoToTestMode;
 	public GameObject GoToBuildModePanel;
+	public GameObject GoToReadyModePanel;
     public Vector2 SpawnPosMultiplier;
     public float TextFlashTime;
 
@@ -119,10 +120,11 @@ public class PlayerBuilderHandler : MonoBehaviour
         ComponentNamePanel.SetActive(true);
         // Activate go to test mode text.
 		GoToTestMode.SetActive (true);
-        // Deactivate go to build mode text.
+        // Deactivate go to build mode & go to ready mode text.
         GoToBuildModePanel.SetActive(false);
-		// Deactivate "testmode" and "ready" text
-		TestModeText.SetActive (false);
+        GoToReadyModePanel.SetActive(false);
+        // Deactivate "testmode" and "ready" text
+        TestModeText.SetActive (false);
         ReadyText.SetActive(false);
         // Update selected cell object.
         UpdateBuilderUi();
@@ -150,8 +152,9 @@ public class PlayerBuilderHandler : MonoBehaviour
         RemovePanel.SetActive(false);
         // Deactivate go to test mode text.
         GoToTestMode.SetActive (false);
-        // Activate go to build mode text.
+        // Activate go to build mode & go to ready mode text.
         GoToBuildModePanel.SetActive(true);
+        GoToReadyModePanel.SetActive(true);
         // Enable "testmode" text
         TestModeText.SetActive (true);
         // Create clone of ship that the players can test and play around with.
