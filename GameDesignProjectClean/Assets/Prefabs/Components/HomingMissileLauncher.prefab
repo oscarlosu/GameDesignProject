@@ -116,16 +116,16 @@ MonoBehaviour:
   ComponentDescription: "Homing missiles seek out enemy ships. Spray and pray!\r\nWarning:
     Homing missiles always find a target. Without any nearby foes, missiles will seek
     out the nearest ship: You!"
-  BuilderSprite: {fileID: 21300000, guid: ce7521aeccd67124bae914a6d2080b7e, type: 3}
+  BuilderSprite: {fileID: 21300000, guid: 2ae98109352098749bbe2bd015781366, type: 3}
   ShipCore: {fileID: 0}
   Mass: 2
   InputType: 0
   ButtonKey: 0
   TriggerKey: 0
   CanSpriteRotate: 1
-  SpriteForward: {fileID: 21300000, guid: ce7521aeccd67124bae914a6d2080b7e, type: 3}
-  SpriteLeft: {fileID: 21300000, guid: 49e14be8130d7bf478ebee247cc2ac87, type: 3}
-  SpriteRight: {fileID: 21300000, guid: 7fb4ef4793c42a14ebf69c3885224853, type: 3}
+  SpriteForward: {fileID: 21300000, guid: 2ae98109352098749bbe2bd015781366, type: 3}
+  SpriteLeft: {fileID: 21300000, guid: bcfabb885219adc43b6f2d9a2a6f9342, type: 3}
+  SpriteRight: {fileID: 21300000, guid: 206bd28b728e5c34fa6ac06095b3487e, type: 3}
   SpriteDirection: 0
   RocketPrefab: {fileID: 155838, guid: 946fed33d74bef54b9e9812c23af333e, type: 2}
   Cooldown: 4
