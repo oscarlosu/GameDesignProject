@@ -205,8 +205,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SourceCore: {fileID: 0}
   SourceStructure: {fileID: 0}
+  ObjectPoolType: 0
   Damage: 1
   MaxLifespan: 20
+  MaxDistance: 70
   ThrustPower: 5
   ThrusterDuration: 5
   GracePeriod: 1
@@ -2490,6 +2492,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: MaxLifespan
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MaxDistance
+      value: 70
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

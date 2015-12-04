@@ -93,8 +93,8 @@ public class ImplosionBomb : Projectile
 
 	void GarbageCollect()
 	{
-		if(elapsedTime > MaxLifespan)
-		{
+        if (elapsedTime > MaxLifespan || Vector3.Distance(transform.position, SourceCore.transform.position) > MaxDistance)
+        {
             Activate();
 		}
 	}

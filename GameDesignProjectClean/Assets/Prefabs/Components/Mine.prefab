@@ -180,6 +180,7 @@ MonoBehaviour:
   ObjectPoolType: 2
   Damage: 2
   MaxLifespan: 20
+  MaxDistance: 70
   TimeTillActive: 2
   DetectionToExplosionTime: 1
   GracePeriod: 1
@@ -323,6 +324,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: ObjectPoolType
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MaxDistance
+      value: 70
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

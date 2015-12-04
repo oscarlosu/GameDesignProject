@@ -160,8 +160,8 @@ public class HomingMissile : Projectile
 
 	void GarbageCollect()
 	{
-		if(elapsedTime > MaxLifespan)
-		{
+        if (elapsedTime > MaxLifespan || Vector3.Distance(transform.position, SourceCore.transform.position) > MaxDistance)
+        {
             Activate();
 		}
 	}

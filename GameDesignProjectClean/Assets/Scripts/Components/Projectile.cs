@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour {
     public ObjectPool.ObjectType ObjectPoolType;
     public int Damage;
 	public int MaxLifespan;
+    public int MaxDistance;
 	public bool InGrace {get; protected set;}
 	protected ObjectPool pool;	
 
