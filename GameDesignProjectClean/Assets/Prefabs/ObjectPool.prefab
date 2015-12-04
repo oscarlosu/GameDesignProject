@@ -48,8 +48,8 @@ MonoBehaviour:
   - {fileID: 119910, guid: 08653db33e7bf04439bbb571dc26628f, type: 2}
   - {fileID: 134662, guid: 476ebd0ea5d6795479cd34352247c4ad, type: 2}
   - {fileID: 108826, guid: cfdb46d2623fd1647822b1423ccf8d20, type: 2}
-  ObjectPoolsDefaultSize: c8000000c8000000c8000000c800000090010000c8000000c8000000c8000000
-  HardSizeLimit: 2000
+  ObjectPoolsDefaultSize: e8030000e803000090010000f4010000f4010000c800000064000000c8000000
+  HardSizeLimit: 5000
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -60,6 +60,34 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: ObjectPool
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ObjectPoolsDefaultSize.Array.data[0]
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ObjectPoolsDefaultSize.Array.data[1]
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ObjectPoolsDefaultSize.Array.data[4]
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ObjectPoolsDefaultSize.Array.data[2]
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ObjectPoolsDefaultSize.Array.data[3]
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ObjectPoolsDefaultSize.Array.data[6]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: HardSizeLimit
+      value: 5000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
