@@ -39,7 +39,6 @@ public class Laser : Projectile
         {
             // Destroy laser
 			pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.Laser);
-			//GameObject.Destroy(this.gameObject);
         }
     }
 
