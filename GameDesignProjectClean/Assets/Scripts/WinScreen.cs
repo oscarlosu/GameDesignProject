@@ -13,17 +13,32 @@ public class WinScreen : MonoBehaviour
     public Image FirstImage, SecondImage, ThirdImage, FourthImage;
     public Text FirstScore, SecondScore, ThirdScore, FourthScore;
     public Text WinText;
+    public float TextFlashTime;
+
+    private bool fadeIn;
 
     // Use this for initialization
     void Start()
     {
+        InvokeRepeating("ToggleFadeIn", 0, TextFlashTime);
+    }
 
+    private void ToggleFadeIn()
+    {
+        fadeIn = !fadeIn;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (fadeIn)
+        {
+            WinText.GetComponent<Text>().CrossFadeAlpha(1, TextFlashTime / 2, false);
+        }
+        else
+        {
+            WinText.GetComponent<Text>().CrossFadeAlpha(0, TextFlashTime / 2, false);
+        }
     }
 
     public void SetupWinScreen(bool[] playersJoined, int[] playerPositions, int[] originalNbOfModules, int[] modulesLeft, int[] modulesDestroyed, bool[] selfDestruct)
@@ -85,7 +100,7 @@ public class WinScreen : MonoBehaviour
                     FirstImage.sprite = CharacterWonSprites[i];
                     FirstScore.text = "Score " + points[i];
                     FirstImage.gameObject.SetActive(true);
-                    WinText.text = "Player " + (i + 1) + " wins!";
+                    WinText.text = "Player " + (i + 1) + " wins!\nPress start to continue";
                     break;
             }
         }

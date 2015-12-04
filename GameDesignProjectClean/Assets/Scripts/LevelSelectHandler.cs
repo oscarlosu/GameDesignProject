@@ -17,7 +17,10 @@ public class LevelSelectHandler : MonoBehaviour
     public string[] LevelSceneNames; // The name of the scene file (as would be used in the Application.Load method (no extension)).
     public Color SelectedLevelColour;
     public float MovePauseTime;
+    public Text ContinueText;
+    public float TextFlashTime;
 
+    private bool fadeIn;
     private float elapsedTime;
     private float elapsedMoveTime; // The time elapsed since last move (used to restrict how fast the player can move the selection).
     private int selectedLevel = 0;
@@ -34,6 +37,12 @@ public class LevelSelectHandler : MonoBehaviour
             LevelSelectPanel.transform.GetChild(selectedLevel).GetComponent<Image>().color = SelectedLevelColour;
         }
         UpdateSelectedLevel();
+        InvokeRepeating("ToggleFadeIn", 0, TextFlashTime);
+    }
+
+    private void ToggleFadeIn()
+    {
+        fadeIn = !fadeIn;
     }
 
     // Update is called once per frame
@@ -61,6 +70,15 @@ public class LevelSelectHandler : MonoBehaviour
                 }
                 elapsedMoveTime = 0; // Reset the timer after move.
             }
+        }
+
+        if (fadeIn)
+        {
+            ContinueText.GetComponent<Text>().CrossFadeAlpha(1, TextFlashTime / 2, false);
+        }
+        else
+        {
+            ContinueText.GetComponent<Text>().CrossFadeAlpha(0, TextFlashTime / 2, false);
         }
 
     }
