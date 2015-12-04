@@ -52,10 +52,12 @@ public class LevelSelectHandler : MonoBehaviour
                 if (leftStickValue.x > 0)
                 {
                     NextLevel();
+					GetComponent<AudioSource>().Play ();
                 }
                 else if (leftStickValue.x < 0)
                 {
                     PrevLevel();
+					GetComponent<AudioSource>().Play ();
                 }
                 elapsedMoveTime = 0; // Reset the timer after move.
             }
