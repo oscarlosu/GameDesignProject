@@ -24,7 +24,7 @@ public class Mine : Projectile
     void Start()
     {
         anim = GetComponent<Animator>();
-		InvokeRepeating("GarbageCollect", 5, 5);
+		
     }
 
 	void OnEnable()
@@ -32,7 +32,8 @@ public class Mine : Projectile
 		InGrace = true;
 		detected = false;
 		elapsedTime = 0;
-	}
+        InvokeRepeating("GarbageCollect", 5, 5);
+    }
 
     // Update is called once per frame
     void Update()
@@ -103,11 +104,9 @@ public class Mine : Projectile
 
 	void GarbageCollect()
 	{
-		// Return to object pool if too far from the camera position
-		if(Vector3.Distance (cam.transform.position, transform.position) > DisableDistance ||
-		   elapsedTime > MaxLifespan)
+		if(elapsedTime > MaxLifespan || Vector3.Distance(transform.position, SourceCore.transform.position) > MaxDistance)
 		{
-			pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.Mine);
+            Activate();
 		}
 	}
 

@@ -32,6 +32,7 @@ public class PlayerBuilderHandler : MonoBehaviour
 	public GameObject ReadyText;
 	public GameObject GoToTestMode;
 	public GameObject GoToBuildModePanel;
+	public GameObject GoToReadyModePanel;
     public Vector2 SpawnPosMultiplier;
     public float TextFlashTime;
 
@@ -49,6 +50,7 @@ public class PlayerBuilderHandler : MonoBehaviour
     private float elapsedMoveTime; // The time elapsed since last move (used to restrict how fast the player can move the selection).
 
     private bool fadeIn;
+    private ObjectPool objectPool;
 
 	public AudioClip CellMoveSound;
 	public AudioClip PlaceModuleSound;
@@ -60,6 +62,9 @@ public class PlayerBuilderHandler : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        // Find object pool.
+        objectPool = GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetComponent<ObjectPool>();
+        // Setup builder.
         PlayerArea.transform.position = new Vector3(StartingPosition.x, StartingPosition.y,
             PlayerArea.transform.position.z);
         grid = new GameObject[GridSizeX, GridSizeY];
@@ -104,7 +109,7 @@ public class PlayerBuilderHandler : MonoBehaviour
         // Remove all projectiles and particles etc.
         foreach (var projectile in GameObject.FindGameObjectsWithTag(GlobalValues.ProjectileTag))
         {
-            GameObject.Destroy(projectile);
+            objectPool.DisablePoolObject(projectile, projectile.GetComponent<Projectile>().ObjectPoolType);
         }
         // Reactivate original ship.
         shipCore.SetActive(true);
@@ -119,10 +124,11 @@ public class PlayerBuilderHandler : MonoBehaviour
         ComponentNamePanel.SetActive(true);
         // Activate go to test mode text.
 		GoToTestMode.SetActive (true);
-        // Deactivate go to build mode text.
+        // Deactivate go to build mode & go to ready mode text.
         GoToBuildModePanel.SetActive(false);
-		// Deactivate "testmode" and "ready" text
-		TestModeText.SetActive (false);
+        GoToReadyModePanel.SetActive(false);
+        // Deactivate "testmode" and "ready" text
+        TestModeText.SetActive (false);
         ReadyText.SetActive(false);
         // Update selected cell object.
         UpdateBuilderUi();
@@ -150,8 +156,9 @@ public class PlayerBuilderHandler : MonoBehaviour
         RemovePanel.SetActive(false);
         // Deactivate go to test mode text.
         GoToTestMode.SetActive (false);
-        // Activate go to build mode text.
+        // Activate go to build mode & go to ready mode text.
         GoToBuildModePanel.SetActive(true);
+        GoToReadyModePanel.SetActive(true);
         // Enable "testmode" text
         TestModeText.SetActive (true);
         // Create clone of ship that the players can test and play around with.
@@ -260,9 +267,8 @@ public class PlayerBuilderHandler : MonoBehaviour
             // Cell selection movement.
             var leftStickInput = GamePad.GetAxis(GamePad.Axis.LeftStick, ControllerIndex);
             var moveInput = leftStickInput;
-            if (moveInput.magnitude > 0.1)
+            if (moveInput.sqrMagnitude > 0.3)
             {
-
                 elapsedMoveTime += Time.deltaTime; // Add to the time elapsed since last move.
                 if (elapsedMoveTime >= MovePauseTime)
                 {

@@ -2,7 +2,6 @@
 
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(AudioSource))]
 public class LaserSpaceStation : MonoBehaviour
 {
     public float EffectDuration;
@@ -16,8 +15,6 @@ public class LaserSpaceStation : MonoBehaviour
     void Awake()
     {
         rend = GetComponent<SpriteRenderer>();
-		GetComponent<AudioSource>().pitch = Random.Range(0.5f, 1.5f);
-		GetComponent<AudioSource> ().Play ();
     }
 
 	void Start()

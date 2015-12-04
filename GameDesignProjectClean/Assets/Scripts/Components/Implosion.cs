@@ -94,7 +94,6 @@ public class Implosion : MonoBehaviour
 	{
         yield return new WaitForSeconds(duration);
 		pool.DisablePoolObject(gameObject, ObjectPool.ObjectType.Implosion);
-		//GameObject.Destroy (gameObject);
 	}
 }
 
