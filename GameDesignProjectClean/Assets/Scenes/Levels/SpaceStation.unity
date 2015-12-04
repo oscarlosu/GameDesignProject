@@ -6357,6 +6357,8 @@ MonoBehaviour:
   laserDuration: 3
   Charge1: {fileID: 855469939}
   Charge2: {fileID: 1747157288}
+  stationLaserSound: {fileID: 8300000, guid: b1c5b528d1b3846bf9c746a59a877d4a, type: 3}
+  chargeLaserSound: {fileID: 8300000, guid: a754b05e4d3394f66b15ba0ca7cac046, type: 3}
   rotModifier: .100000001
   chargeTime: 5
 --- !u!82 &1006767055
@@ -6369,7 +6371,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24338684, guid: 1009fae8e168e4f4aadd5822f83f11a6,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: b1c5b528d1b3846bf9c746a59a877d4a, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
