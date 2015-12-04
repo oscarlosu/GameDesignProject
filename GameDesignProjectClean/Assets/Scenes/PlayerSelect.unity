@@ -124,6 +124,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 11470192, guid: ca7f175ac0755c74da3a8aa8fbe00bc7, type: 2}
+      propertyPath: buildModeSnapshot
+      value: 
+      objectReference: {fileID: 24549680, guid: 1009fae8e168e4f4aadd5822f83f11a6,
+        type: 2}
+    - target: {fileID: 11470192, guid: ca7f175ac0755c74da3a8aa8fbe00bc7, type: 2}
+      propertyPath: playModeSnapshot
+      value: 
+      objectReference: {fileID: 24500003, guid: 1009fae8e168e4f4aadd5822f83f11a6,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ca7f175ac0755c74da3a8aa8fbe00bc7, type: 2}
   m_IsPrefabParent: 0

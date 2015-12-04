@@ -648,7 +648,7 @@ AudioMixerSnapshotController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Snapshot - Copy
+  m_Name: LowPass
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 16fa6473ff6fd419187468bc1ade32f4
   m_FloatValues:

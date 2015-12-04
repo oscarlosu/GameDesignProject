@@ -101,6 +101,7 @@ public class PlayerBuilderHandler : MonoBehaviour
 
     private void GoToBuildMode()
     {
+        objectPool = GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetComponent<ObjectPool>();
         // Set build mode flag.
         inBuildMode = true;
         shipCore.GetComponent<Core>().InBuildMode = true;
