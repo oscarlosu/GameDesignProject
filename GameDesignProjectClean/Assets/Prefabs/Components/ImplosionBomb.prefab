@@ -133,6 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SourceCore: {fileID: 0}
   SourceStructure: {fileID: 0}
+  ObjectPoolType: 3
   Damage: 0
   DisableDistance: 30
   MaxLifespan: 60
@@ -2395,6 +2396,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: MaxLifespan
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ObjectPoolType
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

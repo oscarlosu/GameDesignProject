@@ -50,6 +50,7 @@ public class PlayerBuilderHandler : MonoBehaviour
     private float elapsedMoveTime; // The time elapsed since last move (used to restrict how fast the player can move the selection).
 
     private bool fadeIn;
+    private ObjectPool objectPool;
 
 	public AudioClip CellMoveSound;
 	public AudioClip PlaceModuleSound;
@@ -61,6 +62,9 @@ public class PlayerBuilderHandler : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        // Find object pool.
+        objectPool = GameObject.FindObjectOfType<ObjectPool>();
+        // Setup builder.
         PlayerArea.transform.position = new Vector3(StartingPosition.x, StartingPosition.y,
             PlayerArea.transform.position.z);
         grid = new GameObject[GridSizeX, GridSizeY];
@@ -105,7 +109,7 @@ public class PlayerBuilderHandler : MonoBehaviour
         // Remove all projectiles and particles etc.
         foreach (var projectile in GameObject.FindGameObjectsWithTag(GlobalValues.ProjectileTag))
         {
-            GameObject.Destroy(projectile);
+            objectPool.DisablePoolObject(projectile, projectile.GetComponent<Projectile>().ObjectPoolType);
         }
         // Reactivate original ship.
         shipCore.SetActive(true);

@@ -4,6 +4,7 @@ using System.Collections;
 public class Projectile : MonoBehaviour {
     public GameObject SourceCore;
     public GameObject SourceStructure;
+    public ObjectPool.ObjectType ObjectPoolType;
     public int Damage;
 	public int DisableDistance;
 	public int MaxLifespan;
