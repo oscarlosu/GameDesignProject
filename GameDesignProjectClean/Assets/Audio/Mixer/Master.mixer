@@ -14,7 +14,9 @@ AudioMixerController:
   m_StartSnapshot: {fileID: 24500003}
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: 6a70a17e5c1e34b5cab08c59a1d3c611
+    name: MyExposedParam
   m_AudioMixerGroupViews:
   - guids:
     - 6009cd7291de1b549b5be4d607aae592
@@ -628,11 +630,11 @@ AudioMixerSnapshotController:
     3b502544bb6824307a2ea532e3bde731: .196999997
     dcf002058c66eea44b22accd180072ea: 8.61407185
     a75df407f58d4459ea710af50fc0d721: -19.2556553
-    c13c9a97c28af4a9abee8c6c795caaa9: 114
+    c13c9a97c28af4a9abee8c6c795caaa9: 22000
     3610fbd7f312d4138a728a2538d1d83d: -22.7140408
     ecc190f76bb0f44aebd0a9508a5e8473: -16.6604328
     f11fa658fbd2ed74ca7a20ec6b559125: 12.587965
-    b96b95c8f3a844e2bbd9b35b877cf050: 4.64809608
+    b96b95c8f3a844e2bbd9b35b877cf050: -10.3452072
     e8a04439057c24661ac13c5044cd0650: -9.83328629
     3a8d8e89a532c477a8901bbc69e6fc0c: -10.3452072
     0f2576b94df4e4dea94e9b6a1dc09ba4: 22000
@@ -642,7 +644,9 @@ AudioMixerSnapshotController:
     7902847eeb30a4bf5accf1bc8160e402: -10.8677788
     d5714f1f4ae30407197d6a82e20e2da4: -26.4042263
     d6edcccf7d6254bada4fdb5740d51056: 0
-  m_TransitionOverrides: {}
+  m_TransitionOverrides:
+    c13c9a97c28af4a9abee8c6c795caaa9: 1
+    b96b95c8f3a844e2bbd9b35b877cf050: 1
 --- !u!245 &24549680
 AudioMixerSnapshotController:
   m_ObjectHideFlags: 0
@@ -662,6 +666,7 @@ AudioMixerSnapshotController:
     3b502544bb6824307a2ea532e3bde731: .196999997
     dcf002058c66eea44b22accd180072ea: 8.61407185
     a75df407f58d4459ea710af50fc0d721: -19.2556553
+    c13c9a97c28af4a9abee8c6c795caaa9: 190
     3610fbd7f312d4138a728a2538d1d83d: -22.7140408
     ecc190f76bb0f44aebd0a9508a5e8473: -16.6604328
     f11fa658fbd2ed74ca7a20ec6b559125: 12.587965
@@ -672,6 +677,7 @@ AudioMixerSnapshotController:
     78d5e16a68d3b475f994bf58dc40e953: 4.29999876
     de3b17ab4f149417faac7ebc3ff4a453: 0
     e3e836add513243178d9c9260aff3a12: 1.74776649
+    6a70a17e5c1e34b5cab08c59a1d3c611: 1
     7902847eeb30a4bf5accf1bc8160e402: -10.8677788
     d5714f1f4ae30407197d6a82e20e2da4: -26.4042263
     d6edcccf7d6254bada4fdb5740d51056: 0

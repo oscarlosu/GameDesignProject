@@ -163,19 +163,20 @@ public class GameHandler : MonoBehaviour
                     // Restart the game.
                     //GameOver = false;
                     Destroy(gameObject);
-				BattleMusic();
 				Application.LoadLevel("Splash");
                 }
+                NormalMusic();
+
                 return;
         }
     }
 
 	void Lowpass(){
-		buildModeSnapshot.TransitionTo (.5f);	
+		buildModeSnapshot.TransitionTo (0.5f);	
 	}
 
-	void BattleMusic(){
-		playModeSnapshot.TransitionTo (.5f);
+	void NormalMusic(){
+		playModeSnapshot.TransitionTo (0.5f);
 	}
 
     public bool[] GetPlayersJoined()
