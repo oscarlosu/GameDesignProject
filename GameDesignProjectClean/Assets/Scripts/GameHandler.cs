@@ -149,9 +149,9 @@ public class GameHandler : MonoBehaviour
                     // Restart the game.
                     //GameOver = false;
                     Destroy(gameObject);
-                    Application.LoadLevel("PlayerSelect");
-                }
 				BattleMusic();
+				Application.LoadLevel("PlayerSelect");
+                }
                 return;
         }
     }
