@@ -41,6 +41,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ComponentName: Pulse Device
+  ComponentDescription: 'The pulse module releases a wave that will push physical
+    objects away and brings your ship to a halt.
+
+    Tip: Very effective against missiles.
+
+    Tip: Can be used to stop rotation of you ship, for precision turning.'
   BuilderSprite: {fileID: 21300000, guid: a351c33bf9ca544528513c2d428b137a, type: 3}
   ShipCore: {fileID: 0}
   Mass: 3
@@ -121,6 +127,15 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: a351c33bf9ca544528513c2d428b137a,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: ComponentDescription
+      value: 'The pulse module releases a wave that will push physical objects away
+        and brings your ship to a halt.
+
+        Tip: Very effective against missiles.
+
+        Tip: Can be used to stop rotation of you ship, for precision turning.'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 116820}

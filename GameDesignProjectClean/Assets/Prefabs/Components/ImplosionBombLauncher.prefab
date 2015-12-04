@@ -41,6 +41,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ComponentName: Implosion Bomb Launcher
+  ComponentDescription: "Implosion bombs will pull everything towards it, including
+    your own ship. The implosion will not cause damage, but will disable shields within
+    the implosion range.\r\nYou can detonate the implosion bombs by pressing fire
+    after launching them.\r\nTip: Implosion bombs and a heavy ship is a viable strategy."
   BuilderSprite: {fileID: 21300000, guid: 9e5386481c136f5458bc01b344de0dc3, type: 3}
   ShipCore: {fileID: 0}
   Mass: 4
@@ -144,6 +148,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_SortingLayerID
       value: -98434433
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ComponentDescription
+      value: "Implosion bombs will pull everything towards it, including your own
+        ship. The implosion will not cause damage, but will disable shields within
+        the implosion range.\r\nYou can detonate the implosion bombs by pressing fire
+        after launching them.\r\nTip: Implosion bombs and a heavy ship is a viable
+        strategy."
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -41,6 +41,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ComponentName: Armor
+  ComponentDescription: Armor makes other modules attached to the same structure more
+    durable. The armor module is heavier than other modules, and will add a lot of
+    weight to your ship.
   BuilderSprite: {fileID: 21300000, guid: 2206ea89ca6aa0541b5caace84f6c417, type: 3}
   ShipCore: {fileID: 0}
   Mass: 5
@@ -114,6 +117,12 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: Mass
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ComponentDescription
+      value: Armor makes other modules attached to the same structure more durable.
+        The armor module is heavier than other modules, and will add a lot of weight
+        to your ship.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

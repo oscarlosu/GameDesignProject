@@ -113,6 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ComponentName: Mine spawner
+  ComponentDescription: Spawns explosive mines which become active after a short period
+    of time, whereafter they will explode upon contact with physical objects.
   BuilderSprite: {fileID: 21300000, guid: d4937d6d633812b489e6d241958a4b8d, type: 3}
   ShipCore: {fileID: 0}
   Mass: 2
@@ -206,6 +208,11 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: spawnForce
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ComponentDescription
+      value: Spawns explosive mines which become active after a short period of time,
+        whereafter they will explode upon contact with physical objects.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

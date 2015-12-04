@@ -7,6 +7,8 @@ public class ShipComponent : MonoBehaviour
 {
     // For builder.
     public string ComponentName;
+    [TextArea(3, 10)]
+    public string ComponentDescription;
     public Sprite BuilderSprite;
 
     // For game.
@@ -32,6 +34,7 @@ public class ShipComponentEditor : Editor
         EditorGUILayout.LabelField("Ship component settings", heading);
 
         component.ComponentName = EditorGUILayout.TextField("Component name", component.ComponentName);
+        //component.ComponentDescription = EditorGUILayout.TextField("Component description", component.ComponentDescription);
         component.Mass = EditorGUILayout.IntField("Mass", component.Mass);
         component.BuilderSprite = (Sprite)EditorGUILayout.ObjectField("Builder sprite", component.BuilderSprite, typeof(Sprite), false);
     }

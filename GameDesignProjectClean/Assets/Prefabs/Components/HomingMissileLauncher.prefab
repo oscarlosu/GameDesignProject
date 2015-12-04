@@ -46,6 +46,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -112,6 +113,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ComponentName: Homing missile
+  ComponentDescription: "Homing missiles seek out enemy ships. Spray and pray!\r\nWarning:
+    Homing missiles always find a target. Without any nearby foes, missiles will seek
+    out the nearest ship: You!"
   BuilderSprite: {fileID: 21300000, guid: ce7521aeccd67124bae914a6d2080b7e, type: 3}
   ShipCore: {fileID: 0}
   Mass: 2
@@ -209,6 +213,12 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: RocketLaunchSpeed
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ComponentDescription
+      value: "Homing missiles seek out enemy ships. Spray and pray!\r\nWarning: Homing
+        missiles always find a target. Without any nearby foes, missiles will seek
+        out the nearest ship: You!"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

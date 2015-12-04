@@ -23,6 +23,9 @@ public class PlayerBuilderHandler : MonoBehaviour
     public Image ImageLeft, ImageCenter, ImageRight;
     public GameObject ComponentNamePanel;
     public Text ComponentNameText;
+    public GameObject ComponentDescriptionPanel;
+    public Text ComponentDescriptionText;
+    public GameObject ComponentDescriptionHelpButton;
     public GameObject InfoBox;
     public GameObject RotatePanel, PlacePanel, RemovePanel, ParentPanel, InputPanel;
     public int GridSizeX, GridSizeY;
@@ -122,8 +125,11 @@ public class PlayerBuilderHandler : MonoBehaviour
         // Activate component selector UI.
         ComponentSelectorPanel.SetActive(true);
         ComponentNamePanel.SetActive(true);
+        ComponentDescriptionPanel.SetActive(true);
+        ComponentDescriptionPanel.GetComponent<CanvasGroup>().alpha = 0; // Set alpha to 0.
+        ComponentDescriptionHelpButton.SetActive(true);
         // Activate go to test mode text.
-		GoToTestMode.SetActive (true);
+        GoToTestMode.SetActive (true);
         // Deactivate go to build mode & go to ready mode text.
         GoToBuildModePanel.SetActive(false);
         GoToReadyModePanel.SetActive(false);
@@ -151,6 +157,8 @@ public class PlayerBuilderHandler : MonoBehaviour
         // Disable builder UI elements.
         ComponentSelectorPanel.SetActive(false);
         ComponentNamePanel.SetActive(false);
+        ComponentDescriptionPanel.SetActive(false);
+        ComponentDescriptionHelpButton.SetActive(false);
         PlacePanel.SetActive(false);
         RotatePanel.SetActive(false);
         ParentPanel.SetActive(false);
@@ -164,6 +172,7 @@ public class PlayerBuilderHandler : MonoBehaviour
         // Enable "testmode" text
         TestModeText.SetActive (true);
         FlashingCenterText.GetComponent<Text>().text = "Testing";
+        FlashingCenterText.GetComponent<Text>().color = Color.red;
         FlashingCenterText.SetActive(true);
         // Create clone of ship that the players can test and play around with.
         cloneShip = GameObject.Instantiate(shipCore);
@@ -194,8 +203,10 @@ public class PlayerBuilderHandler : MonoBehaviour
                 : AvailableComponents[selectedComponent + 1].GetComponent<ShipComponent>().BuilderSprite;
             ImageRight.color = new Color(ImageRight.color.r, ImageRight.color.g, ImageRight.color.b, alpha);
 
-            // Set component name.
+            // Set component name and description.
             ComponentNameText.text = AvailableComponents[selectedComponent].GetComponent<ShipComponent>().ComponentName;
+            ComponentDescriptionText.text =
+                AvailableComponents[selectedComponent].GetComponent<ShipComponent>().ComponentDescription;
         }
     }
 
@@ -267,6 +278,10 @@ public class PlayerBuilderHandler : MonoBehaviour
 				GetComponent<AudioSource>().clip = NextModuleSound;
 				GetComponent<AudioSource>().Play();
             }
+
+            // Display component description.
+            var leftTrigger = GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, ControllerIndex);
+            ComponentDescriptionPanel.GetComponent<CanvasGroup>().alpha = Mathf.Clamp(leftTrigger*1.5f, 0, 1);
 
             // Cell selection movement.
             var leftStickInput = GamePad.GetAxis(GamePad.Axis.LeftStick, ControllerIndex);
@@ -407,6 +422,7 @@ public class PlayerBuilderHandler : MonoBehaviour
             if (!playerReady && GamePad.GetButtonDown(ButtonGoToPlayMode, ControllerIndex))
             {
                 FlashingCenterText.GetComponent<Text>().text = "Ready";
+                FlashingCenterText.GetComponent<Text>().color = Color.green;
                 FlashingCenterText.SetActive(true);
                 playerReady = true;
                 var shipReady = Instantiate(shipCore);

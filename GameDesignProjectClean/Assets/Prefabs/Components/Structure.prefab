@@ -73,6 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ComponentName: Structure
+  ComponentDescription: These modules expand your ship, so you can build larger ships.
   BuilderSprite: {fileID: 21300000, guid: e097256d9e328634b868b62219594364, type: 3}
   ShipCore: {fileID: 0}
   Mass: 2

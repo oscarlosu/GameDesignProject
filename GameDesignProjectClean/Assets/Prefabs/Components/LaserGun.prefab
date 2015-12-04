@@ -113,6 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ComponentName: Laser Gun
+  ComponentDescription: "The laser is chargeable, the longer you charge it, the longer
+    the beam.\r\nTip: Lasers can be used to destroy incoming missiles."
   BuilderSprite: {fileID: 21300000, guid: ebb39fafdaa16274fb2a84600cf33cbf, type: 3}
   ShipCore: {fileID: 0}
   Mass: 2
@@ -214,6 +216,11 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: MaxLaserLength
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ComponentDescription
+      value: "The laser is chargeable, the longer you charge it, the longer the beam.\r\nTip:
+        Lasers can be used to destroy incoming missiles."
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

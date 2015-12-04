@@ -41,6 +41,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ComponentName: Rocket
+  ComponentDescription: Rockets fly straight until they are out of fuel. Has a shorter
+    cooldown than the homing missiles.
   BuilderSprite: {fileID: 21300000, guid: 84837f32f0d5bd140bc68e613d4bcbfc, type: 3}
   ShipCore: {fileID: 0}
   Mass: 2
@@ -129,6 +131,11 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: RocketLaunchSpeed
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ComponentDescription
+      value: Rockets fly straight until they are out of fuel. Has a shorter cooldown
+        than the homing missiles.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

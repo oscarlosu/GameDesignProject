@@ -26,8 +26,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 466510}
   - 212: {fileID: 21276574}
-  - 82: {fileID: 8237718}
   - 114: {fileID: 11486626}
+  - 82: {fileID: 8237718}
   m_Layer: 0
   m_Name: Thruster
   m_TagString: Module
@@ -173,6 +173,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ComponentName: Thruster
+  ComponentDescription: "Thrusters allow your ship to move. The more thrusters you
+    have, the faster your ship is.\r\nThe placement of your thrusters will affect
+    how well your ship turns."
   BuilderSprite: {fileID: 21300000, guid: 3e72cb4a2afbd7c499c289cc488915cc, type: 3}
   ShipCore: {fileID: 0}
   Mass: 1
@@ -2431,6 +2434,12 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: ThrustPower
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ComponentDescription
+      value: "Thrusters allow your ship to move. The more thrusters you have, the
+        faster your ship is.\r\nThe placement of your thrusters will affect how well
+        your ship turns."
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
