@@ -203,11 +203,13 @@ Prefab:
         type: 3}
     - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
       propertyPath: LevelDescriptions.Array.data[2]
-      value: 
+      value: A space battle in a deadly vortex. Try to keep control of your ship as
+        you struggle to escape the pull of gravity!
       objectReference: {fileID: 0}
     - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
       propertyPath: LevelDescriptions.Array.data[0]
-      value: EMPTY!!!!
+      value: Just you, your foes, and your ships. Battle in space without distractions
+        to see who truly has the best ship!
       objectReference: {fileID: 0}
     - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
       propertyPath: LevelNames.Array.data[0]
@@ -215,11 +217,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
       propertyPath: LevelNames.Array.data[1]
-      value: Terran expanse
+      value: Battle in Orbit
       objectReference: {fileID: 0}
     - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
       propertyPath: LevelNames.Array.data[2]
-      value: Black hole whirlpool
+      value: Black hole
       objectReference: {fileID: 0}
     - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
       propertyPath: LevelNames.Array.data[3]
@@ -228,6 +230,22 @@ Prefab:
     - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
       propertyPath: LevelNames.Array.data[4]
       value: Rogue space station
+      objectReference: {fileID: 0}
+    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
+      propertyPath: LevelDescriptions.Array.data[1]
+      value: "Fight the rest of the scrappers in close proximity to a planetoid, but
+        beware of the moon! It\u2019ll make scrap of your scrapper in short order."
+      objectReference: {fileID: 0}
+    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
+      propertyPath: LevelDescriptions.Array.data[3]
+      value: "Space is mainly empty, except when it isn\u2019t. Do glorious battle
+        in a deadly asteroid belt! Avoid the asteroids or try to push your enemies
+        into harm\u2019s way!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
+      propertyPath: LevelDescriptions.Array.data[4]
+      value: A space station has gone rogue and has crashed the party! Avoid deadly
+        periodic blasts of deadly laser from the station as well as its lethal weight.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
