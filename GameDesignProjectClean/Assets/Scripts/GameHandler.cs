@@ -37,7 +37,7 @@ public class GameHandler : MonoBehaviour
 
     public enum Scene
     {
-        PlayerSelectScene, LevelSelectScene, BuilderScene, GameScene
+        Splash, PlayerSelectScene, LevelSelectScene, BuilderScene, GameScene
     }
 
     private void Awake()
@@ -70,8 +70,15 @@ public class GameHandler : MonoBehaviour
     {
         switch (CurrentScene)
         {
-            case Scene.PlayerSelectScene:
+            case Scene.Splash:
                 // Can't go further back... Don't do anything.
+                return;
+            case Scene.PlayerSelectScene:
+                if (GamePad.GetButtonDown(BackButton, GamePad.Index.Any))
+                {
+                    Application.LoadLevel("Splash");
+                    CurrentScene = Scene.Splash;
+                }
                 return;
             case Scene.LevelSelectScene:
                 // Go to PlayerSelectScene and reset level select values.
@@ -94,6 +101,13 @@ public class GameHandler : MonoBehaviour
     {
         switch (CurrentScene)
         {
+            case Scene.Splash:
+                if (GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.Any))
+                {
+                    Application.LoadLevel("PlayerSelect");
+                    CurrentScene = Scene.PlayerSelectScene;
+                }
+                return;
             case Scene.PlayerSelectScene:
                 // Check if there are more than one player before going to the next scene.
                 if (GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.Any))
@@ -150,7 +164,7 @@ public class GameHandler : MonoBehaviour
                     //GameOver = false;
                     Destroy(gameObject);
 				BattleMusic();
-				Application.LoadLevel("PlayerSelect");
+				Application.LoadLevel("Splash");
                 }
                 return;
         }
