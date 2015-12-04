@@ -119,6 +119,7 @@ public class SpaceStationController : MonoBehaviour, ILevelHandler
             charge2Systems[i].Stop();
         }
         BroadcastMessage("FireLaserGun", laserSizeStation);
+        GetComponent<AudioSource>().Play();
 
         yield return new WaitForSeconds(laserDuration);
         rotating = true;
