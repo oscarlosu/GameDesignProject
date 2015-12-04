@@ -2251,6 +2251,10 @@ Prefab:
       propertyPath: GoToReadyModePanel
       value: 
       objectReference: {fileID: 177903623}
+    - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
+      propertyPath: FlashingCenterText
+      value: 
+      objectReference: {fileID: 1541537403}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 787f576714bc35540a684f062d7010cf, type: 2}
   m_IsPrefabParent: 0
@@ -3752,7 +3756,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1821072350
 Transform:
   m_ObjectHideFlags: 0

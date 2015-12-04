@@ -138,6 +138,8 @@ public class PlayerBuilderHandler : MonoBehaviour
 
     private void GoToPlayMode()
     {
+        // Assemble ship.
+        shipCore.GetComponent<Core>().Assemble();
         // Set build mode flag.
         inBuildMode = false;
         shipCore.GetComponent<Core>().InBuildMode = false;
@@ -320,7 +322,7 @@ public class PlayerBuilderHandler : MonoBehaviour
                     SetupShipComponent(component, selectedCellX, selectedCellY, parent, parentX, parentY);
                     grid[selectedCellX, selectedCellY] = component;
                     UpdateBuilderUi();
-                    shipCore.GetComponent<Core>().Assemble();
+                    //shipCore.GetComponent<Core>().Assemble();
 
 					GetComponent<AudioSource>().clip = PlaceModuleSound;
 					if (!GetComponent<AudioSource>().isPlaying)
