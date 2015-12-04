@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using UnityEngine;
 using GamepadInput;
+using UnityEngine.Audio;
 using Debug = UnityEngine.Debug;
 
 public class GameHandler : MonoBehaviour
@@ -31,6 +32,8 @@ public class GameHandler : MonoBehaviour
 
     // Other settings.
     private bool GameOver;
+	public AudioMixerSnapshot playModeSnapshot;
+	public AudioMixerSnapshot buildModeSnapshot;
 
     public enum Scene
     {
@@ -132,6 +135,7 @@ public class GameHandler : MonoBehaviour
                     Application.LoadLevel(levelSelectedSceneName);
                     CurrentScene = Scene.GameScene;
                 }
+				Lowpass();
                 return;
             case Scene.GameScene:
                 // The winning condition should have been met.
@@ -147,9 +151,18 @@ public class GameHandler : MonoBehaviour
                     Destroy(gameObject);
                     Application.LoadLevel("PlayerSelect");
                 }
+				BattleMusic();
                 return;
         }
     }
+
+	void Lowpass(){
+		buildModeSnapshot.TransitionTo (.5f);	
+	}
+
+	void BattleMusic(){
+		playModeSnapshot.TransitionTo (.5f);
+	}
 
     public bool[] GetPlayersJoined()
     {
