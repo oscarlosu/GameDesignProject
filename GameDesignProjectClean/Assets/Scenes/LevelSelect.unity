@@ -92,22 +92,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelNames.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelImages.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelSceneNames.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelDescriptions.Array.size
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 465802, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -145,30 +129,6 @@ Prefab:
       value: 
       objectReference: {fileID: 1566290909}
     - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelSceneNames.Array.data[0]
-      value: Empty
-      objectReference: {fileID: 0}
-    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelSceneNames.Array.data[1]
-      value: Moon
-      objectReference: {fileID: 0}
-    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelSceneNames.Array.data[2]
-      value: Blackhole
-      objectReference: {fileID: 0}
-    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelSceneNames.Array.data[3]
-      value: Asteroids
-      objectReference: {fileID: 0}
-    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelSceneNames.Array.data[4]
-      value: SpaceStation
-      objectReference: {fileID: 0}
-    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelImage
-      value: 
-      objectReference: {fileID: 1137709810}
-    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
       propertyPath: LevelNameText
       value: 
       objectReference: {fileID: 559456868}
@@ -177,75 +137,20 @@ Prefab:
       value: 
       objectReference: {fileID: 1319281858}
     - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelImages.Array.data[0]
+      propertyPath: LevelImage
       value: 
-      objectReference: {fileID: 21300000, guid: 17dde066b2d074d49a10b7a97b341b8f,
-        type: 3}
+      objectReference: {fileID: 1137709810}
     - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelImages.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 95916f78392db4af9a4f2a22ffdd97eb,
-        type: 3}
-    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelImages.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: 1c4c5d71770aa4a9ea588bd31a19b79b,
-        type: 3}
-    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelImages.Array.data[3]
-      value: 
-      objectReference: {fileID: 21300000, guid: 574fae0de79854ee18222a558b4b0bb7,
-        type: 3}
-    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelImages.Array.data[4]
-      value: 
-      objectReference: {fileID: 21300000, guid: 3660f6d2292284f478f6f4bd642ec482,
-        type: 3}
-    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelDescriptions.Array.data[2]
-      value: A space battle in a deadly vortex. Try to keep control of your ship as
-        you struggle to escape the pull of gravity!
+      propertyPath: SelectedLevelColour.r
+      value: .308823526
       objectReference: {fileID: 0}
     - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelDescriptions.Array.data[0]
-      value: Just you, your foes, and your ships. Battle in space without distractions
-        to see who truly has the best ship!
+      propertyPath: SelectedLevelColour.g
+      value: .308823526
       objectReference: {fileID: 0}
     - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelNames.Array.data[0]
-      value: The void
-      objectReference: {fileID: 0}
-    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelNames.Array.data[1]
-      value: Battle in Orbit
-      objectReference: {fileID: 0}
-    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelNames.Array.data[2]
-      value: Black hole
-      objectReference: {fileID: 0}
-    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelNames.Array.data[3]
-      value: Asteroid field
-      objectReference: {fileID: 0}
-    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelNames.Array.data[4]
-      value: Rogue space station
-      objectReference: {fileID: 0}
-    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelDescriptions.Array.data[1]
-      value: "Fight the rest of the scrappers in close proximity to a planetoid, but
-        beware of the moon! It\u2019ll make scrap of your scrapper in short order."
-      objectReference: {fileID: 0}
-    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelDescriptions.Array.data[3]
-      value: "Space is mainly empty, except when it isn\u2019t. Do glorious battle
-        in a deadly asteroid belt! Avoid the asteroids or try to push your enemies
-        into harm\u2019s way!"
-      objectReference: {fileID: 0}
-    - target: {fileID: 11422218, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}
-      propertyPath: LevelDescriptions.Array.data[4]
-      value: A space station has gone rogue and has crashed the party! Avoid deadly
-        periodic blasts of deadly laser from the station as well as its lethal weight.
+      propertyPath: SelectedLevelColour.b
+      value: .308823526
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7d4233efc1ff9a9488a01d0f35dd01d3, type: 2}

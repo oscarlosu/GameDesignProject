@@ -40,10 +40,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelSelectPanel: {fileID: 0}
+  LevelNameText: {fileID: 0}
+  LevelDescriptionText: {fileID: 0}
+  LevelImage: {fileID: 0}
+  LevelImages:
+  - {fileID: 21300000, guid: 17dde066b2d074d49a10b7a97b341b8f, type: 3}
+  - {fileID: 21300000, guid: 95916f78392db4af9a4f2a22ffdd97eb, type: 3}
+  - {fileID: 21300000, guid: 1c4c5d71770aa4a9ea588bd31a19b79b, type: 3}
+  - {fileID: 21300000, guid: 574fae0de79854ee18222a558b4b0bb7, type: 3}
+  - {fileID: 21300000, guid: 3660f6d2292284f478f6f4bd642ec482, type: 3}
+  LevelNames:
+  - The void
+  - Battle in Orbit
+  - Black hole
+  - Asteroid field
+  - Rogue space station
+  LevelDescriptions:
+  - Just you, your foes, and your ships. Battle in space without distractions to see
+    who truly has the best ship!
+  - "Fight the rest of the scrappers in close proximity to a planetoid, but beware
+    of the moon! It\u2019ll make scrap of your scrapper in short order."
+  - A space battle in a deadly vortex. Try to keep control of your ship as you struggle
+    to escape the pull of gravity!
+  - "Space is mainly empty, except when it isn\u2019t. Do glorious battle in a deadly
+    asteroid belt! Avoid the asteroids or try to push your enemies into harm\u2019s
+    way!"
+  - A space station has gone rogue and has crashed the party! Avoid deadly periodic
+    blasts of deadly laser from the station as well as its lethal weight.
   NumberOfLevels: 5
-  LevelSceneNames: []
-  SelectedLevelColour: {r: .522058845, g: .522058845, b: .522058845, a: 1}
-  MovePauseTime: .100000001
+  LevelSceneNames:
+  - Empty
+  - Moon
+  - Blackhole
+  - Asteroids
+  - SpaceStation
+  SelectedLevelColour: {r: .463235319, g: .463235319, b: .463235319, a: 1}
+  MovePauseTime: .200000003
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

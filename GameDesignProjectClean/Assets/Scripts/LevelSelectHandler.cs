@@ -44,7 +44,7 @@ public class LevelSelectHandler : MonoBehaviour
 
         // Movements.
         var leftStickValue = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.Any);
-        if (leftStickValue.magnitude > 0.3)
+        if (leftStickValue.magnitude > 0.2)
         {
             elapsedMoveTime += Time.deltaTime; // Add to the time elapsed since last move.
             if (elapsedMoveTime >= MovePauseTime)
