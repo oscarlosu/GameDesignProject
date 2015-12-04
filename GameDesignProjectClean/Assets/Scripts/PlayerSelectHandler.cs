@@ -26,24 +26,28 @@ public class PlayerSelectHandler : MonoBehaviour
             playersJoined[0] = true;
 	        PlayerOnePanel.transform.GetChild(0).GetComponent<Image>().sprite = PlayerOneSprite;
 	        PlayerOnePanel.transform.GetChild(1).gameObject.SetActive(false);
+			GetComponent<AudioSource>().Play();
 	    }
         if (PlayerJoined(GamePad.Index.Two))
         {
             playersJoined[1] = true;
             PlayerTwoPanel.transform.GetChild(0).GetComponent<Image>().sprite = PlayerTwoSprite;
             PlayerTwoPanel.transform.GetChild(1).gameObject.SetActive(false);
+			GetComponent<AudioSource>().Play();
         }
         if (PlayerJoined(GamePad.Index.Three))
         {
             playersJoined[2] = true;
             PlayerThreePanel.transform.GetChild(0).GetComponent<Image>().sprite = PlayerThreeSprite;
             PlayerThreePanel.transform.GetChild(1).gameObject.SetActive(false);
+			GetComponent<AudioSource>().Play();
         }
         if (PlayerJoined(GamePad.Index.Four))
         {
             playersJoined[3] = true;
             PlayerFourPanel.transform.GetChild(0).GetComponent<Image>().sprite = PlayerFourSprite;
             PlayerFourPanel.transform.GetChild(1).gameObject.SetActive(false);
+			GetComponent<AudioSource>().Play();
         }
     }
 

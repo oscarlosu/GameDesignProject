@@ -679,6 +679,10 @@ Prefab:
       propertyPath: m_Name
       value: AsteroidLarge (39)
       objectReference: {fileID: 0}
+    - target: {fileID: 11411810, guid: 95c493f34cbb4c6468c11c050f5661c2, type: 2}
+      propertyPath: LargeColRadius
+      value: .0599999987
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 95c493f34cbb4c6468c11c050f5661c2, type: 2}
   m_IsPrefabParent: 0

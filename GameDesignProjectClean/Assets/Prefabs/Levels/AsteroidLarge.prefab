@@ -13,6 +13,7 @@ GameObject:
   - 212: {fileID: 21262776}
   - 114: {fileID: 11413798}
   - 114: {fileID: 11411810}
+  - 82: {fileID: 8217600}
   m_Layer: 0
   m_Name: AsteroidLarge
   m_TagString: Untagged
@@ -61,6 +62,77 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.79533398
+--- !u!82 &8217600
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 181876}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24304030, guid: 1009fae8e168e4f4aadd5822f83f11a6,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 59e40b529105045b4b0d64523c73d1ec, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!114 &11411810
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -69,7 +141,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 181876}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b4bcd29018700445949e4b2193272cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 568a989bfbb581f4c8710f8de0fc1baf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Size: 2
@@ -90,14 +162,14 @@ MonoBehaviour:
   SmallColRadius: .400000006
   MediumColRadius: 1
   LargeColRadius: 1.79533398
-  SmallMinWeight: 5
-  SmallMaxWeight: 10
+  SmallMinWeight: 1
+  SmallMaxWeight: 5
   MediumMinWeight: 10
   MediumMaxWeight: 15
-  LargeMinWeight: 15
-  LargeMaxWeight: 20
-  BreakdownVelocity: 10
-  DisableTime: .5
+  LargeMinWeight: 20
+  LargeMaxWeight: 25
+  BreakdownVelocity: 5
+  DisableTime: 0
   AsteroidPrefab: {fileID: 122610, guid: d54b5b607f973a44aa625b91dcc653c9, type: 2}
 --- !u!114 &11413798
 MonoBehaviour:
@@ -148,6 +220,18 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: SmallSprites.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: LargeSprites.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MediumSprites.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: aa55068373308a041af11f65928f1ee1,
@@ -174,7 +258,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: DisableTime
-      value: .5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: SplitMaxNum
@@ -186,8 +270,74 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: BreakdownVelocity
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: LargeColRadius
+      value: 1.79533398
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MediumColRadius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: SmallColRadius
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: SmallMinWeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: SmallMaxWeight
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MediumMinWeight
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MediumMaxWeight
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: LargeMinWeight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: LargeMaxWeight
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: AsteroidPrefab
+      value: 
+      objectReference: {fileID: 122610, guid: d54b5b607f973a44aa625b91dcc653c9, type: 2}
+    - target: {fileID: 0}
+      propertyPath: Size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MediumSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 3748487061c47ab479b1b9bb17d9bd6f,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 59e40b529105045b4b0d64523c73d1ec, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BypassReverbZones
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24304030, guid: 1009fae8e168e4f4aadd5822f83f11a6,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 181876}
