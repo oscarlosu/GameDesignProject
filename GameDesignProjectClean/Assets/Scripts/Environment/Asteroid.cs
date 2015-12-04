@@ -123,6 +123,7 @@ public class Asteroid : MonoBehaviour
             if (otherMass > mass)
             {
                 Breakdown(coll);
+				GetComponent<AudioSource>().pitch = Random.Range(0.3f, 2f);
 				GetComponent<AudioSource>().Play();
 
             }
