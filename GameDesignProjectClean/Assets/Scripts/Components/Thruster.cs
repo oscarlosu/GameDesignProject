@@ -66,7 +66,7 @@ public class Thruster : Module
 
         // Handle thumb stick input.
         Vector2 leftStickValue = GamePad.GetAxis(GamePad.Axis.LeftStick, ShipCore.GetComponent<Core>().ControllerIndex);
-        if (leftStickValue.magnitude > 0)
+        if (leftStickValue.sqrMagnitude > 0)
         {
             var powerTotal = 0f;
 

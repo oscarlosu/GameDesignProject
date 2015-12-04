@@ -74,7 +74,6 @@ public class Module : ShipComponent
 
     public void RotateModuleTo(Direction direction)
     {
-        Debug.Log("Rotate from: " + FacingDirection + ", rotate to: " + direction);
         // Can't rotate the module to point directly at its parent structure.
         if (direction != ParentDirection)
         {
