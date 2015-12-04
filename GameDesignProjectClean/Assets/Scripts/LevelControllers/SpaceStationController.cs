@@ -13,6 +13,8 @@ public class SpaceStationController : MonoBehaviour, ILevelHandler
     private ParticleSystem[] charge1Systems;
     private ParticleSystem[] charge2Systems;
 
+	public AudioClip stationLaserSound;
+	public AudioClip chargeLaserSound;
     public float rotModifier;
     public float chargeTime;
     private float waitTime = 0.0f;
@@ -99,6 +101,8 @@ public class SpaceStationController : MonoBehaviour, ILevelHandler
                 charge1Systems[i].Play();
             }
             charge1 = false;
+			GetComponent<AudioSource> ().clip = chargeLaserSound;
+			GetComponent<AudioSource>().Play();
         }
         else
         {
@@ -107,6 +111,8 @@ public class SpaceStationController : MonoBehaviour, ILevelHandler
                 charge2Systems[i].Play();
             }
             charge1 = true;
+			GetComponent<AudioSource> ().clip = chargeLaserSound;
+			GetComponent<AudioSource>().Play();
         }
 
         yield return new WaitForSeconds(chargeTime * 0.5f);
@@ -119,6 +125,7 @@ public class SpaceStationController : MonoBehaviour, ILevelHandler
             charge2Systems[i].Stop();
         }
         BroadcastMessage("FireLaserGun", laserSizeStation);
+		GetComponent<AudioSource> ().clip = stationLaserSound;
         GetComponent<AudioSource>().Play();
 
         yield return new WaitForSeconds(laserDuration);
