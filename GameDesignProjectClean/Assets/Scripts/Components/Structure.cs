@@ -18,6 +18,7 @@ public class Structure : ShipComponent
 
     public void Start()
     {
+        Anim = GetComponent<Animator>();
         // Get all the child modules and structures
         currentModules.Clear();
         currentStructures.Clear();
