@@ -29,7 +29,7 @@ public class PlayerBuilderHandler : MonoBehaviour
     public GameObject SelectedCellPrefab;
     public GameObject[] AvailableComponents;
 	public GameObject TestModeText;
-	public GameObject ReadyText;
+	public GameObject FlashingCenterText;
 	public GameObject GoToTestMode;
 	public GameObject GoToBuildModePanel;
 	public GameObject GoToReadyModePanel;
@@ -129,7 +129,7 @@ public class PlayerBuilderHandler : MonoBehaviour
         GoToReadyModePanel.SetActive(false);
         // Deactivate "testmode" and "ready" text
         TestModeText.SetActive (false);
-        ReadyText.SetActive(false);
+        FlashingCenterText.SetActive(false);
         // Update selected cell object.
         UpdateBuilderUi();
         // Center camera on selected cell.
@@ -161,6 +161,8 @@ public class PlayerBuilderHandler : MonoBehaviour
         GoToReadyModePanel.SetActive(true);
         // Enable "testmode" text
         TestModeText.SetActive (true);
+        FlashingCenterText.GetComponent<Text>().text = "Testing";
+        FlashingCenterText.SetActive(true);
         // Create clone of ship that the players can test and play around with.
         cloneShip = GameObject.Instantiate(shipCore);
         cloneShip.transform.parent = PlayerArea.transform;
@@ -402,7 +404,8 @@ public class PlayerBuilderHandler : MonoBehaviour
             // Set player as ready, which means he/she has to wait for the rest.
             if (!playerReady && GamePad.GetButtonDown(ButtonGoToPlayMode, ControllerIndex))
             {
-                ReadyText.SetActive(true);
+                FlashingCenterText.GetComponent<Text>().text = "Ready";
+                FlashingCenterText.SetActive(true);
                 playerReady = true;
                 var shipReady = Instantiate(shipCore);
                 switch (ControllerIndex)
@@ -426,7 +429,6 @@ public class PlayerBuilderHandler : MonoBehaviour
             // Go back to build mode to build the ship.
             if (GamePad.GetButtonDown(ButtonGoToBuildMode, ControllerIndex))
             {
-                ReadyText.SetActive(false);
                 playerReady = false;
                 switch (ControllerIndex)
                 {
@@ -447,15 +449,15 @@ public class PlayerBuilderHandler : MonoBehaviour
                 return;
             }
 
-            if (ReadyText.activeSelf)
+            if (FlashingCenterText.activeSelf)
             {
                 if (fadeIn)
                 {
-                    ReadyText.GetComponent<Text>().CrossFadeAlpha(1, TextFlashTime/2, false);
+                    FlashingCenterText.GetComponent<Text>().CrossFadeAlpha(1, TextFlashTime/2, false);
                 }
                 else
                 {
-                    ReadyText.GetComponent<Text>().CrossFadeAlpha(0, TextFlashTime/2, false);
+                    FlashingCenterText.GetComponent<Text>().CrossFadeAlpha(0, TextFlashTime/2, false);
                 }
                 
             }

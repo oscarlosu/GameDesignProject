@@ -249,6 +249,10 @@ Prefab:
       propertyPath: GoToReadyModePanel
       value: 
       objectReference: {fileID: 200911461}
+    - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
+      propertyPath: FlashingCenterText
+      value: 
+      objectReference: {fileID: 253052107}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 787f576714bc35540a684f062d7010cf, type: 2}
   m_IsPrefabParent: 0
@@ -814,6 +818,14 @@ Prefab:
     - target: {fileID: 188242, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 183032, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
+      propertyPath: m_Name
+      value: FlashingCenterText
+      objectReference: {fileID: 0}
+    - target: {fileID: 11469122, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
+      propertyPath: m_FontData.m_MaxSize
+      value: 22
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
@@ -1554,6 +1566,14 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 27f2ebbf4bdf548dc940dbf9df167494,
         type: 3}
+    - target: {fileID: 183032, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
+      propertyPath: m_Name
+      value: FlashingCenterText
+      objectReference: {fileID: 0}
+    - target: {fileID: 11469122, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
+      propertyPath: m_FontData.m_MaxSize
+      value: 22
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
   m_IsPrefabParent: 0
@@ -1725,6 +1745,10 @@ Prefab:
       propertyPath: GoToReadyModePanel
       value: 
       objectReference: {fileID: 1910388869}
+    - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
+      propertyPath: FlashingCenterText
+      value: 
+      objectReference: {fileID: 652935450}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 787f576714bc35540a684f062d7010cf, type: 2}
   m_IsPrefabParent: 0
@@ -1993,6 +2017,10 @@ Prefab:
       propertyPath: GoToReadyModePanel
       value: 
       objectReference: {fileID: 1415274344}
+    - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
+      propertyPath: FlashingCenterText
+      value: 
+      objectReference: {fileID: 1041076944}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 787f576714bc35540a684f062d7010cf, type: 2}
   m_IsPrefabParent: 0
@@ -2408,6 +2436,14 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1005407383}
+    - target: {fileID: 183032, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
+      propertyPath: m_Name
+      value: FlashingCenterText
+      objectReference: {fileID: 0}
+    - target: {fileID: 11469122, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
+      propertyPath: m_FontData.m_MaxSize
+      value: 22
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
   m_IsPrefabParent: 0
@@ -3452,6 +3488,26 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 9360013128464404eb7aa09753782434,
         type: 3}
+    - target: {fileID: 183032, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 160434, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 183032, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
+      propertyPath: m_Name
+      value: FlashingCenterText
+      objectReference: {fileID: 0}
+    - target: {fileID: 105950, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11469122, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
+      propertyPath: m_FontData.m_MaxSize
+      value: 22
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
   m_IsPrefabParent: 0
@@ -3696,7 +3752,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1821072350
 Transform:
   m_ObjectHideFlags: 0
