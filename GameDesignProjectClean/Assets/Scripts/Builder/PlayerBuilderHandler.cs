@@ -101,6 +101,10 @@ public class PlayerBuilderHandler : MonoBehaviour
 
     private void GoToBuildMode()
     {
+        if (objectPool == null) // Find the object pool, if it hasn't been set yet.
+        {
+            objectPool = GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetComponent<ObjectPool>();
+        }
         // Set build mode flag.
         inBuildMode = true;
         shipCore.GetComponent<Core>().InBuildMode = true;
