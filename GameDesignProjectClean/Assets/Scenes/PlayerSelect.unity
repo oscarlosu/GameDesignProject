@@ -660,7 +660,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press start to Battle
+  m_Text: Press start to begin
 --- !u!222 &855731368
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1144,6 +1144,8 @@ MonoBehaviour:
   PlayerTwoSprite: {fileID: 21300000, guid: 90b118958ca31c64b932ca1f88e07e3b, type: 3}
   PlayerThreeSprite: {fileID: 21300000, guid: 2aa135fea1418f248b7eacb0b2cc60b5, type: 3}
   PlayerFourSprite: {fileID: 21300000, guid: 27f2ebbf4bdf548dc940dbf9df167494, type: 3}
+  ContinueToBuildText: {fileID: 855731367}
+  TextFlashTime: 1.5
 --- !u!4 &1241021891
 Transform:
   m_ObjectHideFlags: 0

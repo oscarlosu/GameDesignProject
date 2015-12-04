@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Linq;
 using GamepadInput;
 using UnityEngine.UI;
@@ -10,17 +9,30 @@ public class PlayerSelectHandler : MonoBehaviour
     public GamePad.Button JoinButton, ReadyButton;
     public GameObject PlayerOnePanel, PlayerTwoPanel, PlayerThreePanel, PlayerFourPanel;
     public Sprite PlayerOneSprite, PlayerTwoSprite, PlayerThreeSprite, PlayerFourSprite;
+    public Text ContinueToBuildText;
+    public float TextFlashTime;
 
+    private bool fadeIn;
     private bool[] playersJoined = new bool[4];
 
 	// Use this for initialization
 	void Start () {
         // Set this as the GameHandler's PlayerSelectHandler.
-        GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().PlayerSelectHandler = this;
+	    var gameHandler = GameObject.FindGameObjectWithTag("GameHandler");
+	    if (gameHandler != null)
+	    {
+	        GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().PlayerSelectHandler = this;
+	    }
+	    InvokeRepeating("ToggleFadeIn", 0, TextFlashTime);
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void ToggleFadeIn()
+    {
+        fadeIn = !fadeIn;
+    }
+
+    // Update is called once per frame
+    void Update () {
 	    if (PlayerJoined(GamePad.Index.One))
 	    {
             playersJoined[0] = true;
@@ -48,6 +60,15 @@ public class PlayerSelectHandler : MonoBehaviour
             PlayerFourPanel.transform.GetChild(0).GetComponent<Image>().sprite = PlayerFourSprite;
             PlayerFourPanel.transform.GetChild(1).gameObject.SetActive(false);
 			GetComponent<AudioSource>().Play();
+        }
+
+        if (fadeIn)
+        {
+            ContinueToBuildText.GetComponent<Text>().CrossFadeAlpha(1, TextFlashTime / 2, false);
+        }
+        else
+        {
+            ContinueToBuildText.GetComponent<Text>().CrossFadeAlpha(0, TextFlashTime / 2, false);
         }
     }
 

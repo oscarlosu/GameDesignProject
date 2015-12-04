@@ -481,7 +481,6 @@ public class PlayerBuilderHandler : MonoBehaviour
                 {
                     FlashingCenterText.GetComponent<Text>().CrossFadeAlpha(0, TextFlashTime/2, false);
                 }
-                
             }
 
             // The builder UI should be hidden and maybe a small icon and text should explain what to do, to go back to build mode.

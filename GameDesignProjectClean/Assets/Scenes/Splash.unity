@@ -226,8 +226,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 851402120}
   - 212: {fileID: 851402119}
+  - 114: {fileID: 851402121}
   m_Layer: 0
-  m_Name: splash
+  m_Name: Splash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -272,6 +273,19 @@ Transform:
   - {fileID: 1073208403}
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &851402121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 851402118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f095e114dfbda49468a1ab8a849130b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PressStartText: {fileID: 1275825441}
+  TextFlashTime: 1.5
 --- !u!1 &1073208398
 GameObject:
   m_ObjectHideFlags: 0
