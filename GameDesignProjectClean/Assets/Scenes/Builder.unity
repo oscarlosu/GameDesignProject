@@ -1245,10 +1245,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 477214, guid: c6dee1d802c002b419a17f99f581c804, type: 2}
   m_PrefabInternal: {fileID: 551705659}
---- !u!1 &591574238 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 137746, guid: 787f576714bc35540a684f062d7010cf, type: 2}
-  m_PrefabInternal: {fileID: 940377262}
 --- !u!1 &594889478 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 105950, guid: 30b3a9e14283c4a42abefe84e5d70752, type: 2}
@@ -2546,7 +2542,7 @@ Prefab:
     - target: {fileID: 11487204, guid: 787f576714bc35540a684f062d7010cf, type: 2}
       propertyPath: GoToReadyModePanel
       value: 
-      objectReference: {fileID: 591574238}
+      objectReference: {fileID: 1127983257}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 787f576714bc35540a684f062d7010cf, type: 2}
   m_IsPrefabParent: 0
