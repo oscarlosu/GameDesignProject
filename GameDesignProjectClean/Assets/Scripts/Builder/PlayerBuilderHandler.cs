@@ -63,7 +63,7 @@ public class PlayerBuilderHandler : MonoBehaviour
     void Start()
     {
         // Find object pool.
-        objectPool = GameObject.FindObjectOfType<ObjectPool>();
+        objectPool = GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetComponent<ObjectPool>();
         // Setup builder.
         PlayerArea.transform.position = new Vector3(StartingPosition.x, StartingPosition.y,
             PlayerArea.transform.position.z);
@@ -267,9 +267,8 @@ public class PlayerBuilderHandler : MonoBehaviour
             // Cell selection movement.
             var leftStickInput = GamePad.GetAxis(GamePad.Axis.LeftStick, ControllerIndex);
             var moveInput = leftStickInput;
-            if (moveInput.magnitude > 0.1)
+            if (moveInput.sqrMagnitude > 0.3)
             {
-
                 elapsedMoveTime += Time.deltaTime; // Add to the time elapsed since last move.
                 if (elapsedMoveTime >= MovePauseTime)
                 {
