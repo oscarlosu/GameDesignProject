@@ -331,7 +331,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinSize: 10
-  InsideMargin: 5
+  InsideMargin: 10
+  camDelay: 0
   OutsideMargin: 0
   PushInForce: 100
   PushInTorque: 5

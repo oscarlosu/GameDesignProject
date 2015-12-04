@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
 using System.Linq;
 using GamepadInput;
 
@@ -7,11 +7,15 @@ public class BuilderHandler : MonoBehaviour
 {
     public GameObject[] PlayerAreas;
     public GameObject OverlayCanvas;
+    public float OverlayDeactivateTimer;
+    public Text OverlayText;
 
     public delegate void PreviousScene();
     private PreviousScene prevScene;
     private GameObject[] ships = new GameObject[4];
     private bool[] playersJoined;
+
+    private float elapsedTime;
 
     // Use this for initialization
     void Start()
@@ -35,11 +39,21 @@ public class BuilderHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (OverlayCanvas.activeSelf && AnyButtonPressed())
+        elapsedTime += Time.deltaTime;
+        if (OverlayCanvas.activeSelf && elapsedTime >= OverlayDeactivateTimer)
         {
-            OverlayCanvas.SetActive(false);
+            if (!OverlayText.gameObject.activeSelf)
+            {
+                OverlayText.gameObject.SetActive(true);
+            }
+            if (AnyButtonPressed())
+            {
+                OverlayCanvas.SetActive(false);
+            }
         }
     }
+
+    private void DisableOverlayCanvas() { }
 
     // Activating the player areas for the players, who joined.
     private void ActivatePlayerAreas(bool[] players)
