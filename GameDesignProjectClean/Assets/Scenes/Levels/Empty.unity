@@ -258,7 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxSize: 30
   MinSize: 10
-  InsideMargin: 5
+  InsideMargin: 10
   OutsideMargin: 0
   PushInForce: 100
   PushInTorque: 5
