@@ -47,6 +47,8 @@ public class PlayerBuilderHandler : MonoBehaviour
     private bool closeInfoBoxOnAnyKey = true;
 
     private bool inBuildMode;
+    private bool selectingInput;
+    private Module selectingInputFor;
     private bool playerReady;
     private int selectedComponent;
     private GameObject cloneShip; // The ship used in play mode to test the build.
@@ -101,10 +103,6 @@ public class PlayerBuilderHandler : MonoBehaviour
 
     private void GoToBuildMode()
     {
-        if (objectPool == null) // Find the object pool, if it hasn't been set yet.
-        {
-            objectPool = GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetComponent<ObjectPool>();
-        }
         // Set build mode flag.
         inBuildMode = true;
         shipCore.GetComponent<Core>().InBuildMode = true;
@@ -114,9 +112,16 @@ public class PlayerBuilderHandler : MonoBehaviour
             GameObject.Destroy(cloneShip);
         }
         // Remove all projectiles and particles etc.
-        foreach (var projectile in GameObject.FindGameObjectsWithTag(GlobalValues.ProjectileTag))
+        if (objectPool != null)
         {
-            objectPool.DisablePoolObject(projectile, projectile.GetComponent<Projectile>().ObjectPoolType);
+            foreach (var projectile in GameObject.FindGameObjectsWithTag(GlobalValues.ProjectileTag))
+            {
+                objectPool.DisablePoolObject(projectile, projectile.GetComponent<Projectile>().ObjectPoolType);
+            }
+        }
+        else
+        {
+            objectPool = GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetComponent<ObjectPool>();
         }
         // Reactivate original ship.
         shipCore.SetActive(true);
@@ -262,6 +267,21 @@ public class PlayerBuilderHandler : MonoBehaviour
                 return;
             }
 
+            // If selecting input, don't do anything else, until it's done.
+            if (selectingInput)
+            {
+
+                var found = Get(selectedCellX, selectedCellY);
+                if (found != null && found.GetComponent<Module>() && ModuleHasInput(found.GetComponent<Module>()))
+                {
+                    StartCoroutine(SelectComponentButton(found.GetComponent<Module>()));
+                    GetComponent<AudioSource>().clip = AssignKeySound;
+                    GetComponent<AudioSource>().Play();
+                }
+                selectingInput = false;
+                return;
+            }
+
             // Exit build mode to test the ship.
             if (GamePad.GetButtonDown(ButtonGoToPlayMode, ControllerIndex))
             {
@@ -352,7 +372,8 @@ public class PlayerBuilderHandler : MonoBehaviour
                     // Select module input.
                     if (component.GetComponent<Module>() != null && ModuleHasInput(component.GetComponent<Module>()))
                     {
-                        StartCoroutine(SelectComponentButton(component.GetComponent<Module>()));
+                        selectingInput = true;
+                        return;
                     }
                 }
                 // If position is already taken and it's a module, change connection point.
@@ -379,7 +400,7 @@ public class PlayerBuilderHandler : MonoBehaviour
                 }
             }
 
-            // Delete component. // TODO Do this in a better way around structures, since you can destroy big parts of the ship at once.
+            // Delete component.
             if (GamePad.GetButtonDown(GamePad.Button.B, ControllerIndex))
             {
                 var found = Get(selectedCellX, selectedCellY);
@@ -409,14 +430,8 @@ public class PlayerBuilderHandler : MonoBehaviour
             // Change module input.
             if (GamePad.GetButtonDown(GamePad.Button.X, ControllerIndex))
             {
-                var found = Get(selectedCellX, selectedCellY);
-                if (found != null && found.GetComponent<Module>() && ModuleHasInput(found.GetComponent<Module>()))
-                {
-                    StartCoroutine(SelectComponentButton(found.GetComponent<Module>()));
-
-					GetComponent<AudioSource>().clip = AssignKeySound;
-					GetComponent<AudioSource>().Play();
-                }
+                selectingInput = true;
+                return;
             }
         }
         // If not in build mode, nothing from the builder should be active.
@@ -496,12 +511,15 @@ public class PlayerBuilderHandler : MonoBehaviour
     {
         OpenInfoBox("Select module control",
             "Click any button to select, which button you wish to use to control the module.", false);
-        yield return new WaitForSeconds(.3f);
         GamePad.Button? button = null;
         GamePad.Trigger? trigger = null;
-        while (button == null && trigger == null)
+        
+        while (true)
         {
-            AnyButtonPressed(out button, out trigger);
+            if (AnyButtonPressed(out button, out trigger))
+            {
+                break;
+            }
             yield return null;
         }
         if (button.HasValue)
@@ -514,6 +532,8 @@ public class PlayerBuilderHandler : MonoBehaviour
             m.InputType = Module.InputKeyType.Trigger;
             m.TriggerKey = trigger.Value;
         }
+        GetComponent<AudioSource>().clip = AssignKeySound;
+        GetComponent<AudioSource>().Play();
         CloseInfoBox();
     }
 
