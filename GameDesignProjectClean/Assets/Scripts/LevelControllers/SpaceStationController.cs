@@ -8,7 +8,7 @@ public class SpaceStationController : MonoBehaviour, ILevelHandler
     public Transform[] ssParts;
     public float laserDuration = 0.0f;
 
-    public float ShipDistanceFromCenter;
+    public float SpawnDistanceToCenter;
     public GameObject CorePrefab;
 
     public Transform Charge1;
@@ -34,25 +34,25 @@ public class SpaceStationController : MonoBehaviour, ILevelHandler
 
         if (playerShips[0] != null)
         {
-            playerShips[0].transform.position = new Vector3(0, ShipDistanceFromCenter);
+            playerShips[0].transform.position = new Vector3(0, SpawnDistanceToCenter);
             playerShips[0].transform.RotateAround(new Vector3(0, 0, 0), Vector3.forward, (360f / shipCount) * shipsPlaced++ + 45);
             playerShips[0].SetActive(true);
         }
         if (playerShips[1] != null)
         {
-            playerShips[1].transform.position = new Vector3(0, ShipDistanceFromCenter);
+            playerShips[1].transform.position = new Vector3(0, SpawnDistanceToCenter);
             playerShips[1].transform.RotateAround(new Vector3(0, 0, 0), Vector3.forward, (360f / shipCount) * shipsPlaced++ + 45);
             playerShips[1].SetActive(true);
         }
         if (playerShips[2] != null)
         {
-            playerShips[2].transform.position = new Vector3(0, ShipDistanceFromCenter);
+            playerShips[2].transform.position = new Vector3(0, SpawnDistanceToCenter);
             playerShips[2].transform.RotateAround(new Vector3(0, 0, 0), Vector3.forward, (360f / shipCount) * shipsPlaced++ + 45);
             playerShips[2].SetActive(true);
         }
         if (playerShips[3] != null)
         {
-            playerShips[3].transform.position = new Vector3(0, ShipDistanceFromCenter);
+            playerShips[3].transform.position = new Vector3(0, SpawnDistanceToCenter);
             playerShips[3].transform.RotateAround(new Vector3(0, 0, 0), Vector3.forward, (360f / shipCount) * shipsPlaced++ + 45);
             playerShips[3].SetActive(true);
         }
