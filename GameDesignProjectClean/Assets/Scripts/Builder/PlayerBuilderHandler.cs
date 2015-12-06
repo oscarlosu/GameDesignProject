@@ -306,6 +306,10 @@ public class PlayerBuilderHandler : MonoBehaviour
             // Display component description.
             var leftTrigger = GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, ControllerIndex);
             ComponentDescriptionPanel.GetComponent<CanvasGroup>().alpha = Mathf.Clamp(leftTrigger*1.5f, 0, 1);
+            if (GamePad.GetButton(GamePad.Button.Back, ControllerIndex)) // Also display on back.
+            {
+                ComponentDescriptionPanel.GetComponent<CanvasGroup>().alpha = 1;
+            }
 
             // Cell selection movement.
             var leftStickInput = GamePad.GetAxis(GamePad.Axis.LeftStick, ControllerIndex);
