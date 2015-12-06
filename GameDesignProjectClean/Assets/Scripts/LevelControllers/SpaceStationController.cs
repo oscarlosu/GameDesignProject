@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class SpaceStationController : MonoBehaviour, ILevelHandler
 {
@@ -25,8 +26,8 @@ public class SpaceStationController : MonoBehaviour, ILevelHandler
 
     public void StartLevel(GameObject[] playerShips)
     {
-
-        switch(playerShips.Length)
+        int ships = playerShips.Where(s => s != null).Count();
+        switch(ships)
         {
             case 2:
                 if (playerShips[0] != null)
