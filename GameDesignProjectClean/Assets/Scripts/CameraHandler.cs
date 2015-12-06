@@ -6,7 +6,7 @@ using System.Linq;
 public class CameraHandler : MonoBehaviour
 {
     // Zoom to fit params
-	public float MaxSize;
+	//public float MaxSize;
 	public float MinSize;
     public float InsideMargin;
 	public float OutsideMargin;    
@@ -15,7 +15,7 @@ public class CameraHandler : MonoBehaviour
     public float PushInTorque;
 	public float ThrusterDisableTime;
 
-	public AnimationCurve CameraScaleGraph = new AnimationCurve() { keys = new Keyframe[] { new Keyframe(0, 0), new Keyframe(20, 20) } };
+	public AnimationCurve CameraScaleGraph = new AnimationCurve() { keys = new Keyframe[] { new Keyframe(0, 0), new Keyframe(20, 40) } };
 
     private List<GameObject> ships = new List<GameObject>();
     private Camera cam;

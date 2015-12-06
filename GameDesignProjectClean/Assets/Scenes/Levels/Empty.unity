@@ -262,7 +262,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a30b18257a104f74d98ac7a0c285f02a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxSize: 30
   MinSize: 10
   InsideMargin: 10
   OutsideMargin: 0
@@ -274,14 +273,14 @@ MonoBehaviour:
     m_Curve:
     - time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 20
-      value: 20
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1.0019052
+      outSlope: 1.0019052
+      tangentMode: 10
+    - time: 40.0087471
+      value: 40.0849724
+      inSlope: 1.0019052
+      outSlope: 1.0019052
+      tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
 --- !u!1001 &1930331304
