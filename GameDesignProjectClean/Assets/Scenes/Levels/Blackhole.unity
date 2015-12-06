@@ -132,6 +132,14 @@ Prefab:
       propertyPath: ForceTangent
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11499416, guid: 783a4067ed67cdb449c6b96fb5fed0bd, type: 2}
+      propertyPath: CorePrefab
+      value: 
+      objectReference: {fileID: 152432, guid: c7cfe646891c1ad4b8a01844ed01116c, type: 2}
+    - target: {fileID: 11499416, guid: 783a4067ed67cdb449c6b96fb5fed0bd, type: 2}
+      propertyPath: SpawnDistanceToCenter
+      value: 45
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 783a4067ed67cdb449c6b96fb5fed0bd, type: 2}
   m_IsPrefabParent: 0
