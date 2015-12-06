@@ -6355,6 +6355,8 @@ MonoBehaviour:
   - {fileID: 157141668}
   - {fileID: 1585023434}
   laserDuration: 3
+  ShipDistanceFromCenter: 45
+  CorePrefab: {fileID: 152432, guid: c7cfe646891c1ad4b8a01844ed01116c, type: 2}
   Charge1: {fileID: 855469939}
   Charge2: {fileID: 1747157288}
   stationLaserSound: {fileID: 8300000, guid: b1c5b528d1b3846bf9c746a59a877d4a, type: 3}

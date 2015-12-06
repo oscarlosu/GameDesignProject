@@ -8,14 +8,17 @@ public class SpaceStationController : MonoBehaviour, ILevelHandler
     public Transform[] ssParts;
     public float laserDuration = 0.0f;
 
+    public float ShipDistanceFromCenter;
+    public GameObject CorePrefab;
+
     public Transform Charge1;
     public Transform Charge2;
 
     private ParticleSystem[] charge1Systems;
     private ParticleSystem[] charge2Systems;
 
-	public AudioClip stationLaserSound;
-	public AudioClip chargeLaserSound;
+    public AudioClip stationLaserSound;
+    public AudioClip chargeLaserSound;
     public float rotModifier;
     public float chargeTime;
     private float waitTime = 0.0f;
@@ -26,119 +29,65 @@ public class SpaceStationController : MonoBehaviour, ILevelHandler
 
     public void StartLevel(GameObject[] playerShips)
     {
-        int ships = playerShips.Where(s => s != null).Count();
-        switch(ships)
+        int shipCount = playerShips.Count(s => s != null);
+        int shipsPlaced = 0;
+
+        if (playerShips[0] != null)
         {
-            case 2:
-                if (playerShips[0] != null)
-                {
-                    playerShips[0].transform.position = new Vector3(-35, 35);
-                    playerShips[0].transform.eulerAngles = new Vector3(0, 0, 45);
-                    playerShips[0].SetActive(true);
-                }
-                if (playerShips[1] != null)
-                {               
-                    playerShips[1].transform.position = new Vector3(35, -35);
-                    playerShips[1].transform.eulerAngles = new Vector3(0, 0, 225);
-                    playerShips[1].SetActive(true);
-                }
-                break;
-            case 3:
-                if (playerShips[0] != null)
-                {
-                    playerShips[0].transform.position = new Vector3(-35, 35);
-                    playerShips[0].transform.eulerAngles = new Vector3(0, 0, 45);
-                    playerShips[0].SetActive(true);
-                }
-                if (playerShips[1] != null)
-                {
-                    playerShips[1].transform.position = new Vector3(35, 35);
-                    playerShips[1].transform.eulerAngles = new Vector3(0, 0, 315);
-                    playerShips[1].SetActive(true);
-                }
-                if (playerShips[2] != null)
-                {
-                    playerShips[2].transform.position = new Vector3(0, -35);
-                    playerShips[2].transform.eulerAngles = new Vector3(0, 0, 180);
-                    playerShips[2].SetActive(true);
-                }
-                break;
-            case 4:
-                if (playerShips[0] != null)
-                {
-                    playerShips[0].transform.position = new Vector3(-35, 35);
-                    playerShips[0].transform.eulerAngles = new Vector3(0, 0, 45);
-                    playerShips[0].SetActive(true);
-                }
-                if (playerShips[1] != null)
-                {
-                    playerShips[1].transform.position = new Vector3(35, 35);
-                    playerShips[1].transform.eulerAngles = new Vector3(0, 0, 315);
-                    playerShips[1].SetActive(true);
-                }
-                if (playerShips[2] != null)
-                {
-                    playerShips[2].transform.position = new Vector3(-35, -35);
-                    playerShips[2].transform.eulerAngles = new Vector3(0, 0, 135);
-                    playerShips[2].SetActive(true);
-                }
-                if (playerShips[3] != null)
-                {
-                    playerShips[3].transform.position = new Vector3(35, -35);
-                    playerShips[3].transform.eulerAngles = new Vector3(0, 0, 225);
-                    playerShips[3].SetActive(true);
-                }
-                break;
-            default:
-                if (playerShips[0] != null)
-                {
-                    playerShips[0].transform.position = new Vector3(-35, 35);
-                    playerShips[0].transform.eulerAngles = new Vector3(0, 0, 45);
-                    playerShips[0].SetActive(true);
-                }
-                if (playerShips[1] != null)
-                {
-                    playerShips[1].transform.position = new Vector3(35, 35);
-                    playerShips[1].transform.eulerAngles = new Vector3(0, 0, 315);
-                    playerShips[1].SetActive(true);
-                }
-                if (playerShips[2] != null)
-                {
-                    playerShips[2].transform.position = new Vector3(-35, -35);
-                    playerShips[2].transform.eulerAngles = new Vector3(0, 0, 135);
-                    playerShips[2].SetActive(true);
-                }
-                if (playerShips[3] != null)
-                {
-                    playerShips[3].transform.position = new Vector3(35, -35);
-                    playerShips[3].transform.eulerAngles = new Vector3(0, 0, 225);
-                    playerShips[3].SetActive(true);
-                }
-                break;
+            playerShips[0].transform.position = new Vector3(0, ShipDistanceFromCenter);
+            playerShips[0].transform.RotateAround(new Vector3(0, 0, 0), Vector3.forward, (360f / shipCount) * shipsPlaced++ + 45);
+            playerShips[0].SetActive(true);
         }
+        if (playerShips[1] != null)
+        {
+            playerShips[1].transform.position = new Vector3(0, ShipDistanceFromCenter);
+            playerShips[1].transform.RotateAround(new Vector3(0, 0, 0), Vector3.forward, (360f / shipCount) * shipsPlaced++ + 45);
+            playerShips[1].SetActive(true);
+        }
+        if (playerShips[2] != null)
+        {
+            playerShips[2].transform.position = new Vector3(0, ShipDistanceFromCenter);
+            playerShips[2].transform.RotateAround(new Vector3(0, 0, 0), Vector3.forward, (360f / shipCount) * shipsPlaced++ + 45);
+            playerShips[2].SetActive(true);
+        }
+        if (playerShips[3] != null)
+        {
+            playerShips[3].transform.position = new Vector3(0, ShipDistanceFromCenter);
+            playerShips[3].transform.RotateAround(new Vector3(0, 0, 0), Vector3.forward, (360f / shipCount) * shipsPlaced++ + 45);
+            playerShips[3].SetActive(true);
+        }
+        
     }
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         var gameHandler = GameObject.FindGameObjectWithTag("GameHandler");
         if (gameHandler != null)
         {
             gameHandler.GetComponent<GameHandler>().LevelHandler = this;
             StartLevel(gameHandler.GetComponent<GameHandler>().GetPlayerShips());
         }
+        else
+        {
+            GameObject[] playerShips = new[]
+            {Instantiate(CorePrefab), Instantiate(CorePrefab), null, Instantiate(CorePrefab)};
+            StartLevel(playerShips);
+        }
 
         waitTime = Random.Range(10, 20);
         charge1Systems = Charge1.GetComponentsInChildren<ParticleSystem>();
         charge2Systems = Charge2.GetComponentsInChildren<ParticleSystem>();
-        for(int i = 0; i < charge1Systems.Length; i++)
+        for (int i = 0; i < charge1Systems.Length; i++)
         {
             charge1Systems[i].Stop();
             charge2Systems[i].Stop();
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         if (rotating)
         {
             rotModifier = Mathf.Abs(rotModifier);
@@ -157,19 +106,19 @@ public class SpaceStationController : MonoBehaviour, ILevelHandler
             StartCoroutine(FireLaser());
         }
         count += Time.deltaTime;
-	}
+    }
 
     IEnumerator FireLaser()
     {
-        if(charge1)
+        if (charge1)
         {
             for (int i = 0; i < charge1Systems.Length; i++)
             {
                 charge1Systems[i].Play();
             }
             charge1 = false;
-			GetComponent<AudioSource> ().clip = chargeLaserSound;
-			GetComponent<AudioSource>().Play();
+            GetComponent<AudioSource>().clip = chargeLaserSound;
+            GetComponent<AudioSource>().Play();
         }
         else
         {
@@ -178,8 +127,8 @@ public class SpaceStationController : MonoBehaviour, ILevelHandler
                 charge2Systems[i].Play();
             }
             charge1 = true;
-			GetComponent<AudioSource> ().clip = chargeLaserSound;
-			GetComponent<AudioSource>().Play();
+            GetComponent<AudioSource>().clip = chargeLaserSound;
+            GetComponent<AudioSource>().Play();
         }
 
         yield return new WaitForSeconds(chargeTime * 0.5f);
@@ -192,7 +141,7 @@ public class SpaceStationController : MonoBehaviour, ILevelHandler
             charge2Systems[i].Stop();
         }
         BroadcastMessage("FireLaserGun", laserSizeStation);
-		GetComponent<AudioSource> ().clip = stationLaserSound;
+        GetComponent<AudioSource>().clip = stationLaserSound;
         GetComponent<AudioSource>().Play();
 
         yield return new WaitForSeconds(laserDuration);
