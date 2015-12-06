@@ -112,6 +112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32bc752e1207694f97ff04bc8be32ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CorePrefab: {fileID: 152432, guid: c7cfe646891c1ad4b8a01844ed01116c, type: 2}
+  SpawnDistanceToCenter: 35
 --- !u!4 &1158362452
 Transform:
   m_ObjectHideFlags: 0
@@ -236,6 +238,10 @@ Prefab:
     - target: {fileID: 433996, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2038134, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
+      propertyPath: orthographic size
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11489764, guid: 9c7f5a8e22c88e14ba8d0a0c12248326, type: 2}
