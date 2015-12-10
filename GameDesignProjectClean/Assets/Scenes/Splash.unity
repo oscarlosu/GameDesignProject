@@ -437,7 +437,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Press any key to start
+  m_Text: 'Press start to begin
 
 '
 --- !u!222 &1275825442
