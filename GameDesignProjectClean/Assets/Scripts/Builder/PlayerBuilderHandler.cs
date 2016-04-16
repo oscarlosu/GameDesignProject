@@ -106,22 +106,30 @@ public class PlayerBuilderHandler : MonoBehaviour
         // Set build mode flag.
         inBuildMode = true;
         shipCore.GetComponent<Core>().InBuildMode = true;
-        // Remove play mode clone of ship.
-        if (cloneShip != null)
-        {
-            GameObject.Destroy(cloneShip);
-        }
         // Remove all projectiles and particles etc.
         if (objectPool != null)
         {
             foreach (var projectile in GameObject.FindGameObjectsWithTag(GlobalValues.ProjectileTag))
             {
-                objectPool.DisablePoolObject(projectile, projectile.GetComponent<Projectile>().ObjectPoolType);
+                if (projectile != null)
+                {
+                    var projectileComponent = projectile.GetComponent<Projectile>();
+                    if (projectileComponent != null && projectileComponent.SourceCore == cloneShip)
+                    {
+                        objectPool.DisablePoolObject(projectile, projectileComponent.ObjectPoolType);
+                    }
+                }
             }
         }
         else
         {
             objectPool = GameObject.FindGameObjectWithTag(GlobalValues.ObjectPoolTag).GetComponent<ObjectPool>();
+        }
+
+        // Remove play mode clone of ship.
+        if (cloneShip != null)
+        {
+            GameObject.Destroy(cloneShip);
         }
         // Reactivate original ship.
         shipCore.SetActive(true);

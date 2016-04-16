@@ -125,7 +125,7 @@ public class GameHandler : MonoBehaviour
                 return;
             case Scene.LevelSelectScene:
                 // Level should be selected before progressing to the next scene.
-                if (LevelSelectHandler != null && GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.Any))
+                if (LevelSelectHandler != null && GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.Any))
                 {
                     // Save the selected scene name.
                     levelSelectedSceneName = LevelSelectHandler.GetSelectedLevelSceneName();
@@ -163,7 +163,7 @@ public class GameHandler : MonoBehaviour
                     // Restart the game.
                     //GameOver = false;
                     Destroy(gameObject);
-				Application.LoadLevel("Splash");
+				    Application.LoadLevel("Splash");
                 }
                 NormalMusic();
 
@@ -191,6 +191,11 @@ public class GameHandler : MonoBehaviour
 
     public void PlayerLost(GamePad.Index controllerIndex, bool didSelfDestruct)
     {
+        if (CurrentScene != Scene.GameScene)
+        {
+            return;
+        }
+        Debug.Log("GameHandler - Controller Index: " + controllerIndex + " SelfDestruct: " + didSelfDestruct);
         var totalPlayersJoined = playersJoined.Count(t => t);
         // Save that the player lost.
         switch (controllerIndex)
@@ -218,7 +223,7 @@ public class GameHandler : MonoBehaviour
         }
 
         // If only one player is left, the game is over.
-        if (playersLost == totalPlayersJoined - 1)
+        if (playersLost >= totalPlayersJoined - 1)
         {
             for (int i = 0; i < playersJoined.Length; i++)
             {
