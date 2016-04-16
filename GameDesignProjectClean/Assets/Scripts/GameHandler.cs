@@ -31,7 +31,7 @@ public class GameHandler : MonoBehaviour
     private bool[] selfDestruct = new bool[4];
 
     // Other settings.
-    private bool GameOver;
+    private bool VictoryScreenDisplayed, GameOver;
 	public AudioMixerSnapshot playModeSnapshot;
 	public AudioMixerSnapshot buildModeSnapshot;
 
@@ -223,7 +223,7 @@ public class GameHandler : MonoBehaviour
         }
 
         // If only one player is left, the game is over.
-        if (playersLost >= totalPlayersJoined - 1)
+        if (!VictoryScreenDisplayed && playersLost >= totalPlayersJoined - 1)
         {
             for (int i = 0; i < playersJoined.Length; i++)
             {
@@ -235,6 +235,7 @@ public class GameHandler : MonoBehaviour
                 }
                 modulesDestroyed[i] = playerShips[i].GetComponent<Core>().ModulesDestroyed;
             }
+            VictoryScreenDisplayed = true;
             Invoke("DisplayWinScreen", SecondsToWinScreen);
         }
     }
